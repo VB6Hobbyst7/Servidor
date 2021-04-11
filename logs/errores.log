@@ -1,0 +1,30 @@
+06/02/2021 19:56:38 Client does not support authentication protocol requested by server; consider upgrading MySQL client 111945285 - 
+06/02/2021 19:56:38 Database went down. Reconnecting. 111945285 - 
+06/02/2021 19:57:01 Client does not support authentication protocol requested by server; consider upgrading MySQL client 113386933 - 
+06/02/2021 19:57:01 Database went down. Reconnecting. 113386933 - 
+06/02/2021 19:58:28 Client does not support authentication protocol requested by server; consider upgrading MySQL client 38544925 - 
+06/02/2021 19:58:28 Database went down. Reconnecting. 38544925 - 
+07/02/2021 0:38:42 Client does not support authentication protocol requested by server; consider upgrading MySQL client 68232629 - 
+07/02/2021 0:38:42 Database went down. Reconnecting. 68232629 - 
+07/02/2021 1:31:43 Client does not support authentication protocol requested by server; consider upgrading MySQL client 113387077 - 
+07/02/2021 1:31:43 Database went down. Reconnecting. 113387077 - 
+07/02/2021 1:44:56 Error en NPCAI.CrearClanPretoriano 
+07/02/2021 2:55:04 Error en NPCAI.CrearClanPretoriano 
+07/02/2021 15:50:03 Error en NPCAI.CrearClanPretoriano 
+07/02/2021 21:43:02 Error en NPCAI.CrearClanPretoriano 
+07/02/2021 22:35:32 Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: 	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 106
+07/02/2021 22:35:36 Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: 	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 106
+07/02/2021 22:35:56 Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: 	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 106
+11/02/2021 21:57:14 Error en NPCAI.CrearClanPretoriano 
+12/02/2021 20:46:39 Error en NPCAI.CrearClanPretoriano 
+13/02/2021 22:21:20 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 9:39:03 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 9:53:22 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 12:52:42 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 13:23:14 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 13:59:22 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 14:25:24 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 15:02:45 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 15:20:56 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 15:31:00 Error en NPCAI.CrearClanPretoriano 
+14/02/2021 16:35:56 Error en NPCAI.CrearClanPretoriano 
