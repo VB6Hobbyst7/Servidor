@@ -43,7 +43,7 @@ Option Explicit
 'Hecha por el oso
 
 Private Const ARCHIVOMAILS = "\logs\votaron.dat"
-Private Const ARCHIVOCONFIG = "\dat\consultas.dat"
+Private Const ARCHIVOCONFIG = "consultas.dat"
 
 Private pEncuestaActualNum As Integer
 Private pEncuestaActualTex As String
@@ -72,13 +72,13 @@ Public Sub LoadData()
 Dim CantOpciones As Integer
 Dim i As Integer
 
-    pEncuestaActualNum = val(GetVar(App.Path & ARCHIVOCONFIG, "INIT", "ConsultaActual"))
-    pEncuestaActualTex = GetVar(App.Path & ARCHIVOCONFIG, "INIT", "ConsultaActualTexto")
-    pNivelRequerido = GetVar(App.Path & ARCHIVOCONFIG, "INIT", "NivelRequerido")
+    pEncuestaActualNum = val(GetVar(DatPath & ARCHIVOCONFIG, "INIT", "ConsultaActual"))
+    pEncuestaActualTex = GetVar(DatPath & ARCHIVOCONFIG, "INIT", "ConsultaActualTexto")
+    pNivelRequerido = GetVar(DatPath & ARCHIVOCONFIG, "INIT", "NivelRequerido")
 
     If pEncuestaActualNum > 0 Then
        'cargo todas las opciones
-        CantOpciones = val(GetVar(App.Path & ARCHIVOCONFIG, "ENCUESTA" & pEncuestaActualNum, "CANTOPCIONES"))
+        CantOpciones = val(GetVar(DatPath & ARCHIVOCONFIG, "ENCUESTA" & pEncuestaActualNum, "CANTOPCIONES"))
         ReDim pOpciones(1 To CantOpciones) As Integer
         For i = 1 To CantOpciones
             pOpciones(i) = val(GetVar(App.Path & ARCHIVOCONFIG, "ENCUESTA" & pEncuestaActualNum, "OPCION" & i))

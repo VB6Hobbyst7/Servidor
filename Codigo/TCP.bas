@@ -821,8 +821,8 @@ Dim X As Integer, Y As Integer
 For Y = UserList(index).Pos.Y - MargenY To UserList(index).Pos.Y + MargenY
         For X = UserList(index).Pos.X - MargenX To UserList(index).Pos.X + MargenX
             
-            If (X > 0 And X <= MapInfo(UserList(index).Pos.Map).Width Or Y > 0 And Y <= MapInfo(UserList(index).Pos.Map).Height) Then
-                If MapData(UserList(index).Pos.Map).Tile(X, Y).UserIndex = Index2 Then
+            If (X > 0 And X <= MapInfo(UserList(index).Pos.map).Width Or Y > 0 And Y <= MapInfo(UserList(index).Pos.map).Height) Then
+                If MapData(UserList(index).Pos.map).Tile(X, Y).UserIndex = Index2 Then
                     EstaPCarea = True
                     Exit Function
                 End If
@@ -839,8 +839,8 @@ Function HayPCarea(Pos As WorldPos) As Boolean
 Dim X As Integer, Y As Integer
 For Y = Pos.Y - MargenY To Pos.Y + MargenY
         For X = Pos.X - MargenX To Pos.X + MargenX
-            If X > 0 And Y > 0 And X <= MapInfo(Pos.Map).Width And Y <= MapInfo(Pos.Map).Height Then
-                If MapData(Pos.Map).Tile(X, Y).UserIndex > 0 Then
+            If X > 0 And Y > 0 And X <= MapInfo(Pos.map).Width And Y <= MapInfo(Pos.map).Height Then
+                If MapData(Pos.map).Tile(X, Y).UserIndex > 0 Then
                     HayPCarea = True
                     Exit Function
                 End If
@@ -857,8 +857,8 @@ Dim X As Integer, Y As Integer
 For Y = Pos.Y - MargenY To Pos.Y + MargenY
         For X = Pos.X - MargenX To Pos.X + MargenX
         
-            If X > 0 And Y > 0 And X <= MapInfo(Pos.Map).Width And Y <= MapInfo(Pos.Map).Height Then
-                If MapData(Pos.Map).Tile(X, Y).ObjInfo.ObjIndex = ObjIndex Then
+            If X > 0 And Y > 0 And X <= MapInfo(Pos.map).Width And Y <= MapInfo(Pos.map).Height Then
+                If MapData(Pos.map).Tile(X, Y).ObjInfo.ObjIndex = ObjIndex Then
                     HayOBJarea = True
                     Exit Function
                 End If
@@ -1031,7 +1031,7 @@ If UserList(UserIndex).flags.Estupidez = 0 Then
 End If
 
 'Posicion de comienzo
-If UserList(UserIndex).Pos.Map = 0 Then
+If UserList(UserIndex).Pos.map = 0 Then
     Select Case UserList(UserIndex).Hogar
         Case eCiudad.cNix
             UserList(UserIndex).Pos = Nix
@@ -1050,7 +1050,7 @@ If UserList(UserIndex).Pos.Map = 0 Then
             UserList(UserIndex).Pos = Ullathorpe
     End Select
 Else
-    If Not MapaValido(UserList(UserIndex).Pos.Map) Then
+    If Not MapaValido(UserList(UserIndex).Pos.map) Then
         Call WriteErrorMsg(UserIndex, "EL PJ se encuenta en un mapa invalido.")
         Call FlushBuffer(UserIndex)
         Call CloseSocket(UserIndex)
@@ -1060,26 +1060,26 @@ End If
 
 'Tratamos de evitar en lo posible el "Telefrag". Solo 1 intento de loguear en pos adjacentes.
 'Codigo por Pablo (ToxicWaste) y revisado por Nacho (Integer), corregido para que realmetne ande y no tire el server por Juan Martín Sotuyo Dodero (Maraxus)
-If MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NpcIndex <> 0 Then
+If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NpcIndex <> 0 Then
     Dim FoundPlace As Boolean
     Dim esAgua As Boolean
     Dim tX As Long
     Dim tY As Long
     
     FoundPlace = False
-    esAgua = HayAgua(UserList(UserIndex).Pos.Map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
+    esAgua = HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
     
     For tY = UserList(UserIndex).Pos.Y - 1 To UserList(UserIndex).Pos.Y + 1
         For tX = UserList(UserIndex).Pos.X - 1 To UserList(UserIndex).Pos.X + 1
             If esAgua Then
                 'reviso que sea pos legal en agua, que no haya User ni NPC para poder loguear.
-                If LegalPos(UserList(UserIndex).Pos.Map, tX, tY, True, False) Then
+                If LegalPos(UserList(UserIndex).Pos.map, tX, tY, True, False) Then
                     FoundPlace = True
                     Exit For
                 End If
             Else
                 'reviso que sea pos legal en tierra, que no haya User ni NPC para poder loguear.
-                If LegalPos(UserList(UserIndex).Pos.Map, tX, tY, False, True) Then
+                If LegalPos(UserList(UserIndex).Pos.map, tX, tY, False, True) Then
                     FoundPlace = True
                     Exit For
                 End If
@@ -1095,24 +1095,24 @@ If MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList
         UserList(UserIndex).Pos.Y = tY
     Else
         'Si no encontramos un lugar, sacamos al usuario que tenemos abajo, y si es un NPC, lo pisamos.
-        If MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Then
+        If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Then
             'Si no encontramos lugar, y abajo teniamos a un usuario, lo pisamos y cerramos su comercio seguro
-            If UserList(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu > 0 Then
+            If UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu > 0 Then
                 'Le avisamos al que estaba comerciando que se tuvo que ir.
-                If UserList(UserList(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu).flags.UserLogged Then
-                    Call FinComerciarUsu(UserList(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
-                    Call WriteConsoleMsg(UserList(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu, "Comercio cancelado. El otro usuario se ha desconectado.", FontTypeNames.FONTTYPE_TALK)
-                    Call FlushBuffer(UserList(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
+                If UserList(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu).flags.UserLogged Then
+                    Call FinComerciarUsu(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
+                    Call WriteConsoleMsg(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu, "Comercio cancelado. El otro usuario se ha desconectado.", FontTypeNames.FONTTYPE_TALK)
+                    Call FlushBuffer(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
                 End If
                 'Lo sacamos.
-                If UserList(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).flags.UserLogged Then
-                    Call FinComerciarUsu(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
-                    Call WriteErrorMsg(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex, "Alguien se ha conectado donde te encontrabas, por favor reconéctate...")
-                    Call FlushBuffer(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+                If UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).flags.UserLogged Then
+                    Call FinComerciarUsu(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+                    Call WriteErrorMsg(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex, "Alguien se ha conectado donde te encontrabas, por favor reconéctate...")
+                    Call FlushBuffer(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
                 End If
             End If
             
-            Call CloseSocket(MapData(UserList(UserIndex).Pos.Map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+            Call CloseSocket(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
         End If
     End If
 End If
@@ -1124,7 +1124,7 @@ UserList(UserIndex).showName = True 'Por default los nombres son visibles
 
 'If in the water, and has a boat, equip it!
 If UserList(UserIndex).Invent.BarcoObjIndex > 0 And _
-        (HayAgua(UserList(UserIndex).Pos.Map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y) Or BodyIsBoat(UserList(UserIndex).Char.Body)) Then
+        (HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y) Or BodyIsBoat(UserList(UserIndex).Char.Body)) Then
     Dim Barco As ObjData
     Barco = ObjData(UserList(UserIndex).Invent.BarcoObjIndex)
     UserList(UserIndex).Char.Head = 0
@@ -1143,7 +1143,7 @@ End If
 
 
 'Info
-Call WriteChangeMap(UserIndex, UserList(UserIndex).Pos.Map) 'Carga el mapa
+Call WriteChangeMap(UserIndex, UserList(UserIndex).Pos.map) 'Carga el mapa
 'Call WriteUserIndexInServer(UserIndex) 'Enviamos el User index
 
 
@@ -1165,7 +1165,7 @@ End If
 #End If
 
 'Crea  el personaje del usuario
-Call MakeUserChar(True, UserList(UserIndex).Pos.Map, UserIndex, UserList(UserIndex).Pos.Map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
+Call MakeUserChar(True, UserList(UserIndex).Pos.map, UserIndex, UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
 
 Call WriteUserCharIndexInServer(UserIndex)
 ''[/el oso]
@@ -1414,7 +1414,7 @@ Sub ResetBasicUserInfo(ByVal UserIndex As Integer)
         .Name = vbNullString
         .desc = vbNullString
         .DescRM = vbNullString
-        .Pos.Map = 0
+        .Pos.map = 0
         .Pos.X = 0
         .Pos.Y = 0
         .ip = vbNullString
@@ -1430,7 +1430,7 @@ Sub ResetBasicUserInfo(ByVal UserIndex As Integer)
         
         .RetoIndex = 0
         .SalaIndex = 0
-        .RetoAntPos.Map = 0
+        .RetoAntPos.map = 0
         .RetoAntPos.X = 0
         .RetoAntPos.Y = 0
         Dim i As Integer
@@ -1580,13 +1580,16 @@ End Sub
 Sub ResetUserBanco(ByVal UserIndex As Integer)
     Dim LoopC As Long
     
-    For LoopC = 1 To MAX_BANCOINVENTORY_SLOTS
-          UserList(UserIndex).BancoInvent.Object(LoopC).Amount = 0
-          UserList(UserIndex).BancoInvent.Object(LoopC).Equipped = 0
-          UserList(UserIndex).BancoInvent.Object(LoopC).ObjIndex = 0
-    Next LoopC
     
-    UserList(UserIndex).BancoInvent.NroItems = 0
+    
+   ' For LoopC = 1 To MAX_BANCOINVENTORY_SLOTS
+    
+    '      UserList(UserIndex).BancoInvent.Object(LoopC).Amount = 0
+    '      UserList(UserIndex).BancoInvent.Object(LoopC).Equipped = 0
+    '      UserList(UserIndex).BancoInvent.Object(LoopC).ObjIndex = 0
+    'Next LoopC
+    
+   ' UserList(UserIndex).BancoInvent.NroItems = 0
 End Sub
 
 Public Sub LimpiarComercioSeguro(ByVal UserIndex As Integer)
@@ -1617,7 +1620,7 @@ Call ResetUserFlags(UserIndex)
 Call LimpiarInventario(UserIndex)
 Call ResetUserSpells(UserIndex)
 Call ResetUserPets(UserIndex)
-Call ResetUserBanco(UserIndex)
+'Call ResetUserBanco(UserIndex)
 With UserList(UserIndex).ComUsu
     .Acepto = False
     
@@ -1639,7 +1642,7 @@ On Error GoTo errhandler
 
 Dim N As Integer
 Dim LoopC As Integer
-Dim Map As Integer
+Dim map As Integer
 Dim Name As String
 Dim i As Integer
 
@@ -1662,7 +1665,7 @@ UserList(UserIndex).flags.NPCAtacado = 0
 
 
 
-Map = UserList(UserIndex).Pos.Map
+map = UserList(UserIndex).Pos.map
 Name = UCase$(UserList(UserIndex).Name)
 
 UserList(UserIndex).Char.FX = 0

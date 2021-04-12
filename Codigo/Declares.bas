@@ -1335,7 +1335,7 @@ Public Type User
     iCliente As Integer
     
     '[KEVIN]
-    BancoInvent As BancoInventario
+    'BancoInvent As BancoInventario
     '[/KEVIN]
     
     Counters As UserCounters

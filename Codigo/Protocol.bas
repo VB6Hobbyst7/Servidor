@@ -3623,7 +3623,7 @@ Private Sub HandleMoveBank(ByVal UserIndex As Integer)
         
         Dim Dir As Integer
         Dim Slot As Byte
-        Dim TempItem As Obj
+        Dim TempItem As obj
         
         If .ReadBoolean() Then
             Dir = 1
@@ -7744,7 +7744,7 @@ On Error GoTo errhandler
         Dim X As Long
         Dim Y As Long
         Dim i As Long
-        Dim Found As Boolean
+        Dim found As Boolean
         
         tIndex = NameIndex(UserName)
         
@@ -7762,20 +7762,20 @@ On Error GoTo errhandler
                                     If LegalPos(UserList(tIndex).Pos.map, X, Y, True, True) Then
                                         Call WarpUserChar(UserIndex, UserList(tIndex).Pos.map, X, Y, True)
                                         Call LogGM(.Name, "/IRCERCA " & UserName & " Mapa:" & UserList(tIndex).Pos.map & " X:" & UserList(tIndex).Pos.X & " Y:" & UserList(tIndex).Pos.Y)
-                                        Found = True
+                                        found = True
                                         Exit For
                                     End If
                                 End If
                             Next Y
                             
-                            If Found Then Exit For  ' Feo, pero hay que abortar 3 fors sin usar GoTo
+                            If found Then Exit For  ' Feo, pero hay que abortar 3 fors sin usar GoTo
                         Next X
                         
-                        If Found Then Exit For  ' Feo, pero hay que abortar 3 fors sin usar GoTo
+                        If found Then Exit For  ' Feo, pero hay que abortar 3 fors sin usar GoTo
                     Next i
                     
                     'No space found??
-                    If Not Found Then
+                    If Not found Then
                         Call WriteConsoleMsg(UserIndex, "Todos los lugares están ocupados.", FontTypeNames.FONTTYPE_INFO)
                     End If
                 End If
@@ -9448,7 +9448,7 @@ On Error GoTo errhandler
             If tUser <= 0 Then
                 Call WriteConsoleMsg(UserIndex, "Usuario offline. Leyendo charfile... ", FontTypeNames.FONTTYPE_TALK)
                 
-                Call SendUserBovedaTxtFromChar(UserIndex, UserName)
+                Call SendUserBovedaTxtFromChar(UserIndex)
             Else
                 Call SendUserBovedaTxt(UserIndex, tUser)
             End If
@@ -10518,7 +10518,7 @@ Private Sub HandleTeleportCreate(ByVal UserIndex As Integer)
             Exit Sub
         End If
         
-        Dim ET As Obj
+        Dim ET As obj
         ET.Amount = 1
         ET.ObjIndex = 378
         
@@ -11763,7 +11763,7 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
         Dim ObjS As String
         Dim ObjIndex As Integer
         Dim Listado As String
-        Dim Found As Integer
+        Dim found As Integer
         Cant = .incomingData.ReadInteger()
         
         ObjS = .incomingData.ReadASCIIString()
@@ -11783,20 +11783,20 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
             For i = 1 To NumObjDatas
                 If InStr(1, ObjData(i).Name, ObjS, vbTextCompare) > 0 Then
                     Listado = Listado & i & " - " & ObjData(i).Name & vbCrLf
-                    Found = Found + 1
+                    found = found + 1
                     ObjIndex = i
                 End If
             Next i
         
         
-            If Found = 0 Then
+            If found = 0 Then
                 Call WriteConsoleMsg(UserIndex, "No se han encontrado objetos que contengan '" & ObjS & "'", FontTypeNames.FONTTYPE_GUILD)
                 Exit Sub
-            ElseIf Found > 60 Then
-                Call WriteConsoleMsg(UserIndex, "Se han encontrado " & Found & " objetos que contienen '" & ObjS & "', por favor acote el parámetro de búsqueda." & vbCrLf & Listado, FontTypeNames.FONTTYPE_GUILD)
+            ElseIf found > 60 Then
+                Call WriteConsoleMsg(UserIndex, "Se han encontrado " & found & " objetos que contienen '" & ObjS & "', por favor acote el parámetro de búsqueda." & vbCrLf & Listado, FontTypeNames.FONTTYPE_GUILD)
                 Exit Sub
-            ElseIf Found > 1 Then
-                Call WriteConsoleMsg(UserIndex, "Se han encontrado " & Found & " objetos que contienen '" & ObjS & "':" & vbCrLf & Listado, FontTypeNames.FONTTYPE_GUILD)
+            ElseIf found > 1 Then
+                Call WriteConsoleMsg(UserIndex, "Se han encontrado " & found & " objetos que contienen '" & ObjS & "':" & vbCrLf & Listado, FontTypeNames.FONTTYPE_GUILD)
                 Exit Sub
             End If
         End If
@@ -11809,7 +11809,7 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
         
         Call LogGM(.Name, "/CI: " & ObjIndex & " - " & ObjData(ObjIndex).Name & " - " & Cant)
         
-        Dim Objeto As Obj
+        Dim Objeto As obj
         Call WriteConsoleMsg(UserIndex, "ATENCION: FUERON CREADOS ***" & Cant & "*** ITEMS!, TIRE Y /DEST LOS QUE NO NECESITE!!", FontTypeNames.FONTTYPE_GUILD)
         
         Objeto.Amount = Cant
@@ -16345,7 +16345,7 @@ End Sub
 ' @param    slot Inventory slot which needs to be updated.
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
-Public Sub WriteChangeBankSlot(ByVal UserIndex As Integer, ByVal Slot As Byte)
+Public Sub WriteChangeBankSlot(ByVal UserIndex As Integer, ByVal Slot As Integer, ByVal ObjIndex As Integer, ByVal Amount As Integer)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -16356,10 +16356,7 @@ On Error GoTo errhandler
         Call .WriteByte(ServerPacketID.ChangeBankSlot)
         Call .WriteByte(Slot)
         
-        Dim ObjIndex As Integer
         Dim obData As ObjData
-        
-        ObjIndex = UserList(UserIndex).BancoInvent.Object(Slot).ObjIndex
         
         Call .WriteInteger(ObjIndex)
         
@@ -16368,7 +16365,7 @@ On Error GoTo errhandler
         End If
         
         Call .WriteASCIIString(obData.Name)
-        Call .WriteInteger(UserList(UserIndex).BancoInvent.Object(Slot).Amount)
+        Call .WriteInteger(Amount)
         Call .WriteInteger(obData.GrhIndex)
         Call .WriteByte(obData.OBJType)
         Call .WriteInteger(obData.MaxHIT)
@@ -16473,7 +16470,7 @@ Public Sub WriteBlacksmithWeapons(ByVal UserIndex As Integer)
 '***************************************************
 On Error GoTo errhandler
     Dim i As Long
-    Dim Obj As ObjData
+    Dim obj As ObjData
     Dim validIndexes() As Integer
     Dim Count As Integer
     
@@ -16495,14 +16492,14 @@ On Error GoTo errhandler
         
         ' Write the needed data of each object
         For i = 1 To Count
-            Obj = ObjData(ArmasHerrero(validIndexes(i)))
-            Call .WriteASCIIString(Obj.Name)
-            Call .WriteInteger(Obj.GrhIndex)
-            Call .WriteInteger(Obj.LingH)
-            Call .WriteInteger(Obj.LingP)
-            Call .WriteInteger(Obj.LingO)
+            obj = ObjData(ArmasHerrero(validIndexes(i)))
+            Call .WriteASCIIString(obj.Name)
+            Call .WriteInteger(obj.GrhIndex)
+            Call .WriteInteger(obj.LingH)
+            Call .WriteInteger(obj.LingP)
+            Call .WriteInteger(obj.LingO)
             Call .WriteInteger(ArmasHerrero(validIndexes(i)))
-            Call .WriteInteger(Obj.Upgrade)
+            Call .WriteInteger(obj.Upgrade)
         Next i
     End With
 Exit Sub
@@ -16528,7 +16525,7 @@ Public Sub WriteBlacksmithArmors(ByVal UserIndex As Integer)
 '***************************************************
 On Error GoTo errhandler
     Dim i As Long
-    Dim Obj As ObjData
+    Dim obj As ObjData
     Dim validIndexes() As Integer
     Dim Count As Integer
     
@@ -16550,14 +16547,14 @@ On Error GoTo errhandler
         
         ' Write the needed data of each object
         For i = 1 To Count
-            Obj = ObjData(ArmadurasHerrero(validIndexes(i)))
-            Call .WriteASCIIString(Obj.Name)
-            Call .WriteInteger(Obj.GrhIndex)
-            Call .WriteInteger(Obj.LingH)
-            Call .WriteInteger(Obj.LingP)
-            Call .WriteInteger(Obj.LingO)
+            obj = ObjData(ArmadurasHerrero(validIndexes(i)))
+            Call .WriteASCIIString(obj.Name)
+            Call .WriteInteger(obj.GrhIndex)
+            Call .WriteInteger(obj.LingH)
+            Call .WriteInteger(obj.LingP)
+            Call .WriteInteger(obj.LingO)
             Call .WriteInteger(ArmadurasHerrero(validIndexes(i)))
-            Call .WriteInteger(Obj.Upgrade)
+            Call .WriteInteger(obj.Upgrade)
         Next i
     End With
 Exit Sub
@@ -16583,7 +16580,7 @@ Public Sub WriteCarpenterObjects(ByVal UserIndex As Integer)
 '***************************************************
 On Error GoTo errhandler
     Dim i As Long
-    Dim Obj As ObjData
+    Dim obj As ObjData
     Dim validIndexes() As Integer
     Dim Count As Integer
     
@@ -16605,13 +16602,13 @@ On Error GoTo errhandler
         
         ' Write the needed data of each object
         For i = 1 To Count
-            Obj = ObjData(ObjCarpintero(validIndexes(i)))
-            Call .WriteASCIIString(Obj.Name)
-            Call .WriteInteger(Obj.GrhIndex)
-            Call .WriteInteger(Obj.Madera)
-            Call .WriteInteger(Obj.MaderaElfica)
+            obj = ObjData(ObjCarpintero(validIndexes(i)))
+            Call .WriteASCIIString(obj.Name)
+            Call .WriteInteger(obj.GrhIndex)
+            Call .WriteInteger(obj.Madera)
+            Call .WriteInteger(obj.MaderaElfica)
             Call .WriteInteger(ObjCarpintero(validIndexes(i)))
-            Call .WriteInteger(Obj.Upgrade)
+            Call .WriteInteger(obj.Upgrade)
         Next i
     End With
 Exit Sub
@@ -16753,7 +16750,7 @@ End Sub
 ' @param    price       The value the NPC asks for the object.
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
-Public Sub WriteChangeNPCInventorySlot(ByVal UserIndex As Integer, ByVal Slot As Byte, ByRef Obj As Obj, ByVal price As Single, Optional ByVal PuedeUsarItem As Byte = 1)
+Public Sub WriteChangeNPCInventorySlot(ByVal UserIndex As Integer, ByVal Slot As Byte, ByRef obj As obj, ByVal price As Single, Optional ByVal PuedeUsarItem As Byte = 1)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 06/13/08
@@ -16763,18 +16760,18 @@ Public Sub WriteChangeNPCInventorySlot(ByVal UserIndex As Integer, ByVal Slot As
 On Error GoTo errhandler
     Dim ObjInfo As ObjData
     
-    If Obj.ObjIndex >= LBound(ObjData()) And Obj.ObjIndex <= UBound(ObjData()) Then
-        ObjInfo = ObjData(Obj.ObjIndex)
+    If obj.ObjIndex >= LBound(ObjData()) And obj.ObjIndex <= UBound(ObjData()) Then
+        ObjInfo = ObjData(obj.ObjIndex)
     End If
     
     With UserList(UserIndex).outgoingData
         Call .WriteByte(ServerPacketID.ChangeNPCInventorySlot)
         Call .WriteByte(Slot)
         Call .WriteASCIIString(ObjInfo.Name)
-        Call .WriteInteger(Obj.Amount)
+        Call .WriteInteger(obj.Amount)
         Call .WriteSingle(price)
         Call .WriteInteger(ObjInfo.GrhIndex)
-        Call .WriteInteger(Obj.ObjIndex)
+        Call .WriteInteger(obj.ObjIndex)
         Call .WriteByte(ObjInfo.OBJType)
         Call .WriteInteger(ObjInfo.MaxHIT)
         Call .WriteInteger(ObjInfo.MinHIT)

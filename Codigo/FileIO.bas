@@ -192,7 +192,7 @@ NumeroHechizos = val(Leer.GetValue("INIT", "NumeroHechizos"))
 
 ReDim Hechizos(1 To NumeroHechizos) As tHechizo
 
-frmCargando.cargar.Min = 0
+frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumeroHechizos
 frmCargando.cargar.value = 0
 
@@ -641,7 +641,7 @@ Call Leer.Initialize(DatPath & "Obj.dat")
 'obtiene el numero de obj
 NumObjDatas = val(Leer.GetValue("INIT", "NumObjs"))
 
-frmCargando.cargar.Min = 0
+frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumObjDatas
 frmCargando.cargar.value = 0
 
@@ -1019,12 +1019,12 @@ UserList(UserIndex).Invent.NroItems = CInt(UserFile("InvCantidadItems"))
 
 '[KEVIN]--------------------------------------------------------------------
 '***********************************************************************************
-UserList(UserIndex).BancoInvent.NroItems = CInt(UserFile("BanCantidadItems"))
+'UserList(UserIndex).BancoInvent.NroItems = CInt(UserFile("BanCantidadItems"))
 'Lista de objetos del banco
-For LoopC = 1 To MAX_BANCOINVENTORY_SLOTS
-    UserList(UserIndex).BancoInvent.Object(LoopC).ObjIndex = CInt(UserFile("BanObj" & LoopC))
-    UserList(UserIndex).BancoInvent.Object(LoopC).Amount = CInt(UserFile("BanCant" & LoopC))
-Next LoopC
+'For LoopC = 1 To MAX_BANCOINVENTORY_SLOTS
+'    UserList(UserIndex).BancoInvent.Object(LoopC).ObjIndex = CInt(UserFile("BanObj" & LoopC))
+'    UserList(UserIndex).BancoInvent.Object(LoopC).Amount = CInt(UserFile("BanCant" & LoopC))
+'Next LoopC
 '------------------------------------------------------------------------------------
 '[/KEVIN]*****************************************************************************
 
@@ -1120,7 +1120,7 @@ Dim npcfile As String
 
 On Error GoTo man
     
-    frmCargando.cargar.Min = 0
+    frmCargando.cargar.min = 0
     frmCargando.cargar.max = NumMaps
     frmCargando.cargar.value = 0
 
@@ -1747,12 +1747,12 @@ Query = Query & "NpcsMuertes=" & CStr(UserList(UserIndex).Stats.NPCsMuertos) & "
   
 '[KEVIN]----------------------------------------------------------------------------
 '*******************************************************************************************
-Query = Query & "BanCantidadItems=" & val(UserList(UserIndex).BancoInvent.NroItems) & ", "
-Dim loopd As Integer
-For loopd = 1 To MAX_BANCOINVENTORY_SLOTS
-    Query = Query & "BanObj" & loopd & "=" & UserList(UserIndex).BancoInvent.Object(loopd).ObjIndex & ", "
-    Query = Query & "BanCant" & loopd & "=" & UserList(UserIndex).BancoInvent.Object(loopd).Amount & ", "
-Next loopd
+'Query = Query & "BanCantidadItems=" & val(UserList(UserIndex).BancoInvent.NroItems) & ", "
+'Dim loopd As Integer
+'For loopd = 1 To MAX_BANCOINVENTORY_SLOTS
+'    Query = Query & "BanObj" & loopd & "=" & UserList(UserIndex).BancoInvent.Object(loopd).ObjIndex & ", "
+'    Query = Query & "BanCant" & loopd & "=" & UserList(UserIndex).BancoInvent.Object(loopd).Amount & ", "
+'Next loopd
 '*******************************************************************************************
 '[/KEVIN]-----------
   
