@@ -520,6 +520,17 @@ CREATE TABLE `pjs` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+DROP TABLE IF EXISTS `pjs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vault` (
+  `cuenta_id` BIGINT NOT NULL,
+  `slot` INT NOT NULL,
+  `item` INT NOT NULL DEFAULT 0,
+  `quantity` INT NOT NULL DEFAULT 0,
+  `updated_at` DATETIME NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  PRIMARY KEY (`cuenta_id`, `slot`));
+
 -- Dump completed on 2020-07-14 15:50:55
 
 LOCK TABLES `fortalezas` WRITE;
@@ -527,13 +538,3 @@ LOCK TABLES `fortalezas` WRITE;
 INSERT INTO `fortalezas` VALUES (1,'Oeste',11,'2018-12-15 14:50:15',40,1460,18,1304,620),(2,'Este',11,'2018-12-15 14:47:58',1055,1460,1080,1252,619);
 /*!40000 ALTER TABLE `fortalezas` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
-
-CREATE TABLE `aoyind3`.`vault` (
-  `cuenta_id` BIGINT NOT NULL,
-  `slot` INT NOT NULL,
-  `item` INT NOT NULL DEFAULT 0,
-  `quantity` INT NOT NULL DEFAULT 0,
-  `updated_at` DATETIME NOT NULL DEFAULT NOW() ON UPDATE NOW()
-  PRIMARY KEY (`cuenta_id`, `slot`));
