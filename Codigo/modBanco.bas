@@ -55,7 +55,7 @@ Dim NullObj As UserOBJ
 Dim LoopC As Byte
 Dim Cant As Integer
 
-Dim obj As UserOBJ
+Dim Obj As UserOBJ
 Dim Datos As clsMySQLRecordSet
  Cant = mySQL.SQLQuery("SELECT * FROM vault WHERE cuenta_id=" & UserList(UserIndex).MySQLIdCuenta, Datos)
     
@@ -75,9 +75,9 @@ Dim i As Integer
     For i = 1 To Cant
     
         If Datos("slot") = Slot Then
-            obj.ObjIndex = Datos("item")
-            obj.Amount = Datos("quantity")
-            Call SendBanObj(UserIndex, Slot, obj)
+            Obj.ObjIndex = Datos("item")
+            Obj.Amount = Datos("quantity")
+            Call SendBanObj(UserIndex, Slot, Obj)
             found = True
         End If
 
@@ -103,9 +103,9 @@ Else
     For i = 1 To Cant
     
         If Datos("slot") >= 1 And Datos("slot") <= MAX_BANCOINVENTORY_SLOTS Then
-            obj.ObjIndex = Datos("item")
-            obj.Amount = Datos("quantity")
-            Call SendBanObj(UserIndex, Datos("slot"), obj)
+            Obj.ObjIndex = Datos("item")
+            Obj.Amount = Datos("quantity")
+            Call SendBanObj(UserIndex, Datos("slot"), Obj)
         End If
 
         Datos.MoveNext
@@ -362,13 +362,13 @@ On Error Resume Next
 Dim j As Integer
 
 Call WriteConsoleMsg(sendIndex, UserList(UserIndex).Name, FontTypeNames.FONTTYPE_INFO)
-Call WriteConsoleMsg(sendIndex, " Tiene " & UserList(UserIndex).BancoInvent.NroItems & " objetos.", FontTypeNames.FONTTYPE_INFO)
+'Call WriteConsoleMsg(sendIndex, " Tiene " & UserList(UserIndex).BancoInvent.NroItems & " objetos.", FontTypeNames.FONTTYPE_INFO)
 
-For j = 1 To MAX_BANCOINVENTORY_SLOTS
-    If UserList(UserIndex).BancoInvent.Object(j).ObjIndex > 0 Then
-        Call WriteConsoleMsg(sendIndex, " Objeto " & j & " " & ObjData(UserList(UserIndex).BancoInvent.Object(j).ObjIndex).Name & " Cantidad:" & UserList(UserIndex).BancoInvent.Object(j).Amount, FontTypeNames.FONTTYPE_INFO)
-    End If
-Next
+'For j = 1 To MAX_BANCOINVENTORY_SLOTS
+'    If UserList(UserIndex).BancoInvent.Object(j).ObjIndex > 0 Then
+'        Call WriteConsoleMsg(sendIndex, " Objeto " & j & " " & ObjData(UserList(UserIndex).BancoInvent.Object(j).ObjIndex).Name & " Cantidad:" & UserList(UserIndex).BancoInvent.Object(j).Amount, FontTypeNames.FONTTYPE_INFO)
+'    End If
+'Next
 
 End Sub
 
@@ -387,7 +387,7 @@ Query = "SELECT * FROM vault WHERE cuenta_id=" & UserList(sendIndex).MySQLIdCuen
 Cant = mySQL.SQLQuery(Query, Datos)
     
 If Cant > 0 Then
-    Call WriteConsoleMsg(sendIndex, charName, FontTypeNames.FONTTYPE_INFO)
+    'Call WriteConsoleMsg(sendIndex, charName, FontTypeNames.FONTTYPE_INFO)
     Call WriteConsoleMsg(sendIndex, " Tiene " & Datos("BanCantidadItems") & " objetos.", FontTypeNames.FONTTYPE_INFO)
     For j = 1 To Cant
         'Tmp = datos("BanObj" & i)
@@ -414,6 +414,7 @@ Dim j As Integer
 
 Dim Cant As Integer
 Dim Datos As clsMySQLRecordSet
+Dim Query As String
 Query = "SELECT * FROM vault WHERE cuenta_id=" & UserList(UserIndex).MySQLIdCuenta & " AND (slot=" & Slot1 & " OR slot=" & Slot2 & ")"
         
 Cant = mySQL.SQLQuery(Query, Datos)
