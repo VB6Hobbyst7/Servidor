@@ -1,5 +1,5 @@
 Acciones = 0, 0, 0, 0, C
-Admin = 0, 0, 1091, 635, 
+Admin = 0, 0, 1091, 635, Z
 AI = 234, 234, 1325, 869, 
 modSistemaComercio = 26, 26, 1046, 660, 
 Declaraciones = 156, 156, 1247, 791, 
@@ -54,7 +54,7 @@ modCentinela = 52, 52, 1114, 687,
 clsByteQueue = 0, 0, 0, 0, C
 clsIniReader = 0, 0, 0, 0, C
 Statistics = 0, 0, 0, 0, C
-Protocol = 52, 52, 1236, 626, Z
+Protocol = 52, 52, 1236, 626, 
 modSendData = 0, 0, 0, 0, C
 Characters = 0, 0, 0, 0, C
 clsMySQL = 104, 104, 1166, 739, 
