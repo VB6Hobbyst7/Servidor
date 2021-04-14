@@ -88,7 +88,7 @@ Public DificultadMinar As Integer
 Public PorcentajeRecuperoMana As Integer
 
 Public MinutosWs As Long
-Public Puerto As Integer
+Public Puerto As Long
 Public FechaHora As String
 Public Hora As Byte
 
@@ -124,7 +124,7 @@ For i = 1 To LastNPC
    'OJO
    If Npclist(i).flags.NPCActive Then
         
-        If InMapBounds(Npclist(i).Orig.Map, Npclist(i).Orig.X, Npclist(i).Orig.Y) And Npclist(i).Numero = Guardias Then
+        If InMapBounds(Npclist(i).Orig.map, Npclist(i).Orig.X, Npclist(i).Orig.Y) And Npclist(i).Numero = Guardias Then
                 MiNPC = Npclist(i)
                 Call QuitarNPC(i)
                 Call ReSpawnNpc(MiNPC)
@@ -158,12 +158,12 @@ Dim j As Integer, k As Integer
 
 FrmStat.ProgressBar1.min = 0
 FrmStat.ProgressBar1.max = k
-FrmStat.ProgressBar1.value = 0
+FrmStat.ProgressBar1.Value = 0
 
 For loopX = 1 To NumMaps
     'DoEvents
     Call GrabarMapa(loopX, WorldBkPath & "\Mapa" & loopX & ".bak")
-    FrmStat.ProgressBar1.value = FrmStat.ProgressBar1.value + 1
+    FrmStat.ProgressBar1.Value = FrmStat.ProgressBar1.Value + 1
 Next loopX
 
 FrmStat.Visible = False
@@ -195,7 +195,7 @@ Public Sub PurgarPenas()
                         UserList(i).Char.Body = ObjData(UserList(i).Invent.ArmourEqpObjIndex).Ropaje
                         Call ChangeUserChar(i, UserList(i).Char.Body, UserList(i).Char.Head, UserList(i).Char.heading, UserList(i).Char.WeaponAnim, UserList(i).Char.ShieldAnim, UserList(i).Char.CascoAnim)
                     End If
-                    Call WarpUserChar(i, Libertad.Map, Libertad.X, Libertad.Y, True)
+                    Call WarpUserChar(i, Libertad.map, Libertad.X, Libertad.Y, True)
                     Call WriteConsoleMsg(i, "Has sido liberado!", FontTypeNames.FONTTYPE_INFO)
                     
                     Call FlushBuffer(i)
@@ -211,7 +211,7 @@ Public Sub Encarcelar(ByVal UserIndex As Integer, ByVal Minutos As Long, Optiona
         UserList(UserIndex).Counters.Pena = Minutos
        
         
-        Call WarpUserChar(UserIndex, Prision.Map, Prision.X, Prision.Y, True)
+        Call WarpUserChar(UserIndex, Prision.map, Prision.X, Prision.Y, True)
         
         'Select Case Minutos
         '    Case 1 To 5

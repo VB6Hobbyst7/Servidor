@@ -151,7 +151,7 @@ Call WriteUpdateUserStats(UserIndex)
          'Actualizamos el inventario del usuario
          Call UpdateUserInv(True, UserIndex, 0)
          'Actualizamos el banco
-         Call UpdateBanUserInv(True, UserIndex, 0)
+         Call UpdateBanUserInv(False, UserIndex, i)
     End If
     'Actualizamos la ventana de comercio
     Call UpdateVentanaBanco(UserIndex)
