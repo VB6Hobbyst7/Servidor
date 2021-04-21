@@ -304,7 +304,7 @@ Sub CreateNewAccount(ByVal UserIndex As Integer, ByVal UserAccount As String, By
         Exit Sub
     End If
     
-    Call Execute("INSERT INTO Cuentas SET Nombre=" & Comillas(UserAccount) & ", Email=" & Comillas(UserEmail) & ", Password=" & Comillas(UserPassword))
+    Call Execute("INSERT INTO cuentas SET Nombre=" & Comillas(UserAccount) & ", Email=" & Comillas(UserEmail) & ", Password=" & Comillas(UserPassword))
     UserList(UserIndex).MySQLId = GetByCampo("SELECT LAST_INSERT_ID() as Id", "Id")
     
     If UserList(UserIndex).MySQLId > 0 Then
@@ -567,7 +567,7 @@ On Error GoTo errhandler
     End If
        
     'Empty buffer for reuse
-    Call UserList(UserIndex).incomingData.ReadASCIIStringFixed(UserList(UserIndex).incomingData.length)
+    Call UserList(UserIndex).incomingData.ReadASCIIStringFixed(UserList(UserIndex).incomingData.Length)
     
     If UserList(UserIndex).flags.UserLogged Then
         If NumUsers > 0 Then NumUsers = NumUsers - 1
