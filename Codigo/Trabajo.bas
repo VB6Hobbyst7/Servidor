@@ -183,6 +183,8 @@ Public Sub ToggleBoatBody(ByVal UserIndex As Integer)
                 .Invent.BarcoObjIndex = 475
             ElseIf TieneObjetos(474, 1, UserIndex) Then
                 .Invent.BarcoObjIndex = 474
+             ElseIf TieneObjetos(1100, 1, UserIndex) Then
+             .Invent.BarcoObjIndex = 1100
             Else
                 Exit Sub
             End If
@@ -216,6 +218,10 @@ Public Sub ToggleBoatBody(ByVal UserIndex As Integer)
                     Else
                         NewBody = iGaleonPk
                     End If
+                    
+                    Case iBalsa
+                    
+                    NewBody = iBalsa
             End Select
         
         ' Ciudas y Armadas
@@ -247,6 +253,9 @@ Public Sub ToggleBoatBody(ByVal UserIndex As Integer)
                         Else
                             NewBody = iGaleonCiudaAtacable
                         End If
+                        
+                        Case iBalsa
+                        NewBody = iBalsa
                 End Select
             
             ' Normal
@@ -273,6 +282,10 @@ Public Sub ToggleBoatBody(ByVal UserIndex As Integer)
                         Else
                             NewBody = iGaleonCiuda
                         End If
+                        
+                    Case iBalsa
+                    
+                      NewBody = iBalsa
                 End Select
             
             End If
