@@ -1017,6 +1017,25 @@ Public Type Obj
     Amount As Integer
 End Type
 
+'Quest
+Public Type tQuestNpc
+    NpcIndex As Integer
+    Amount As Integer
+End Type
+ 
+Public Type tUserQuest
+    NPCsKilled() As Integer
+    QuestIndex As Integer
+End Type
+ 
+Public Type tQuestStats
+    Quests(1 To MAXUSERQUESTS) As tUserQuest
+    NumQuestsDone As Integer
+    QuestsDone() As Integer
+End Type
+'quest
+
+
 '[Pablo ToxicWaste]
 Public Type ModClase
     Evasion As Double
@@ -1064,6 +1083,26 @@ End Type
 '*********************************************************
 '*********************************************************
 '*********************************************************
+
+'quest
+Public Type tQuest
+    Nombre As String
+    desc As String
+    RequiredLevel As Byte
+    
+    RequiredOBJs As Byte
+    RequiredOBJ() As Obj
+    
+    RequiredNPCs As Byte
+    RequiredNPC() As tQuestNpc
+    
+    RewardGLD As Long
+    RewardEXP As Long
+    
+    RewardOBJs As Byte
+    RewardOBJ() As Obj
+End Type
+'quest
 
 Public Type tReputacion 'Fama del usuario
     NobleRep As Long
@@ -1390,6 +1429,9 @@ Public Type User
     incomingData As clsByteQueue
     
     CurrentInventorySlots As Byte
+    'quest
+    QuestStats As tQuestStats
+    'quest
 End Type
 
 Private Type tNpcs
@@ -1564,8 +1606,9 @@ Public Type NPC
     Hostile As Byte
     PoderAtaque As Long
     PoderEvasion As Long
-
-
+'quest
+    QuestNumber As Integer
+'quest
     GiveEXP As Long
     GiveGLDMin As Long
     GiveGLDMax As Long
@@ -1717,6 +1760,9 @@ Public ModRaza(1 To NUMRAZAS) As ModRaza
 Public ModVida(1 To NUMCLASES) As Double
 Public DistribucionEnteraVida(1 To 5) As Integer
 Public DistribucionSemienteraVida(1 To 4) As Integer
+'quest
+Public QuestList() As tQuest
+'quest
 '*********************************************************
 
 Public Nix As WorldPos

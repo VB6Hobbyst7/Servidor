@@ -44,15 +44,15 @@ Attribute VB_Name = "NPCs"
 
 Option Explicit
 
-Sub QuitarMascota(ByVal UserIndex As Integer, ByVal NpcIndex As Integer)
+Sub QuitarMascota(ByVal Userindex As Integer, ByVal NpcIndex As Integer)
     Dim i As Integer
     
     For i = 1 To MAXMASCOTAS
-      If UserList(UserIndex).MascotasIndex(i) = NpcIndex Then
-         UserList(UserIndex).MascotasIndex(i) = 0
-         UserList(UserIndex).MascotasType(i) = 0
+      If UserList(Userindex).MascotasIndex(i) = NpcIndex Then
+         UserList(Userindex).MascotasIndex(i) = 0
+         UserList(Userindex).MascotasType(i) = 0
          
-         UserList(UserIndex).NroMascotas = UserList(UserIndex).NroMascotas - 1
+         UserList(Userindex).NroMascotas = UserList(Userindex).NroMascotas - 1
          Exit For
       End If
     Next i
@@ -62,7 +62,7 @@ Sub QuitarMascotaNpc(ByVal Maestro As Integer)
     Npclist(Maestro).Mascotas = Npclist(Maestro).Mascotas - 1
 End Sub
 
-Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
+Sub MuereNpc(ByVal NpcIndex As Integer, ByVal Userindex As Integer)
 '********************************************************
 'Author: Unknown
 'Llamado cuando la vida de un NPC llega a cero.
@@ -70,7 +70,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
 '22/06/06: (Nacho) Chequeamos si es pretoriano
 '24/01/2007: Pablo (ToxicWaste): Agrego para actualización de tag si cambia de status.
 '********************************************************
-On Error GoTo errhandler
+On Error GoTo Errhandler
     Dim MiNPC As NPC
     MiNPC = Npclist(NpcIndex)
     Dim EraCriminal As Boolean
@@ -115,20 +115,20 @@ On Error GoTo errhandler
     'Quitamos el npc
     Call QuitarNPC(NpcIndex)
     
-    If UserIndex > 0 Then ' Lo mato un usuario?
+    If Userindex > 0 Then ' Lo mato un usuario?
         If MiNPC.flags.Snd3 > 0 Then
-            Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(MiNPC.flags.Snd3, MiNPC.Pos.X, MiNPC.Pos.Y))
+            Call SendData(SendTarget.ToPCArea, Userindex, PrepareMessagePlayWave(MiNPC.flags.Snd3, MiNPC.Pos.X, MiNPC.Pos.Y))
         End If
-        UserList(UserIndex).flags.TargetNPC = 0
-        UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
+        UserList(Userindex).flags.TargetNPC = 0
+        UserList(Userindex).flags.TargetNpcTipo = eNPCType.Comun
         
         'El user que lo mato tiene mascotas?
-        If UserList(UserIndex).NroMascotas > 0 Then
+        If UserList(Userindex).NroMascotas > 0 Then
             Dim T As Integer
             For T = 1 To MAXMASCOTAS
-                  If UserList(UserIndex).MascotasIndex(T) > 0 Then
-                      If Npclist(UserList(UserIndex).MascotasIndex(T)).TargetNPC = NpcIndex Then
-                              Call FollowAmo(UserList(UserIndex).MascotasIndex(T))
+                  If UserList(Userindex).MascotasIndex(T) > 0 Then
+                      If Npclist(UserList(Userindex).MascotasIndex(T)).TargetNPC = NpcIndex Then
+                              Call FollowAmo(UserList(Userindex).MascotasIndex(T))
                       End If
                   End If
             Next T
@@ -137,64 +137,64 @@ On Error GoTo errhandler
         '[KEVIN]
         If MiNPC.flags.WasAttackByGuards = False Then
             If MiNPC.flags.ExpCount > 0 Then
-                If UserList(UserIndex).PartyIndex > 0 Then
-                    Call mdParty.ObtenerExito(UserIndex, MiNPC.flags.ExpCount, MiNPC.Pos.map, MiNPC.Pos.X, MiNPC.Pos.Y)
+                If UserList(Userindex).PartyIndex > 0 Then
+                    Call mdParty.ObtenerExito(Userindex, MiNPC.flags.ExpCount, MiNPC.Pos.map, MiNPC.Pos.X, MiNPC.Pos.Y)
                 Else
-                    UserList(UserIndex).Stats.Exp = UserList(UserIndex).Stats.Exp + MiNPC.flags.ExpCount
-                    If UserList(UserIndex).Stats.Exp > MAXEXP Then _
-                        UserList(UserIndex).Stats.Exp = MAXEXP
-                    Call WriteConsoleMsg(UserIndex, "Has ganado " & MiNPC.flags.ExpCount & " puntos de experiencia.", FontTypeNames.FONTTYPE_EXP)
+                    UserList(Userindex).Stats.Exp = UserList(Userindex).Stats.Exp + MiNPC.flags.ExpCount
+                    If UserList(Userindex).Stats.Exp > MAXEXP Then _
+                        UserList(Userindex).Stats.Exp = MAXEXP
+                    Call WriteConsoleMsg(Userindex, "Has ganado " & MiNPC.flags.ExpCount & " puntos de experiencia.", FontTypeNames.FONTTYPE_EXP)
                 End If
                 MiNPC.flags.ExpCount = 0
             End If
         End If
         
         '[/KEVIN]
-        Call WriteConsoleMsg(UserIndex, "¡Has matado a la criatura!", FontTypeNames.FONTTYPE_FIGHT)
+        Call WriteConsoleMsg(Userindex, "¡Has matado a la criatura!", FontTypeNames.FONTTYPE_FIGHT)
         
         If MiNPC.flags.WasAttackByGuards = False Then
-            If UserList(UserIndex).Stats.NPCsMuertos < 32000 Then _
-                UserList(UserIndex).Stats.NPCsMuertos = UserList(UserIndex).Stats.NPCsMuertos + 1
+            If UserList(Userindex).Stats.NPCsMuertos < 32000 Then _
+                UserList(Userindex).Stats.NPCsMuertos = UserList(Userindex).Stats.NPCsMuertos + 1
                 
-        EraCriminal = Criminal(UserIndex)
+        EraCriminal = Criminal(Userindex)
         
         If MiNPC.Stats.Alineacion = 0 Then
             If MiNPC.Numero = Guardias Then
-                UserList(UserIndex).Reputacion.NobleRep = 0
-                UserList(UserIndex).Reputacion.PlebeRep = 0
-                UserList(UserIndex).Reputacion.AsesinoRep = UserList(UserIndex).Reputacion.AsesinoRep + 500
-                If UserList(UserIndex).Reputacion.AsesinoRep > MAXREP Then _
-                    UserList(UserIndex).Reputacion.AsesinoRep = MAXREP
+                UserList(Userindex).Reputacion.NobleRep = 0
+                UserList(Userindex).Reputacion.PlebeRep = 0
+                UserList(Userindex).Reputacion.AsesinoRep = UserList(Userindex).Reputacion.AsesinoRep + 500
+                If UserList(Userindex).Reputacion.AsesinoRep > MAXREP Then _
+                    UserList(Userindex).Reputacion.AsesinoRep = MAXREP
             End If
             If MiNPC.MaestroUser = 0 Then
-                UserList(UserIndex).Reputacion.AsesinoRep = UserList(UserIndex).Reputacion.AsesinoRep + vlASESINO
-                If UserList(UserIndex).Reputacion.AsesinoRep > MAXREP Then _
-                    UserList(UserIndex).Reputacion.AsesinoRep = MAXREP
+                UserList(Userindex).Reputacion.AsesinoRep = UserList(Userindex).Reputacion.AsesinoRep + vlASESINO
+                If UserList(Userindex).Reputacion.AsesinoRep > MAXREP Then _
+                    UserList(Userindex).Reputacion.AsesinoRep = MAXREP
             End If
         ElseIf MiNPC.Stats.Alineacion = 1 Then
-            UserList(UserIndex).Reputacion.PlebeRep = UserList(UserIndex).Reputacion.PlebeRep + vlCAZADOR
-            If UserList(UserIndex).Reputacion.PlebeRep > MAXREP Then _
-                UserList(UserIndex).Reputacion.PlebeRep = MAXREP
+            UserList(Userindex).Reputacion.PlebeRep = UserList(Userindex).Reputacion.PlebeRep + vlCAZADOR
+            If UserList(Userindex).Reputacion.PlebeRep > MAXREP Then _
+                UserList(Userindex).Reputacion.PlebeRep = MAXREP
         ElseIf MiNPC.Stats.Alineacion = 2 Then
-            UserList(UserIndex).Reputacion.NobleRep = UserList(UserIndex).Reputacion.NobleRep + vlASESINO / 2
-            If UserList(UserIndex).Reputacion.NobleRep > MAXREP Then _
-                UserList(UserIndex).Reputacion.NobleRep = MAXREP
+            UserList(Userindex).Reputacion.NobleRep = UserList(Userindex).Reputacion.NobleRep + vlASESINO / 2
+            If UserList(Userindex).Reputacion.NobleRep > MAXREP Then _
+                UserList(Userindex).Reputacion.NobleRep = MAXREP
         ElseIf MiNPC.Stats.Alineacion = 4 Then
-            UserList(UserIndex).Reputacion.PlebeRep = UserList(UserIndex).Reputacion.PlebeRep + vlCAZADOR
-            If UserList(UserIndex).Reputacion.PlebeRep > MAXREP Then _
-                UserList(UserIndex).Reputacion.PlebeRep = MAXREP
+            UserList(Userindex).Reputacion.PlebeRep = UserList(Userindex).Reputacion.PlebeRep + vlCAZADOR
+            If UserList(Userindex).Reputacion.PlebeRep > MAXREP Then _
+                UserList(Userindex).Reputacion.PlebeRep = MAXREP
         End If
-        If Criminal(UserIndex) And esArmada(UserIndex) Then Call ExpulsarFaccionReal(UserIndex)
-        If Not Criminal(UserIndex) And esCaos(UserIndex) Then Call ExpulsarFaccionCaos(UserIndex)
+        If Criminal(Userindex) And esArmada(Userindex) Then Call ExpulsarFaccionReal(Userindex)
+        If Not Criminal(Userindex) And esCaos(Userindex) Then Call ExpulsarFaccionCaos(Userindex)
         
-        If EraCriminal And Not Criminal(UserIndex) Then
-            Call RefreshCharStatus(UserIndex)
-        ElseIf Not EraCriminal And Criminal(UserIndex) Then
-            Call RefreshCharStatus(UserIndex)
+        If EraCriminal And Not Criminal(Userindex) Then
+            Call RefreshCharStatus(Userindex)
+        ElseIf Not EraCriminal And Criminal(Userindex) Then
+            Call RefreshCharStatus(Userindex)
         End If
         
         
-        Call CheckUserLevel(UserIndex)
+        Call CheckUserLevel(Userindex)
     
         End If
     
@@ -212,12 +212,27 @@ On Error GoTo errhandler
         'ReSpawn o no
         Call ReSpawnNpc(MiNPC)
     End If
-   
-    
+   'quest
+    For i = 1 To MAXUSERQUESTS
+        With UserList(Userindex).QuestStats.Quests(i)
+            If .QuestIndex Then
+                If QuestList(.QuestIndex).RequiredNPCs Then
+                    For j = 1 To QuestList(.QuestIndex).RequiredNPCs
+                        If QuestList(.QuestIndex).RequiredNPC(j).NpcIndex = MiNPC.Numero Then
+                            If QuestList(.QuestIndex).RequiredNPC(j).Amount > .NPCsKilled(j) Then
+                                .NPCsKilled(j) = .NPCsKilled(j) + 1
+                            End If
+                        End If
+                    Next j
+                End If
+            End If
+        End With
+    Next i
+'quest
     
 Exit Sub
 
-errhandler:
+Errhandler:
     Call LogError("Error en MuereNpc - Error: " & Err.Number & " - Desc: " & Err.Description)
 End Sub
 
@@ -314,7 +329,9 @@ Private Sub ResetNpcMainInfo(ByVal NpcIndex As Integer)
         .zona = 0
         .InvReSpawn = 0
         .Mensaje = 0
-        
+        'quest
+        .QuestNumber = 0
+        'quest
         If .MaestroUser > 0 And .EquitandoBody = 0 Then Call QuitarMascota(.MaestroUser, NpcIndex)
         If .MaestroNpc > 0 Then Call QuitarMascotaNpc(.MaestroNpc)
         
@@ -365,7 +382,7 @@ End Sub
 
 Public Sub QuitarNPC(ByVal NpcIndex As Integer)
 
-On Error GoTo errhandler
+On Error GoTo Errhandler
 
     With Npclist(NpcIndex)
         .flags.NPCActive = False
@@ -396,7 +413,7 @@ On Error GoTo errhandler
     End If
 Exit Sub
 
-errhandler:
+Errhandler:
     Call LogError("Error en QuitarNPC")
 End Sub
 
@@ -453,8 +470,8 @@ Dim Y As Integer
         
         Npclist(nIndex).Area = Area
         
-        Pos.map = Areas(Area).Mapa
-        altpos.map = Areas(Area).Mapa
+        Pos.map = Areas(Area).mapa
+        altpos.map = Areas(Area).mapa
         
         Do While Not PosicionValida
             Pos.X = RandomNumber(Areas(Area).X1, Areas(Area).X2)      'Obtenemos posicion al azar en x
@@ -607,7 +624,7 @@ Public Sub MoveNPCChar(ByVal NpcIndex As Integer, ByVal nHeading As Byte)
 On Error GoTo errh
     Dim nPos As WorldPos
     Dim CasperPos As WorldPos
-    Dim UserIndex As Integer
+    Dim Userindex As Integer
     Dim CasperHeading As Byte
     
     With Npclist(NpcIndex)
@@ -620,12 +637,12 @@ On Error GoTo errh
             If .flags.TierraInvalida = 1 And Not HayAgua(.Pos.map, nPos.X, nPos.Y) Then Exit Sub
             
 
-            UserIndex = MapData(.Pos.map).Tile(nPos.X, nPos.Y).UserIndex
+            Userindex = MapData(.Pos.map).Tile(nPos.X, nPos.Y).Userindex
             ' Si hay un usuario a dodne se mueve el npc, entonces esta muerto
-            If UserIndex > 0 Then
+            If Userindex > 0 Then
                     CasperHeading = InvertHeading(nHeading)
-                    CasperPos = UserList(UserIndex).Pos
-                    MapData(.Pos.map).Tile(CasperPos.X, CasperPos.Y).UserIndex = 0
+                    CasperPos = UserList(Userindex).Pos
+                    MapData(.Pos.map).Tile(CasperPos.X, CasperPos.Y).Userindex = 0
                     Call HeadtoPos(CasperHeading, CasperPos)
             
 
@@ -635,9 +652,9 @@ On Error GoTo errh
                     
                     
                     'Update map and user pos
-                    UserList(UserIndex).Pos = CasperPos
-                    UserList(UserIndex).Char.heading = CasperHeading
-                    MapData(.Pos.map).Tile(CasperPos.X, CasperPos.Y).UserIndex = UserIndex
+                    UserList(Userindex).Pos = CasperPos
+                    UserList(Userindex).Char.heading = CasperHeading
+                    MapData(.Pos.map).Tile(CasperPos.X, CasperPos.Y).Userindex = Userindex
             
 
 
@@ -651,7 +668,7 @@ On Error GoTo errh
             MapData(.Pos.map).Tile(nPos.X, nPos.Y).NpcIndex = NpcIndex
             
             'Actualizamos las áreas de ser necesario
-            If UserIndex > 0 Then Call ModAreas.CheckUpdateNeededUser(UserIndex, CasperHeading)
+            If Userindex > 0 Then Call ModAreas.CheckUpdateNeededUser(Userindex, CasperHeading)
             Call CheckUpdateNeededNpc(NpcIndex, nHeading)
         
         ElseIf .MaestroUser = 0 Then
@@ -671,7 +688,7 @@ End Sub
 Function NextOpenNPC() As Integer
 'Call LogTarea("Sub NextOpenNPC")
 
-On Error GoTo errhandler
+On Error GoTo Errhandler
     Dim LoopC As Long
       
     For LoopC = 1 To MAXNPCS + 1
@@ -682,17 +699,17 @@ On Error GoTo errhandler
     NextOpenNPC = LoopC
 Exit Function
 
-errhandler:
+Errhandler:
     Call LogError("Error en NextOpenNPC")
 End Function
 
-Sub NpcEnvenenarUser(ByVal UserIndex As Integer)
+Sub NpcEnvenenarUser(ByVal Userindex As Integer)
 
 Dim N As Integer
 N = RandomNumber(1, 100)
 If N < 30 Then
-    UserList(UserIndex).flags.Envenenado = 1
-    Call WriteConsoleMsg(UserIndex, "¡¡La criatura te ha envenenado!!", FontTypeNames.FONTTYPE_FIGHT)
+    UserList(Userindex).flags.Envenenado = 1
+    Call WriteConsoleMsg(Userindex, "¡¡La criatura te ha envenenado!!", FontTypeNames.FONTTYPE_FIGHT)
 End If
 
 End Sub
@@ -899,7 +916,9 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         
         .GiveGLDMin = val(Leer.GetValue("NPC" & NpcNumber, "GiveGLDMin")) * MultiplicadorORO
         .GiveGLDMax = val(Leer.GetValue("NPC" & NpcNumber, "GiveGLDMax")) * MultiplicadorORO
-        
+        'quest
+         .QuestNumber = val(Leer.GetValue("NPC" & NpcNumber, "QuestNumber"))
+        'quest
         .PoderAtaque = val(Leer.GetValue("NPC" & NpcNumber, "PoderAtaque"))
         .PoderEvasion = val(Leer.GetValue("NPC" & NpcNumber, "PoderEvasion"))
         

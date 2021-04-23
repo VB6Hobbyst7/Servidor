@@ -465,6 +465,9 @@ Unload frmCargando
 
 Call LoadGuildsDB
 
+'quest
+Call LoadQuests
+'quest
 
 Call initMercader
 Call initFortalezas
