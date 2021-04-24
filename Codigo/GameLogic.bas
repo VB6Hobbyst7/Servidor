@@ -92,7 +92,7 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, ByVal map As Integer, ByVal 
 '***************************************************
     Dim nPos As WorldPos
     
-On Error GoTo errhandler
+On Error GoTo ErrHandler
     'Controla las salidas
     If InMapBounds(map, X, Y) Then
         With MapData(map).Tile(X, Y)
@@ -171,7 +171,7 @@ On Error GoTo errhandler
     End If
 Exit Sub
 
-errhandler:
+ErrHandler:
     Call LogError("Error en DotileEvents. Error: " & Err.Number & " - Desc: " & Err.Description)
 End Sub
 Sub CambiarOrigHeading(ByVal NpcIndex As Integer, ByVal Trigger As Byte)
@@ -696,170 +696,170 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 '13/02/2009: ZaMa - EL nombre del gm que aparece por consola al clickearlo, tiene el color correspondiente a su rango
 '***************************************************
 
-On Error GoTo errhandler
+    On Error GoTo ErrHandler
 
-'Responde al click del usuario sobre el mapa
-Dim FoundChar As Byte
-Dim FoundSomething As Byte
-Dim TempCharIndex As Integer
-Dim Stat As String
-Dim ft As FontTypeNames
+    'Responde al click del usuario sobre el mapa
+    Dim FoundChar As Byte
+    Dim FoundSomething As Byte
+    Dim TempCharIndex As Integer
+    Dim Stat As String
+    Dim ft As FontTypeNames
 
-UserList(UserIndex).flags.TargetObj = 0
+    UserList(UserIndex).flags.TargetObj = 0
 
-'¿Rango Visión? (ToxicWaste)
-If (Abs(UserList(UserIndex).Pos.Y - Y) > RANGO_VISION_Y) Or (Abs(UserList(UserIndex).Pos.X - X) > RANGO_VISION_X) Then
-    Exit Sub
-End If
+    '¿Rango Visión? (ToxicWaste)
+    If (Abs(UserList(UserIndex).Pos.Y - Y) > RANGO_VISION_Y) Or (Abs(UserList(UserIndex).Pos.X - X) > RANGO_VISION_X) Then
+        Exit Sub
+    End If
 
-'¿Posicion valida?
-If InMapBounds(map, X, Y) Then
-    UserList(UserIndex).flags.TargetMap = map
-    UserList(UserIndex).flags.targetX = X
-    UserList(UserIndex).flags.targetY = Y
-    '¿Es un obj?
-    If MapData(map).Tile(X, Y).ObjInfo.ObjIndex > 0 Then
-        'Informa el nombre
-        UserList(UserIndex).flags.TargetObjMap = map
-        UserList(UserIndex).flags.TargetObjX = X
-        UserList(UserIndex).flags.TargetObjY = Y
-        FoundSomething = 1
-    ElseIf MapData(map).Tile(X + 1, Y).ObjInfo.ObjIndex > 0 Then
-        'Informa el nombre
-        If ObjData(MapData(map).Tile(X + 1, Y).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
-            UserList(UserIndex).flags.TargetObjMap = map
-            UserList(UserIndex).flags.TargetObjX = X + 1
-            UserList(UserIndex).flags.TargetObjY = Y
-            FoundSomething = 1
-        End If
-    ElseIf MapData(map).Tile(X + 1, Y + 1).ObjInfo.ObjIndex > 0 Then
-        If ObjData(MapData(map).Tile(X + 1, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
-            'Informa el nombre
-            UserList(UserIndex).flags.TargetObjMap = map
-            UserList(UserIndex).flags.TargetObjX = X + 1
-            UserList(UserIndex).flags.TargetObjY = Y + 1
-            FoundSomething = 1
-        End If
-    ElseIf MapData(map).Tile(X, Y + 1).ObjInfo.ObjIndex > 0 Then
-        If ObjData(MapData(map).Tile(X, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
+    '¿Posicion valida?
+    If InMapBounds(map, X, Y) Then
+        UserList(UserIndex).flags.TargetMap = map
+        UserList(UserIndex).flags.targetX = X
+        UserList(UserIndex).flags.targetY = Y
+        '¿Es un obj?
+        If MapData(map).Tile(X, Y).ObjInfo.ObjIndex > 0 Then
             'Informa el nombre
             UserList(UserIndex).flags.TargetObjMap = map
             UserList(UserIndex).flags.TargetObjX = X
-            UserList(UserIndex).flags.TargetObjY = Y + 1
+            UserList(UserIndex).flags.TargetObjY = Y
             FoundSomething = 1
-        End If
-    End If
-    
-    If FoundSomething = 1 Then
-        UserList(UserIndex).flags.TargetObj = MapData(map).Tile(UserList(UserIndex).flags.TargetObjX, UserList(UserIndex).flags.TargetObjY).ObjInfo.ObjIndex
-        If MostrarCantidad(UserList(UserIndex).flags.TargetObj) Then
-            Call WriteConsoleMsg(UserIndex, ObjData(UserList(UserIndex).flags.TargetObj).Name & " - " & MapData(UserList(UserIndex).flags.TargetObjMap).Tile(UserList(UserIndex).flags.TargetObjX, UserList(UserIndex).flags.TargetObjY).ObjInfo.Amount & "", FontTypeNames.FONTTYPE_INFO)
-        Else
-            Call WriteConsoleMsg(UserIndex, ObjData(UserList(UserIndex).flags.TargetObj).Name, FontTypeNames.FONTTYPE_INFO)
-        End If
-    
-    End If
-    '¿Es un personaje?
-    If MapData(map).Tile(X, Y).UserIndex > 0 Then
-        TempCharIndex = MapData(map).Tile(X, Y).UserIndex
-        FoundChar = 1
-    End If
-    If MapData(map).Tile(X, Y).NpcIndex > 0 Then
-        TempCharIndex = MapData(map).Tile(X, Y).NpcIndex
-        FoundChar = 2
-    End If
-    '¿Es un personaje?
-    If FoundChar = 0 Then
-        If Y + 1 <= MapInfo(map).Height Then
-            If MapData(map).Tile(X, Y + 1).UserIndex > 0 Then
-                TempCharIndex = MapData(map).Tile(X, Y + 1).UserIndex
-                FoundChar = 1
+        ElseIf MapData(map).Tile(X + 1, Y).ObjInfo.ObjIndex > 0 Then
+            'Informa el nombre
+            If ObjData(MapData(map).Tile(X + 1, Y).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
+                UserList(UserIndex).flags.TargetObjMap = map
+                UserList(UserIndex).flags.TargetObjX = X + 1
+                UserList(UserIndex).flags.TargetObjY = Y
+                FoundSomething = 1
             End If
-            If MapData(map).Tile(X, Y + 1).NpcIndex > 0 Then
-                TempCharIndex = MapData(map).Tile(X, Y + 1).NpcIndex
-                FoundChar = 2
+        ElseIf MapData(map).Tile(X + 1, Y + 1).ObjInfo.ObjIndex > 0 Then
+            If ObjData(MapData(map).Tile(X + 1, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
+                'Informa el nombre
+                UserList(UserIndex).flags.TargetObjMap = map
+                UserList(UserIndex).flags.TargetObjX = X + 1
+                UserList(UserIndex).flags.TargetObjY = Y + 1
+                FoundSomething = 1
+            End If
+        ElseIf MapData(map).Tile(X, Y + 1).ObjInfo.ObjIndex > 0 Then
+            If ObjData(MapData(map).Tile(X, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
+                'Informa el nombre
+                UserList(UserIndex).flags.TargetObjMap = map
+                UserList(UserIndex).flags.TargetObjX = X
+                UserList(UserIndex).flags.TargetObjY = Y + 1
+                FoundSomething = 1
             End If
         End If
-    End If
-    
-    
-    'Reaccion al personaje
-    If FoundChar = 1 Then '  ¿Encontro un Usuario?
-            
-       If UserList(TempCharIndex).flags.AdminInvisible = 0 Or UserList(UserIndex).flags.Privilegios And PlayerType.Dios Then
-            
-            If LenB(UserList(TempCharIndex).DescRM) = 0 And UserList(TempCharIndex).showName Then 'No tiene descRM y quiere que se vea su nombre.
-                If EsNewbie(TempCharIndex) Then
-                    Stat = " <NEWBIE>"
-                End If
-                
-                If UserList(TempCharIndex).Faccion.ArmadaReal = 1 Then
-                    Stat = Stat & " <Ejército Real> " & "<" & TituloReal(TempCharIndex) & ">"
-                ElseIf UserList(TempCharIndex).Faccion.FuerzasCaos = 1 Then
-                    Stat = Stat & " <Legión Oscura> " & "<" & TituloCaos(TempCharIndex) & ">"
-                End If
-                
-                If UserList(TempCharIndex).GuildIndex > 0 Then
-                    Stat = Stat & " <" & modGuilds.GuildName(UserList(TempCharIndex).GuildIndex) & ">"
-                End If
-                
-                If Len(UserList(TempCharIndex).desc) > 0 Then
-                    Stat = "Ves a " & UserList(TempCharIndex).Name & Stat & " - " & UserList(TempCharIndex).desc
-                Else
-                    Stat = "Ves a " & UserList(TempCharIndex).Name & Stat
-                End If
-                
-                                
-                If UserList(TempCharIndex).flags.Privilegios And PlayerType.RoyalCouncil Then
-                    Stat = Stat & " [CONSEJO DE BANDERBILL]"
-                    ft = FontTypeNames.FONTTYPE_CONSEJOVesA
-                ElseIf UserList(TempCharIndex).flags.Privilegios And PlayerType.ChaosCouncil Then
-                    Stat = Stat & " [CONCILIO DE LAS SOMBRAS]"
-                    ft = FontTypeNames.FONTTYPE_CONSEJOCAOSVesA
-                Else
-                    If Not UserList(TempCharIndex).flags.Privilegios And PlayerType.User Then
-                        Stat = Stat & " <GAME MASTER>"
-                        
-                        ' Elijo el color segun el rango del GM:
-                        ' Dios
-                        If UserList(TempCharIndex).flags.Privilegios = PlayerType.Dios Then
-                            ft = FontTypeNames.FONTTYPE_DIOS
-                        ' Gm
-                        ElseIf UserList(TempCharIndex).flags.Privilegios = PlayerType.SemiDios Then
-                            ft = FontTypeNames.FONTTYPE_GM
-                        ' Conse
-                        ElseIf UserList(TempCharIndex).flags.Privilegios = PlayerType.Consejero Then
-                            ft = FontTypeNames.FONTTYPE_CONSE
-                        ' Rm o Dsrm
-                        ElseIf UserList(TempCharIndex).flags.Privilegios = (PlayerType.RoleMaster Or PlayerType.Consejero) Or UserList(TempCharIndex).flags.Privilegios = (PlayerType.RoleMaster Or PlayerType.Dios) Then
-                            ft = FontTypeNames.FONTTYPE_EJECUCION
-                        End If
-                        
-                    ElseIf Criminal(TempCharIndex) Then
-                        Stat = Stat & " <CRIMINAL>"
-                        ft = FontTypeNames.FONTTYPE_FIGHT
-                    Else
-                        Stat = Stat & " <CIUDADANO>"
-                        ft = FontTypeNames.FONTTYPE_CITIZEN
-                    End If
-                End If
-            Else  'Si tiene descRM la muestro siempre.
-                Stat = UserList(TempCharIndex).DescRM
-                ft = FontTypeNames.FONTTYPE_INFOBOLD
-            End If
-            
-            If LenB(Stat) > 0 Then
-                Call WriteConsoleMsg(UserIndex, Stat, ft)
-            End If
-            
-            FoundSomething = 1
-            UserList(UserIndex).flags.TargetUser = TempCharIndex
-            UserList(UserIndex).flags.TargetNPC = 0
-            UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
-       End If
 
-    End If
-    If FoundChar = 2 Then '¿Encontro un NPC?
+        If FoundSomething = 1 Then
+            UserList(UserIndex).flags.TargetObj = MapData(map).Tile(UserList(UserIndex).flags.TargetObjX, UserList(UserIndex).flags.TargetObjY).ObjInfo.ObjIndex
+            If MostrarCantidad(UserList(UserIndex).flags.TargetObj) Then
+                Call WriteConsoleMsg(UserIndex, ObjData(UserList(UserIndex).flags.TargetObj).Name & " - " & MapData(UserList(UserIndex).flags.TargetObjMap).Tile(UserList(UserIndex).flags.TargetObjX, UserList(UserIndex).flags.TargetObjY).ObjInfo.Amount & "", FontTypeNames.FONTTYPE_INFO)
+            Else
+                Call WriteConsoleMsg(UserIndex, ObjData(UserList(UserIndex).flags.TargetObj).Name, FontTypeNames.FONTTYPE_INFO)
+            End If
+
+        End If
+        '¿Es un personaje?
+        If MapData(map).Tile(X, Y).UserIndex > 0 Then
+            TempCharIndex = MapData(map).Tile(X, Y).UserIndex
+            FoundChar = 1
+        End If
+        If MapData(map).Tile(X, Y).NpcIndex > 0 Then
+            TempCharIndex = MapData(map).Tile(X, Y).NpcIndex
+            FoundChar = 2
+        End If
+        '¿Es un personaje?
+        If FoundChar = 0 Then
+            If Y + 1 <= MapInfo(map).Height Then
+                If MapData(map).Tile(X, Y + 1).UserIndex > 0 Then
+                    TempCharIndex = MapData(map).Tile(X, Y + 1).UserIndex
+                    FoundChar = 1
+                End If
+                If MapData(map).Tile(X, Y + 1).NpcIndex > 0 Then
+                    TempCharIndex = MapData(map).Tile(X, Y + 1).NpcIndex
+                    FoundChar = 2
+                End If
+            End If
+        End If
+
+
+        'Reaccion al personaje
+        If FoundChar = 1 Then    '  ¿Encontro un Usuario?
+
+            If UserList(TempCharIndex).flags.AdminInvisible = 0 Or UserList(UserIndex).flags.Privilegios And PlayerType.Dios Then
+
+                If LenB(UserList(TempCharIndex).DescRM) = 0 And UserList(TempCharIndex).showName Then    'No tiene descRM y quiere que se vea su nombre.
+                    If EsNewbie(TempCharIndex) Then
+                        Stat = " <NEWBIE>"
+                    End If
+
+                    If UserList(TempCharIndex).Faccion.ArmadaReal = 1 Then
+                        Stat = Stat & " <Ejército Real> " & "<" & TituloReal(TempCharIndex) & ">"
+                    ElseIf UserList(TempCharIndex).Faccion.FuerzasCaos = 1 Then
+                        Stat = Stat & " <Legión Oscura> " & "<" & TituloCaos(TempCharIndex) & ">"
+                    End If
+
+                    If UserList(TempCharIndex).GuildIndex > 0 Then
+                        Stat = Stat & " <" & modGuilds.GuildName(UserList(TempCharIndex).GuildIndex) & ">"
+                    End If
+
+                    If Len(UserList(TempCharIndex).desc) > 0 Then
+                        Stat = "Ves a " & UserList(TempCharIndex).Name & Stat & " - " & UserList(TempCharIndex).desc
+                    Else
+                        Stat = "Ves a " & UserList(TempCharIndex).Name & Stat
+                    End If
+
+
+                    If UserList(TempCharIndex).flags.Privilegios And PlayerType.RoyalCouncil Then
+                        Stat = Stat & " [CONSEJO DE BANDERBILL]"
+                        ft = FontTypeNames.FONTTYPE_CONSEJOVesA
+                    ElseIf UserList(TempCharIndex).flags.Privilegios And PlayerType.ChaosCouncil Then
+                        Stat = Stat & " [CONCILIO DE LAS SOMBRAS]"
+                        ft = FontTypeNames.FONTTYPE_CONSEJOCAOSVesA
+                    Else
+                        If Not UserList(TempCharIndex).flags.Privilegios And PlayerType.user Then
+                            Stat = Stat & " <GAME MASTER>"
+
+                            ' Elijo el color segun el rango del GM:
+                            ' Dios
+                            If UserList(TempCharIndex).flags.Privilegios = PlayerType.Dios Then
+                                ft = FontTypeNames.FONTTYPE_DIOS
+                                ' Gm
+                            ElseIf UserList(TempCharIndex).flags.Privilegios = PlayerType.SemiDios Then
+                                ft = FontTypeNames.FONTTYPE_GM
+                                ' Conse
+                            ElseIf UserList(TempCharIndex).flags.Privilegios = PlayerType.Consejero Then
+                                ft = FontTypeNames.FONTTYPE_CONSE
+                                ' Rm o Dsrm
+                            ElseIf UserList(TempCharIndex).flags.Privilegios = (PlayerType.RoleMaster Or PlayerType.Consejero) Or UserList(TempCharIndex).flags.Privilegios = (PlayerType.RoleMaster Or PlayerType.Dios) Then
+                                ft = FontTypeNames.FONTTYPE_EJECUCION
+                            End If
+
+                        ElseIf Criminal(TempCharIndex) Then
+                            Stat = Stat & " <CRIMINAL>"
+                            ft = FontTypeNames.FONTTYPE_FIGHT
+                        Else
+                            Stat = Stat & " <CIUDADANO>"
+                            ft = FontTypeNames.FONTTYPE_CITIZEN
+                        End If
+                    End If
+                Else  'Si tiene descRM la muestro siempre.
+                    Stat = UserList(TempCharIndex).DescRM
+                    ft = FontTypeNames.FONTTYPE_INFOBOLD
+                End If
+
+                If LenB(Stat) > 0 Then
+                    Call WriteConsoleMsg(UserIndex, Stat, ft)
+                End If
+
+                FoundSomething = 1
+                UserList(UserIndex).flags.TargetUser = TempCharIndex
+                UserList(UserIndex).flags.TargetNPC = 0
+                UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
+            End If
+
+        End If
+        If FoundChar = 2 Then    '¿Encontro un NPC?
             Dim estatus As String
             If Npclist(TempCharIndex).Stats.MaxHP = 0 Then
                 estatus = ""
@@ -916,7 +916,7 @@ If InMapBounds(map, X, Y) Then
                     End If
                 End If
             End If
-            
+
             If Npclist(TempCharIndex).NpcType = Marinero Then
                 Call HablaMarinero(UserIndex, TempCharIndex)
             ElseIf Len(Npclist(TempCharIndex).desc) > 1 Then
@@ -935,22 +935,60 @@ If InMapBounds(map, X, Y) Then
                     '    Call WriteConsoleMsg(UserIndex, "Le pegó primero: " & Npclist(TempCharIndex).flags.AttackedFirstBy & ".", FontTypeNames.FONTTYPE_INFO)
                     'End If
                 End If
-                
+
             End If
             FoundSomething = 1
             UserList(UserIndex).flags.TargetNpcTipo = Npclist(TempCharIndex).NpcType
             UserList(UserIndex).flags.TargetNPC = TempCharIndex
             UserList(UserIndex).flags.TargetUser = 0
             UserList(UserIndex).flags.TargetObj = 0
-        
-    End If
-    
+ 'quest
+            Dim i As Long, j As Long
+
+            For i = 1 To MAXUSERQUESTS
+
+                With UserList(UserIndex).QuestStats.Quests(i)
+
+                    If .QuestIndex Then
+                        If QuestList(.QuestIndex).RequiredTargetNPCs Then
+
+                            For j = 1 To QuestList(.QuestIndex).RequiredTargetNPCs
+
+                                If QuestList(.QuestIndex).RequiredTargetNPC(j).NpcIndex = Npclist(TempCharIndex).Numero Then
+                                    If QuestList(.QuestIndex).RequiredTargetNPC(j).Amount > .NPCsTarget(j) Then
+                                        .NPCsTarget(j) = .NPCsTarget(j) + 1
+
+                                    End If
+
+                                    If QuestList(.QuestIndex).RequiredTargetNPC(j).Amount = .NPCsTarget(j) Then
+                                        Call FinishQuest(UserIndex, .QuestIndex, i)
+                                        Call WriteUpdateNPCSimbolo(UserIndex, TempCharIndex, 1)
+                                        Call WriteChatOverHead(UserIndex, "¡Quest Finalizada!", Npclist(TempCharIndex).Char.CharIndex, vbYellow)
+                                        Call WriteConsoleMsg(UserIndex, "Quest Finalizada!", FontTypeNames.FONTTYPE_INFO)
+                                    End If
+
+                                End If
+
+                            Next j
+
+                        End If
+
+                    End If
+
+                End With
+
+            Next i
+
+        End If
+
+
+
     If FoundChar = 0 Then
         UserList(UserIndex).flags.TargetNPC = 0
         UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
         UserList(UserIndex).flags.TargetUser = 0
     End If
-    
+
     '*** NO ENCOTRO NADA ***
     If FoundSomething = 0 Then
         UserList(UserIndex).flags.TargetNPC = 0
@@ -978,8 +1016,8 @@ End If
 
 Exit Sub
 
-errhandler:
-    Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
+ErrHandler:
+Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
 
 End Sub
 
@@ -1087,10 +1125,10 @@ EsObjetoFijo = OBJType = eOBJType.otForos Or _
 
 End Function
 
-Function Min(Val1 As Long, Val2 As Long) As Long
-If Val1 < Val2 Then
-    Min = Val1
+Function min(val1 As Long, val2 As Long) As Long
+If val1 < val2 Then
+    min = val1
 Else
-    Min = Val2
+    min = val2
 End If
 End Function

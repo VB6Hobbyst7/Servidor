@@ -143,7 +143,7 @@ End Enum
 '
 
 #If SeguridadAlkon Then
-Public aDos As New clsAntiDoS
+    Public aDos As New clsAntiDoS
 #End If
 
 Public aClon As New clsAntiMassClon
@@ -214,7 +214,7 @@ Public Enum iMinerales
 End Enum
 
 Public Enum PlayerType
-    User = &H1
+    user = &H1
     Consejero = &H2
     SemiDios = &H4
     Dios = &H8
@@ -283,7 +283,7 @@ End Enum
 
 Public Const LimiteNewbie As Byte = 12
 
-Public Type tCabecera 'Cabecera de los con
+Public Type tCabecera    'Cabecera de los con
     desc As String * 255
     crc As Long
     MagicWord As Long
@@ -375,7 +375,7 @@ Public Enum eTerreno
     Mar = 6
     Fortaleza = 7
 End Enum
-    
+
 
 ' <<<<<< Targets >>>>>>
 Public Enum TargetType
@@ -480,6 +480,7 @@ Public Enum eNPCType
     Marinero = 12
     Gobernador = 13
     Montura = 14
+    Quest = 17
 End Enum
 
 Public Const MIN_APUÑALAR As Byte = 10
@@ -586,8 +587,8 @@ Public Enum eAtributos
     Constitucion = 5
 End Enum
 
-Public Const AdicionalHPGuerrero As Byte = 2 'HP adicionales cuando sube de nivel
-Public Const AdicionalHPCazador As Byte = 1 'HP adicionales cuando sube de nivel
+Public Const AdicionalHPGuerrero As Byte = 2    'HP adicionales cuando sube de nivel
+Public Const AdicionalHPCazador As Byte = 1    'HP adicionales cuando sube de nivel
 
 Public Const AumentoSTDef As Byte = 15
 Public Const AumentoSTLadron As Byte = AumentoSTDef + 3
@@ -737,52 +738,52 @@ Public Type tHechizo
     desc As String
     PalabrasMagicas As String
     ExclusivoClase As String
-    
+
     HechizeroMsg As String
     TargetMsg As String
     PropioMsg As String
-    
-'    Resis As Byte
-    
+
+    '    Resis As Byte
+
     Tipo As TipoHechizo
-    
+
     Wav As Integer
     FXgrh As Integer
     Loops As Byte
     Efecto As Byte
-    
+
     SubeHp As Byte
     MinHP As Integer
     MaxHP As Integer
-    
+
     SubeMana As Byte
     MiMana As Integer
     MaMana As Integer
-    
+
     SubeSta As Byte
     MinSta As Integer
     MaxSta As Integer
-    
+
     SubeHam As Byte
     MinHam As Integer
     MaxHam As Integer
-    
+
     SubeSed As Byte
     MinSed As Integer
     MaxSed As Integer
-    
+
     SubeAgilidad As Byte
     MinAgilidad As Integer
     MaxAgilidad As Integer
-    
+
     SubeFuerza As Byte
     MinFuerza As Integer
     MaxFuerza As Integer
-    
+
     SubeCarisma As Byte
     MinCarisma As Integer
     MaxCarisma As Integer
-    
+
     Invisibilidad As Byte
     Paraliza As Byte
     Inmoviliza As Byte
@@ -799,14 +800,14 @@ Public Type tHechizo
     Morph As Byte
     Mimetiza As Byte
     RemueveInvisibilidadParcial As Byte
-    
+
     Invoca As Byte
     NumNpc As Integer
     Cant As Integer
 
-'    Materializa As Byte
-'    ItemIndex As Byte
-    
+    '    Materializa As Byte
+    '    ItemIndex As Byte
+
     MinSkill As Integer
     ManaRequerido As Integer
 
@@ -814,10 +815,10 @@ Public Type tHechizo
     StaRequerido As Integer
 
     Target As TargetType
-    
+
     NeedStaff As Integer
     StaffAffected As Boolean
-    
+
     Congelar As Byte
 End Type
 
@@ -852,8 +853,8 @@ End Type
 
 Public Type tPartyData
     PIndex As Integer
-    RemXP As Double 'La exp. en el server se cuenta con Doubles
-    TargetUser As Integer 'Para las invitaciones
+    RemXP As Double    'La exp. en el server se cuenta con Doubles
+    TargetUser As Integer    'Para las invitaciones
 End Type
 
 Public Type Position
@@ -878,54 +879,54 @@ Public Type Char
     CharIndex As Integer
     Head As Integer
     Body As Integer
-    
+
     WeaponAnim As Integer
     WeaponRazaEnanaAnim As Integer
-    
+
     ShieldAnim As Integer
     CascoAnim As Integer
-    
+
     FX As Integer
     Loops As Integer
-    
+
     heading As eHeading
 End Type
 
 'Tipos de objetos
 Public Type ObjData
-    Name As String 'Nombre del obj
-    
-    OBJType As eOBJType 'Tipo enum que determina cuales son las caract del obj
-    
-    GrhIndex As Integer ' Indice del grafico que representa el obj
+    Name As String    'Nombre del obj
+
+    OBJType As eOBJType    'Tipo enum que determina cuales son las caract del obj
+
+    GrhIndex As Integer    ' Indice del grafico que representa el obj
     GrhSecundario As Integer
-    
+
     'Solo contenedores
     MAXITEMS As Integer
     Conte As Inventario
     Apuñala As Byte
-    
+
     HechizoIndex As Integer
-      
-    MinHP As Integer ' Minimo puntos de vida
-    MaxHP As Integer ' Maximo puntos de vida
-    
-    
+
+    MinHP As Integer    ' Minimo puntos de vida
+    MaxHP As Integer    ' Maximo puntos de vida
+
+
     MineralIndex As Integer
     LingoteInex As Integer
-    
-    
+
+
     proyectil As Integer
     Municion As Integer
     CanUse As Byte
     HitArea As Byte
-    
+
     Crucial As Byte
     Newbie As Integer
-    
+
     'Puntos de Stamina que da
-    MinSta As Integer ' Minimo puntos de stamina
-    
+    MinSta As Integer    ' Minimo puntos de stamina
+
     'Pociones
     TipoPocion As Byte
     MaxModificador As Integer
@@ -933,82 +934,82 @@ Public Type ObjData
     DuracionEfecto As Long
     MinSkill As Integer
     LingoteIndex As Integer
-    
-    MinHIT As Integer 'Minimo golpe
-    MaxHIT As Integer 'Maximo golpe
-    
+
+    MinHIT As Integer    'Minimo golpe
+    MaxHIT As Integer    'Maximo golpe
+
     MinHam As Integer
     MinSed As Integer
-    
+
     def As Integer
-    MinDef As Integer ' Armaduras
-    MaxDef As Integer ' Armaduras
-    
-    Ropaje As Integer 'Indice del grafico del ropaje
-    
-    WeaponAnim As Integer ' Apunta a una anim de armas
+    MinDef As Integer    ' Armaduras
+    MaxDef As Integer    ' Armaduras
+
+    Ropaje As Integer    'Indice del grafico del ropaje
+
+    WeaponAnim As Integer    ' Apunta a una anim de armas
     WeaponRazaEnanaAnim As Integer
-    ShieldAnim As Integer ' Apunta a una anim de escudo
+    ShieldAnim As Integer    ' Apunta a una anim de escudo
     CascoAnim As Integer
-    
+
     Valor As Long     ' Precio
-    
+
     Cerrada As Integer
     Llave As Byte
-    clave As Long 'si clave=llave la puerta se abre o cierra
-    
+    clave As Long    'si clave=llave la puerta se abre o cierra
+
     IndexAbierta As Integer
     IndexCerrada As Integer
     IndexCerradaLlave As Integer
-    
+
     RazaEnana As Byte
     RazaDrow As Byte
     RazaElfa As Byte
     RazaGnoma As Byte
     RazaHumana As Byte
-    
+
     Mujer As Byte
     Hombre As Byte
-    
+
     Envenena As Byte
     Paraliza As Byte
-    
+
     Agarrable As Byte
-    
+
     LingH As Integer
     LingO As Integer
     LingP As Integer
     Madera As Integer
     MaderaElfica As Integer
-    
+
     SkHerreria As Integer
     SkCarpinteria As Integer
-    
+
     texto As String
-    
+
     'Clases que no tienen permitido usar este obj
     ClaseProhibida(1 To NUMCLASES) As eClass
-    
+
     Snd1 As Integer
     Snd2 As Integer
     Snd3 As Integer
-    
+
     Real As Integer
     Caos As Integer
-    
+
     NoSeCae As Integer
-    
+
     StaffPower As Integer
     StaffDamageBonus As Integer
     DefensaMagicaMax As Integer
     DefensaMagicaMin As Integer
     Refuerzo As Byte
-    
-    Log As Byte 'es un objeto que queremos loguear? Pablo (ToxicWaste) 07/09/07
-    NoLog As Byte 'es un objeto que esta prohibido loguear?
-    
+
+    Log As Byte    'es un objeto que queremos loguear? Pablo (ToxicWaste) 07/09/07
+    NoLog As Byte    'es un objeto que esta prohibido loguear?
+
     Upgrade As Integer
-    
+
     Efecto As Byte
 End Type
 
@@ -1022,16 +1023,21 @@ Public Type tQuestNpc
     NpcIndex As Integer
     Amount As Integer
 End Type
- 
+
 Public Type tUserQuest
+
+    NPCsTarget() As Integer
     NPCsKilled() As Integer
     QuestIndex As Integer
+
 End Type
- 
+
 Public Type tQuestStats
+
     Quests(1 To MAXUSERQUESTS) As tUserQuest
     NumQuestsDone As Integer
     QuestsDone() As Integer
+
 End Type
 'quest
 
@@ -1086,25 +1092,36 @@ End Type
 
 'quest
 Public Type tQuest
+
     Nombre As String
     desc As String
+    NextQuest As String
+    DescFinal As String
     RequiredLevel As Byte
-    
+
+    RequiredQuest As Byte
+
     RequiredOBJs As Byte
     RequiredOBJ() As Obj
-    
+
     RequiredNPCs As Byte
     RequiredNPC() As tQuestNpc
-    
+
+
+    RequiredTargetNPCs As Byte
+    RequiredTargetNPC() As tQuestNpc
+
     RewardGLD As Long
     RewardEXP As Long
-    
+
     RewardOBJs As Byte
     RewardOBJ() As Obj
+    Repetible As Byte
+
 End Type
 'quest
 
-Public Type tReputacion 'Fama del usuario
+Public Type tReputacion    'Fama del usuario
     NobleRep As Long
     BurguesRep As Long
     PlebeRep As Long
@@ -1116,25 +1133,25 @@ End Type
 
 'Estadisticas de los usuarios
 Public Type UserStats
-    GLD As Long 'Dinero
+    GLD As Long    'Dinero
     Banco As Long
-    
+
     MaxHP As Integer
     MinHP As Integer
-    
+
     MaxSta As Integer
     MinSta As Integer
     MaxMAN As Integer
     MinMAN As Integer
     MaxHIT As Integer
     MinHIT As Integer
-    
+
     MaxHam As Integer
     MinHam As Integer
-    
+
     MaxAGU As Integer
     MinAGU As Integer
-        
+
     def As Integer
     Exp As Double
     ELV As Byte
@@ -1146,9 +1163,9 @@ Public Type UserStats
     UsuariosMatados As Long
     CriminalesMatados As Long
     NPCsMuertos As Integer
-    
+
     SkillPts As Integer
-    
+
 End Type
 
 'Flags
@@ -1162,10 +1179,10 @@ Public Type UserFlags
     EmbarcacionIndex As Integer
     EmbarcacionPos As WorldPos
     Nadando As Boolean
-    Muerto As Byte '¿Esta muerto?
-    Escondido As Byte '¿Esta escondido?
-    Comerciando As Boolean '¿Esta comerciando?
-    UserLogged As Boolean '¿Esta online?
+    Muerto As Byte    '¿Esta muerto?
+    Escondido As Byte    '¿Esta escondido?
+    Comerciando As Boolean    '¿Esta comerciando?
+    UserLogged As Boolean    '¿Esta online?
     Meditando As Boolean
     Descuento As String
     Hambre As Byte
@@ -1188,79 +1205,79 @@ Public Type UserFlags
     TomoPocion As Boolean
     TipoPocion As Byte
     Embarcado As Byte
-    
+
     NoPuedeSerAtacado As Boolean
     AtacablePor As Integer
     ShareNpcWith As Integer
-    
+
     Vuela As Byte
     Navegando As Byte
     Seguro As Boolean
     SeguroResu As Boolean
-    
+
     DuracionEfecto As Long
-    TargetNPC As Integer ' Npc señalado por el usuario
-    TargetNpcTipo As eNPCType ' Tipo del npc señalado
+    TargetNPC As Integer    ' Npc señalado por el usuario
+    TargetNpcTipo As eNPCType    ' Tipo del npc señalado
     NpcInv As Integer
-    
+
     Ban As Byte
     AdministrativeBan As Byte
-    
-    TargetUser As Integer ' Usuario señalado
-    
-    TargetObj As Integer ' Obj señalado
+
+    TargetUser As Integer    ' Usuario señalado
+
+    TargetObj As Integer    ' Obj señalado
     TargetObjMap As Integer
     TargetObjX As Integer
     TargetObjY As Integer
-    
+
     TargetMap As Integer
     targetX As Integer
     targetY As Integer
-    
+
     TargetObjInvIndex As Integer
     TargetObjInvSlot As Integer
-    
+
     AtacadoPorNpc As Integer
     AtacadoPorUser As Integer
     NPCAtacado As Integer
-    
+
     StatsChanged As Byte
     Privilegios As PlayerType
-    
+
     ValCoDe As Integer
-    
+
     LastCrimMatado As String
     LastCiudMatado As String
-    
+
     OldBody As Integer
     OldHead As Integer
     AdminInvisible As Byte
     AdminPerseguible As Boolean
-    
+
     ChatColor As Long
-    
+
     '[el oso]
     MD5Reportado As String
     '[/el oso]
-    
+
     '[Barrin 30-11-03]
     TimesWalk As Long
     StartWalk As Long
     CountSH As Long
     '[/Barrin 30-11-03]
     Movimiento As Long
-    
+
     '[CDT 17-02-04]
-    UltimoMensaje As Byte 'UltimoMensaje - 23'
+    UltimoMensaje As Byte    'UltimoMensaje - 23'
     '[/CDT]
-    
+
     Silenciado As Byte
-    
+
     Mimetizado As Byte
-    
-    CentinelaOK As Boolean 'Centinela
-    
-    Traveling As Byte 'Travelin Band ¿?
+
+    CentinelaOK As Boolean    'Centinela
+
+    Traveling As Byte    'Travelin Band ¿?
 End Type
 
 Public Type UserCounters
@@ -1278,10 +1295,10 @@ Public Type UserCounters
     Paralisis As Integer
     Ceguera As Integer
     Estupidez As Integer
-        
+
     Invisibilidad As Integer
     TiempoOculto As Integer
-    
+
     Mimetismo As Integer
     PiqueteC As Long
     Pena As Long
@@ -1290,12 +1307,12 @@ Public Type UserCounters
     Saliendo As Boolean
     Salir As Integer
     '[/Gonzalo]
-    
+
     'Barrin 3/10/03
     tInicioMeditar As Long
     bPuedeMeditar As Boolean
     'Barrin
-    
+
     TimerLanzarSpell As Long
     TimerPuedeAtacar As Long
     TimerPuedeUsarArco As Long
@@ -1307,13 +1324,13 @@ Public Type UserCounters
     TimerPuedeSerAtacado As Long
     TimerPerteneceNpc As Long
     TimerEstadoAtacable As Long
-    
-    
+
+
     Trabajando As Long  ' Para el centinela
     Ocultando As Long   ' Unico trabajo no revisado por el centinela
-    
+
     failedUsageAttempts As Long
-    
+
     goHome As Long
 End Type
 
@@ -1332,7 +1349,7 @@ Public Type tFacciones
     Reenlistadas As Byte
     NivelIngreso As Integer
     FechaIngreso As String
-    MatadosIngreso As Integer 'Para Armadas nada mas
+    MatadosIngreso As Integer    'Para Armadas nada mas
     NextRecompensa As Integer
 End Type
 
@@ -1342,92 +1359,92 @@ Public Type tCrafting
 End Type
 
 'Tipo de los Usuarios
-Public Type User
+Public Type user
     Name As String
     Id As Long
     MySQLId As Long
     MySQLIdCuenta As Long
-    
-    showName As Boolean 'Permite que los GMs oculten su nick con el comando /SHOWNAME
-    
-    Char As Char 'Define la apariencia
+
+    showName As Boolean    'Permite que los GMs oculten su nick con el comando /SHOWNAME
+
+    Char As Char    'Define la apariencia
     CharMimetizado As Char
     OrigChar As Char
-    
-    desc As String ' Descripcion
+
+    desc As String    ' Descripcion
     DescRM As String
-    
+
     clase As eClass
     raza As eRaza
     genero As eGenero
     email As String
     Hogar As eCiudad
-        
+
     Invent As Inventario
-    
+
     Pos As WorldPos
     zona As Integer
-    
+
     ConnIDValida As Boolean
-    ConnID As Long 'ID
+    ConnID As Long    'ID
     clave() As Byte
     iServer As Integer
     iCliente As Integer
-    
+
     '[KEVIN]
     'BancoInvent As BancoInventario
     '[/KEVIN]
-    
+
     Counters As UserCounters
-    
+
     Construir As tCrafting
-    
+
     MascotasIndex(1 To MAXMASCOTAS) As Integer
     MascotasType(1 To MAXMASCOTAS) As Integer
     NroMascotas As Integer
-    
+
     Stats As UserStats
     flags As UserFlags
-    
-    Reputacion As tReputacion
-    
-    Faccion As tFacciones
-    
-#If SeguridadAlkon Then
-    Security As SecurityData
-#End If
 
-#If ConUpTime Then
+    Reputacion As tReputacion
+
+    Faccion As tFacciones
+
+    #If SeguridadAlkon Then
+    Security As SecurityData
+    #End If
+
+    #If ConUpTime Then
     LogOnTime As Date
     UpTime As Long
-#End If
+    #End If
 
     ip As String
-    
-     '[Alejo]
+
+    '[Alejo]
     ComUsu As tCOmercioUsuario
     '[/Alejo]
-    
-    
+
+
     GuildIndex As Integer   'puntero al array global de guilds
     FundandoGuildAlineacion As ALINEACION_GUILD     'esto esta aca hasta que se parchee el cliente y se pongan cadenas de datos distintas para cada alineacion
     EscucheClan As Integer
-    
+
     PartyIndex As Integer   'index a la party q es miembro
     PartySolicitud As Integer   'index a la party q solicito
-    
+
     RetoIndex As Integer
     SalaIndex As Integer
     RetoAntPos As WorldPos
-    
+
     KeyCrypt As Integer
-    
+
     AreasInfo As AreaInfo
-    
+
     'Outgoing and incoming messages
     outgoingData As clsByteQueue
     incomingData As clsByteQueue
-    
+
     CurrentInventorySlots As Byte
     'quest
     QuestStats As tQuestStats
@@ -1446,7 +1463,7 @@ Private Type tArea
     X2 As Integer
     Y2 As Integer
     NPCs As Byte
-    NPC() As tNpcs
+    npc() As tNpcs
 End Type
 
 Private Type tZona
@@ -1468,7 +1485,7 @@ Private Type tZona
     Musica4 As Byte
     Musica5 As Byte
     Acoplar As Byte
-    
+
     TieneNpcInvocacion As Byte
     NpcInvocadoIndex As Integer
     Sonidos(1 To 5) As Byte
@@ -1512,33 +1529,33 @@ Public Type NPCFlags
     AfectaParalisis As Byte
     Domable As Integer
     ReSpawn As Byte
-    NPCActive As Boolean '¿Esta vivo?
+    NPCActive As Boolean    '¿Esta vivo?
     Follow As Boolean
     Faccion As Byte
     AtacaDoble As Byte
     LanzaSpells As Byte
-    
+
     ExpCount As Long
-    
+
     OldMovement As TipoAI
     OldHostil As Byte
-    
+
     AguaValida As Byte
     TierraInvalida As Byte
-    
+
     Sound As Integer
     AttackedBy As String
     AttackedFirstBy As String
     BackUp As Byte
     RespawnOrigPos As Byte
-    
+
     Envenenado As Byte
     Paralizado As Byte
     Inmovilizado As Byte
     invisible As Byte
     Maldicion As Byte
     Bendicion As Byte
-    
+
     Snd1 As Integer
     Snd2 As Integer
     Snd3 As Integer
@@ -1559,23 +1576,23 @@ Public Type NpcPathFindingInfo
     TargetUser As Integer   ' UserIndex chased
     TargetNPC As Integer
     NoPath As Boolean       ' If it is true there is no path to the target location
-    
+
     '* By setting PathLenght to 0 we force the recalculation
     '  of the path, this is very useful. For example,
     '  if a NPC or a User moves over the npc's path, blocking
     '  its way, the function NpcLegalPos set PathLenght to 0
     '  forcing the seek of a new path.
-    
+
 End Type
 ' New type for holding the pathfinding info
 
 
-Public Type NPC
-    EquitandoBody As Integer ' Monturas
+Public Type npc
+    EquitandoBody As Integer    ' Monturas
 
     Name As String
     MostrarNombre As Boolean
-    Char As Char 'Define como se vera
+    Char As Char    'Define como se vera
     desc As String
     Mensaje As Byte
 
@@ -1592,7 +1609,7 @@ Public Type NPC
 
     Veneno As Byte
 
-    Pos As WorldPos 'Posicion
+    Pos As WorldPos    'Posicion
     Area As Integer
     zona As Integer
     Orig As WorldPos
@@ -1606,9 +1623,12 @@ Public Type NPC
     Hostile As Byte
     PoderAtaque As Long
     PoderEvasion As Long
-'quest
-    QuestNumber As Integer
-'quest
+    'quest
+    NumDropQuest As Byte
+    DropQuest() As String
+    NumQuest As Integer
+    QuestNumber() As Byte
+    'quest
     GiveEXP As Long
     GiveGLDMin As Long
     GiveGLDMax As Long
@@ -1616,24 +1636,24 @@ Public Type NPC
     Stats As NPCStats
     flags As NPCFlags
     Contadores As NpcCounters
-    
+
     Invent As Inventario
     CanAttack As Byte
     AttackTimer As Byte
-    
+
     NroExpresiones As Byte
-    Expresiones() As String ' le da vida ;)
-    
+    Expresiones() As String    ' le da vida ;)
+
     NroSpells As Byte
     Spells() As Integer  ' le da vida ;)
-    
+
     '<<<<Entrenadores>>>>>
     NroCriaturas As Integer
     Criaturas() As tCriaturasEntrenador
     MaestroUser As Integer
     MaestroNpc As Integer
     Mascotas As Integer
-    
+
     ' New!! Needed for pathfindig
     PFINFO As NpcPathFindingInfo
     AreasInfo As AreaInfo
@@ -1671,7 +1691,7 @@ End Type
 
 Public SERVERONLINE As Boolean
 Public ULTIMAVERSION As String
-Public BackUp As Boolean ' TODO: Se usa esta variable ?
+Public BackUp As Boolean    ' TODO: Se usa esta variable ?
 
 Public ListaRazas(1 To NUMRAZAS) As String
 Public SkillsNames(1 To NUMSKILLS) As String
@@ -1738,8 +1758,8 @@ Public EnTesting As Boolean
 
 
 '*****************ARRAYS PUBLICOS*************************
-Public UserList() As User 'USUARIOS
-Public Npclist(1 To MAXNPCS) As NPC 'NPCS
+Public UserList() As user    'USUARIOS
+Public Npclist(1 To MAXNPCS) As npc    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo
 Public Hechizos() As tHechizo

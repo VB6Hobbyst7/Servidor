@@ -41,7 +41,7 @@ Option Explicit
 '?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 '?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 Public Function TirarItemAlPiso(Pos As WorldPos, Obj As Obj, Optional NotPirata As Boolean = True) As WorldPos
-On Error GoTo Errhandler
+On Error GoTo ErrHandler
 
     Dim NuevaPos As WorldPos
     NuevaPos.X = 0
@@ -54,25 +54,25 @@ On Error GoTo Errhandler
     TirarItemAlPiso = NuevaPos
 
 Exit Function
-Errhandler:
+ErrHandler:
 
 End Function
 
-Public Sub NPC_TIRAR_ITEMS(ByRef NPC As NPC)
+Public Sub NPC_TIRAR_ITEMS(ByRef npc As npc)
 'TIRA TODOS LOS ITEMS DEL NPC
 On Error Resume Next
 
-If NPC.Invent.NroItems > 0 Then
+If npc.Invent.NroItems > 0 Then
     
     Dim i As Byte
     Dim MiObj As Obj
         
     For i = 1 To MAX_INVENTORY_SLOTS
         
-        If NPC.Invent.Object(i).ObjIndex > 0 Then
-            MiObj.Amount = NPC.Invent.Object(i).Amount
-            MiObj.ObjIndex = NPC.Invent.Object(i).ObjIndex
-            Call TirarItemAlPiso(NPC.Pos, MiObj)
+        If npc.Invent.Object(i).ObjIndex > 0 Then
+            MiObj.Amount = npc.Invent.Object(i).Amount
+            MiObj.ObjIndex = npc.Invent.Object(i).ObjIndex
+            Call TirarItemAlPiso(npc.Pos, MiObj)
         End If
           
     Next i
@@ -220,6 +220,52 @@ For LoopC = 1 To Npclist(NpcIndex).Invent.NroItems
     Npclist(NpcIndex).Invent.Object(LoopC).Amount = val(ReadField(2, ln, 45))
     
 Next LoopC
+
+End Sub
+
+
+Public Sub DropObjQuest(ByRef npc As npc, ByRef UserIndex As Integer)
+    'Dropeo por Quest
+    'Ladder
+    '3/12/2020
+        On Error GoTo ErrHandler
+
+100     If npc.NumDropQuest = 0 Then Exit Sub
+        
+    
+        Dim Dropeo       As Obj
+        Dim QuestIndex As Integer
+        Dim ObjIndex As Integer
+        Dim Amount As Integer
+        Dim Probabilidad As Byte
+
+        Dim i As Byte
+    
+    
+102     For i = 1 To npc.NumDropQuest
+    
+104         QuestIndex = val(ReadField(1, npc.DropQuest(i), Asc("-")))
+106         ObjIndex = val(ReadField(2, npc.DropQuest(i), Asc("-")))
+108         Amount = val(ReadField(3, npc.DropQuest(i), Asc("-")))
+110         Probabilidad = val(ReadField(4, npc.DropQuest(i), Asc("-")))
+        
+112         If QuestIndex <> 0 Then
+114             If TieneQuest(UserIndex, QuestIndex) <> 0 Then
+116                 Probabilidad = RandomNumber(1, Probabilidad) 'Tiro Item?
+118                 If Probabilidad = 1 Then
+120                     Dropeo.Amount = Amount
+122                     Dropeo.ObjIndex = ObjIndex
+124                     Call TirarItemAlPiso(npc.Pos, Dropeo)
+126                     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SWING, npc.Pos.X, npc.Pos.Y))
+                    End If
+                End If
+            End If
+128     Next i
+
+        Exit Sub
+
+ErrHandler:
+130     Call LogError("Error DropObjQuest al dropear el item " & ObjData(ObjIndex).Name & ", al usuario " & UserList(UserIndex).Name & ". " & Err.Description & ".")
 
 End Sub
 

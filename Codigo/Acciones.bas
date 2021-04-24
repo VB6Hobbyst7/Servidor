@@ -43,73 +43,73 @@ Option Explicit
 
 Sub Accion(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)
     Dim tempIndex As Integer
-    
-On Error Resume Next
+
+    On Error Resume Next
     '¿Rango Visión? (ToxicWaste)
     If (Abs(UserList(UserIndex).Pos.Y - Y) > RANGO_VISION_Y) Or (Abs(UserList(UserIndex).Pos.X - X) > RANGO_VISION_X) Then
         Exit Sub
     End If
-    
+
     '¿Posicion valida?
     If InMapBounds(map, X, Y) Then
         With UserList(UserIndex)
             If MapData(map).Tile(X, Y).NpcIndex > 0 Then     'Acciones NPCs
                 tempIndex = MapData(map).Tile(X, Y).NpcIndex
-                
+
                 'Set the target NPC
                 .flags.TargetNPC = tempIndex
-                
+
                 If Npclist(tempIndex).Comercia = 1 Then
                     '¿Esta el user muerto? Si es asi no puede comerciar
                     If .flags.Muerto = 1 Then
                         Call WriteConsoleMsg(UserIndex, "¡¡Estas muerto!!", FontTypeNames.FONTTYPE_INFO)
                         Exit Sub
                     End If
-                    
+
                     'Is it already in commerce mode??
                     If .flags.Comerciando Then
                         Exit Sub
                     End If
-                    
+
                     If Distancia(Npclist(tempIndex).Pos, .Pos) > 3 Then
                         Call WriteConsoleMsg(UserIndex, "Estás demasiado lejos del vendedor.", FontTypeNames.FONTTYPE_INFO)
                         Exit Sub
                     End If
-                    
+
                     'Iniciamos la rutina pa' comerciar.
                     Call IniciarComercioNPC(UserIndex)
-                
+
                 ElseIf Npclist(tempIndex).NpcType = eNPCType.Banquero Then
                     '¿Esta el user muerto? Si es asi no puede comerciar
                     If .flags.Muerto = 1 Then
                         Call WriteConsoleMsg(UserIndex, "¡¡Estas muerto!!", FontTypeNames.FONTTYPE_INFO)
                         Exit Sub
                     End If
-                    
+
                     'Is it already in commerce mode??
                     If .flags.Comerciando Then
                         Exit Sub
                     End If
-                    
+
                     If Distancia(Npclist(tempIndex).Pos, .Pos) > 4 Then
                         Call WriteConsoleMsg(UserIndex, "Estás demasiado lejos del banquero.", FontTypeNames.FONTTYPE_INFO)
                         Exit Sub
                     End If
-                    
+
                     'A depositar de una
                     Call IniciarDeposito(UserIndex)
-                
+
                 ElseIf Npclist(tempIndex).NpcType = eNPCType.Revividor Or Npclist(tempIndex).NpcType = eNPCType.ResucitadorNewbie Then
                     If Distancia(.Pos, Npclist(tempIndex).Pos) > 10 Then
                         Call WriteConsoleMsg(UserIndex, "El sacerdote no puede curarte debido a que estas demasiado lejos.", FontTypeNames.FONTTYPE_INFO)
                         Exit Sub
                     End If
-                    
+
                     'Revivimos si es necesario
                     If .flags.Muerto = 1 And (Npclist(tempIndex).NpcType = eNPCType.Revividor Or EsNewbie(UserIndex)) Then
                         Call RevivirUsuario(UserIndex)
                     End If
-                    
+
                     If Npclist(tempIndex).NpcType = eNPCType.Revividor Or EsNewbie(UserIndex) Then
                         'curamos totalmente
                         .Stats.MinHP = .Stats.MaxHP
@@ -118,72 +118,82 @@ On Error Resume Next
                 ElseIf Npclist(tempIndex).NpcType = eNPCType.Marinero Then
                     Call HablaMarinero(UserIndex, tempIndex, True)
                 ElseIf Npclist(tempIndex).NpcType = eNPCType.Entrenador Then
-                    
-                        'Dead users can't use pets
-                        If .flags.Muerto = 1 Then
-                            Call WriteConsoleMsg(UserIndex, "¡¡Estás muerto!!", FontTypeNames.FONTTYPE_INFO)
-                            Exit Sub
-                        End If
-                        
-                        'Validate target NPC
-                        If .flags.TargetNPC = 0 Then
-                            Call WriteConsoleMsg(UserIndex, "Primero tenés que seleccionar un personaje, hace click izquierdo sobre él.", FontTypeNames.FONTTYPE_INFO)
-                            Exit Sub
-                        End If
-                        
-                        'Make sure it's close enough
-                        If Distancia(Npclist(.flags.TargetNPC).Pos, .Pos) > 10 Then
-                            Call WriteConsoleMsg(UserIndex, "Estás demasiado lejos.", FontTypeNames.FONTTYPE_INFO)
-                            Exit Sub
-                        End If
-                        
-                        Call WriteTrainerCreatureList(UserIndex, .flags.TargetNPC)
+
+                    'Dead users can't use pets
+                    If .flags.Muerto = 1 Then
+                        Call WriteConsoleMsg(UserIndex, "¡¡Estás muerto!!", FontTypeNames.FONTTYPE_INFO)
+                        Exit Sub
+                    End If
+
+                    'Validate target NPC
+                    If .flags.TargetNPC = 0 Then
+                        Call WriteConsoleMsg(UserIndex, "Primero tenés que seleccionar un personaje, hace click izquierdo sobre él.", FontTypeNames.FONTTYPE_INFO)
+                        Exit Sub
+                    End If
+
+                    'Make sure it's close enough
+                    If Distancia(Npclist(.flags.TargetNPC).Pos, .Pos) > 10 Then
+                        Call WriteConsoleMsg(UserIndex, "Estás demasiado lejos.", FontTypeNames.FONTTYPE_INFO)
+                        Exit Sub
+                    End If
+
+                    Call WriteTrainerCreatureList(UserIndex, .flags.TargetNPC)
                 End If
-                
-            '¿Es un obj?
+
+            ElseIf Npclist(MapData(map).Tile(X, Y).NpcIndex).NpcType = eNPCType.Quest Then
+
+                If UserList(UserIndex).flags.Muerto = 1 Then
+                    Call WriteConsoleMsg(UserIndex, "Estas Muerto....", FontTypeNames.FONTTYPE_INFO)
+                    Exit Sub
+
+                End If
+
+                Call EnviarQuest(UserIndex)
+
+                '¿Es un obj?
             ElseIf MapData(map).Tile(X, Y).ObjInfo.ObjIndex > 0 Then
                 tempIndex = MapData(map).Tile(X, Y).ObjInfo.ObjIndex
-                
+
                 .flags.TargetObj = tempIndex
-                
+
                 Select Case ObjData(tempIndex).OBJType
-                    Case eOBJType.otPuertas 'Es una puerta
-                        Call AccionParaPuerta(map, X, Y, UserIndex)
-                    Case eOBJType.otCarteles 'Es un cartel
-                        Call AccionParaCartel(map, X, Y, UserIndex)
-                    Case eOBJType.otLeña    'Leña
-                        If tempIndex = FOGATA_APAG And .flags.Muerto = 0 Then
-                            Call AccionParaRamita(map, X, Y, UserIndex)
-                        End If
+                Case eOBJType.otPuertas    'Es una puerta
+                    Call AccionParaPuerta(map, X, Y, UserIndex)
+                Case eOBJType.otCarteles    'Es un cartel
+                    Call AccionParaCartel(map, X, Y, UserIndex)
+                Case eOBJType.otLeña    'Leña
+                    If tempIndex = FOGATA_APAG And .flags.Muerto = 0 Then
+                        Call AccionParaRamita(map, X, Y, UserIndex)
+                    End If
                 End Select
-            '>>>>>>>>>>>OBJETOS QUE OCUPAM MAS DE UN TILE<<<<<<<<<<<<<
+                '>>>>>>>>>>>OBJETOS QUE OCUPAM MAS DE UN TILE<<<<<<<<<<<<<
             ElseIf MapData(map).Tile(X + 1, Y).ObjInfo.ObjIndex > 0 Then
                 tempIndex = MapData(map).Tile(X + 1, Y).ObjInfo.ObjIndex
                 .flags.TargetObj = tempIndex
-                
+
                 Select Case ObjData(tempIndex).OBJType
-                    
-                    Case eOBJType.otPuertas 'Es una puerta
-                        Call AccionParaPuerta(map, X + 1, Y, UserIndex)
-                    
+
+                Case eOBJType.otPuertas    'Es una puerta
+                    Call AccionParaPuerta(map, X + 1, Y, UserIndex)
+
                 End Select
-            
+
             ElseIf MapData(map).Tile(X + 1, Y + 1).ObjInfo.ObjIndex > 0 Then
                 tempIndex = MapData(map).Tile(X + 1, Y + 1).ObjInfo.ObjIndex
                 .flags.TargetObj = tempIndex
-        
+
                 Select Case ObjData(tempIndex).OBJType
-                    Case eOBJType.otPuertas 'Es una puerta
-                        Call AccionParaPuerta(map, X + 1, Y + 1, UserIndex)
+                Case eOBJType.otPuertas    'Es una puerta
+                    Call AccionParaPuerta(map, X + 1, Y + 1, UserIndex)
                 End Select
-            
+
             ElseIf MapData(map).Tile(X, Y + 1).ObjInfo.ObjIndex > 0 Then
                 tempIndex = MapData(map).Tile(X, Y + 1).ObjInfo.ObjIndex
                 .flags.TargetObj = tempIndex
-                
+
                 Select Case ObjData(tempIndex).OBJType
-                    Case eOBJType.otPuertas 'Es una puerta
-                        Call AccionParaPuerta(map, X, Y + 1, UserIndex)
+                Case eOBJType.otPuertas    'Es una puerta
+                    Call AccionParaPuerta(map, X, Y + 1, UserIndex)
                 End Select
             End If
         End With
