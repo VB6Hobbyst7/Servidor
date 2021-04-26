@@ -95,6 +95,12 @@ EOF = (lngCurRow > lngRecords - 1)
 
 End Function
 
+Public Function Count() As Long
+Count = lngRecords
+End Function
+
+
+
 Public Sub SetValue(ByVal lngCol As Long, ByVal lngRow As Long, strValue As String, ByVal lngLenght As Long)
 
 arrData(lngCol, lngRow).value = strValue

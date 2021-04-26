@@ -66,11 +66,11 @@ Public Sub HandleQuestAccept(ByVal UserIndex As Integer)
 
         Dim QuestSlot As Byte
         
-        Dim indice As Byte
+        Dim indice As Integer
  
-100     Call UserList(UserIndex).incomingData.ReadInteger
+100     Call UserList(UserIndex).incomingData.ReadByte
 
-102     indice = UserList(UserIndex).incomingData.ReadByte
+102     indice = UserList(UserIndex).incomingData.ReadInteger
  
 104     NpcIndex = UserList(UserIndex).flags.TargetNPC
     
@@ -134,7 +134,7 @@ Public Sub HandleQuestAccept(ByVal UserIndex As Integer)
 142         If QuestList(.QuestIndex).RequiredNPCs Then ReDim .NPCsKilled(1 To QuestList(.QuestIndex).RequiredNPCs)
 144         If QuestList(.QuestIndex).RequiredTargetNPCs Then ReDim .NPCsTarget(1 To QuestList(.QuestIndex).RequiredTargetNPCs)
 146         Call WriteConsoleMsg(UserIndex, "Has aceptado la mision " & Chr(34) & QuestList(.QuestIndex).Nombre & Chr(34) & ".", FontTypeNames.FONTTYPE_INFO)
-148         Call WriteUpdateNPCSimbolo(UserIndex, NpcIndex, 4)
+148         Call WriteUpdateNPCSimbolo(UserIndex, NpcIndex, 6)
         
         End With
 
@@ -295,7 +295,7 @@ Public Sub FinishQuest(ByVal UserIndex As Integer, ByVal QuestIndex As Integer, 
 196         If .Repetible = 0 Then
                 'Se agrega que el usuario ya hizo esta quest.
 198             Call AddDoneQuest(UserIndex, QuestIndex)
-200             Call WriteUpdateNPCSimbolo(UserIndex, NpcIndex, 2)
+200             Call WriteUpdateNPCSimbolo(UserIndex, NpcIndex, 4)
             End If
         
         End With
@@ -691,7 +691,7 @@ Public Sub HandleQuestListRequest(ByVal UserIndex As Integer)
         
  
         'Leemos el paquete
-100     Call UserList(UserIndex).incomingData.ReadInteger
+100     Call UserList(UserIndex).incomingData.ReadByte
     
 102    ' If UserList(UserIndex).flags.BattleModo = 0 Then
 104         Call WriteQuestListSend(UserIndex)
@@ -744,7 +744,7 @@ Public Sub HandleQuestDetailsRequest(ByVal UserIndex As Integer)
         Dim QuestSlot As Byte
  
         'Leemos el paquete
-100     Call UserList(UserIndex).incomingData.ReadInteger
+100     Call UserList(UserIndex).incomingData.ReadByte
     
 102     QuestSlot = UserList(UserIndex).incomingData.ReadByte
     
@@ -768,7 +768,7 @@ Public Sub HandleQuestAbandon(ByVal UserIndex As Integer)
         
         On Error GoTo HandleQuestAbandon_Err
         
-100     Call UserList(UserIndex).incomingData.ReadInteger
+100     Call UserList(UserIndex).incomingData.ReadByte
     
         'Borramos la quest.
 102     Call CleanQuestSlot(UserIndex, UserList(UserIndex).incomingData.ReadByte)

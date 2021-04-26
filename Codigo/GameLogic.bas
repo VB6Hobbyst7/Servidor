@@ -92,7 +92,7 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, ByVal map As Integer, ByVal 
 '***************************************************
     Dim nPos As WorldPos
     
-On Error GoTo ErrHandler
+On Error GoTo errhandler
     'Controla las salidas
     If InMapBounds(map, X, Y) Then
         With MapData(map).Tile(X, Y)
@@ -171,7 +171,7 @@ On Error GoTo ErrHandler
     End If
 Exit Sub
 
-ErrHandler:
+errhandler:
     Call LogError("Error en DotileEvents. Error: " & Err.Number & " - Desc: " & Err.Description)
 End Sub
 Sub CambiarOrigHeading(ByVal NpcIndex As Integer, ByVal Trigger As Byte)
@@ -696,7 +696,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 '13/02/2009: ZaMa - EL nombre del gm que aparece por consola al clickearlo, tiene el color correspondiente a su rango
 '***************************************************
 
-    On Error GoTo ErrHandler
+    On Error GoTo errhandler
 
     'Responde al click del usuario sobre el mapa
     Dim FoundChar As Byte
@@ -962,7 +962,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 
                                     If QuestList(.QuestIndex).RequiredTargetNPC(j).Amount = .NPCsTarget(j) Then
                                         Call FinishQuest(UserIndex, .QuestIndex, i)
-                                        Call WriteUpdateNPCSimbolo(UserIndex, TempCharIndex, 1)
+                                        Call WriteUpdateNPCSimbolo(UserIndex, TempCharIndex, 3)
                                         Call WriteChatOverHead(UserIndex, "¡Quest Finalizada!", Npclist(TempCharIndex).Char.CharIndex, vbYellow)
                                         Call WriteConsoleMsg(UserIndex, "Quest Finalizada!", FontTypeNames.FONTTYPE_INFO)
                                     End If
@@ -1016,7 +1016,7 @@ End If
 
 Exit Sub
 
-ErrHandler:
+errhandler:
 Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
 
 End Sub

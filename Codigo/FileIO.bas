@@ -194,7 +194,7 @@ ReDim Hechizos(1 To NumeroHechizos) As tHechizo
 
 frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumeroHechizos
-frmCargando.cargar.Value = 0
+frmCargando.cargar.value = 0
 
 'Llena la lista
 For hechizo = 1 To NumeroHechizos
@@ -285,7 +285,7 @@ For hechizo = 1 To NumeroHechizos
     Hechizos(hechizo).StaRequerido = val(Leer.GetValue("Hechizo" & hechizo, "StaRequerido"))
     
     Hechizos(hechizo).Target = val(Leer.GetValue("Hechizo" & hechizo, "Target"))
-    frmCargando.cargar.Value = frmCargando.cargar.Value + 1
+    frmCargando.cargar.value = frmCargando.cargar.value + 1
     
     Hechizos(hechizo).NeedStaff = val(Leer.GetValue("Hechizo" & hechizo, "NeedStaff"))
     Hechizos(hechizo).StaffAffected = CBool(val(Leer.GetValue("Hechizo" & hechizo, "StaffAffected")))
@@ -643,7 +643,7 @@ NumObjDatas = val(Leer.GetValue("INIT", "NumObjs"))
 
 frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumObjDatas
-frmCargando.cargar.Value = 0
+frmCargando.cargar.value = 0
 
 
 ReDim Preserve ObjData(1 To NumObjDatas) As ObjData
@@ -839,7 +839,7 @@ For Object = 1 To NumObjDatas
         ObjData(Object).Valor = ObjData(Object).Valor * MultiplicadorORO
     End If
     
-    frmCargando.cargar.Value = frmCargando.cargar.Value + 1
+    frmCargando.cargar.value = frmCargando.cargar.value + 1
 Next Object
 
 Set Leer = Nothing
@@ -1122,7 +1122,7 @@ On Error GoTo man
     
     frmCargando.cargar.min = 0
     frmCargando.cargar.max = NumMaps
-    frmCargando.cargar.Value = 0
+    frmCargando.cargar.value = 0
 
 
     For map = 1 To NumMaps
@@ -1190,16 +1190,16 @@ man:
     Call LogError(Date & " " & Err.Description & " " & Err.HelpContext & " " & Err.HelpFile & " " & Err.Source)
 
 End Sub
-Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef Value As Integer)
+Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Integer)
 
 'value = (Data(Pos + 1) And &H7F) * &H100 Or Data(Pos) Or -(Data(Pos + 1) > &H7F) * &H8000
 
-CopyMemory Value, data(Pos), 2
+CopyMemory value, data(Pos), 2
 
 Pos = Pos + 2
 End Sub
-Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef Value As Byte)
-Value = data(Pos)
+Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Byte)
+value = data(Pos)
 Pos = Pos + 1
 End Sub
 Public Sub CargarMapa(ByVal map As Long, ByVal MAPFl As String)
@@ -1328,7 +1328,7 @@ On Error GoTo errh
                 Call ReadByte(data, Pos, TempByte)
             End If
         Next X
-        frmCargando.cargar.Value = Y
+        frmCargando.cargar.value = Y
     Next Y
 
 Exit Sub
@@ -1503,7 +1503,7 @@ recordusuarios = val(GetVar(IniPath & "Server.ini", "INIT", "Record"))
 Temporal = val(GetVar(IniPath & "Server.ini", "INIT", "MaxUsers"))
 If MaxUsers = 0 Then
     MaxUsers = Temporal
-    ReDim UserList(1 To MaxUsers) As User
+    ReDim UserList(1 To MaxUsers) As user
 End If
 
 '&&&&&&&&&&&&&&&&&&&&& BALANCE &&&&&&&&&&&&&&&&&&&&&&&
@@ -1554,12 +1554,12 @@ Encriptacion.StringValidacion = Encriptacion.ArmarStringValidacion
 
 End Sub
 
-Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal Value As String)
+Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal value As String)
 '*****************************************************************
 'Escribe VAR en un archivo
 '*****************************************************************
 
-writeprivateprofilestring Main, Var, Value, file
+writeprivateprofilestring Main, Var, value, file
     
 End Sub
 
@@ -1832,6 +1832,101 @@ If UserList(UserIndex).flags.Muerto = 1 Then
 End If
 'Debug.Print ("UPDATE pjs SET " & left$(Query, Len(Query) - 2) & " WHERE Id=" & UserList(UserIndex).MySQLId)
 Call Execute("UPDATE pjs SET " & left$(Query, Len(Query) - 2) & " WHERE Id=" & UserList(UserIndex).MySQLId)
+
+
+
+Dim QueryQuest As String
+
+With UserList(UserIndex)
+'User quests
+444         QueryQuest = QueryQuest & "INSERT INTO quest (user_id, number, quest_id, npcs, npcstarget) VALUES "
+        
+            Dim Tmp As Integer, LoopK As Long
+
+446         For LoopC = 1 To MAXUSERQUESTS
+448             QueryQuest = QueryQuest & "("
+450             QueryQuest = QueryQuest & UserList(UserIndex).MySQLId & ", "
+452             QueryQuest = QueryQuest & LoopC & ", "
+454             QueryQuest = QueryQuest & .QuestStats.Quests(LoopC).QuestIndex & ", '"
+            
+456             If .QuestStats.Quests(LoopC).QuestIndex > 0 Then
+458                 Tmp = QuestList(.QuestStats.Quests(LoopC).QuestIndex).RequiredNPCs
+
+460                 If Tmp Then
+
+462                     For LoopK = 1 To Tmp
+464                         QueryQuest = QueryQuest & CStr(.QuestStats.Quests(LoopC).NPCsKilled(LoopK))
+                        
+466                         If LoopK < Tmp Then
+468                             QueryQuest = QueryQuest & "-"
+                            End If
+
+470                     Next LoopK
+                    
+
+                    End If
+
+                End If
+            
+472             QueryQuest = QueryQuest & "', '"
+            
+474             If .QuestStats.Quests(LoopC).QuestIndex > 0 Then
+                
+476                 Tmp = QuestList(.QuestStats.Quests(LoopC).QuestIndex).RequiredTargetNPCs
+                    
+478                 For LoopK = 1 To Tmp
+
+480                     QueryQuest = QueryQuest & CStr(.QuestStats.Quests(LoopC).NPCsTarget(LoopK))
+                    
+482                     If LoopK < Tmp Then
+484                         QueryQuest = QueryQuest & "-"
+                        End If
+                
+486                 Next LoopK
+            
+                End If
+            
+488             QueryQuest = QueryQuest & "')"
+
+490             If LoopC < MAXUSERQUESTS Then
+492                 QueryQuest = QueryQuest & ", "
+                End If
+
+494         Next LoopC
+        
+496         QueryQuest = QueryQuest & " ON DUPLICATE KEY UPDATE quest_id=VALUES(quest_id), npcs=VALUES(npcs); "
+        Call Execute(QueryQuest)
+
+
+        'Form1.Text1 = QueryQuest
+        'Form1.Show
+        'MsgBox QueryQuest
+            'User completed quests
+            QueryQuest = ""
+498         If .QuestStats.NumQuestsDone > 0 Then
+500             QueryQuest = QueryQuest & "INSERT INTO quest_done (user_id, quest_id) VALUES "
+    
+502             For LoopC = 1 To .QuestStats.NumQuestsDone
+504                 QueryQuest = QueryQuest & "("
+506                 QueryQuest = QueryQuest & UserList(UserIndex).MySQLId & ", "
+508                 QueryQuest = QueryQuest & .QuestStats.QuestsDone(LoopC) & ")"
+    
+510                 If LoopC < .QuestStats.NumQuestsDone Then
+512                     QueryQuest = QueryQuest & ", "
+                    End If
+    
+514             Next LoopC
+            
+516             QueryQuest = QueryQuest & " ON DUPLICATE KEY UPDATE quest_id=VALUES(quest_id); "
+                Call Execute(QueryQuest)
+            End If
+            
+End With
+
+
+
+
+
 
 Exit Sub
 

@@ -70,8 +70,8 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
 '22/06/06: (Nacho) Chequeamos si es pretoriano
 '24/01/2007: Pablo (ToxicWaste): Agrego para actualización de tag si cambia de status.
 '********************************************************
-    On Error GoTo ErrHandler
-    Dim MiNPC As npc
+    On Error GoTo errhandler
+    Dim MiNPC As NPC
     MiNPC = Npclist(NpcIndex)
     Dim EraCriminal As Boolean
     Dim Area As Integer
@@ -202,7 +202,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
     
     
     'quest
-    Dim k As Long, m As Long
+    Dim k As Long, M As Long
         
         For k = 1 To MAXUSERQUESTS
         
@@ -211,22 +211,22 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
                If .QuestIndex Then
                    If QuestList(.QuestIndex).RequiredNPCs Then
         
-                        For m = 1 To QuestList(.QuestIndex).RequiredNPCs
+                        For M = 1 To QuestList(.QuestIndex).RequiredNPCs
         
-                            If QuestList(.QuestIndex).RequiredNPC(m).NpcIndex = MiNPC.Numero Then
-                               If QuestList(.QuestIndex).RequiredNPC(m).Amount > .NPCsKilled(m) Then
-                                    .NPCsKilled(m) = .NPCsKilled(m) + 1
+                            If QuestList(.QuestIndex).RequiredNPC(M).NpcIndex = MiNPC.Numero Then
+                               If QuestList(.QuestIndex).RequiredNPC(M).Amount > .NPCsKilled(M) Then
+                                    .NPCsKilled(M) = .NPCsKilled(M) + 1
         
                                     End If
                                     
-                                If QuestList(.QuestIndex).RequiredNPC(j).Amount = .NPCsKilled(m) Then
+                                If QuestList(.QuestIndex).RequiredNPC(M).Amount = .NPCsKilled(M) Then
                                     Call WriteConsoleMsg(UserIndex, "Ya has matado todos los " & MiNPC.Name & " que la mision " & QuestList(.QuestIndex).Nombre & " requeria. Chequeá si ya estas listo para recibir la recompensa.", FontTypeNames.FONTTYPE_INFO)
                                     
                                     End If
         
                                 End If
         
-                       Next m
+                       Next M
         
                         End If
         
@@ -258,7 +258,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
     
         Exit Sub
 
-ErrHandler:
+errhandler:
         Call LogError("Error en MuereNpc - Error: " & Err.Number & " - Desc: " & Err.Description)
     End Sub
 
@@ -408,7 +408,7 @@ End Sub
 
 Public Sub QuitarNPC(ByVal NpcIndex As Integer)
 
-On Error GoTo ErrHandler
+On Error GoTo errhandler
 
     With Npclist(NpcIndex)
         .flags.NPCActive = False
@@ -439,7 +439,7 @@ On Error GoTo ErrHandler
     End If
 Exit Sub
 
-ErrHandler:
+errhandler:
     Call LogError("Error en QuitarNPC")
 End Sub
 
@@ -610,17 +610,17 @@ Dim Simbolo As Byte
                     
                     If tmpByte Then
                        If FinishQuestCheck(sndIndex, .QuestNumber(q), tmpByte) Then
-                          Simbolo = 3
+                          Simbolo = 5
                             HayFinalizada = True
                             Else
                             HayPendiente = True
-                            Simbolo = 4
+                            Simbolo = 6
                             End If
                         Else
                                  If UserDoneQuest(sndIndex, .QuestNumber(q)) Or Not UserDoneQuest(sndIndex, QuestList(.QuestNumber(q)).RequiredQuest) Or UserList(sndIndex).Stats.ELV < QuestList(.QuestNumber(q)).RequiredLevel Then
-136                                     Simbolo = 2
+136                                     Simbolo = 4
                             Else
-138                                     Simbolo = 1
+138                                     Simbolo = 3
 140                             HayDisponible = True
                             End If
         
@@ -632,22 +632,22 @@ Dim Simbolo As Byte
                     'Para darle prioridad a ciertos simbolos
                     
 144                 If HayDisponible Then
-146                     Simbolo = 1
+146                     Simbolo = 3
                     End If
                     
 148                 If HayPendiente Then
-150                     Simbolo = 4
+150                     Simbolo = 6
                     End If
                     
 152                 If HayFinalizada Then
-154                     Simbolo = 3
+154                     Simbolo = 5
                     End If
                     'Para darle prioridad a ciertos simbolos
                     
                 End If
 
     'quest
-        Call WriteCharacterCreate(sndIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, Npclist(NpcIndex).Char.heading, Npclist(NpcIndex).Char.CharIndex, X, Y, Npclist(NpcIndex).Char.WeaponAnim, Npclist(NpcIndex).Char.ShieldAnim, 0, 0, Npclist(NpcIndex).Char.CascoAnim, Nombre, Criminal, 0)
+        Call WriteCharacterCreate(sndIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, Npclist(NpcIndex).Char.heading, Npclist(NpcIndex).Char.CharIndex, X, Y, Npclist(NpcIndex).Char.WeaponAnim, Npclist(NpcIndex).Char.ShieldAnim, 0, 0, Npclist(NpcIndex).Char.CascoAnim, Nombre, Criminal, 0, Simbolo)
         Call FlushBuffer(sndIndex)
     Else
         Call AgregarNpc(NpcIndex)
@@ -768,7 +768,7 @@ End Sub
 Function NextOpenNPC() As Integer
 'Call LogTarea("Sub NextOpenNPC")
 
-On Error GoTo ErrHandler
+On Error GoTo errhandler
     Dim LoopC As Long
       
     For LoopC = 1 To MAXNPCS + 1
@@ -779,7 +779,7 @@ On Error GoTo ErrHandler
     NextOpenNPC = LoopC
 Exit Function
 
-ErrHandler:
+errhandler:
     Call LogError("Error en NextOpenNPC")
 End Function
 
@@ -875,7 +875,7 @@ SpawnNpc = nIndex
 
 End Function
 
-Sub ReSpawnNpc(MiNPC As npc)
+Sub ReSpawnNpc(MiNPC As NPC)
 
 If (MiNPC.flags.ReSpawn = 0) Then
     If MiNPC.NpcType = Mercader Then
@@ -888,7 +888,7 @@ If (MiNPC.flags.ReSpawn = 0) Then
 End If
 End Sub
 
-Private Sub NPCTirarOro(ByRef MiNPC As npc)
+Private Sub NPCTirarOro(ByRef MiNPC As NPC)
 'SI EL NPC TIENE ORO LO TIRAMOS
     If MiNPC.GiveGLDMin > 0 Then
         Dim MiObj As Obj
