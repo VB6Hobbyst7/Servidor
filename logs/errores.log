@@ -28,3 +28,1216 @@
 14/02/2021 15:20:56 Error en NPCAI.CrearClanPretoriano 
 14/02/2021 15:31:00 Error en NPCAI.CrearClanPretoriano 
 14/02/2021 16:35:56 Error en NPCAI.CrearClanPretoriano 
+4/24/2021 7:05:13 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 7:05:14 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 7:05:14 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 7:05:17 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 7:19:06 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:19:06 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:19:06 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:19:06 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:19:06 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:22:01 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:22:01 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:22:01 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:22:01 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:22:01 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:22:26 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:22:26 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:22:26 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:22:26 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:22:26 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:24:03 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:24:03 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:24:03 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:24:03 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:24:03 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:27:45 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:27:45 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:27:45 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:27:45 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:27:45 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:29:20 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:29:22 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:30:36 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:30:36 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:30:36 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:30:36 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:30:36 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:31:39 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:31:39 PM Error en la subrutina CheckUserLevel - Error : 9 - Description : El subíndice está fuera del intervalo
+4/24/2021 7:31:39 PM Error: 13 [No coinciden los tipos]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000013	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/24/2021 7:31:39 PM Error en EraseUserchar 9: El subíndice está fuera del intervalo
+4/24/2021 7:31:59 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:32:19 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:32:19 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:32:19 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:32:19 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:32:19 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:32:37 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:32:44 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:32:44 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:32:44 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:32:44 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:32:44 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:35:26 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:36:43 PM Error en CheckUpdateNeededNpc. Número 457 Descripción: Esta clave ya está asociada a un elemento de esta colección
+4/24/2021 7:43:17 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:43:17 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:43:17 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:43:17 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:43:17 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:43:51 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:45:05 PM Error en CheckUpdateNeededNpc. Número 457 Descripción: Esta clave ya está asociada a un elemento de esta colección
+4/24/2021 7:45:20 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:46:31 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:46:31 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:46:31 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:46:31 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:46:31 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:48:06 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:48:44 PM Error en CheckUpdateNeededNpc. Número 457 Descripción: Esta clave ya está asociada a un elemento de esta colección
+4/24/2021 7:48:59 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:48:59 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:48:59 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:48:59 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:48:59 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:49:01 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:49:26 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:49:46 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 7:49:46 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 7:49:46 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 7:49:46 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:49:46 PM Unknown column 'Qi' in 'field list' 81863437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 7:50:11 PM Error en CheckUpdateNeededUser. Número 0 Descripción: 
+4/24/2021 7:52:40 PM Error en CheckUpdateNeededNpc. Número 457 Descripción: Esta clave ya está asociada a un elemento de esta colección
+4/24/2021 8:07:35 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:07:35 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:07:36 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:07:37 PM 60 iteraciones en CrearNpc Area:119 NroNpc:614
+4/24/2021 8:07:38 PM 60 iteraciones en CrearNpc Area:119 NroNpc:616
+4/24/2021 8:07:38 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:12:25 PM Error en la subrutina CheckUserLevel - Error : 9 - Description : El subíndice está fuera del intervalo
+4/24/2021 8:12:25 PM Error: 13 [No coinciden los tipos]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000013	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/24/2021 8:12:25 PM Error en EraseUserchar 9: El subíndice está fuera del intervalo
+4/24/2021 8:12:56 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:12:57 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:12:57 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:12:59 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:14:32 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:14:32 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:14:33 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:14:35 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:15:12 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:15:12 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:15:12 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:15:12 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:15:12 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:15:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:15:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:15:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:15:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:15:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:15:57 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:15:57 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:15:57 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:15:57 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:15:57 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:16:09 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:16:09 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:16:09 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:16:09 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:16:09 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:16:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:16:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:16:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:16:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:16:22 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:25:30 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:25:31 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:25:31 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:25:33 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:28:05 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:28:05 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:28:05 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:28:05 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:28:05 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:28:46 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:28:46 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:28:46 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:28:46 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:28:46 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:31:32 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:31:32 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:31:32 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:31:32 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 16-0 WHERE Id=2355
+4/24/2021 8:31:32 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 17-0 WHERE Id=2355
+4/24/2021 8:41:02 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:41:02 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:41:02 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:41:05 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:42:31 PM Unknown column 'Qi' in 'field list' 148644621 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:42:31 PM Unknown column 'Qi' in 'field list' 148644621 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:42:31 PM Unknown column 'Qi' in 'field list' 148644621 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:42:31 PM Unknown column 'Qi' in 'field list' 148644621 - UPDATE pjs SET Qi= 16-0 WHERE Id=2355
+4/24/2021 8:42:31 PM Unknown column 'Qi' in 'field list' 148644621 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/24/2021 8:44:53 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:44:53 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:44:54 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:44:56 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:48:02 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:48:02 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:48:03 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:48:04 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:49:50 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:49:50 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:49:50 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:49:50 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/24/2021 8:49:50 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:51:42 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:51:42 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:51:42 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:51:42 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/24/2021 8:51:42 PM Unknown column 'Qi' in 'field list' 146285325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 8:54:23 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:54:23 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:54:24 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:54:25 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:55:42 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:55:43 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:55:43 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 8:55:45 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 8:57:14 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 8:57:14 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/24/2021 8:57:14 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/24/2021 8:57:14 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/24/2021 8:57:14 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:02:40 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/24/2021 9:02:40 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/24/2021 9:02:40 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:02:40 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:02:40 PM Unknown column 'Qi' in 'field list' 148972301 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:06:41 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:06:42 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:06:42 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:06:44 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 9:10:03 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:10:04 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:10:04 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:10:06 PM Error en NPCAI.CrearClanPretoriano 
+4/24/2021 9:11:45 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:11:45 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:11:45 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:11:45 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:11:45 PM Unknown column 'Qi' in 'field list' 147464973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/24/2021 9:12:33 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:12:34 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:12:34 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/24/2021 9:12:37 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 5:10:30 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 5:10:30 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 5:10:31 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 5:10:32 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 5:18:13 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 5:18:13 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 5:18:13 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 14-0 WHERE Id=2355
+4/25/2021 5:18:13 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/25/2021 5:18:13 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 5:24:26 PM Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+4/25/2021 5:29:53 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/25/2021 5:29:53 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 16-1 WHERE Id=2355
+4/25/2021 5:29:53 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 17-0 WHERE Id=2355
+4/25/2021 5:29:53 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 5:29:53 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 5:37:07 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 5:37:07 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 5:37:07 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 5:37:07 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 16-1 WHERE Id=2355
+4/25/2021 5:37:07 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 5:40:44 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 5:40:44 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 5:40:44 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 5:40:44 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 16-1 WHERE Id=2355
+4/25/2021 5:40:44 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 5:50:10 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 5:50:10 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 5:50:10 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 5:50:10 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 16-1 WHERE Id=2355
+4/25/2021 5:50:10 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 5:56:55 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 5:56:55 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 5:56:55 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 5:56:55 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 16-1 WHERE Id=2355
+4/25/2021 5:56:55 PM Unknown column 'Qi' in 'field list' 148972293 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 6:10:39 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:10:39 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:10:40 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:10:42 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 6:15:11 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 6:15:11 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 6:15:11 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 6:15:11 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 16-1 WHERE Id=2355
+4/25/2021 6:15:11 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 1 WHERE Id=2355
+4/25/2021 6:18:30 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 6:18:30 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 6:18:30 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 6:18:30 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 6:18:30 PM Unknown column 'Qi' in 'field list' 144057093 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 6:24:33 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:24:34 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:24:34 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:24:36 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 6:25:49 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:25:50 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:25:50 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:25:52 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 6:27:31 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:27:31 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:27:32 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 6:27:33 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 7:30:35 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:30:36 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:30:36 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:30:38 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 7:32:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/25/2021 7:32:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/25/2021 7:32:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/25/2021 7:32:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:32:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:40:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:40:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:40:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:40:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:40:04 PM Unknown column 'Qi' in 'field list' 152183557 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 7:43:07 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:43:08 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:43:08 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:43:09 PM 60 iteraciones en CrearNpc Area:119 NroNpc:614
+4/25/2021 7:43:11 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 7:43:55 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:43:55 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:43:56 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/25/2021 7:43:58 PM Error en NPCAI.CrearClanPretoriano 
+4/25/2021 8:07:08 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:07:08 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:07:08 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:07:08 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:07:08 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:08:48 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:08:48 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:08:48 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:08:48 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/25/2021 8:08:48 PM Unknown column 'Qi' in 'field list' 149168901 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:56:34 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:56:34 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:56:35 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:56:37 AM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:59:13 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 1:59:13 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 1:59:13 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 1:59:13 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 1:59:13 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:00:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:00:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:00:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:00:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:00:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:04:38 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 2:04:38 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:04:38 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:04:38 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:04:38 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:05:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:05:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:05:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:05:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:05:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:10:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:10:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:10:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:10:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:10:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:11:17 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:11:17 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:11:17 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:11:17 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:11:17 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:22:41 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:22:41 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:22:41 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:22:41 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:22:41 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:25:48 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:25:48 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:25:48 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:25:48 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:25:48 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:27:07 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:27:07 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:27:07 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:27:07 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:27:07 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:34:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:34:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:34:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:34:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 2:34:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 2:41:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:41:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:41:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:41:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 2:41:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:42:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:42:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:42:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:42:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 2:42:00 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:52:57 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:52:57 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:52:57 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:52:57 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 2:52:57 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:55:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 2:55:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 2:55:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 2:55:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 2:55:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:00:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:00:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:00:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:00:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 3:00:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:04:26 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:04:26 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:04:26 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:04:26 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 3:04:26 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:12:49 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 3:12:49 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 3:12:49 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:12:49 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:12:49 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:33:01 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 3:33:01 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:33:01 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:33:01 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:33:01 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:35:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:35:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:35:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:35:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:35:31 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:42:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:42:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:42:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:42:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:42:37 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:45:34 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:45:34 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:45:34 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:45:34 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 3:45:34 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:53:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:53:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:53:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:53:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:53:39 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:55:42 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 3:55:42 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 3:55:42 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 3:55:42 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:55:42 AM Unknown column 'Qi' in 'field list' 147858181 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:29:32 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:29:33 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:29:33 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:29:35 AM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 10:31:06 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:31:07 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:31:07 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:31:09 AM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 10:35:27 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:35:28 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:35:28 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:35:30 AM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 10:37:14 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:37:15 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:37:15 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:37:17 AM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 10:38:32 AM Unknown column 'Qi' in 'field list' 149037829 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 10:38:32 AM Unknown column 'Qi' in 'field list' 149037829 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:38:32 AM Unknown column 'Qi' in 'field list' 149037829 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:38:32 AM Unknown column 'Qi' in 'field list' 149037829 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:38:32 AM Unknown column 'Qi' in 'field list' 149037829 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:47:21 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:47:22 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:47:22 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 10:47:24 AM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 10:48:14 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 10:48:14 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:48:14 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:48:14 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 10:48:14 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 11:08:59 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 11:08:59 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 11:08:59 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 11:08:59 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 11:08:59 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 11:12:02 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 11:12:02 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 11:12:02 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 11:12:02 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 11:12:02 AM Unknown column 'Qi' in 'field list' 147464965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:19:00 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:19:01 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:19:01 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:19:03 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 12:19:44 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 12:19:44 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:19:44 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:19:44 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:19:44 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:21:38 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 12:21:38 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:21:38 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:21:38 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:21:38 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:22:00 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 12:22:00 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 12:22:00 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 12:22:00 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:22:00 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:11 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 12:25:11 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:11 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:11 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:11 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:28 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 12:25:28 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 12:25:28 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 12:25:28 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:28 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:58 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:58 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:58 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:58 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:25:58 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:34:38 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:34:38 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:34:39 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:34:41 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 12:35:13 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/26/2021 12:35:13 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/26/2021 12:35:13 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/26/2021 12:35:13 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:35:13 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:37:03 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:37:03 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:37:03 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:37:03 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:37:03 PM Unknown column 'Qi' in 'field list' 147333893 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:42:18 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:42:19 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:42:19 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:42:21 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 12:43:10 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:43:11 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:43:11 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 12:43:13 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 12:43:19 PM Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+4/26/2021 12:43:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 12:43:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:43:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:43:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:43:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:44:48 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 12:44:48 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:44:48 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:44:48 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:44:48 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:45:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 12:45:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:45:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:45:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 12:45:49 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:10:38 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:10:38 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:10:39 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:10:41 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:12:37 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:12:37 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:12:38 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:12:39 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:15:13 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:15:14 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:15:14 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:15:16 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:16:26 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:16:26 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:26 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:26 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:26 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:26 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:30 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:16:30 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:30 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:30 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:30 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:30 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:35 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:16:35 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:35 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:35 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:35 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:35 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:39 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:16:39 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:39 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:39 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:39 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:39 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:16:44 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:16:44 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:16:44 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:16:44 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:16:44 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:16:44 PM Unknown column 'Qi' in 'field list' 148906757 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:17:26 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:17:26 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:17:26 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:17:29 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:17:33 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:17:33 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:17:33 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:17:33 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:17:33 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:17:33 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:08 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:18:08 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:08 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:08 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:08 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:08 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:19 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:18:19 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:19 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:19 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:19 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:19 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:21 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:18:21 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:21 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:21 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:21 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:21 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:25 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:18:25 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:25 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:25 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:25 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:25 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:18:29 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:18:29 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:29 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:29 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:29 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:29 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:30 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:18:30 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:30 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:30 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:30 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:18:30 PM Unknown column 'Qi' in 'field list' 148644613 - UPDATE pjs SET Qi= 0 WHERE Id=2358
+4/26/2021 1:19:20 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:19:20 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:19:20 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:19:21 PM 60 iteraciones en CrearNpc Area:119 NroNpc:614
+4/26/2021 1:19:22 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:19:50 PM Error: 91 [Variable de tipo Object o la variable de bloque With no está establecida]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000091	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:19:50 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:19:50 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:19:50 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:19:50 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:19:50 PM Unknown column 'Qi' in 'field list' 148120325 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:22:11 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:22:11 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:22:12 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:22:13 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:22:53 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:22:54 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:22:54 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:22:56 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:23:28 PM Error: 13 [No coinciden los tipos]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000013	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:23:28 PM Unknown column 'Qi' in 'field list' 149299973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:23:28 PM Unknown column 'Qi' in 'field list' 149299973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:23:28 PM Unknown column 'Qi' in 'field list' 149299973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:23:28 PM Unknown column 'Qi' in 'field list' 149299973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:23:28 PM Unknown column 'Qi' in 'field list' 149299973 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:24:42 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:24:43 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:24:43 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:24:45 PM 60 iteraciones en CrearNpc Area:119 NroNpc:616
+4/26/2021 1:24:45 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:25:27 PM Error: 13 [No coinciden los tipos]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000013	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:25:27 PM Unknown column 'Qi' in 'field list' 149365509 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:25:27 PM Unknown column 'Qi' in 'field list' 149365509 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:25:27 PM Unknown column 'Qi' in 'field list' 149365509 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:25:27 PM Unknown column 'Qi' in 'field list' 149365509 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:25:27 PM Unknown column 'Qi' in 'field list' 149365509 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:27:27 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:27:28 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:27:28 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:27:30 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:28:45 PM You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 148185861 - SELECT * FROM quest_done WHERE user_id=
+4/26/2021 1:28:45 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:28:45 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:45 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:45 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:45 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:45 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:50 PM You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 148185861 - SELECT * FROM quest_done WHERE user_id=
+4/26/2021 1:28:50 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:28:50 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:50 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:50 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:50 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:50 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:53 PM You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 148185861 - SELECT * FROM quest_done WHERE user_id=
+4/26/2021 1:28:53 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:28:53 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:53 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:53 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:53 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:53 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:55 PM You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 148185861 - SELECT * FROM quest_done WHERE user_id=
+4/26/2021 1:28:55 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:28:55 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:55 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:55 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:55 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:28:55 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:29:55 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:29:55 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:29:55 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:29:57 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:30:00 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:30:00 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:00 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:00 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:00 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:00 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:03 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:30:03 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:03 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:03 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:03 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:03 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:08 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:30:08 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:08 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:08 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:08 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:08 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:10 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:30:10 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:10 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:10 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:10 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:30:10 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:32:36 PM Error: 9 [El subíndice está fuera del intervalo]  Source: ServidorArgentum	 HelpFile: C:\Windows\Help\VBENLR98.CHM	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 2
+4/26/2021 1:32:36 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:32:36 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:32:36 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:32:36 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:32:36 PM Unknown column 'Qi' in 'field list' 147530501 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:35:12 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:35:12 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:35:13 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:35:14 PM 60 iteraciones en CrearNpc Area:119 NroNpc:614
+4/26/2021 1:35:14 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:42:50 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:42:51 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:42:51 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:42:53 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:48:02 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:48:03 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:48:03 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:48:04 PM 60 iteraciones en CrearNpc Area:119 NroNpc:615
+4/26/2021 1:48:05 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:52:51 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:52:52 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:52:52 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:52:54 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:54:00 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 1:54:00 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:00 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:00 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:00 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:19 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 1:54:19 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:19 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:19 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:54:19 PM Unknown column 'Qi' in 'field list' 148841221 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:57:50 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:57:50 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:57:51 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 1:57:53 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 1:58:45 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:58:45 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:58:45 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:58:45 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:58:45 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:09 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 1:59:09 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 1:59:09 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:09 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:09 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:26 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 1:59:26 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:26 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:26 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:26 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:44 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 1:59:44 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 1:59:44 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:44 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 1:59:44 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:21 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 2:01:21 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 3 WHERE Id=2355
+4/26/2021 2:01:21 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:21 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:21 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:43 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 2:01:43 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:43 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:43 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:43 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:57 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 2 WHERE Id=2355
+4/26/2021 2:01:57 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:57 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:57 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:01:57 PM Unknown column 'Qi' in 'field list' 149955333 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:06:03 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:06:04 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:06:04 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:06:06 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 2:08:19 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:08:19 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:08:19 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:08:19 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:08:19 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:03 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:03 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:03 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:03 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:03 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:29 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:29 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:29 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:29 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:09:29 PM Unknown column 'Qi' in 'field list' 148185861 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 2:12:16 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:12:16 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:12:17 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:12:19 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 2:13:11 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:13:12 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:13:12 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 2:13:14 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:18:10 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:18:10 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:18:11 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:18:13 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:20:22 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:20:22 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:20:23 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:20:25 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:21:19 PM Unknown column 'Qi' in 'field list' 148579077 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:21:19 PM Unknown column 'Qi' in 'field list' 148579077 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:21:19 PM Unknown column 'Qi' in 'field list' 148579077 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:21:19 PM Unknown column 'Qi' in 'field list' 148579077 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:21:19 PM Unknown column 'Qi' in 'field list' 148579077 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:23:18 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:23:18 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:23:19 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:23:19 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:29:51 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 3:29:51 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:29:51 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:29:51 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:29:51 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:32:28 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 3:32:28 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:32:28 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:32:28 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:32:28 PM Unknown column 'Qi' in 'field list' 9183965 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:35:08 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:35:08 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:35:09 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:35:11 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:37:28 PM Unknown column 'Qi' in 'field list' 149562125 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 3:37:28 PM Unknown column 'Qi' in 'field list' 149562125 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:37:28 PM Unknown column 'Qi' in 'field list' 149562125 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:37:28 PM Unknown column 'Qi' in 'field list' 149562125 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:37:28 PM Unknown column 'Qi' in 'field list' 149562125 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:44:27 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:44:27 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:44:27 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:44:27 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:45:44 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:45:44 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:45:44 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:45:44 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:45:44 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:19 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:19 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:19 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:19 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:19 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:42 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:42 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:42 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:42 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:48:42 PM Unknown column 'Qi' in 'field list' 91693789 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:50:58 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:50:59 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:50:59 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:51:00 PM 60 iteraciones en CrearNpc Area:119 NroNpc:614
+4/26/2021 3:51:02 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:52:59 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:52:59 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:53:00 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 3:53:02 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 3:55:09 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:55:09 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:55:09 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:55:09 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:55:09 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:29 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:29 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:29 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:29 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:29 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:56 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:56 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:56 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:56 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 3:56:56 PM Unknown column 'Qi' in 'field list' 148054797 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:10:53 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 4:10:53 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 4:10:53 PM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/26/2021 4:10:54 PM Error en NPCAI.CrearClanPretoriano 
+4/26/2021 4:43:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:43:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:43:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:43:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:43:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:45:01 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 4:45:01 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:45:01 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:45:01 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:45:01 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:52:03 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 4:52:03 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:52:03 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:52:03 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 4:52:03 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:18:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 6:18:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:18:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:18:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:18:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:24:45 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 6:24:45 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:24:45 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:24:45 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:24:45 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:12 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:55 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:55 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:55 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:55 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:32:55 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:50:07 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:50:07 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:50:07 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:50:07 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 6:50:07 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:45:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:45:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:45:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:45:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:45:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:52:47 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 8:52:47 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:52:47 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:52:47 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:52:47 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:58:09 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 8:58:09 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:58:09 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:58:09 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 8:58:09 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:01:53 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:01:53 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:01:53 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:01:53 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:01:53 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:05:25 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:05:25 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:05:25 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:05:25 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:05:25 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:08:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:08:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:08:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:08:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:08:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:15:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:15:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:15:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:15:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:15:35 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:18:00 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:18:00 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:18:00 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:18:00 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:18:00 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:20:02 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:20:02 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:20:02 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:20:02 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:20:02 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:24:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:24:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:24:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:24:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:24:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:37:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:37:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:37:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:37:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:37:42 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:39:41 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/26/2021 9:39:41 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:39:41 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:39:41 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/26/2021 9:39:41 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:48:22 PM MySQL server has gone away 8921821 - SELECT COUNT(Id) as 'Cantidad' FROM cuentas WHERE Nombre='deidhara'
+4/27/2021 10:48:22 PM Database went down. Reconnecting. 8921821 - SELECT COUNT(Id) as 'Cantidad' FROM cuentas WHERE Nombre='deidhara'
+4/27/2021 10:52:10 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 10:52:10 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:52:10 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:52:10 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:52:10 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:53:23 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 10:53:23 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:53:23 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:53:23 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 10:53:23 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:01:17 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 11:01:17 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:01:17 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:01:17 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:01:17 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:04:52 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 11:04:52 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:04:52 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:04:52 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:04:52 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:12:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 11:12:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:12:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:12:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:12:36 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:16:50 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 11:16:50 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:16:50 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:16:50 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:16:50 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:23:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/27/2021 11:23:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:23:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:23:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/27/2021 11:23:13 PM Unknown column 'Qi' in 'field list' 8921821 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 9:57:44 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 9:57:44 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 9:57:44 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 9:57:44 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 9:58:50 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 9:58:50 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 9:58:50 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 9:58:50 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 9:58:50 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:02:41 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:02:41 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:02:41 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:02:41 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:02:41 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:02:53 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 10:02:53 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 10:02:53 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 10:02:53 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:02:53 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:03:01 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:01 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:01 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:01 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:01 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:20 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:20 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:20 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:20 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:20 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:03:33 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 10:03:33 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 10:03:33 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 10:03:33 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:03:33 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:05:36 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:05:36 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:05:36 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:05:36 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:05:36 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:06:10 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:06:10 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:06:10 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:06:10 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:06:10 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:06:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 10:06:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 10:06:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 10:06:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:06:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:07:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:07:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:07:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:07:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:07:25 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:09:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 10:09:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 10:09:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 10:09:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:09:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:12:46 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 10:12:46 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 10:12:46 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 10:12:46 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:12:46 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:13:38 AM Error en UsuarioAtacaNpc. Error 9 : Subscript out of range. User: 1-> feoo. NpcIndex: 1742.
+4/28/2021 10:14:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:14:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:14:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:14:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:14:44 AM Unknown column 'Qi' in 'field list' 91431629 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:15:16 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:15:16 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:15:16 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:15:16 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:16:09 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:16:09 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:09 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:09 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:09 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:17 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:16:17 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:16:17 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:16:17 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:16:17 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:16:45 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:16:45 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:45 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:45 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:45 AM Unknown column 'Qi' in 'field list' 91169493 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:16:57 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:16:57 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:16:57 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:16:57 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:18:23 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:18:24 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:18:24 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:18:24 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:21:36 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:21:36 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:21:36 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:21:37 AM 60 iteraciones en CrearNpc Area:119 NroNpc:616
+4/28/2021 10:21:37 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:24:39 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:24:39 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:24:39 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:24:40 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:24:50 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:24:50 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:24:50 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:24:50 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:26:38 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:26:38 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:38 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:38 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:38 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:56 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:26:56 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:56 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:56 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:26:56 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:27:10 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:27:10 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:27:10 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:27:10 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:27:10 AM Unknown column 'Qi' in 'field list' 4137685 - UPDATE pjs SET Qi= 0 WHERE Id=2357
+4/28/2021 10:27:30 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:27:30 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:27:30 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:27:30 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:27:39 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:27:39 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:27:39 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:27:40 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:28:21 AM Unknown column 'Qi' in 'field list' 35332813 - UPDATE pjs SET Qi= 15-0-15 WHERE Id=2355
+4/28/2021 10:28:21 AM Unknown column 'Qi' in 'field list' 35332813 - UPDATE pjs SET Qi= 7 WHERE Id=2355
+4/28/2021 10:28:21 AM Unknown column 'Qi' in 'field list' 35332813 - UPDATE pjs SET Qi= 14-14 WHERE Id=2355
+4/28/2021 10:28:21 AM Unknown column 'Qi' in 'field list' 35332813 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:28:21 AM Unknown column 'Qi' in 'field list' 35332813 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:29:15 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:29:15 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:29:15 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:29:15 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:31:22 AM Unknown column 'Qi' in 'field list' 91890389 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:31:22 AM Unknown column 'Qi' in 'field list' 91890389 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:31:22 AM Unknown column 'Qi' in 'field list' 91890389 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:31:22 AM Unknown column 'Qi' in 'field list' 91890389 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:31:22 AM Unknown column 'Qi' in 'field list' 91890389 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:34:26 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:34:26 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:34:27 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:34:29 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:39:34 AM Unknown column 'Qi' in 'field list' 145236741 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:39:34 AM Unknown column 'Qi' in 'field list' 145236741 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:39:34 AM Unknown column 'Qi' in 'field list' 145236741 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:39:34 AM Unknown column 'Qi' in 'field list' 145236741 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:39:34 AM Unknown column 'Qi' in 'field list' 145236741 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:42:55 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:42:55 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:42:56 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:42:58 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:46:56 AM Unknown column 'Qi' in 'field list' 150283013 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 10:46:56 AM Unknown column 'Qi' in 'field list' 150283013 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:46:56 AM Unknown column 'Qi' in 'field list' 150283013 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:46:56 AM Unknown column 'Qi' in 'field list' 150283013 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:46:56 AM Unknown column 'Qi' in 'field list' 150283013 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 10:55:36 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:55:37 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:55:37 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:55:39 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 10:56:40 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:56:40 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:56:41 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
+4/28/2021 10:56:43 AM Error en NPCAI.CrearClanPretoriano 
+4/28/2021 11:00:18 AM Unknown column 'Qi' in 'field list' 149234437 - UPDATE pjs SET Qi= 4-0-0-0-0 WHERE Id=2355
+4/28/2021 11:00:18 AM Unknown column 'Qi' in 'field list' 149234437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 11:00:18 AM Unknown column 'Qi' in 'field list' 149234437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 11:00:18 AM Unknown column 'Qi' in 'field list' 149234437 - UPDATE pjs SET Qi= 0 WHERE Id=2355
+4/28/2021 11:00:18 AM Unknown column 'Qi' in 'field list' 149234437 - UPDATE pjs SET Qi= 0 WHERE Id=2355

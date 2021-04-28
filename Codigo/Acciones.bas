@@ -138,9 +138,9 @@ Sub Accion(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Integer,
                     End If
 
                     Call WriteTrainerCreatureList(UserIndex, .flags.TargetNPC)
-                End If
-
-            ElseIf Npclist(MapData(map).Tile(X, Y).NpcIndex).NpcType = eNPCType.Quest Then
+                    
+                    
+                ElseIf Npclist(MapData(map).Tile(X, Y).NpcIndex).NpcType = eNPCType.Quest Then
 
                 If UserList(UserIndex).flags.Muerto = 1 Then
                     Call WriteConsoleMsg(UserIndex, "Estas Muerto....", FontTypeNames.FONTTYPE_INFO)
@@ -149,6 +149,9 @@ Sub Accion(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Integer,
                 End If
 
                 Call EnviarQuest(UserIndex)
+                End If
+
+         
 
                 '¿Es un obj?
             ElseIf MapData(map).Tile(X, Y).ObjInfo.ObjIndex > 0 Then
