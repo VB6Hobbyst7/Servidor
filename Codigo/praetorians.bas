@@ -47,10 +47,10 @@ Private Const SONIDO_Dragon_VIVO As Integer = 30
 ''ESTÁN UBICADOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ''MUCHO MENOS LA COORDENADA Y DE LAS ALCOBAS YA QUE DEBE SER LA MISMA!!!
 ''(HAY FUNCIONES Q CUENTAN CON QUE ES LA MISMA!)
-Public Const ALCOBA1_X As Integer = 380
-Public Const ALCOBA1_Y As Integer = 421
-Public Const ALCOBA2_X As Integer = 413
-Public Const ALCOBA2_Y As Integer = 421
+Public Const ALCOBA1_X As Integer = 365
+Public Const ALCOBA1_Y As Integer = 44
+Public Const ALCOBA2_X As Integer = 399
+Public Const ALCOBA2_Y As Integer = 44
 
 Public Const ZONA_PRETORIANO As Integer = 49
 
@@ -118,7 +118,7 @@ On Error GoTo errorh
     Dim wp2 As WorldPos
     Dim TeleFrag As Integer
     
-    wp.map = 2
+    wp.map = 6
     If X < Zonas(MAPA_PRETORIANO).X1 + 50 Then   ''forma burda de ver que alcoba es
         wp.X = ALCOBA2_X
         wp.Y = ALCOBA2_Y
@@ -127,7 +127,7 @@ On Error GoTo errorh
         wp.Y = ALCOBA1_Y
     End If
     pretorianosVivos = 7 'Hay 7 + el Rey.
-    TeleFrag = MapData(wp.map).Tile(wp.X, wp.Y).NpcIndex
+    TeleFrag = MapData(6).Tile(wp.X, wp.Y).NpcIndex
     
     If TeleFrag > 0 Then
         ''El rey va a pisar a un npc de antiguo rey
@@ -1273,7 +1273,7 @@ ElseIf Hechizos(Spell).SubeHp = 2 Then
     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(Spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(Spell).FXgrh, Hechizos(Spell).Loops))
 
-    If UserList(UserIndex).flags.Privilegios And PlayerType.User Then UserList(UserIndex).Stats.MinHP = UserList(UserIndex).Stats.MinHP - daño
+    If UserList(UserIndex).flags.Privilegios And PlayerType.user Then UserList(UserIndex).Stats.MinHP = UserList(UserIndex).Stats.MinHP - daño
     
     Call WriteConsoleMsg(UserIndex, Npclist(NpcIndex).Name & " te ha quitado " & daño & " puntos de vida.", FontTypeNames.FONTTYPE_FIGHT)
     
@@ -1358,7 +1358,7 @@ On Error GoTo errorh
                         danio = 880 / (Dist ^ (3 / 7))
                         danioI = Abs(Int(danio))
                         ''efectiviza el danio
-                        If UserList(PJInd).flags.Privilegios And PlayerType.User Then UserList(PJInd).Stats.MinHP = UserList(PJInd).Stats.MinHP - danioI
+                        If UserList(PJInd).flags.Privilegios And PlayerType.user Then UserList(PJInd).Stats.MinHP = UserList(PJInd).Stats.MinHP - danioI
                         
                         Call WriteConsoleMsg(PJInd, Npclist(npcind).Name & " te ha quitado " & danioI & " puntos de vida al romper su vara.", FontTypeNames.FONTTYPE_FIGHT)
                         Call SendData(SendTarget.ToPCArea, PJInd, PrepareMessagePlayWave(Hechizos(indireccion).Wav, UserList(PJInd).Pos.X, UserList(PJInd).Pos.Y))
@@ -1417,7 +1417,7 @@ Dim NPCy As Integer
 Dim USRx As Integer
 Dim USRy As Integer
 Dim dual As Integer
-Dim Mapa As Integer
+Dim mapa As Integer
 
 If Not (Npclist(npcorig).Pos.map = map) Then Exit Sub     ''si son distintos mapas abort
 
@@ -1430,7 +1430,7 @@ If (NPCx = X And NPCy = Y) Then Exit Sub    ''ya llegué!!
 ''  Levanto las coordenadas del destino
 USRx = X
 USRy = Y
-Mapa = map
+mapa = map
 
 ''  moverse
     If (NPCx > USRx) Then
@@ -1438,16 +1438,16 @@ Mapa = map
             ''NPC esta arriba a la derecha
             dual = RandomNumber(0, 10)
             If ((dual And 1) = 0) Then ''move down
-                If LegalPos(Mapa, NPCx, NPCy + 1) Then
+                If LegalPos(mapa, NPCx, NPCy + 1) Then
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then
+                ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then
+                ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then
                     Call MoverDer(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then
+                ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then
                     Call MoverArr(npcorig)
                     Exit Sub
                 Else
@@ -1456,16 +1456,16 @@ Mapa = map
                 End If
                 
             Else        ''random first move
-                If LegalPos(Mapa, NPCx - 1, NPCy) Then
+                If LegalPos(mapa, NPCx - 1, NPCy) Then
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then
+                ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then
+                ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then
                     Call MoverDer(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then
+                ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then
                     Call MoverArr(npcorig)
                     Exit Sub
                 Else
@@ -1475,32 +1475,32 @@ Mapa = map
         ElseIf (NPCy > USRy) Then   ''NPC esta abajo a la derecha
             dual = RandomNumber(0, 10)
             If ((dual And 1) = 0) Then ''move up
-                If LegalPos(Mapa, NPCx, NPCy - 1) Then  ''U
+                If LegalPos(mapa, NPCx, NPCy - 1) Then  ''U
                     Call MoverArr(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+                ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''D
+                ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''D
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+                ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                     Call MoverDer(npcorig)
                     Exit Sub
                 Else
                     If CasperBlock(npcorig) Then Call LiberarCasperBlock(npcorig)
                 End If
             Else    ''random first move
-                If LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+                If LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then ''U
+                ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then ''U
                     Call MoverArr(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''D
+                ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''D
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+                ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                     Call MoverDer(npcorig)
                     Exit Sub
                 Else
@@ -1508,13 +1508,13 @@ Mapa = map
                 End If
             End If  ''endif random first move
         Else    ''x completitud, esta en la misma Y
-            If LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+            If LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                 Call MoverIzq(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''D
+            ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''D
                 Call MoverAba(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then  ''U
+            ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then  ''U
                 Call MoverArr(npcorig)
                 Exit Sub
             Else
@@ -1533,32 +1533,32 @@ Mapa = map
             ''NPC esta arriba a la izquierda
             dual = RandomNumber(0, 10)
             If ((dual And 1) = 0) Then ''move down
-                If LegalPos(Mapa, NPCx, NPCy + 1) Then  ''ABA
+                If LegalPos(mapa, NPCx, NPCy + 1) Then  ''ABA
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+                ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                     Call MoverDer(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then
+                ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then
+                ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then
                     Call MoverArr(npcorig)
                     Exit Sub
                 Else
                     If CasperBlock(npcorig) Then Call LiberarCasperBlock(npcorig)
                 End If
             Else    ''random first move
-                If LegalPos(Mapa, NPCx + 1, NPCy) Then  ''DER
+                If LegalPos(mapa, NPCx + 1, NPCy) Then  ''DER
                     Call MoverDer(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''ABA
+                ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''ABA
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then
+                ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then
+                ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then
                     Call MoverArr(npcorig)
                     Exit Sub
                 Else
@@ -1569,32 +1569,32 @@ Mapa = map
         ElseIf (NPCy > USRy) Then   ''NPC esta abajo a la izquierda
             dual = RandomNumber(0, 10)
             If ((dual And 1) = 0) Then ''move up
-                If LegalPos(Mapa, NPCx, NPCy - 1) Then  ''U
+                If LegalPos(mapa, NPCx, NPCy - 1) Then  ''U
                     Call MoverArr(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+                ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                     Call MoverDer(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+                ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                     Call MoverIzq(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''D
+                ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''D
                     Call MoverAba(npcorig)
                     Exit Sub
                 Else
                     If CasperBlock(npcorig) Then Call LiberarCasperBlock(npcorig)
                 End If
             Else
-                If LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+                If LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                     Call MoverDer(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then  ''U
+                ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then  ''U
                     Call MoverArr(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''D
+                ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''D
                     Call MoverAba(npcorig)
                     Exit Sub
-                ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+                ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                     Call MoverIzq(npcorig)
                     Exit Sub
                 Else
@@ -1602,13 +1602,13 @@ Mapa = map
                 End If
             End If
         Else    ''x completitud, esta en la misma Y
-            If LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+            If LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                 Call MoverDer(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx, NPCy + 1) Then  ''D
+            ElseIf LegalPos(mapa, NPCx, NPCy + 1) Then  ''D
                 Call MoverAba(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx, NPCy - 1) Then  ''U
+            ElseIf LegalPos(mapa, NPCx, NPCy - 1) Then  ''U
                 Call MoverArr(npcorig)
                 Exit Sub
             Else
@@ -1624,13 +1624,13 @@ Mapa = map
     
     Else ''igual X
         If (NPCy > USRy) Then    ''NPC ESTA ABAJO
-            If LegalPos(Mapa, NPCx, NPCy - 1) Then  ''U
+            If LegalPos(mapa, NPCx, NPCy - 1) Then  ''U
                 Call MoverArr(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+            ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                 Call MoverDer(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+            ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                 Call MoverIzq(npcorig)
                 Exit Sub
             Else
@@ -1642,13 +1642,13 @@ Mapa = map
                 End If
             End If
         Else    ''NPC ESTA ARRIBA
-            If LegalPos(Mapa, NPCx, NPCy + 1) Then  ''ABA
+            If LegalPos(mapa, NPCx, NPCy + 1) Then  ''ABA
                 Call MoverAba(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx + 1, NPCy) Then  ''R
+            ElseIf LegalPos(mapa, NPCx + 1, NPCy) Then  ''R
                 Call MoverDer(npcorig)
                 Exit Sub
-            ElseIf LegalPos(Mapa, NPCx - 1, NPCy) Then  ''L
+            ElseIf LegalPos(mapa, NPCx - 1, NPCy) Then  ''L
                 Call MoverIzq(npcorig)
                 Exit Sub
             Else
@@ -1672,19 +1672,19 @@ End Sub
 Sub MoverAba(ByVal npcorig As Integer)
 On Error GoTo errorh
 
-    Dim Mapa As Integer
+    Dim mapa As Integer
     Dim NPCx As Integer
     Dim NPCy As Integer
-    Mapa = Npclist(npcorig).Pos.map
+    mapa = Npclist(npcorig).Pos.map
     NPCx = Npclist(npcorig).Pos.X
     NPCy = Npclist(npcorig).Pos.Y
     
     Call SendData(SendTarget.ToNPCArea, npcorig, PrepareMessageCharacterMove(Npclist(npcorig).Char.CharIndex, NPCx, NPCy + 1))
     'Update map and npc pos
-    MapData(Mapa).Tile(NPCx, NPCy).NpcIndex = 0
+    MapData(mapa).Tile(NPCx, NPCy).NpcIndex = 0
     Npclist(npcorig).Pos.Y = NPCy + 1
     Npclist(npcorig).Char.heading = eHeading.SOUTH
-    MapData(Mapa).Tile(NPCx, NPCy + 1).NpcIndex = npcorig
+    MapData(mapa).Tile(NPCx, NPCy + 1).NpcIndex = npcorig
     
     'Revisamos sidebemos cambair el área
     Call ModAreas.CheckUpdateNeededNpc(npcorig, SOUTH)
@@ -1698,19 +1698,19 @@ End Sub
 Sub MoverArr(ByVal npcorig As Integer)
 On Error GoTo errorh
 
-    Dim Mapa As Integer
+    Dim mapa As Integer
     Dim NPCx As Integer
     Dim NPCy As Integer
-    Mapa = Npclist(npcorig).Pos.map
+    mapa = Npclist(npcorig).Pos.map
     NPCx = Npclist(npcorig).Pos.X
     NPCy = Npclist(npcorig).Pos.Y
     
     Call SendData(SendTarget.ToNPCArea, npcorig, PrepareMessageCharacterMove(Npclist(npcorig).Char.CharIndex, NPCx, NPCy - 1))
     'Update map and npc pos
-    MapData(Mapa).Tile(NPCx, NPCy).NpcIndex = 0
+    MapData(mapa).Tile(NPCx, NPCy).NpcIndex = 0
     Npclist(npcorig).Pos.Y = NPCy - 1
     Npclist(npcorig).Char.heading = eHeading.NORTH
-    MapData(Mapa).Tile(NPCx, NPCy - 1).NpcIndex = npcorig
+    MapData(mapa).Tile(NPCx, NPCy - 1).NpcIndex = npcorig
     
     'Revisamos sidebemos cambair el área
     Call ModAreas.CheckUpdateNeededNpc(npcorig, NORTH)
@@ -1723,19 +1723,19 @@ End Sub
 Sub MoverIzq(ByVal npcorig As Integer)
 On Error GoTo errorh
 
-    Dim Mapa As Integer
+    Dim mapa As Integer
     Dim NPCx As Integer
     Dim NPCy As Integer
-    Mapa = Npclist(npcorig).Pos.map
+    mapa = Npclist(npcorig).Pos.map
     NPCx = Npclist(npcorig).Pos.X
     NPCy = Npclist(npcorig).Pos.Y
 
     Call SendData(SendTarget.ToNPCArea, npcorig, PrepareMessageCharacterMove(Npclist(npcorig).Char.CharIndex, NPCx - 1, NPCy))
     'Update map and npc pos
-    MapData(Mapa).Tile(NPCx, NPCy).NpcIndex = 0
+    MapData(mapa).Tile(NPCx, NPCy).NpcIndex = 0
     Npclist(npcorig).Pos.X = NPCx - 1
     Npclist(npcorig).Char.heading = eHeading.WEST
-    MapData(Mapa).Tile(NPCx - 1, NPCy).NpcIndex = npcorig
+    MapData(mapa).Tile(NPCx - 1, NPCy).NpcIndex = npcorig
     
     'Revisamos sidebemos cambair el área
     Call ModAreas.CheckUpdateNeededNpc(npcorig, WEST)
@@ -1749,19 +1749,19 @@ End Sub
 Sub MoverDer(ByVal npcorig As Integer)
 On Error GoTo errorh
 
-    Dim Mapa As Integer
+    Dim mapa As Integer
     Dim NPCx As Integer
     Dim NPCy As Integer
-    Mapa = Npclist(npcorig).Pos.map
+    mapa = Npclist(npcorig).Pos.map
     NPCx = Npclist(npcorig).Pos.X
     NPCy = Npclist(npcorig).Pos.Y
     
     Call SendData(SendTarget.ToNPCArea, npcorig, PrepareMessageCharacterMove(Npclist(npcorig).Char.CharIndex, NPCx + 1, NPCy))
     'Update map and npc pos
-    MapData(Mapa).Tile(NPCx, NPCy).NpcIndex = 0
+    MapData(mapa).Tile(NPCx, NPCy).NpcIndex = 0
     Npclist(npcorig).Pos.X = NPCx + 1
     Npclist(npcorig).Char.heading = eHeading.EAST
-    MapData(Mapa).Tile(NPCx + 1, NPCy).NpcIndex = npcorig
+    MapData(mapa).Tile(NPCx + 1, NPCy).NpcIndex = npcorig
     
     'Revisamos sidebemos cambair el área
     Call ModAreas.CheckUpdateNeededNpc(npcorig, EAST)
