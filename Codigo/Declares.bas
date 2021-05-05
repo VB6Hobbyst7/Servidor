@@ -894,6 +894,9 @@ End Type
 
 'Tipos de objetos
 Public Type ObjData
+  'aura
+  Aura As Byte
+  'aura
     Name As String    'Nombre del obj
 
     OBJType As eOBJType    'Tipo enum que determina cuales son las caract del obj
@@ -1463,7 +1466,7 @@ Private Type tArea
     X2 As Integer
     Y2 As Integer
     NPCs As Byte
-    npc() As tNpcs
+    NPC() As tNpcs
 End Type
 
 Private Type tZona
@@ -1587,7 +1590,7 @@ End Type
 ' New type for holding the pathfinding info
 
 
-Public Type npc
+Public Type NPC
     EquitandoBody As Integer    ' Monturas
 
     Name As String
@@ -1759,7 +1762,7 @@ Public EnTesting As Boolean
 
 '*****************ARRAYS PUBLICOS*************************
 Public UserList() As user    'USUARIOS
-Public Npclist(1 To MAXNPCS) As npc    'NPCS
+Public Npclist(1 To MAXNPCS) As NPC    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo
 Public Hechizos() As tHechizo

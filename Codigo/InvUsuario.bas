@@ -62,7 +62,7 @@ On Error GoTo manejador
 Dim flag As Boolean
 
 'Admins can use ANYTHING!
-If UserList(UserIndex).flags.Privilegios And PlayerType.User Then
+If UserList(UserIndex).flags.Privilegios And PlayerType.user Then
     If ObjData(ObjIndex).ClaseProhibida(1) <> 0 Then
         Dim i As Integer
         For i = 1 To NUMCLASES
@@ -323,7 +323,7 @@ If Num > 0 Then
             Call WriteConsoleMsg(UserIndex, "¡¡ATENCION!! ¡ACABAS DE TIRAR TU BARCA!", FontTypeNames.FONTTYPE_TALK)
         End If
         
-        If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Call LogGM(UserList(UserIndex).Name, "Tiro cantidad:" & Num & " Objeto:" & ObjData(Obj.ObjIndex).Name)
+        If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Call LogGM(UserList(UserIndex).Name, "Tiro cantidad:" & Num & " Objeto:" & ObjData(Obj.ObjIndex).Name)
         
         'Log de Objetos que se tiran al piso. Pablo (ToxicWaste) 07/09/07
         'Es un Objeto que tenemos que loguear?
@@ -343,7 +343,9 @@ If Num > 0 Then
   End If
     
 End If
-
+'aura
+Call ActualizarAuras(UserIndex)
+'aura
 End Sub
 
 Sub EraseObj(ByVal Num As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)
@@ -464,7 +466,7 @@ If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList
             If Agarro Then
                 'Quitamos el objeto
                 Call EraseObj(MapData(UserList(UserIndex).Pos.map).Tile(X, Y).ObjInfo.Amount, UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
-                If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Call LogGM(UserList(UserIndex).Name, "Agarro:" & MiObj.Amount & " Objeto:" & ObjData(MiObj.ObjIndex).Name)
+                If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Call LogGM(UserList(UserIndex).Name, "Agarro:" & MiObj.Amount & " Objeto:" & ObjData(MiObj.ObjIndex).Name)
                 
                 'Log de Objetos que se agarran del piso. Pablo (ToxicWaste) 07/09/07
                 'Es un Objeto que tenemos que loguear?
@@ -634,7 +636,9 @@ On Error GoTo errhandler
     End If
     
     Call UpdateUserInv(False, UserIndex, Slot)
-    
+    'auras
+    ActualizarAuras UserIndex
+   'auras
     Exit Sub
 
 errhandler:
@@ -936,6 +940,9 @@ Select Case Obj.OBJType
 End Select
 
 'Actualiza
+'aura
+Call ActualizarAuras(UserIndex)
+'aura
 Call UpdateUserInv(False, UserIndex, Slot)
 
 Exit Sub
@@ -1181,7 +1188,7 @@ Select Case Obj.OBJType
                 Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, 2, 0))
                 
             Case 6  ' Pocion Negra
-                If .flags.Privilegios And PlayerType.User Then
+                If .flags.Privilegios And PlayerType.user Then
                     Call QuitarUserInvItem(UserIndex, Slot, 1)
                     Call UserDie(UserIndex)
                     Call WriteConsoleMsg(UserIndex, "Sientes un gran mareo y pierdes el conocimiento.", FontTypeNames.FONTTYPE_FIGHT)
@@ -1528,7 +1535,7 @@ If Cantidad > 0 Then
 
     Cantidad = Cantidad * 0.1
     
-    Cantidad = Min(Cantidad, UserList(UserIndex).Stats.ELV * MultiplicadorOroMuerte)
+    Cantidad = min(Cantidad, UserList(UserIndex).Stats.ELV * MultiplicadorOroMuerte)
 
     If Cantidad > 0 Then Call TirarOro(Cantidad, UserIndex)
 End If

@@ -1287,7 +1287,9 @@ End If
 Call Statistics.UserConnected(UserIndex)
 
 Call MostrarNumUsers
-
+'Auras
+ActualizarAuras UserIndex
+'Auras
 
 
 With UserList(UserIndex)

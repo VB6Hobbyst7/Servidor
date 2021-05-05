@@ -208,6 +208,7 @@ Private Enum ServerPacketID
     UserCommerceEnd         ' FINCOMUSUOK
     UserOfferConfirm
     CancelOfferItem
+    SendAura                ' AURA
     ShowBlacksmithForm      ' SFH
     ShowCarpenterForm       ' SFC
     NPCSwing                ' N1
@@ -19037,3 +19038,22 @@ CantidadObjEnInv_Err:
 112     Resume Next
         
 End Function
+'aura
+Public Function PrepareMessageSendAura(ByVal UserIndex As Integer, ByVal Aurag As Byte, ByVal Parte As UpdateAuras)
+'***************************************************
+'Author: El_Santo43
+'Creation: 31/10/2014
+'Last Modified By:
+'Last Modification:
+'Prepares the "SendAura" message and returns it
+'***************************************************
+    With auxiliarBuffer
+        Call .WriteByte(ServerPacketID.SendAura)
+        Call .WriteInteger(UserList(UserIndex).Char.CharIndex)
+     
+        Call .WriteByte(Parte)
+        Call .WriteByte(Aurag)
+        PrepareMessageSendAura = .ReadASCIIStringFixed(.Length)
+    End With
+End Function
+'aura

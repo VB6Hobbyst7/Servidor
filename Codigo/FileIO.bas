@@ -832,7 +832,9 @@ For Object = 1 To NumObjDatas
     ObjData(Object).NoSeCae = val(Leer.GetValue("OBJ" & Object, "NoSeCae"))
     
     ObjData(Object).Upgrade = val(Leer.GetValue("OBJ" & Object, "Upgrade"))
-    
+    'aura
+    ObjData(Object).Aura = val(Leer.GetValue("OBJ" & Object, "Aura"))
+    'aura
     ObjData(Object).Efecto = val(Leer.GetValue("OBJ" & Object, "Efecto"))
     
     If Object = 414 Or Object = 415 Or Object = 416 Or Object = 1067 Then
