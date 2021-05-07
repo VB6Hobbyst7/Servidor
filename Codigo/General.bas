@@ -192,305 +192,308 @@ End Sub
 
 
 Sub Main()
-On Error Resume Next
-Dim f As Date
-
-ChDir App.Path
-ChDrive App.Path
-
-Call LoadMotd
-Call BanIpCargar
-
-Prision.map = 1
-Libertad.map = 1
-
-Prision.X = 240
-Prision.Y = 225
-Libertad.X = 240
-Libertad.Y = 240
-
-
-LastBackup = Format(Now, "Short Time")
-Minutos = Format(Now, "Short Time")
-
-IniPath = App.Path & "\"
-
-centinelaActivado = True
-
-LevelSkill(1).LevelValue = 3
-LevelSkill(2).LevelValue = 5
-LevelSkill(3).LevelValue = 7
-LevelSkill(4).LevelValue = 10
-LevelSkill(5).LevelValue = 13
-LevelSkill(6).LevelValue = 15
-LevelSkill(7).LevelValue = 17
-LevelSkill(8).LevelValue = 20
-LevelSkill(9).LevelValue = 23
-LevelSkill(10).LevelValue = 25
-LevelSkill(11).LevelValue = 27
-LevelSkill(12).LevelValue = 30
-LevelSkill(13).LevelValue = 33
-LevelSkill(14).LevelValue = 35
-LevelSkill(15).LevelValue = 37
-LevelSkill(16).LevelValue = 40
-LevelSkill(17).LevelValue = 43
-LevelSkill(18).LevelValue = 45
-LevelSkill(19).LevelValue = 47
-LevelSkill(20).LevelValue = 50
-LevelSkill(21).LevelValue = 53
-LevelSkill(22).LevelValue = 55
-LevelSkill(23).LevelValue = 57
-LevelSkill(24).LevelValue = 60
-LevelSkill(25).LevelValue = 63
-LevelSkill(26).LevelValue = 65
-LevelSkill(27).LevelValue = 67
-LevelSkill(28).LevelValue = 70
-LevelSkill(29).LevelValue = 73
-LevelSkill(30).LevelValue = 75
-LevelSkill(31).LevelValue = 77
-LevelSkill(32).LevelValue = 80
-LevelSkill(33).LevelValue = 83
-LevelSkill(34).LevelValue = 85
-LevelSkill(35).LevelValue = 87
-LevelSkill(36).LevelValue = 90
-LevelSkill(37).LevelValue = 93
-LevelSkill(38).LevelValue = 95
-LevelSkill(39).LevelValue = 97
-LevelSkill(40).LevelValue = 100
-LevelSkill(41).LevelValue = 100
-LevelSkill(42).LevelValue = 100
-LevelSkill(43).LevelValue = 100
-LevelSkill(44).LevelValue = 100
-LevelSkill(45).LevelValue = 100
-LevelSkill(46).LevelValue = 100
-LevelSkill(47).LevelValue = 100
-LevelSkill(48).LevelValue = 100
-LevelSkill(49).LevelValue = 100
-LevelSkill(50).LevelValue = 100
-
-
-ListaRazas(eRaza.Humano) = "Humano"
-ListaRazas(eRaza.Elfo) = "Elfo"
-ListaRazas(eRaza.Drow) = "Drow"
-ListaRazas(eRaza.Gnomo) = "Gnomo"
-ListaRazas(eRaza.Enano) = "Enano"
-
-ListaClases(eClass.Mage) = "Mago"
-ListaClases(eClass.Cleric) = "Clerigo"
-ListaClases(eClass.Warrior) = "Guerrero"
-ListaClases(eClass.Assasin) = "Asesino"
-ListaClases(eClass.Thief) = "Ladron"
-ListaClases(eClass.Bard) = "Bardo"
-ListaClases(eClass.Druid) = "Druida"
-ListaClases(eClass.Bandit) = "Bandido"
-ListaClases(eClass.PALADIN) = "Paladin"
-ListaClases(eClass.Hunter) = "Cazador"
-ListaClases(eClass.Worker) = "Trabajador"
-ListaClases(eClass.Pirat) = "Pirata"
-
-SkillsNames(eSkill.Magia) = "Magia"
-SkillsNames(eSkill.Robar) = "Robar"
-SkillsNames(eSkill.Tacticas) = "Evasión en combate"
-SkillsNames(eSkill.Armas) = "Combate con armas"
-SkillsNames(eSkill.Meditar) = "Meditar"
-SkillsNames(eSkill.Apuñalar) = "Apuñalar"
-SkillsNames(eSkill.Ocultarse) = "Ocultarse"
-SkillsNames(eSkill.Supervivencia) = "Supervivencia"
-SkillsNames(eSkill.Talar) = "Talar arboles"
-SkillsNames(eSkill.Comerciar) = "Comercio"
-SkillsNames(eSkill.Defensa) = "Defensa con escudos"
-SkillsNames(eSkill.Pesca) = "Pesca"
-SkillsNames(eSkill.Mineria) = "Mineria"
-SkillsNames(eSkill.Carpinteria) = "Carpinteria"
-SkillsNames(eSkill.Herreria) = "Herreria"
-SkillsNames(eSkill.Liderazgo) = "Liderazgo"
-SkillsNames(eSkill.Domar) = "Domar animales"
-SkillsNames(eSkill.Proyectiles) = "Combate a distancia"
-SkillsNames(eSkill.Wrestling) = "Combate sin armas"
-SkillsNames(eSkill.Navegacion) = "Navegacion"
-
-ListaAtributos(eAtributos.fuerza) = "Fuerza"
-ListaAtributos(eAtributos.agilidad) = "Agilidad"
-ListaAtributos(eAtributos.Inteligencia) = "Inteligencia"
-ListaAtributos(eAtributos.Carisma) = "Carisma"
-ListaAtributos(eAtributos.Constitucion) = "Constitucion"
-
-
-frmCargando.Show
-
-'Call PlayWaveAPI(App.Path & "\wav\harp3.wav")
-
-frmMain.Caption = frmMain.Caption & " V." & App.Major & "." & App.Minor & "." & App.Revision
-IniPath = App.Path & "\"
-CharPath = App.Path & "\Charfile\"
-
-
-DoEvents
-
-frmCargando.Label1(2).Caption = "Iniciando Arrays..."
-
-
-
-Call CargarSpawnList
-Call CargarForbidenWords
-'¿?¿?¿?¿?¿?¿?¿?¿ CARGAMOS DATOS DESDE ARCHIVOS ¿??¿?¿?¿?¿?¿?¿?¿
-frmCargando.Label1(2).Caption = "Cargando Server.ini"
-
-MaxUsers = 0
-Call LoadSini
-Call CargaApuestas
-
-
-'*************************************************
-frmCargando.Label1(2).Caption = "Cargando NPCs.Dat"
-Call CargaNpcsDat
-'*************************************************
-
-frmCargando.Label1(2).Caption = "Cargando Obj.Dat"
-'Call LoadOBJData
-Call LoadOBJData
-    
-frmCargando.Label1(2).Caption = "Cargando Hechizos.Dat"
-Call CargarHechizos
-    
-    
-frmCargando.Label1(2).Caption = "Cargando Objetos de Herrería"
-Call LoadArmasHerreria
-Call LoadArmadurasHerreria
-
-frmCargando.Label1(2).Caption = "Cargando Objetos de Carpintería"
-Call LoadObjCarpintero
+    On Error Resume Next
+    Dim f As Date
+
+    ChDir App.Path
+    ChDrive App.Path
+    'bots
+    'inicializa los spells de los bots
+    Call ModBots.ia_Spells
+    'bots
+    Call LoadMotd
+    Call BanIpCargar
+
+    Prision.map = 1
+    Libertad.map = 1
+
+    Prision.X = 240
+    Prision.Y = 225
+    Libertad.X = 240
+    Libertad.Y = 240
+
+
+    LastBackup = Format(Now, "Short Time")
+    Minutos = Format(Now, "Short Time")
+
+    IniPath = App.Path & "\"
+
+    centinelaActivado = True
+
+    LevelSkill(1).LevelValue = 3
+    LevelSkill(2).LevelValue = 5
+    LevelSkill(3).LevelValue = 7
+    LevelSkill(4).LevelValue = 10
+    LevelSkill(5).LevelValue = 13
+    LevelSkill(6).LevelValue = 15
+    LevelSkill(7).LevelValue = 17
+    LevelSkill(8).LevelValue = 20
+    LevelSkill(9).LevelValue = 23
+    LevelSkill(10).LevelValue = 25
+    LevelSkill(11).LevelValue = 27
+    LevelSkill(12).LevelValue = 30
+    LevelSkill(13).LevelValue = 33
+    LevelSkill(14).LevelValue = 35
+    LevelSkill(15).LevelValue = 37
+    LevelSkill(16).LevelValue = 40
+    LevelSkill(17).LevelValue = 43
+    LevelSkill(18).LevelValue = 45
+    LevelSkill(19).LevelValue = 47
+    LevelSkill(20).LevelValue = 50
+    LevelSkill(21).LevelValue = 53
+    LevelSkill(22).LevelValue = 55
+    LevelSkill(23).LevelValue = 57
+    LevelSkill(24).LevelValue = 60
+    LevelSkill(25).LevelValue = 63
+    LevelSkill(26).LevelValue = 65
+    LevelSkill(27).LevelValue = 67
+    LevelSkill(28).LevelValue = 70
+    LevelSkill(29).LevelValue = 73
+    LevelSkill(30).LevelValue = 75
+    LevelSkill(31).LevelValue = 77
+    LevelSkill(32).LevelValue = 80
+    LevelSkill(33).LevelValue = 83
+    LevelSkill(34).LevelValue = 85
+    LevelSkill(35).LevelValue = 87
+    LevelSkill(36).LevelValue = 90
+    LevelSkill(37).LevelValue = 93
+    LevelSkill(38).LevelValue = 95
+    LevelSkill(39).LevelValue = 97
+    LevelSkill(40).LevelValue = 100
+    LevelSkill(41).LevelValue = 100
+    LevelSkill(42).LevelValue = 100
+    LevelSkill(43).LevelValue = 100
+    LevelSkill(44).LevelValue = 100
+    LevelSkill(45).LevelValue = 100
+    LevelSkill(46).LevelValue = 100
+    LevelSkill(47).LevelValue = 100
+    LevelSkill(48).LevelValue = 100
+    LevelSkill(49).LevelValue = 100
+    LevelSkill(50).LevelValue = 100
+
+
+    ListaRazas(eRaza.Humano) = "Humano"
+    ListaRazas(eRaza.Elfo) = "Elfo"
+    ListaRazas(eRaza.Drow) = "Drow"
+    ListaRazas(eRaza.Gnomo) = "Gnomo"
+    ListaRazas(eRaza.Enano) = "Enano"
+
+    ListaClases(eClass.Mage) = "Mago"
+    ListaClases(eClass.Cleric) = "Clerigo"
+    ListaClases(eClass.Warrior) = "Guerrero"
+    ListaClases(eClass.Assasin) = "Asesino"
+    ListaClases(eClass.Thief) = "Ladron"
+    ListaClases(eClass.Bard) = "Bardo"
+    ListaClases(eClass.Druid) = "Druida"
+    ListaClases(eClass.Bandit) = "Bandido"
+    ListaClases(eClass.PALADIN) = "Paladin"
+    ListaClases(eClass.Hunter) = "Cazador"
+    ListaClases(eClass.Worker) = "Trabajador"
+    ListaClases(eClass.Pirat) = "Pirata"
+
+    SkillsNames(eSkill.Magia) = "Magia"
+    SkillsNames(eSkill.Robar) = "Robar"
+    SkillsNames(eSkill.Tacticas) = "Evasión en combate"
+    SkillsNames(eSkill.Armas) = "Combate con armas"
+    SkillsNames(eSkill.Meditar) = "Meditar"
+    SkillsNames(eSkill.Apuñalar) = "Apuñalar"
+    SkillsNames(eSkill.Ocultarse) = "Ocultarse"
+    SkillsNames(eSkill.Supervivencia) = "Supervivencia"
+    SkillsNames(eSkill.Talar) = "Talar arboles"
+    SkillsNames(eSkill.Comerciar) = "Comercio"
+    SkillsNames(eSkill.Defensa) = "Defensa con escudos"
+    SkillsNames(eSkill.Pesca) = "Pesca"
+    SkillsNames(eSkill.Mineria) = "Mineria"
+    SkillsNames(eSkill.Carpinteria) = "Carpinteria"
+    SkillsNames(eSkill.Herreria) = "Herreria"
+    SkillsNames(eSkill.Liderazgo) = "Liderazgo"
+    SkillsNames(eSkill.Domar) = "Domar animales"
+    SkillsNames(eSkill.Proyectiles) = "Combate a distancia"
+    SkillsNames(eSkill.Wrestling) = "Combate sin armas"
+    SkillsNames(eSkill.Navegacion) = "Navegacion"
+
+    ListaAtributos(eAtributos.fuerza) = "Fuerza"
+    ListaAtributos(eAtributos.agilidad) = "Agilidad"
+    ListaAtributos(eAtributos.Inteligencia) = "Inteligencia"
+    ListaAtributos(eAtributos.Carisma) = "Carisma"
+    ListaAtributos(eAtributos.Constitucion) = "Constitucion"
+
+
+    frmCargando.Show
+
+    'Call PlayWaveAPI(App.Path & "\wav\harp3.wav")
+
+    frmMain.Caption = frmMain.Caption & " V." & App.Major & "." & App.Minor & "." & App.Revision
+    IniPath = App.Path & "\"
+    CharPath = App.Path & "\Charfile\"
+
+
+    DoEvents
+
+    frmCargando.Label1(2).Caption = "Iniciando Arrays..."
+
 
-frmCargando.Label1(2).Caption = "Cargando Balance.Dat"
-Call LoadBalance    '4/01/08 Pablo ToxicWaste
+
+    Call CargarSpawnList
+    Call CargarForbidenWords
+    '¿?¿?¿?¿?¿?¿?¿?¿ CARGAMOS DATOS DESDE ARCHIVOS ¿??¿?¿?¿?¿?¿?¿?¿
+    frmCargando.Label1(2).Caption = "Cargando Server.ini"
 
-frmCargando.Label1(2).Caption = "Cargando Zonas"
-Call CargarZonas
+    MaxUsers = 0
+    Call LoadSini
+    Call CargaApuestas
+
 
-frmCargando.Label1(2).Caption = "Conectando a MySQL"
-Set mySQL = New clsMySQL
-If mySQL.SQLConnect(MySQL_Host, MySQL_DB, MySQL_User, MySQL_Pass) Then
-    frmCargando.Label1(2).Caption = "Conexión Exitosa"
-Else
-    MsgBox "No se ha podido conectar a la base de datos.", vbCritical
-    End
-End If
+    '*************************************************
+    frmCargando.Label1(2).Caption = "Cargando NPCs.Dat"
+    Call CargaNpcsDat
+    '*************************************************
 
-frmCargando.Label1(2).Caption = "Cargando Mapas"
-Call LoadMapData
+    frmCargando.Label1(2).Caption = "Cargando Obj.Dat"
+    'Call LoadOBJData
+    Call LoadOBJData
 
-If BootDelBackUp Then
-    frmCargando.Label1(2).Caption = "Cargando BackUp"
-    Call CargarBackUp
-End If
+    frmCargando.Label1(2).Caption = "Cargando Hechizos.Dat"
+    Call CargarHechizos
 
-DoEvents
-frmCargando.Label1(2).Caption = "Generando Areas..."
-Call CargarAreas
-frmCargando.Label1(2).Caption = "Finalizando..."
-'Comentado porque hay worldsave en ese mapa!
-Call CrearClanPretoriano(Zonas(MAPA_PRETORIANO).X1)
-'¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 
-Dim LoopC As Integer
+    frmCargando.Label1(2).Caption = "Cargando Objetos de Herrería"
+    Call LoadArmasHerreria
+    Call LoadArmadurasHerreria
 
-'Resetea las conexiones de los usuarios
-For LoopC = 1 To MaxUsers
-    UserList(LoopC).ConnID = -1
-    UserList(LoopC).ConnIDValida = False
-    Set UserList(LoopC).incomingData = New clsByteQueue
-    Set UserList(LoopC).outgoingData = New clsByteQueue
-Next LoopC
+    frmCargando.Label1(2).Caption = "Cargando Objetos de Carpintería"
+    Call LoadObjCarpintero
 
-'¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
+    frmCargando.Label1(2).Caption = "Cargando Balance.Dat"
+    Call LoadBalance    '4/01/08 Pablo ToxicWaste
 
-With frmMain
-    .AutoSave.Enabled = True
-    .tPiqueteC.Enabled = True
-    .GameTimer.Enabled = True
-    .tLluviaEvent.Enabled = True
-    .Auditoria.Enabled = True
-    .KillLog.Enabled = True
-    .TIMER_AI.Enabled = True
-    .npcataca.Enabled = True
-    
-#If SeguridadAlkon Then
-    .securityTimer.Enabled = True
-#End If
-End With
+    frmCargando.Label1(2).Caption = "Cargando Zonas"
+    Call CargarZonas
 
-'¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
-'Configuracion de los sockets
+    frmCargando.Label1(2).Caption = "Conectando a MySQL"
+    Set mySQL = New clsMySQL
+    If mySQL.SQLConnect(MySQL_Host, MySQL_DB, MySQL_User, MySQL_Pass) Then
+        frmCargando.Label1(2).Caption = "Conexión Exitosa"
+    Else
+        MsgBox "No se ha podido conectar a la base de datos.", vbCritical
+        End
+    End If
 
-Call SecurityIp.InitIpTables(1000)
+    frmCargando.Label1(2).Caption = "Cargando Mapas"
+    Call LoadMapData
 
-#If UsarQueSocket = 1 Then
+    If BootDelBackUp Then
+        frmCargando.Label1(2).Caption = "Cargando BackUp"
+        Call CargarBackUp
+    End If
 
-Call IniciaWsApi(frmMain.hWnd)
-SockListen = ListenForConnect(Puerto, hWndMsg, "")
+    DoEvents
+    frmCargando.Label1(2).Caption = "Generando Areas..."
+    Call CargarAreas
+    frmCargando.Label1(2).Caption = "Finalizando..."
+    'Comentado porque hay worldsave en ese mapa!
+    Call CrearClanPretoriano(Zonas(MAPA_PRETORIANO).X1)
+    '¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 
-#ElseIf UsarQueSocket = 0 Then
+    Dim LoopC As Integer
 
-frmCargando.Label1(2).Caption = "Configurando Sockets"
+    'Resetea las conexiones de los usuarios
+    For LoopC = 1 To MaxUsers
+        UserList(LoopC).ConnID = -1
+        UserList(LoopC).ConnIDValida = False
+        Set UserList(LoopC).incomingData = New clsByteQueue
+        Set UserList(LoopC).outgoingData = New clsByteQueue
+    Next LoopC
 
-frmMain.Socket2(0).AddressFamily = AF_INET
-frmMain.Socket2(0).Protocol = IPPROTO_IP
-frmMain.Socket2(0).SocketType = SOCK_STREAM
-frmMain.Socket2(0).Binary = False
-frmMain.Socket2(0).Blocking = False
-frmMain.Socket2(0).BufferSize = 2048
+    '¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 
-Call ConfigListeningSocket(frmMain.Socket1, Puerto)
+    With frmMain
+        .AutoSave.Enabled = True
+        .tPiqueteC.Enabled = True
+        .GameTimer.Enabled = True
+        .tLluviaEvent.Enabled = True
+        .Auditoria.Enabled = True
+        .KillLog.Enabled = True
+        .TIMER_AI.Enabled = True
+        .npcataca.Enabled = True
 
-#ElseIf UsarQueSocket = 2 Then
+        #If SeguridadAlkon Then
+            .securityTimer.Enabled = True
+        #End If
+    End With
 
-frmMain.Serv.Iniciar Puerto
+    '¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
+    'Configuracion de los sockets
 
-#ElseIf UsarQueSocket = 3 Then
+    Call SecurityIp.InitIpTables(1000)
 
-frmMain.TCPServ.Encolar True
-frmMain.TCPServ.IniciarTabla 1009
-frmMain.TCPServ.SetQueueLim 51200
-frmMain.TCPServ.Iniciar Puerto
+    #If UsarQueSocket = 1 Then
 
-#End If
+        Call IniciaWsApi(frmMain.hWnd)
+        SockListen = ListenForConnect(Puerto, hWndMsg, "")
 
-If frmMain.Visible Then frmMain.txStatus.Caption = "Escuchando conexiones entrantes ..."
-'¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
+    #ElseIf UsarQueSocket = 0 Then
 
+        frmCargando.Label1(2).Caption = "Configurando Sockets"
 
+        frmMain.Socket2(0).AddressFamily = AF_INET
+        frmMain.Socket2(0).Protocol = IPPROTO_IP
+        frmMain.Socket2(0).SocketType = SOCK_STREAM
+        frmMain.Socket2(0).Binary = False
+        frmMain.Socket2(0).Blocking = False
+        frmMain.Socket2(0).BufferSize = 2048
 
+        Call ConfigListeningSocket(frmMain.Socket1, Puerto)
 
-Unload frmCargando
+    #ElseIf UsarQueSocket = 2 Then
 
-Call LoadGuildsDB
+        frmMain.Serv.Iniciar Puerto
 
-'quest
-Call LoadQuests
-'quest
+    #ElseIf UsarQueSocket = 3 Then
 
-Call initMercader
-Call initFortalezas
+        frmMain.TCPServ.Encolar True
+        frmMain.TCPServ.IniciarTabla 1009
+        frmMain.TCPServ.SetQueueLim 51200
+        frmMain.TCPServ.Iniciar Puerto
 
+    #End If
 
-'Log
-Dim N As Integer
-N = FreeFile
-Open LogPath & "\Main.log" For Append Shared As #N
-Print #N, Date & " " & time & " server iniciado " & App.Major & "."; App.Minor & "." & App.Revision
-Close #N
+    If frmMain.Visible Then frmMain.txStatus.Caption = "Escuchando conexiones entrantes ..."
+    '¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 
-'Ocultar
-If HideMe = 1 Then
-    Call frmMain.InitMain(1)
-Else
-    Call frmMain.InitMain(0)
-End If
 
 
-tInicioServer = (GetTickCount() And &H7FFFFFFF)
-Call InicializaEstadisticas
-Call InitBarcos
+
+    Unload frmCargando
+
+    Call LoadGuildsDB
+
+    'quest
+    Call LoadQuests
+    'quest
+
+    Call initMercader
+    Call initFortalezas
+
+
+    'Log
+    Dim N As Integer
+    N = FreeFile
+    Open LogPath & "\Main.log" For Append Shared As #N
+    Print #N, Date & " " & time & " server iniciado " & App.Major & "."; App.Minor & "." & App.Revision
+    Close #N
+
+    'Ocultar
+    If HideMe = 1 Then
+        Call frmMain.InitMain(1)
+    Else
+        Call frmMain.InitMain(0)
+    End If
+
+
+    tInicioServer = (GetTickCount() And &H7FFFFFFF)
+    Call InicializaEstadisticas
+    Call InitBarcos
 End Sub
 
 Function FileExist(ByVal file As String, Optional FileType As VbFileAttribute = vbNormal) As Boolean
@@ -854,7 +857,7 @@ For LoopC = 1 To UBound(UserList())
     Set UserList(LoopC).outgoingData = Nothing
 Next LoopC
 
-ReDim UserList(1 To MaxUsers) As User
+ReDim UserList(1 To MaxUsers) As user
 
 For LoopC = 1 To MaxUsers
     UserList(LoopC).ConnID = -1
@@ -1352,7 +1355,7 @@ End Sub
 
 Public Sub HambreYSed(ByVal UserIndex As Integer, ByRef fenviarAyS As Boolean)
 
-If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Exit Sub
+If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Exit Sub
 
 'Sed
 If UserList(UserIndex).Stats.MinAGU > 0 Then

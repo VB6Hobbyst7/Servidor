@@ -55,11 +55,11 @@ Public Function MaximoInt(ByVal a As Integer, ByVal B As Integer) As Integer
     End If
 End Function
 
-Private Function PoderEvasionEscudo(ByVal UserIndex As Integer) As Long
+Public Function PoderEvasionEscudo(ByVal UserIndex As Integer) As Long
     PoderEvasionEscudo = (UserList(UserIndex).Stats.UserSkills(eSkill.Defensa) * ModClase(UserList(UserIndex).clase).Evasion) / 2
 End Function
 
-Private Function PoderEvasion(ByVal UserIndex As Integer) As Long
+Public Function PoderEvasion(ByVal UserIndex As Integer) As Long
     Dim lTemp As Long
     With UserList(UserIndex)
         lTemp = (.Stats.UserSkills(eSkill.Tacticas) + _
@@ -452,7 +452,7 @@ Public Sub NpcDaño(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
         
         Call WriteNPCHitUser(UserIndex, Lugar, daño, Npclist(NpcIndex).NpcType)
   
-        If .flags.Privilegios And PlayerType.User Then .Stats.MinHP = .Stats.MinHP - daño
+        If .flags.Privilegios And PlayerType.user Then .Stats.MinHP = .Stats.MinHP - daño
         
         If .flags.Meditando Then
             If daño > Fix(.Stats.MinHP / 100 * .Stats.UserAtributos(eAtributos.Inteligencia) * .Stats.UserSkills(eSkill.Meditar) / 100 * 12 / (RandomNumber(0, 5) + 7)) Then
@@ -540,7 +540,7 @@ End Sub
 Public Function NpcAtacaUser(ByVal NpcIndex As Integer, ByVal UserIndex As Integer) As Boolean
 
     If UserList(UserIndex).flags.AdminInvisible = 1 Then Exit Function
-    If (Not UserList(UserIndex).flags.Privilegios And PlayerType.User) <> 0 And Not UserList(UserIndex).flags.AdminPerseguible Then Exit Function
+    If (Not UserList(UserIndex).flags.Privilegios And PlayerType.user) <> 0 And Not UserList(UserIndex).flags.AdminPerseguible Then Exit Function
     
     With Npclist(NpcIndex)
         ' El npc puede atacar ???
@@ -755,17 +755,17 @@ End Function
 Public Sub UsuarioAtaca(ByVal UserIndex As Integer)
     Dim index As Integer
     Dim AttackPos As WorldPos
-    
+
     'Check bow's interval
     'If Not IntervaloPermiteUsarArcos(UserIndex, False) Then Exit Sub
-    
+
     'Check Spell-Magic interval
     'If Not IntervaloPermiteMagiaGolpe(UserIndex) Then
-        'Check Attack interval
+    'Check Attack interval
     If Not IntervaloPermiteAtacar(UserIndex) Then Exit Sub
-     '   End If
+    '   End If
     'End If
-    
+
     With UserList(UserIndex)
         'Quitamos stamina
         If .Stats.MinSta >= 10 Then
@@ -780,18 +780,33 @@ Public Sub UsuarioAtaca(ByVal UserIndex As Integer)
             End If
             Exit Sub
         End If
-        
+
         AttackPos = .Pos
         Call HeadtoPos(.Char.heading, AttackPos)
-        
+
         'Exit if not legal
         If AttackPos.X < 1 Or AttackPos.X > MapInfo(UserList(UserIndex).Pos.map).Width Or AttackPos.Y <= 1 Or AttackPos.Y > MapInfo(UserList(UserIndex).Pos.map).Height Then
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SWING, .Pos.X, .Pos.Y))
             Exit Sub
         End If
-        
+        'bots
+        'Está el bot?
+        Dim bot_Index As Byte
+   
+        bot_Index = MapData(AttackPos.map).Tile(AttackPos.X, AttackPos.Y).BotIndex
+
+        If bot_Index <> 0 Then
+            'Checkeo que esté invocado.
+            If ia_Bot(bot_Index).Invocado Then
+                'compruebo que este en mi grupo
+                'If ia_Bot(bot_Index).GrupoID = UserList(UserIndex).Group_User.Grupo_ID Then
+                ia_DamageHit bot_Index, UserIndex
+                'End If
+            End If
+        End If
+        'bots
         index = MapData(AttackPos.map).Tile(AttackPos.X, AttackPos.Y).UserIndex
-        
+
         'Look for user
         If index > 0 Then
             Call UsuarioAtacaUsuario(UserIndex, index)
@@ -799,9 +814,9 @@ Public Sub UsuarioAtaca(ByVal UserIndex As Integer)
             Call WriteUpdateUserStats(index)
             Exit Sub
         End If
-        
+
         index = MapData(AttackPos.map).Tile(AttackPos.X, AttackPos.Y).NpcIndex
-        
+
         'Look for NPC
         If index > 0 Then
             If Npclist(index).Attackable Then
@@ -809,25 +824,25 @@ Public Sub UsuarioAtaca(ByVal UserIndex As Integer)
                     Call WriteConsoleMsg(UserIndex, "No podés atacar mascotas en zonas seguras", FontTypeNames.FONTTYPE_FIGHT)
                     Exit Sub
                 End If
-                
+
                 Call UsuarioAtacaNpc(UserIndex, index)
             Else
                 'Call WriteConsoleMsg(UserIndex, "No podés atacar a este NPC", FontTypeNames.FONTTYPE_FIGHT)
                 Call WriteMultiMessage(UserIndex, eMessages.NoPodesAtacarEsteNPC)
             End If
-            
+
             Call WriteUpdateUserStats(UserIndex)
-            
+
             Exit Sub
         End If
         '[ATAK ANIM]
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageAtaca(UserIndex, 1))
-        
+
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SWING, .Pos.X, .Pos.Y))
         Call WriteUpdateUserStats(UserIndex)
-        
+
         If .Counters.Trabajando Then .Counters.Trabajando = .Counters.Trabajando - 1
-            
+
         If .Counters.Ocultando Then .Counters.Ocultando = .Counters.Ocultando - 1
     End With
 End Sub
@@ -1128,27 +1143,27 @@ Public Sub UserDañoUser(ByVal AtacanteIndex As Integer, ByVal VictimaIndex As In
     Call FlushBuffer(VictimaIndex)
 End Sub
 
-Sub UsuarioAtacadoPorUsuario(ByVal attackerIndex As Integer, ByVal VictimIndex As Integer)
+Sub UsuarioAtacadoPorUsuario(ByVal attackerIndex As Integer, ByVal victimIndex As Integer)
 '***************************************************
 'Autor: Unknown
 'Last Modification: 10/01/08
 'Last Modified By: Lucas Tavolaro Ortiz (Tavo)
 ' 10/01/2008: Tavo - Se cancela la salida del juego si el user esta saliendo
 '***************************************************
-    If UserList(VictimIndex).flags.Meditando Then
-        UserList(VictimIndex).flags.Meditando = False
-        Call WriteMeditateToggle(VictimIndex)
-        Call WriteConsoleMsg(VictimIndex, "Dejas de meditar.", FontTypeNames.FONTTYPE_INFO)
-        UserList(VictimIndex).Char.FX = 0
-        UserList(VictimIndex).Char.Loops = 0
-        Call SendData(SendTarget.ToPCArea, VictimIndex, PrepareMessageCreateFX(UserList(VictimIndex).Char.CharIndex, 0, 0))
+    If UserList(victimIndex).flags.Meditando Then
+        UserList(victimIndex).flags.Meditando = False
+        Call WriteMeditateToggle(victimIndex)
+        Call WriteConsoleMsg(victimIndex, "Dejas de meditar.", FontTypeNames.FONTTYPE_INFO)
+        UserList(victimIndex).Char.FX = 0
+        UserList(victimIndex).Char.Loops = 0
+        Call SendData(SendTarget.ToPCArea, victimIndex, PrepareMessageCreateFX(UserList(victimIndex).Char.CharIndex, 0, 0))
     End If
     
-    If TriggerZonaPelea(attackerIndex, VictimIndex) = TRIGGER6_PERMITE Then Exit Sub
-    If Zonas(UserList(attackerIndex).zona).Terreno = eTerreno.Fortaleza And Zonas(UserList(VictimIndex).zona).Terreno = eTerreno.Fortaleza Then Exit Sub
+    If TriggerZonaPelea(attackerIndex, victimIndex) = TRIGGER6_PERMITE Then Exit Sub
+    If Zonas(UserList(attackerIndex).zona).Terreno = eTerreno.Fortaleza And Zonas(UserList(victimIndex).zona).Terreno = eTerreno.Fortaleza Then Exit Sub
     Dim EraCriminal As Boolean
     
-    If Not Criminal(attackerIndex) And Not Criminal(VictimIndex) Then
+    If Not Criminal(attackerIndex) And Not Criminal(victimIndex) Then
         Call VolverCriminal(attackerIndex)
     End If
     
@@ -1157,7 +1172,7 @@ Sub UsuarioAtacadoPorUsuario(ByVal attackerIndex As Integer, ByVal VictimIndex A
     EraCriminal = Criminal(attackerIndex)
     
     With UserList(attackerIndex).Reputacion
-        If Not Criminal(VictimIndex) Then
+        If Not Criminal(victimIndex) Then
             .BandidoRep = .BandidoRep + vlASALTO
             If .BandidoRep > MAXREP Then .BandidoRep = MAXREP
             
@@ -1177,12 +1192,12 @@ Sub UsuarioAtacadoPorUsuario(ByVal attackerIndex As Integer, ByVal VictimIndex A
         Call RefreshCharStatus(attackerIndex)
     End If
     
-    Call AllMascotasAtacanUser(attackerIndex, VictimIndex)
-    Call AllMascotasAtacanUser(VictimIndex, attackerIndex)
+    Call AllMascotasAtacanUser(attackerIndex, victimIndex)
+    Call AllMascotasAtacanUser(victimIndex, attackerIndex)
     
     'Si la victima esta saliendo se cancela la salida
-    Call CancelExit(VictimIndex)
-    Call FlushBuffer(VictimIndex)
+    Call CancelExit(victimIndex)
+    Call FlushBuffer(victimIndex)
 End Sub
 
 Sub AllMascotasAtacanUser(ByVal victim As Integer, ByVal Maestro As Integer)
@@ -1198,7 +1213,7 @@ Sub AllMascotasAtacanUser(ByVal victim As Integer, ByVal Maestro As Integer)
     Next iCount
 End Sub
 
-Public Function PuedeAtacar(ByVal attackerIndex As Integer, ByVal VictimIndex As Integer) As Boolean
+Public Function PuedeAtacar(ByVal attackerIndex As Integer, ByVal victimIndex As Integer) As Boolean
 '***************************************************
 'Autor: Unknown
 'Last Modification: 24/02/2009
@@ -1219,7 +1234,7 @@ On Error GoTo errhandler
     End If
     
     'No podes atacar a alguien muerto
-    If UserList(VictimIndex).flags.Muerto = 1 Then
+    If UserList(victimIndex).flags.Muerto = 1 Then
         'Call WriteConsoleMsg(attackerIndex, "No podés atacar a un espíritu.", FontTypeNames.FONTTYPE_INFO)
         Call WriteMultiMessage(attackerIndex, eMessages.VictimaMuerto)
         PuedeAtacar = False
@@ -1227,7 +1242,7 @@ On Error GoTo errhandler
     End If
     
     'Estamos en una Arena? o un trigger zona segura?
-    Select Case TriggerZonaPelea(attackerIndex, VictimIndex)
+    Select Case TriggerZonaPelea(attackerIndex, victimIndex)
         Case eTrigger6.TRIGGER6_PERMITE
             PuedeAtacar = True
             Exit Function
@@ -1238,15 +1253,15 @@ On Error GoTo errhandler
         
         Case eTrigger6.TRIGGER6_AUSENTE
             'Si no estamos en el Trigger 6 entonces es imposible atacar un gm
-            If (UserList(VictimIndex).flags.Privilegios And PlayerType.User) = 0 And attackerIndex <> VictimIndex Then
-                If UserList(VictimIndex).flags.AdminInvisible = 0 Then Call WriteConsoleMsg(attackerIndex, "El ser es demasiado poderoso", FontTypeNames.FONTTYPE_WARNING)
+            If (UserList(victimIndex).flags.Privilegios And PlayerType.user) = 0 And attackerIndex <> victimIndex Then
+                If UserList(victimIndex).flags.AdminInvisible = 0 Then Call WriteConsoleMsg(attackerIndex, "El ser es demasiado poderoso", FontTypeNames.FONTTYPE_WARNING)
                 PuedeAtacar = False
                 Exit Function
             End If
     End Select
     
-    If Zonas(UserList(attackerIndex).zona).Terreno = eTerreno.Fortaleza And Zonas(UserList(VictimIndex).zona).Terreno = eTerreno.Fortaleza Then
-        If UserList(attackerIndex).GuildIndex > 0 And UserList(attackerIndex).GuildIndex = UserList(VictimIndex).GuildIndex Then
+    If Zonas(UserList(attackerIndex).zona).Terreno = eTerreno.Fortaleza And Zonas(UserList(victimIndex).zona).Terreno = eTerreno.Fortaleza Then
+        If UserList(attackerIndex).GuildIndex > 0 And UserList(attackerIndex).GuildIndex = UserList(victimIndex).GuildIndex Then
             Call WriteConsoleMsg(attackerIndex, "No puedes atacar a los miembros de tu clan dentro de los dominios de la fortaleza.", FontTypeNames.FONTTYPE_WARNING)
             PuedeAtacar = False
         Else
@@ -1256,14 +1271,14 @@ On Error GoTo errhandler
     End If
     
     'Sos un Armada atacando un ciudadano?
-    If (Not Criminal(VictimIndex)) And (esArmada(attackerIndex)) Then
+    If (Not Criminal(victimIndex)) And (esArmada(attackerIndex)) Then
         Call WriteConsoleMsg(attackerIndex, "Los soldados del Ejército Real tienen prohibido atacar ciudadanos.", FontTypeNames.FONTTYPE_WARNING)
         PuedeAtacar = False
         Exit Function
     End If
     
     'Sos un Caos atacando otro caos?
-    If esCaos(VictimIndex) And esCaos(attackerIndex) Then
+    If esCaos(victimIndex) And esCaos(attackerIndex) Then
         Call WriteConsoleMsg(attackerIndex, "Los miembros de la legión oscura tienen prohibido atacarse entre sí.", FontTypeNames.FONTTYPE_WARNING)
         PuedeAtacar = False
         Exit Function
@@ -1271,7 +1286,7 @@ On Error GoTo errhandler
     
     'Tenes puesto el seguro?
     If UserList(attackerIndex).flags.Seguro Then
-        If Not Criminal(VictimIndex) Then
+        If Not Criminal(victimIndex) Then
             Call WriteConsoleMsg(attackerIndex, "No podes atacar ciudadanos, para hacerlo debes desactivar el seguro ingresando /SEG", FontTypeNames.FONTTYPE_WARNING)
             PuedeAtacar = False
             Exit Function
@@ -1279,11 +1294,11 @@ On Error GoTo errhandler
     End If
     
     'Estas en un Mapa Seguro?
-    If Zonas(UserList(VictimIndex).zona).Segura = 1 Then
+    If Zonas(UserList(victimIndex).zona).Segura = 1 Then
         If esArmada(attackerIndex) Then
             If UserList(attackerIndex).Faccion.RecompensasReal > 11 Then
-                If UserList(VictimIndex).Pos.map = 58 Or UserList(VictimIndex).Pos.map = 59 Or UserList(VictimIndex).Pos.map = 60 Then 'TODO JAVIER
-                Call WriteConsoleMsg(VictimIndex, "¡Huye de la ciudad! estas siendo atacado y no podrás defenderte.", FontTypeNames.FONTTYPE_WARNING)
+                If UserList(victimIndex).Pos.map = 58 Or UserList(victimIndex).Pos.map = 59 Or UserList(victimIndex).Pos.map = 60 Then 'TODO JAVIER
+                Call WriteConsoleMsg(victimIndex, "¡Huye de la ciudad! estas siendo atacado y no podrás defenderte.", FontTypeNames.FONTTYPE_WARNING)
                 PuedeAtacar = True 'Beneficio de Armadas que atacan en su ciudad.
                 Exit Function
                 End If
@@ -1291,8 +1306,8 @@ On Error GoTo errhandler
         End If
         If esCaos(attackerIndex) Then
             If UserList(attackerIndex).Faccion.RecompensasCaos > 11 Then
-                If UserList(VictimIndex).Pos.map = 151 Or UserList(VictimIndex).Pos.map = 156 Then 'TODO JAVIER
-                Call WriteConsoleMsg(VictimIndex, "¡Huye de la ciudad! estas siendo atacado y no podrás defenderte.", FontTypeNames.FONTTYPE_WARNING)
+                If UserList(victimIndex).Pos.map = 151 Or UserList(victimIndex).Pos.map = 156 Then 'TODO JAVIER
+                Call WriteConsoleMsg(victimIndex, "¡Huye de la ciudad! estas siendo atacado y no podrás defenderte.", FontTypeNames.FONTTYPE_WARNING)
                 PuedeAtacar = True 'Beneficio de Caos que atacan en su ciudad.
                 Exit Function
                 End If
@@ -1308,7 +1323,7 @@ On Error GoTo errhandler
     End If
     
     'Estas atacando desde un trigger seguro? o tu victima esta en uno asi?
-    If MapData(UserList(VictimIndex).Pos.map).Tile(UserList(VictimIndex).Pos.X, UserList(VictimIndex).Pos.Y).Trigger = eTrigger.ZONASEGURA Or _
+    If MapData(UserList(victimIndex).Pos.map).Tile(UserList(victimIndex).Pos.X, UserList(victimIndex).Pos.Y).Trigger = eTrigger.ZONASEGURA Or _
         MapData(UserList(attackerIndex).Pos.map).Tile(UserList(attackerIndex).Pos.X, UserList(attackerIndex).Pos.Y).Trigger = eTrigger.ZONASEGURA Then
         'Call WriteConsoleMsg(attackerIndex, "No podés pelear aquí.", FontTypeNames.FONTTYPE_WARNING)
         Call WriteMultiMessage(attackerIndex, eMessages.NoPodesPelearAqui)

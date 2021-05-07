@@ -852,7 +852,7 @@ Public Type Inventario
 End Type
 
 Public Type tPartyData
-    PIndex As Integer
+    pIndex As Integer
     RemXP As Double    'La exp. en el server se cuenta con Doubles
     TargetUser As Integer    'Para las invitaciones
 End Type
@@ -894,9 +894,9 @@ End Type
 
 'Tipos de objetos
 Public Type ObjData
-  'aura
-  Aura As Byte
-  'aura
+    'aura
+    Aura As Byte
+    'aura
     Name As String    'Nombre del obj
 
     OBJType As eOBJType    'Tipo enum que determina cuales son las caract del obj
@@ -1170,9 +1170,19 @@ Public Type UserStats
     SkillPts As Integer
 
 End Type
-
+' Determina el color del nick
+Public Enum eNickColor
+    ieCriminal = &H1
+    ieCiudadano = &H2
+    ieAtacable = &H4
+    ieTeamUno = &H1
+    ieTeamDos = &H2
+End Enum
 'Flags
 Public Type UserFlags
+    'bots
+    targetBot As Byte
+    'bots
     Wait As Byte
     Chiquito As Boolean
     Equitando As Boolean
@@ -1678,6 +1688,9 @@ End Type
 
 
 Public Type MapBlock
+   'bots
+    BotIndex As Integer
+   'bots
     Blocked As Byte
     Graphic(1 To 4) As Integer
     UserIndex As Integer
@@ -1787,6 +1800,9 @@ Public DistribucionSemienteraVida(1 To 4) As Integer
 Public QuestList() As tQuest
 'quest
 '*********************************************************
+'bots
+Public Possbots As WorldPos
+'bots
 
 Public Nix As WorldPos
 Public Ullathorpe As WorldPos

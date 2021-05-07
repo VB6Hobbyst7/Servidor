@@ -759,6 +759,39 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
             End If
 
         End If
+
+        'bots
+        If Y + 1 <= YMaxMapSize Then
+            UserList(UserIndex).flags.targetBot = MapData(map).Tile(X, Y).BotIndex
+            If Not UserList(UserIndex).flags.targetBot <> 0 Then UserList(UserIndex).flags.targetBot = MapData(map).Tile(X, Y + 1).BotIndex
+
+            'Target the botName : D
+            If UserList(UserIndex).flags.targetBot <> 0 Then
+                'If ia_Bot(.TargetBOT).GrupoID = UserList(UserIndex).Group_User.Grupo_ID Then
+                If ia_Bot(UserList(UserIndex).flags.targetBot).Invocado Then
+                    Dim tmp_Font As FontTypeNames
+
+                    If ia_Bot(UserList(UserIndex).flags.targetBot).EsCriminal Then
+                        tmp_Font = FontTypeNames.FONTTYPE_FIGHT
+                    Else
+                        tmp_Font = FontTypeNames.FONTTYPE_CITIZEN
+                    End If
+
+                    Call WriteConsoleMsg(UserIndex, "Ves a " & ia_Bot(UserList(UserIndex).flags.targetBot).Tag, tmp_Font)
+                End If
+                'Else
+                UserList(UserIndex).flags.targetBot = 0
+                'End If
+            End If
+        End If
+        'bots
+
+
+
+
+
+
+
         '¿Es un personaje?
         If MapData(map).Tile(X, Y).UserIndex > 0 Then
             TempCharIndex = MapData(map).Tile(X, Y).UserIndex
@@ -942,7 +975,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
             UserList(UserIndex).flags.TargetNPC = TempCharIndex
             UserList(UserIndex).flags.TargetUser = 0
             UserList(UserIndex).flags.TargetObj = 0
- 'quest
+            'quest
             Dim i As Long, j As Long
 
             For i = 1 To MAXUSERQUESTS
@@ -983,41 +1016,41 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 
 
 
-    If FoundChar = 0 Then
-        UserList(UserIndex).flags.TargetNPC = 0
-        UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
-        UserList(UserIndex).flags.TargetUser = 0
+        If FoundChar = 0 Then
+            UserList(UserIndex).flags.TargetNPC = 0
+            UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
+            UserList(UserIndex).flags.TargetUser = 0
+        End If
+
+        '*** NO ENCOTRO NADA ***
+        If FoundSomething = 0 Then
+            UserList(UserIndex).flags.TargetNPC = 0
+            UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
+            UserList(UserIndex).flags.TargetUser = 0
+            UserList(UserIndex).flags.TargetObj = 0
+            UserList(UserIndex).flags.TargetObjMap = 0
+            UserList(UserIndex).flags.TargetObjX = 0
+            UserList(UserIndex).flags.TargetObjY = 0
+            'Call WriteConsoleMsg(UserIndex, "No ves nada interesante.", FontTypeNames.FONTTYPE_INFO)
+        End If
+
+    Else
+        If FoundSomething = 0 Then
+            UserList(UserIndex).flags.TargetNPC = 0
+            UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
+            UserList(UserIndex).flags.TargetUser = 0
+            UserList(UserIndex).flags.TargetObj = 0
+            UserList(UserIndex).flags.TargetObjMap = 0
+            UserList(UserIndex).flags.TargetObjX = 0
+            UserList(UserIndex).flags.TargetObjY = 0
+            'Call WriteConsoleMsg(UserIndex, "No ves nada interesante.", FontTypeNames.FONTTYPE_INFO)
+        End If
     End If
 
-    '*** NO ENCOTRO NADA ***
-    If FoundSomething = 0 Then
-        UserList(UserIndex).flags.TargetNPC = 0
-        UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
-        UserList(UserIndex).flags.TargetUser = 0
-        UserList(UserIndex).flags.TargetObj = 0
-        UserList(UserIndex).flags.TargetObjMap = 0
-        UserList(UserIndex).flags.TargetObjX = 0
-        UserList(UserIndex).flags.TargetObjY = 0
-        'Call WriteConsoleMsg(UserIndex, "No ves nada interesante.", FontTypeNames.FONTTYPE_INFO)
-    End If
-
-Else
-    If FoundSomething = 0 Then
-        UserList(UserIndex).flags.TargetNPC = 0
-        UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
-        UserList(UserIndex).flags.TargetUser = 0
-        UserList(UserIndex).flags.TargetObj = 0
-        UserList(UserIndex).flags.TargetObjMap = 0
-        UserList(UserIndex).flags.TargetObjX = 0
-        UserList(UserIndex).flags.TargetObjY = 0
-        'Call WriteConsoleMsg(UserIndex, "No ves nada interesante.", FontTypeNames.FONTTYPE_INFO)
-    End If
-End If
-
-Exit Sub
+    Exit Sub
 
 errhandler:
-Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
+    Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
 
 End Sub
 

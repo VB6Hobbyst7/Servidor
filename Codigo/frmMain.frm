@@ -28,6 +28,11 @@ Begin VB.Form frmMain
    ScaleWidth      =   5385
    StartUpPosition =   2  'CenterScreen
    WindowState     =   1  'Minimized
+   Begin VB.Timer timerbots 
+      Interval        =   40
+      Left            =   0
+      Top             =   0
+   End
    Begin VB.PictureBox pBarcos 
       AutoRedraw      =   -1  'True
       BackColor       =   &H00FFFFFF&
@@ -238,6 +243,12 @@ Begin VB.Form frmMain
          Caption         =   "&Salir"
       End
    End
+   Begin VB.Menu BOTS 
+      Caption         =   "BOTS"
+      Begin VB.Menu Agregarbots 
+         Caption         =   "Agregar"
+      End
+   End
 End
 Attribute VB_Name = "frmMain"
 Attribute VB_GlobalNameSpace = False
@@ -338,6 +349,10 @@ Sub CheckIdleUser()
             End If
         End If
     Next iUserIndex
+End Sub
+
+Private Sub Agregarbots_Click()
+FrmBots.Show
 End Sub
 
 Private Sub Auditoria_Timer()
@@ -553,10 +568,10 @@ On Error GoTo hayerror
                     If .flags.Muerto = 0 Then
                         
                         '[Consejeros]
-                        If (.flags.Privilegios And PlayerType.User) Then Call EfectoLava(iUserIndex)
-                        If .flags.Desnudo <> 0 And (.flags.Privilegios And PlayerType.User) <> 0 Then Call EfectoFrio(iUserIndex)
+                        If (.flags.Privilegios And PlayerType.user) Then Call EfectoLava(iUserIndex)
+                        If .flags.Desnudo <> 0 And (.flags.Privilegios And PlayerType.user) <> 0 Then Call EfectoFrio(iUserIndex)
                         If .flags.Meditando Then Call DoMeditar(iUserIndex)
-                        If .flags.Envenenado <> 0 And (.flags.Privilegios And PlayerType.User) <> 0 Then Call EfectoVeneno(iUserIndex)
+                        If .flags.Envenenado <> 0 And (.flags.Privilegios And PlayerType.user) <> 0 Then Call EfectoVeneno(iUserIndex)
                         If .flags.AdminInvisible <> 1 Then
                             If .flags.invisible = 1 Then Call EfectoInvisibilidad(iUserIndex)
                             If .flags.Oculto = 1 Then Call DoPermanecerOculto(iUserIndex, False)
@@ -747,8 +762,8 @@ On Error GoTo errhandler:
      
     For i = 1 To MaxUsers
         If UserList(i).ConnIDValida Then
-            If UserList(i).outgoingData.length > 0 Then
-                Call EnviarDatosASlot(i, UserList(i).outgoingData.ReadASCIIStringFixed(UserList(i).outgoingData.length))
+            If UserList(i).outgoingData.Length > 0 Then
+                Call EnviarDatosASlot(i, UserList(i).outgoingData.ReadASCIIStringFixed(UserList(i).outgoingData.Length))
             End If
         End If
     Next i
@@ -842,6 +857,21 @@ ErrorHandler:
     Call MuereNpc(NpcIndex, 0)
 End Sub
 
+
+'Bots
+Private Sub timerbots_Timer()
+
+'Acción de los bots -
+    Dim loopX   As Long
+    
+    For loopX = 1 To MAX_BOTS
+    
+        If ia_Bot(loopX).Invocado Then ia_Action loopX
+    
+    Next loopX
+    
+End Sub
+'bots
 
 Private Sub tLluviaEvent_Timer()
 
@@ -1066,7 +1096,7 @@ With UserList(MiDato)
     
     If .ConnID <> -1 Then
         Procesado = False
-        Do While .incomingData.length And Not Procesado
+        Do While .incomingData.Length And Not Procesado
             Procesado = HandleIncomingData(MiDato)
         Loop
     End If

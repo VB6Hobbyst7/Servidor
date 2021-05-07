@@ -45,10 +45,10 @@ Dim NumWizs As Integer
 Dim WizNum As Integer
 Dim NomB As String
 
-NumWizs = val(GetVar(IniPath & "Server.ini", "INIT", "Admines"))
+NumWizs = val(GetVar(IniPath & "Server.ini", "INIT", "Dioses"))
 
 For WizNum = 1 To NumWizs
-    NomB = UCase$(GetVar(IniPath & "Server.ini", "Admines", "Admin" & WizNum))
+    NomB = UCase$(GetVar(IniPath & "Server.ini", "Dioses", "Dios" & WizNum))
     
     If left$(NomB, 1) = "*" Or left$(NomB, 1) = "+" Then NomB = Right$(NomB, Len(NomB) - 1)
     If UCase$(Name) = NomB Then
