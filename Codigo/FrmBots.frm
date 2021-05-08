@@ -198,7 +198,7 @@ KeyAscii = 0
 End Sub
 
 Private Sub cmdCrearbots_Click()
-   
+   Dim Clan As String
     
    If clase = 0 Then Exit Sub
    If TxtNombrebots.Text = "" Then Exit Sub
@@ -208,10 +208,15 @@ Private Sub cmdCrearbots_Click()
     Possbots.map = val(Textmapbots.Text)
     Possbots.X = val(Txtxbots.Text)
     Possbots.Y = val(txtybots.Text)
+  If txtclanbots.Text = "" Then
+  Clan = ""
+  Else
+  Clan = "<" & txtclanbots.Text & ">"
+  End If
   
 
 
-    Call ia_Spawn(clase, Possbots, TxtNombrebots.Text & " <" & txtclanbots.Text & ">", False, obpkbots.value, 0)
+    Call ia_Spawn(clase, Possbots, TxtNombrebots.Text & Clan, False, obpkbots.value, 0)
     CantidadBots = CantidadBots + 1
     'ReDim NombreBost(CantidadBots) As String
     NombreBost(CantidadBots) = TxtNombrebots.Text

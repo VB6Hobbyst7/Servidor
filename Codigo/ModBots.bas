@@ -1055,8 +1055,8 @@ BotIndexPos = ia_Bot(BotIndex).Pos
 Dim loopX   As Long
 Dim loopY   As Long
  
-For loopY = Pos.Y - MargenY To Pos.Y + MargenY
-        For loopX = Pos.X - MargenX To Pos.X + MargenX   'hay un bot
+For loopY = BotIndexPos.Y - MargenY To BotIndexPos.Y + MargenY
+        For loopX = BotIndexPos.X - MargenX To BotIndexPos.X + MargenX   'hay un bot
             If MapData(BotIndexPos.map).Tile(loopX, loopY).BotIndex = otherBotIndex Then
                 ia_BotEnArea = True
                 Exit Function
