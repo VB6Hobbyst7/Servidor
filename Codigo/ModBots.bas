@@ -368,12 +368,12 @@ With ia_Bot(ProximoBot).Char
     
     'Preparo el paquete de datos.
     
-            Dim tmp_Color   As eNickColor
+            Dim tmp_Color   As Byte
             
             If ia_Bot(ProximoBot).esCriminal Then
-               tmp_Color = eNickColor.ieCriminal
+               tmp_Color = 1
             Else
-               tmp_Color = eNickColor.ieCiudadano
+               tmp_Color = 0
             End If
     
     PackageToSend = PrepareMessageCharacterCreate(.Body, .Head, eHeading.SOUTH, .CharIndex, ia_Bot(ProximoBot).Pos.X, ia_Bot(ProximoBot).Pos.Y, .WeaponAnim, .ShieldAnim, 0, 0, .CascoAnim, ia_Bot(ProximoBot).Tag, tmp_Color, 0, 0)

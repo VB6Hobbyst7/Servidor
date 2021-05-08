@@ -9,10 +9,18 @@ Begin VB.Form FrmBots
    ScaleHeight     =   6480
    ScaleWidth      =   5595
    StartUpPosition =   3  'Windows Default
+   Begin VB.CheckBox obpkbots 
+      Caption         =   "Es PK"
+      Height          =   255
+      Left            =   3360
+      TabIndex        =   16
+      Top             =   2880
+      Width           =   1215
+   End
    Begin VB.ComboBox Combo1 
       Height          =   315
       Left            =   360
-      TabIndex        =   16
+      TabIndex        =   15
       Text            =   "Seleciones el Bots que quiere borrar"
       Top             =   4560
       Width           =   3135
@@ -21,14 +29,14 @@ Begin VB.Form FrmBots
       Caption         =   "Eliminar Ultimo Bots Agregado"
       Height          =   495
       Left            =   3840
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   4440
       Width           =   1575
    End
    Begin VB.TextBox txtclanbots 
       Height          =   285
       Left            =   3360
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   2370
       Width           =   1935
    End
@@ -36,17 +44,9 @@ Begin VB.Form FrmBots
       Caption         =   "Crear"
       Height          =   495
       Left            =   1680
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   3240
       Width           =   1815
-   End
-   Begin VB.OptionButton obpkbots 
-      Caption         =   "Es PK"
-      Height          =   195
-      Left            =   3360
-      TabIndex        =   11
-      Top             =   2880
-      Width           =   1695
    End
    Begin VB.TextBox TxtNombrebots 
       Height          =   285
@@ -91,7 +91,7 @@ Begin VB.Form FrmBots
       Caption         =   "Ingrese el Clan"
       Height          =   255
       Left            =   3360
-      TabIndex        =   13
+      TabIndex        =   12
       Top             =   2040
       Width           =   2295
    End
@@ -249,3 +249,5 @@ If CantidadBots = 0 Then Exit Sub
 Call ia_EraseChar(CantidadBots, False)
 CantidadBots = CantidadBots - 1
 End Sub
+
+
