@@ -568,10 +568,10 @@ On Error GoTo hayerror
                     If .flags.Muerto = 0 Then
                         
                         '[Consejeros]
-                        If (.flags.Privilegios And PlayerType.user) Then Call EfectoLava(iUserIndex)
-                        If .flags.Desnudo <> 0 And (.flags.Privilegios And PlayerType.user) <> 0 Then Call EfectoFrio(iUserIndex)
+                        If (.flags.Privilegios And PlayerType.User) Then Call EfectoLava(iUserIndex)
+                        If .flags.Desnudo <> 0 And (.flags.Privilegios And PlayerType.User) <> 0 Then Call EfectoFrio(iUserIndex)
                         If .flags.Meditando Then Call DoMeditar(iUserIndex)
-                        If .flags.Envenenado <> 0 And (.flags.Privilegios And PlayerType.user) <> 0 Then Call EfectoVeneno(iUserIndex)
+                        If .flags.Envenenado <> 0 And (.flags.Privilegios And PlayerType.User) <> 0 Then Call EfectoVeneno(iUserIndex)
                         If .flags.AdminInvisible <> 1 Then
                             If .flags.invisible = 1 Then Call EfectoInvisibilidad(iUserIndex)
                             If .flags.Oculto = 1 Then Call DoPermanecerOculto(iUserIndex, False)
@@ -853,7 +853,7 @@ End If
 Exit Sub
 
 ErrorHandler:
-    Call LogError("Error en TIMER_AI_Timer " & Npclist(NpcIndex).Name & " mapa:" & Npclist(NpcIndex).Pos.map)
+    Call LogError("Error en TIMER_AI_Timer " & Npclist(NpcIndex).Name & " mapa:" & Npclist(NpcIndex).Pos.map & "X: " & Npclist(NpcIndex).Pos.X & "Y: " & Npclist(NpcIndex).Pos.Y)
     Call MuereNpc(NpcIndex, 0)
 End Sub
 

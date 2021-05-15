@@ -306,10 +306,10 @@ Private Enum ServerPacketID
     StopWorking
     RetosAbre
     RetosRespuesta
-    
-    
-    
-    'SERVER NEW PACKETS
+    QuestDetails
+    QuestListSend
+    NpcQuestListSend
+    UpdateNPCSimbolo
     SetEquitando            ' EQUITANDO
     SetCongelado            ' CONGELADO
     SetChiquito             ' CHIQUITOLIN
@@ -317,18 +317,11 @@ Private Enum ServerPacketID
     PalabrasMagicas         ' Palabras Magiacs
     UserSpellNPC            ' US2
     SetNadando
-    
     MultiMessage            'Message in client
-    
     FirstInfo               'Primera Informacion
     CuentaRegresiva         'Cuenta
-    
     PicInRender             'PicInRender
-    
     Quit                    'Efecto Quit
-    
-    
-    'GM messages
     SpawnList               ' SPL
     ShowSOSForm             ' MSOS
     ShowMOTDEditionForm     ' ZMOTD
@@ -341,15 +334,16 @@ Private Enum ServerPacketID
     goHome
     GotHome
     Tooltip
-    
-    'quest
-    QuestDetails
-    QuestListSend
-    NpcQuestListSend
-    UpdateNPCSimbolo
-    'quest
-    
+    UserInEvent
+    EventPacketSv
 End Enum
+'eventos
+Private Enum SvEventPacketID
+    SendListEvent = 1
+    SendDataEvent = 2
+
+End Enum
+'eventos
 
 Private Enum ClientPacketID
     BorrarPJ                'BorrarPJ
@@ -458,29 +452,32 @@ Private Enum ClientPacketID
     RetosCrear
     RetosDecide
     IntercambiarInv
-    
-    'GM messages
-    gm
-    WarpMeToTarget          '/TELEPLOC
-    Home
-    
-    
-    'CLIENT NEW PACKETS
-    Equitar                 'Montar
-    DejarMontura            'Dejar Montura
-    CreateEfectoClient      'Crear Efecto desde el cliente
-    CreateEfectoClientAction     'Hago la accion (daño, etc)
-    AnclarEmbarcacion
-    'DesAnclarEmbarcacion
-    
-    'quest
     Quest                   '/QUEST
     QuestAccept
     QuestListRequest
     QuestDetailsRequest
     QuestAbandon
-    'quest
+    gm
+    WarpMeToTarget          '/TELEPLOC
+    Home
+    Equitar                 'Montar
+    DejarMontura            'Dejar Montura
+    CreateEfectoClient      'Crear Efecto desde el cliente
+    CreateEfectoClientAction     'Hago la accion (daño, etc)
+    AnclarEmbarcacion
+    EventPacketCL
+      
 End Enum
+'eventos
+Public Enum EventPacketID
+    eNewEvent = 1
+    eCloseEvent = 2
+    RequiredEvents = 3
+    RequiredDataEvent = 4
+    eParticipeEvent = 5
+    eAbandonateEvent = 6
+End Enum
+'eventos
 
 Public Enum FontTypeNames
     FONTTYPE_TALK
@@ -545,31 +542,31 @@ Public Function HandleIncomingData(ByVal UserIndex As Integer) As Boolean
 'Last Modification: 01/09/07
 '
 '***************************************************
-On Error Resume Next
-    Dim packetID As Byte
-    
-    packetID = UserList(UserIndex).incomingData.PeekByte()
-    
+    On Error Resume Next
+    Dim PacketID As Byte
+
+    PacketID = UserList(UserIndex).incomingData.PeekByte()
+
     'Does the packet requires a logged user??
-    If Not (packetID = ClientPacketID.LoginExistingChar _
-      Or packetID = ClientPacketID.OpenAccount _
-      Or packetID = ClientPacketID.LoginNewChar _
-      Or packetID = ClientPacketID.LoginNewAccount _
-      Or packetID = ClientPacketID.BorrarPJ) Then
-        
+    If Not (PacketID = ClientPacketID.LoginExistingChar _
+            Or PacketID = ClientPacketID.OpenAccount _
+            Or PacketID = ClientPacketID.LoginNewChar _
+            Or PacketID = ClientPacketID.LoginNewAccount _
+            Or PacketID = ClientPacketID.BorrarPJ) Then
+
         'Is the user actually logged?
         If Not UserList(UserIndex).flags.UserLogged Then
             Call CloseSocket(UserIndex)
             HandleIncomingData = True
             Exit Function
-        
-        'He is logged. Reset idle counter if id is valid.
-        ElseIf packetID <= LAST_CLIENT_PACKET_ID Then
+
+            'He is logged. Reset idle counter if id is valid.
+        ElseIf PacketID <= LAST_CLIENT_PACKET_ID Then
             UserList(UserIndex).Counters.IdleCount = 0
         End If
-    ElseIf packetID <= LAST_CLIENT_PACKET_ID Then
+    ElseIf PacketID <= LAST_CLIENT_PACKET_ID Then
         UserList(UserIndex).Counters.IdleCount = 0
-        
+
         'Is the user logged?
         If UserList(UserIndex).flags.UserLogged Then
             Call CloseSocket(UserIndex)
@@ -577,378 +574,382 @@ On Error Resume Next
             Exit Function
         End If
     End If
-    
-    Select Case packetID
-        Case ClientPacketID.BorrarPJ             'ALOGIN
-            Call HandleBorrarPJ(UserIndex)
-            
-        Case ClientPacketID.OpenAccount             'ALOGIN
-            Call HandleOpenAccount(UserIndex)
-            
-        Case ClientPacketID.LoginExistingChar       'OLOGIN
-            Call HandleLoginExistingChar(UserIndex)
-        
-        Case ClientPacketID.LoginNewChar            'NLOGIN
-            Call HandleLoginNewChar(UserIndex)
-            
-        Case ClientPacketID.LoginNewAccount         'CALOGIN
-            Call HandleLoginNewAccount(UserIndex)
-        
-        Case ClientPacketID.Talk                    ';
-            Call HandleTalk(UserIndex)
-        
-        Case ClientPacketID.Yell                    '-
-            Call HandleYell(UserIndex)
-        
-        Case ClientPacketID.Whisper                 '\
-            Call HandleWhisper(UserIndex)
-        
-        Case ClientPacketID.Walk                    'M
-            Call HandleWalk(UserIndex)
-        
-        Case ClientPacketID.RequestPositionUpdate   'RPU
-            Call HandleRequestPositionUpdate(UserIndex)
-        
-        Case ClientPacketID.Attack                  'AT
-            Call HandleAttack(UserIndex)
-        
-        Case ClientPacketID.PickUp                  'AG
-            Call HandlePickUp(UserIndex)
-            
-        Case ClientPacketID.SafeToggle              '/SEG & SEG  (SEG's behaviour has to be coded in the client)
-            Call HandleSafeToggle(UserIndex)
-        
-        Case ClientPacketID.ResuscitationSafeToggle
-            Call HandleResuscitationToggle(UserIndex)
-        
-        Case ClientPacketID.RequestGuildLeaderInfo  'GLINFO
-            Call HandleRequestGuildLeaderInfo(UserIndex)
-        
-        Case ClientPacketID.RequestAtributes        'ATR
-            Call HandleRequestAtributes(UserIndex)
-        
-        Case ClientPacketID.RequestFame             'FAMA
-            Call HandleRequestFame(UserIndex)
-        
-        Case ClientPacketID.RequestSkills           'ESKI
-            Call HandleRequestSkills(UserIndex)
-        
-        Case ClientPacketID.RequestMiniStats        'FEST
-            Call HandleRequestMiniStats(UserIndex)
-        
-        Case ClientPacketID.CommerceEnd             'FINCOM
-            Call HandleCommerceEnd(UserIndex)
-        
-        Case ClientPacketID.UserCommerceEnd         'FINCOMUSU
-            Call HandleUserCommerceEnd(UserIndex)
-            
-        Case ClientPacketID.UserCommerceConfirm
-            Call HandleUserCommerceConfirm(UserIndex)
-            
-        Case ClientPacketID.CommerceChat
-            Call HandleCommerceChat(UserIndex)
-        
-        Case ClientPacketID.BankEnd                 'FINBAN
-            Call HandleBankEnd(UserIndex)
-        
-        Case ClientPacketID.UserCommerceOk          'COMUSUOK
-            Call HandleUserCommerceOk(UserIndex)
-        
-        Case ClientPacketID.UserCommerceReject      'COMUSUNO
-            Call HandleUserCommerceReject(UserIndex)
-        
-        Case ClientPacketID.Drop                    'TI
-            Call HandleDrop(UserIndex)
-        
-        Case ClientPacketID.CastSpell               'LH
-            Call HandleCastSpell(UserIndex)
-        
-        Case ClientPacketID.LeftClick               'LC
-            Call HandleLeftClick(UserIndex)
-        
-        Case ClientPacketID.DoubleClick             'RC
-            Call HandleDoubleClick(UserIndex)
-        
-        Case ClientPacketID.Work                    'UK
-            Call HandleWork(UserIndex)
-        
-        Case ClientPacketID.UseSpellMacro           'UMH
-            Call HandleUseSpellMacro(UserIndex)
-        
-        Case ClientPacketID.UseItem                 'USA
-            Call HandleUseItem(UserIndex)
-        
-        Case ClientPacketID.CraftBlacksmith         'CNS
-            Call HandleCraftBlacksmith(UserIndex)
-        
-        Case ClientPacketID.CraftCarpenter          'CNC
-            Call HandleCraftCarpenter(UserIndex)
-        
-        Case ClientPacketID.WorkLeftClick           'WLC
-            Call HandleWorkLeftClick(UserIndex)
-        
-        Case ClientPacketID.CreateNewGuild          'CIG
-            Call HandleCreateNewGuild(UserIndex)
-        
-        Case ClientPacketID.SpellInfo               'INFS
-            Call HandleSpellInfo(UserIndex)
-        
-        Case ClientPacketID.EquipItem               'EQUI
-            Call HandleEquipItem(UserIndex)
-        
-        Case ClientPacketID.ChangeHeading           'CHEA
-            Call HandleChangeHeading(UserIndex)
-        
-        Case ClientPacketID.ModifySkills            'SKSE
-            Call HandleModifySkills(UserIndex)
-        
-        Case ClientPacketID.Train                   'ENTR
-            Call HandleTrain(UserIndex)
-        
-        Case ClientPacketID.CommerceBuy             'COMP
-            Call HandleCommerceBuy(UserIndex)
-        
-        Case ClientPacketID.BankExtractItem         'RETI
-            Call HandleBankExtractItem(UserIndex)
-        
-        Case ClientPacketID.CommerceSell            'VEND
-            Call HandleCommerceSell(UserIndex)
-        
-        Case ClientPacketID.BankDeposit             'DEPO
-            Call HandleBankDeposit(UserIndex)
-        
-        Case ClientPacketID.MoveSpell               'DESPHE
-            Call HandleMoveSpell(UserIndex)
-            
-        Case ClientPacketID.MoveBank
-            Call HandleMoveBank(UserIndex)
-        
-        Case ClientPacketID.ClanCodexUpdate         'DESCOD
-            Call HandleClanCodexUpdate(UserIndex)
-        
-        Case ClientPacketID.UserCommerceOffer       'OFRECER
-            Call HandleUserCommerceOffer(UserIndex)
-        
-        Case ClientPacketID.guild
-            Call HandleGuild(UserIndex)
-            
-        Case ClientPacketID.Online                  '/ONLINE
-            Call HandleOnline(UserIndex)
-        
-        Case ClientPacketID.Quit                    '/SALIR
-            Call HandleQuit(UserIndex)
-        
-        Case ClientPacketID.GuildLeave              '/SALIRCLAN
-            Call HandleGuildLeave(UserIndex)
-        
-        Case ClientPacketID.RequestAccountState     '/BALANCE
-            Call HandleRequestAccountState(UserIndex)
-        
-        Case ClientPacketID.PetStand                '/QUIETO
-            Call HandlePetStand(UserIndex)
-        
-        Case ClientPacketID.PetFollow               '/ACOMPAÑAR
-            Call HandlePetFollow(UserIndex)
-        
-        Case ClientPacketID.TrainList               '/ENTRENAR
-            Call HandleTrainList(UserIndex)
-        
-        Case ClientPacketID.Rest                    '/DESCANSAR
-            Call HandleRest(UserIndex)
-        
-        Case ClientPacketID.Meditate                '/MEDITAR
-            Call HandleMeditate(UserIndex)
-        
-        Case ClientPacketID.Resucitate              '/RESUCITAR
-            Call HandleResucitate(UserIndex)
-        
-        Case ClientPacketID.Heal                    '/CURAR
-            Call HandleHeal(UserIndex)
-        
-        Case ClientPacketID.Help                    '/AYUDA
-            Call HandleHelp(UserIndex)
-        
-        Case ClientPacketID.RequestStats            '/EST
-            Call HandleRequestStats(UserIndex)
-        
-        Case ClientPacketID.CommerceStart           '/COMERCIAR
-            Call HandleCommerceStart(UserIndex)
-        
-        Case ClientPacketID.BankStart               '/BOVEDA
-            Call HandleBankStart(UserIndex)
-        
-        Case ClientPacketID.ComandosVarios                  '/ENLISTAR
-            Call HandleComandosVarios(UserIndex)
-        
-        Case ClientPacketID.Information             '/INFORMACION
-            Call HandleInformation(UserIndex)
-        
-        Case ClientPacketID.Reward                  '/RECOMPENSA
-            Call HandleReward(UserIndex)
-        
-        Case ClientPacketID.RequestMOTD             '/MOTD
-            Call HandleRequestMOTD(UserIndex)
-        
-        Case ClientPacketID.UpTime                  '/UPTIME
-            Call HandleUpTime(UserIndex)
-        
-        Case ClientPacketID.PartyLeave              '/SALIRPARTY
-            Call HandlePartyLeave(UserIndex)
-        
-        Case ClientPacketID.PartyCreate             '/CREARPARTY
-            Call HandlePartyCreate(UserIndex)
-        
-        Case ClientPacketID.PartyJoin               '/PARTY
-            Call HandlePartyJoin(UserIndex)
-        
-        Case ClientPacketID.Inquiry                 '/ENCUESTA ( with no params )
-            Call HandleInquiry(UserIndex)
-        
-        Case ClientPacketID.GuildMessage            '/CMSG
-            Call HandleGuildMessage(UserIndex)
-        
-        Case ClientPacketID.PartyMessage            '/PMSG
-            Call HandlePartyMessage(UserIndex)
-        
-        Case ClientPacketID.CentinelReport          '/CENTINELA
-            Call HandleCentinelReport(UserIndex)
-        
-        Case ClientPacketID.GuildOnline             '/ONLINECLAN
-            Call HandleGuildOnline(UserIndex)
-        
-        Case ClientPacketID.PartyOnline             '/ONLINEPARTY
-            Call HandlePartyOnline(UserIndex)
-        
-        Case ClientPacketID.CouncilMessage          '/BMSG
-            Call HandleCouncilMessage(UserIndex)
-        
-        Case ClientPacketID.RoleMasterRequest       '/ROL
-            Call HandleRoleMasterRequest(UserIndex)
-        
-        Case ClientPacketID.GMRequest               '/GM
-            Call HandleGMRequest(UserIndex)
-        
-        Case ClientPacketID.bugReport               '/_BUG
-            Call HandleBugReport(UserIndex)
-        
-        Case ClientPacketID.ChangeDescription       '/DESC
-            Call HandleChangeDescription(UserIndex)
-        
-        Case ClientPacketID.GuildVote               '/VOTO
-            Call HandleGuildVote(UserIndex)
-        
-        Case ClientPacketID.Punishments             '/PENAS
-            Call HandlePunishments(UserIndex)
-        
-        Case ClientPacketID.ChangePassword          '/CONTRASEÑA
-            Call HandleChangePassword(UserIndex)
-        
-        Case ClientPacketID.Gamble                  '/APOSTAR
-            Call HandleGamble(UserIndex)
-        
-        Case ClientPacketID.InquiryVote             '/ENCUESTA ( with parameters )
-            Call HandleInquiryVote(UserIndex)
-        
-        Case ClientPacketID.LeaveFaction            '/RETIRAR ( with no arguments )
-            Call HandleLeaveFaction(UserIndex)
-        
-        Case ClientPacketID.BankExtractGold         '/RETIRAR ( with arguments )
-            Call HandleBankExtractGold(UserIndex)
-        
-        Case ClientPacketID.BankDepositGold         '/DEPOSITAR
-            Call HandleBankDepositGold(UserIndex)
-        
-        Case ClientPacketID.Denounce                '/DENUNCIAR
-            Call HandleDenounce(UserIndex)
-        
-        Case ClientPacketID.GuildFundate            '/FUNDARCLAN
-            Call HandleGuildFundate(UserIndex)
-        
-        Case ClientPacketID.PartyKick               '/ECHARPARTY
-            Call HandlePartyKick(UserIndex)
-        
-        Case ClientPacketID.PartySetLeader          '/PARTYLIDER
-            Call HandlePartySetLeader(UserIndex)
-        
-        Case ClientPacketID.PartyAcceptMember       '/ACCEPTPARTY
-            Call HandlePartyAcceptMember(UserIndex)
-        
-        Case ClientPacketID.Ping                    '/PING
-            Call HandlePing(UserIndex)
-        
-        Case ClientPacketID.InitCrafting
-            Call HandleInitCrafting(UserIndex)
-            
-        Case ClientPacketID.ItemUpgrade
-            Call HandleItemUpgrade(UserIndex)
-        
-        Case ClientPacketID.RequestPartyForm
-            Call HandlePartyForm(UserIndex)
-            
-        Case ClientPacketID.RetosAbrir
-            Call HandleRetosAbrir(UserIndex)
-            
-        Case ClientPacketID.RetosCrear
-            Call HandleRetosCrear(UserIndex)
-            
-        Case ClientPacketID.RetosDecide
-            Call HandleRetosDecide(UserIndex)
 
-        Case ClientPacketID.IntercambiarInv
-            Call HandleIntercambiarInv(UserIndex)
-            
-        Case ClientPacketID.Home
-            Call HandleHome(UserIndex)
-            
-        Case ClientPacketID.Equitar
-            Call HandleEquitar(UserIndex)
-            
-        Case ClientPacketID.DejarMontura
-            Call HandleDejarMontura(UserIndex)
-            
-        Case ClientPacketID.CreateEfectoClient
-            Call HandleCreateEfectoClient(UserIndex)
-            
-        Case ClientPacketID.CreateEfectoClientAction
-            Call HandleCreateEfectoClientAction(UserIndex)
-            
-        Case ClientPacketID.AnclarEmbarcacion
-            Call HandleAnclarEmbarcacion(UserIndex)
-            
+    Select Case PacketID
+    Case ClientPacketID.BorrarPJ             'ALOGIN
+        Call HandleBorrarPJ(UserIndex)
+
+    Case ClientPacketID.OpenAccount             'ALOGIN
+        Call HandleOpenAccount(UserIndex)
+
+    Case ClientPacketID.LoginExistingChar       'OLOGIN
+        Call HandleLoginExistingChar(UserIndex)
+
+    Case ClientPacketID.LoginNewChar            'NLOGIN
+        Call HandleLoginNewChar(UserIndex)
+
+    Case ClientPacketID.LoginNewAccount         'CALOGIN
+        Call HandleLoginNewAccount(UserIndex)
+
+    Case ClientPacketID.Talk                    ';
+        Call HandleTalk(UserIndex)
+
+    Case ClientPacketID.Yell                    '-
+        Call HandleYell(UserIndex)
+
+    Case ClientPacketID.Whisper                 '\
+        Call HandleWhisper(UserIndex)
+
+    Case ClientPacketID.Walk                    'M
+        Call HandleWalk(UserIndex)
+
+    Case ClientPacketID.RequestPositionUpdate   'RPU
+        Call HandleRequestPositionUpdate(UserIndex)
+
+    Case ClientPacketID.Attack                  'AT
+        Call HandleAttack(UserIndex)
+
+    Case ClientPacketID.PickUp                  'AG
+        Call HandlePickUp(UserIndex)
+
+    Case ClientPacketID.SafeToggle              '/SEG & SEG  (SEG's behaviour has to be coded in the client)
+        Call HandleSafeToggle(UserIndex)
+
+    Case ClientPacketID.ResuscitationSafeToggle
+        Call HandleResuscitationToggle(UserIndex)
+
+    Case ClientPacketID.RequestGuildLeaderInfo  'GLINFO
+        Call HandleRequestGuildLeaderInfo(UserIndex)
+
+    Case ClientPacketID.RequestAtributes        'ATR
+        Call HandleRequestAtributes(UserIndex)
+
+    Case ClientPacketID.RequestFame             'FAMA
+        Call HandleRequestFame(UserIndex)
+
+    Case ClientPacketID.RequestSkills           'ESKI
+        Call HandleRequestSkills(UserIndex)
+
+    Case ClientPacketID.RequestMiniStats        'FEST
+        Call HandleRequestMiniStats(UserIndex)
+
+    Case ClientPacketID.CommerceEnd             'FINCOM
+        Call HandleCommerceEnd(UserIndex)
+
+    Case ClientPacketID.UserCommerceEnd         'FINCOMUSU
+        Call HandleUserCommerceEnd(UserIndex)
+
+    Case ClientPacketID.UserCommerceConfirm
+        Call HandleUserCommerceConfirm(UserIndex)
+
+    Case ClientPacketID.CommerceChat
+        Call HandleCommerceChat(UserIndex)
+
+    Case ClientPacketID.BankEnd                 'FINBAN
+        Call HandleBankEnd(UserIndex)
+
+    Case ClientPacketID.UserCommerceOk          'COMUSUOK
+        Call HandleUserCommerceOk(UserIndex)
+
+    Case ClientPacketID.UserCommerceReject      'COMUSUNO
+        Call HandleUserCommerceReject(UserIndex)
+
+    Case ClientPacketID.Drop                    'TI
+        Call HandleDrop(UserIndex)
+
+    Case ClientPacketID.CastSpell               'LH
+        Call HandleCastSpell(UserIndex)
+
+    Case ClientPacketID.LeftClick               'LC
+        Call HandleLeftClick(UserIndex)
+
+    Case ClientPacketID.DoubleClick             'RC
+        Call HandleDoubleClick(UserIndex)
+
+    Case ClientPacketID.Work                    'UK
+        Call HandleWork(UserIndex)
+
+    Case ClientPacketID.UseSpellMacro           'UMH
+        Call HandleUseSpellMacro(UserIndex)
+
+    Case ClientPacketID.UseItem                 'USA
+        Call HandleUseItem(UserIndex)
+
+    Case ClientPacketID.CraftBlacksmith         'CNS
+        Call HandleCraftBlacksmith(UserIndex)
+
+    Case ClientPacketID.CraftCarpenter          'CNC
+        Call HandleCraftCarpenter(UserIndex)
+
+    Case ClientPacketID.WorkLeftClick           'WLC
+        Call HandleWorkLeftClick(UserIndex)
+
+    Case ClientPacketID.CreateNewGuild          'CIG
+        Call HandleCreateNewGuild(UserIndex)
+
+    Case ClientPacketID.SpellInfo               'INFS
+        Call HandleSpellInfo(UserIndex)
+
+    Case ClientPacketID.EquipItem               'EQUI
+        Call HandleEquipItem(UserIndex)
+
+    Case ClientPacketID.ChangeHeading           'CHEA
+        Call HandleChangeHeading(UserIndex)
+
+    Case ClientPacketID.ModifySkills            'SKSE
+        Call HandleModifySkills(UserIndex)
+
+    Case ClientPacketID.Train                   'ENTR
+        Call HandleTrain(UserIndex)
+
+    Case ClientPacketID.CommerceBuy             'COMP
+        Call HandleCommerceBuy(UserIndex)
+
+    Case ClientPacketID.BankExtractItem         'RETI
+        Call HandleBankExtractItem(UserIndex)
+
+    Case ClientPacketID.CommerceSell            'VEND
+        Call HandleCommerceSell(UserIndex)
+
+    Case ClientPacketID.BankDeposit             'DEPO
+        Call HandleBankDeposit(UserIndex)
+
+    Case ClientPacketID.MoveSpell               'DESPHE
+        Call HandleMoveSpell(UserIndex)
+
+    Case ClientPacketID.MoveBank
+        Call HandleMoveBank(UserIndex)
+
+    Case ClientPacketID.ClanCodexUpdate         'DESCOD
+        Call HandleClanCodexUpdate(UserIndex)
+
+    Case ClientPacketID.UserCommerceOffer       'OFRECER
+        Call HandleUserCommerceOffer(UserIndex)
+
+    Case ClientPacketID.guild
+        Call HandleGuild(UserIndex)
+
+    Case ClientPacketID.Online                  '/ONLINE
+        Call HandleOnline(UserIndex)
+
+    Case ClientPacketID.Quit                    '/SALIR
+        Call HandleQuit(UserIndex)
+
+    Case ClientPacketID.GuildLeave              '/SALIRCLAN
+        Call HandleGuildLeave(UserIndex)
+
+    Case ClientPacketID.RequestAccountState     '/BALANCE
+        Call HandleRequestAccountState(UserIndex)
+
+    Case ClientPacketID.PetStand                '/QUIETO
+        Call HandlePetStand(UserIndex)
+
+    Case ClientPacketID.PetFollow               '/ACOMPAÑAR
+        Call HandlePetFollow(UserIndex)
+
+    Case ClientPacketID.TrainList               '/ENTRENAR
+        Call HandleTrainList(UserIndex)
+
+    Case ClientPacketID.Rest                    '/DESCANSAR
+        Call HandleRest(UserIndex)
+
+    Case ClientPacketID.Meditate                '/MEDITAR
+        Call HandleMeditate(UserIndex)
+
+    Case ClientPacketID.Resucitate              '/RESUCITAR
+        Call HandleResucitate(UserIndex)
+
+    Case ClientPacketID.Heal                    '/CURAR
+        Call HandleHeal(UserIndex)
+
+    Case ClientPacketID.Help                    '/AYUDA
+        Call HandleHelp(UserIndex)
+
+    Case ClientPacketID.RequestStats            '/EST
+        Call HandleRequestStats(UserIndex)
+
+    Case ClientPacketID.CommerceStart           '/COMERCIAR
+        Call HandleCommerceStart(UserIndex)
+
+    Case ClientPacketID.BankStart               '/BOVEDA
+        Call HandleBankStart(UserIndex)
+
+    Case ClientPacketID.ComandosVarios                  '/ENLISTAR
+        Call HandleComandosVarios(UserIndex)
+
+    Case ClientPacketID.Information             '/INFORMACION
+        Call HandleInformation(UserIndex)
+
+    Case ClientPacketID.Reward                  '/RECOMPENSA
+        Call HandleReward(UserIndex)
+
+    Case ClientPacketID.RequestMOTD             '/MOTD
+        Call HandleRequestMOTD(UserIndex)
+
+    Case ClientPacketID.UpTime                  '/UPTIME
+        Call HandleUpTime(UserIndex)
+
+    Case ClientPacketID.PartyLeave              '/SALIRPARTY
+        Call HandlePartyLeave(UserIndex)
+
+    Case ClientPacketID.PartyCreate             '/CREARPARTY
+        Call HandlePartyCreate(UserIndex)
+
+    Case ClientPacketID.PartyJoin               '/PARTY
+        Call HandlePartyJoin(UserIndex)
+
+    Case ClientPacketID.Inquiry                 '/ENCUESTA ( with no params )
+        Call HandleInquiry(UserIndex)
+
+    Case ClientPacketID.GuildMessage            '/CMSG
+        Call HandleGuildMessage(UserIndex)
+
+    Case ClientPacketID.PartyMessage            '/PMSG
+        Call HandlePartyMessage(UserIndex)
+
+    Case ClientPacketID.CentinelReport          '/CENTINELA
+        Call HandleCentinelReport(UserIndex)
+
+    Case ClientPacketID.GuildOnline             '/ONLINECLAN
+        Call HandleGuildOnline(UserIndex)
+
+    Case ClientPacketID.PartyOnline             '/ONLINEPARTY
+        Call HandlePartyOnline(UserIndex)
+
+    Case ClientPacketID.CouncilMessage          '/BMSG
+        Call HandleCouncilMessage(UserIndex)
+
+    Case ClientPacketID.RoleMasterRequest       '/ROL
+        Call HandleRoleMasterRequest(UserIndex)
+
+    Case ClientPacketID.GMRequest               '/GM
+        Call HandleGMRequest(UserIndex)
+
+    Case ClientPacketID.bugReport               '/_BUG
+        Call HandleBugReport(UserIndex)
+
+    Case ClientPacketID.ChangeDescription       '/DESC
+        Call HandleChangeDescription(UserIndex)
+
+    Case ClientPacketID.GuildVote               '/VOTO
+        Call HandleGuildVote(UserIndex)
+
+    Case ClientPacketID.Punishments             '/PENAS
+        Call HandlePunishments(UserIndex)
+
+    Case ClientPacketID.ChangePassword          '/CONTRASEÑA
+        Call HandleChangePassword(UserIndex)
+
+    Case ClientPacketID.Gamble                  '/APOSTAR
+        Call HandleGamble(UserIndex)
+
+    Case ClientPacketID.InquiryVote             '/ENCUESTA ( with parameters )
+        Call HandleInquiryVote(UserIndex)
+
+    Case ClientPacketID.LeaveFaction            '/RETIRAR ( with no arguments )
+        Call HandleLeaveFaction(UserIndex)
+
+    Case ClientPacketID.BankExtractGold         '/RETIRAR ( with arguments )
+        Call HandleBankExtractGold(UserIndex)
+
+    Case ClientPacketID.BankDepositGold         '/DEPOSITAR
+        Call HandleBankDepositGold(UserIndex)
+
+    Case ClientPacketID.Denounce                '/DENUNCIAR
+        Call HandleDenounce(UserIndex)
+
+    Case ClientPacketID.GuildFundate            '/FUNDARCLAN
+        Call HandleGuildFundate(UserIndex)
+
+    Case ClientPacketID.PartyKick               '/ECHARPARTY
+        Call HandlePartyKick(UserIndex)
+
+    Case ClientPacketID.PartySetLeader          '/PARTYLIDER
+        Call HandlePartySetLeader(UserIndex)
+
+    Case ClientPacketID.PartyAcceptMember       '/ACCEPTPARTY
+        Call HandlePartyAcceptMember(UserIndex)
+
+    Case ClientPacketID.Ping                    '/PING
+        Call HandlePing(UserIndex)
+    
+    Case ClientPacketID.EventPacketCL          'Eventos
+        Call HandleEventPacket(UserIndex)
+
+
+    Case ClientPacketID.InitCrafting
+        Call HandleInitCrafting(UserIndex)
+
+    Case ClientPacketID.ItemUpgrade
+        Call HandleItemUpgrade(UserIndex)
+
+    Case ClientPacketID.RequestPartyForm
+        Call HandlePartyForm(UserIndex)
+
+    Case ClientPacketID.RetosAbrir
+        Call HandleRetosAbrir(UserIndex)
+
+    Case ClientPacketID.RetosCrear
+        Call HandleRetosCrear(UserIndex)
+
+    Case ClientPacketID.RetosDecide
+        Call HandleRetosDecide(UserIndex)
+
+    Case ClientPacketID.IntercambiarInv
+        Call HandleIntercambiarInv(UserIndex)
+
+    Case ClientPacketID.Home
+        Call HandleHome(UserIndex)
+
+    Case ClientPacketID.Equitar
+        Call HandleEquitar(UserIndex)
+
+    Case ClientPacketID.DejarMontura
+        Call HandleDejarMontura(UserIndex)
+
+    Case ClientPacketID.CreateEfectoClient
+        Call HandleCreateEfectoClient(UserIndex)
+
+    Case ClientPacketID.CreateEfectoClientAction
+        Call HandleCreateEfectoClientAction(UserIndex)
+
+    Case ClientPacketID.AnclarEmbarcacion
+        Call HandleAnclarEmbarcacion(UserIndex)
+
         'quest
-        Case ClientPacketID.Quest                   '/QUEST
-            Call HandleQuest(UserIndex)
-            
-        Case ClientPacketID.QuestAccept
-            Call HandleQuestAccept(UserIndex)
-            
-        Case ClientPacketID.QuestListRequest
-            Call HandleQuestListRequest(UserIndex)
-            
-        Case ClientPacketID.QuestDetailsRequest
-            Call HandleQuestDetailsRequest(UserIndex)
-            
-        Case ClientPacketID.QuestAbandon
-            Call HandleQuestAbandon(UserIndex)
-        
+    Case ClientPacketID.Quest                   '/QUEST
+        Call HandleQuest(UserIndex)
+
+    Case ClientPacketID.QuestAccept
+        Call HandleQuestAccept(UserIndex)
+
+    Case ClientPacketID.QuestListRequest
+        Call HandleQuestListRequest(UserIndex)
+
+    Case ClientPacketID.QuestDetailsRequest
+        Call HandleQuestDetailsRequest(UserIndex)
+
+    Case ClientPacketID.QuestAbandon
+        Call HandleQuestAbandon(UserIndex)
+
         'quest
-            
-        
+
+
         'GM messages
-        Case ClientPacketID.gm
-            Call HandleGM(UserIndex)
-        Case ClientPacketID.WarpMeToTarget          '/TELEPLOC
-            Call HandleWarpMeToTarget(UserIndex)
+    Case ClientPacketID.gm
+        Call HandleGM(UserIndex)
+    Case ClientPacketID.WarpMeToTarget          '/TELEPLOC
+        Call HandleWarpMeToTarget(UserIndex)
         #If SeguridadAlkon Then
-                Case Else
-                    Call HandleIncomingDataEx(UserIndex)
+        Case Else
+            Call HandleIncomingDataEx(UserIndex)
         #Else
-                Case Else
-                    'ERROR : Abort!
-                    Call CloseSocket(UserIndex)
+        Case Else
+            'ERROR : Abort!
+            Call CloseSocket(UserIndex)
         #End If
     End Select
-    
+
     'Done with this packet, move on to next one or send everything if no more packets found
     If UserList(UserIndex).incomingData.Length > 0 And Err.Number = 0 Then
         Err.Clear
@@ -957,9 +958,9 @@ On Error Resume Next
     ElseIf Err.Number <> 0 And Not Err.Number = UserList(UserIndex).incomingData.NotEnoughDataErrCode Then
         'An error ocurred, log it and kick player.
         Call LogError("Error: " & Err.Number & " [" & Err.Description & "] " & " Source: " & Err.Source & _
-                        vbTab & " HelpFile: " & Err.HelpFile & vbTab & " HelpContext: " & Err.HelpContext & _
-                        vbTab & " LastDllError: " & Err.LastDllError & vbTab & _
-                        " - UserIndex: " & UserIndex & " - producido al manejar el paquete: " & CStr(packetID))
+                      vbTab & " HelpFile: " & Err.HelpFile & vbTab & " HelpContext: " & Err.HelpContext & _
+                      vbTab & " LastDllError: " & Err.LastDllError & vbTab & _
+                    " - UserIndex: " & UserIndex & " - producido al manejar el paquete: " & CStr(PacketID))
         Call CloseSocket(UserIndex)
         HandleIncomingData = True
     Else
@@ -1601,7 +1602,7 @@ On Error GoTo errhandler
                 'Analize chat...
                 Call Statistics.ParseChat(Chat)
                 
-                If .flags.Privilegios And PlayerType.user Then
+                If .flags.Privilegios And PlayerType.User Then
                     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageChatOverHead(Chat, .Char.CharIndex, vbRed))
                 Else
                     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageChatOverHead(Chat, .Char.CharIndex, CHAT_COLOR_GM_YELL))
@@ -1668,13 +1669,13 @@ On Error GoTo errhandler
             Else
                 targetPriv = UserList(TargetUserIndex).flags.Privilegios
                 'A los dioses y admins no vale susurrarles si no sos uno vos mismo (así no pueden ver si están conectados o no)
-                If (targetPriv And (PlayerType.Dios Or PlayerType.Admin)) <> 0 And (.flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios)) <> 0 Then
+                If (targetPriv And (PlayerType.Dios Or PlayerType.Admin)) <> 0 And (.flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios)) <> 0 Then
                     ' Controlamos que no este invisible
                     If UserList(TargetUserIndex).flags.AdminInvisible <> 1 Then
                         Call WriteConsoleMsg(UserIndex, "No puedes susurrarle a los Dioses y Admins.", FontTypeNames.FONTTYPE_INFO)
                     End If
                 'A los Consejeros y SemiDioses no vale susurrarles si sos un PJ común.
-                ElseIf (.flags.Privilegios And PlayerType.user) <> 0 And (Not targetPriv And PlayerType.user) <> 0 Then
+                ElseIf (.flags.Privilegios And PlayerType.User) <> 0 And (Not targetPriv And PlayerType.User) <> 0 Then
                     ' Controlamos que no este invisible
                     If UserList(TargetUserIndex).flags.AdminInvisible <> 1 Then
                         Call WriteConsoleMsg(UserIndex, "No puedes susurrarle a los GMs.", FontTypeNames.FONTTYPE_INFO)
@@ -1697,7 +1698,7 @@ On Error GoTo errhandler
                         Call FlushBuffer(TargetUserIndex)
                         
                         '[CDT 17-02-2004]
-                        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then
+                        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then
                             Call SendData(SendTarget.ToAdminsAreaButConsejeros, UserIndex, PrepareMessageChatOverHead("a " & UserList(TargetUserIndex).Name & "> " & Chat, .Char.CharIndex, vbYellow))
                         End If
                     End If
@@ -2915,7 +2916,7 @@ Private Sub HandleWorkLeftClick(ByVal UserIndex As Integer)
 
                 If tU > 0 And tU <> UserIndex Then
                     'Can't steal administrative players
-                    If UserList(tU).flags.Privilegios And PlayerType.user Then
+                    If UserList(tU).flags.Privilegios And PlayerType.User Then
                         If UserList(tU).flags.Muerto = 0 Then
                             If Abs(.Pos.X - X) + Abs(.Pos.Y - Y) > 2 Then
                                 Call WriteConsoleMsg(UserIndex, "Estás demasiado lejos.", FontTypeNames.FONTTYPE_INFO)
@@ -4320,12 +4321,12 @@ On Error GoTo errhandler
         'Remove packet ID
         Call buffer.ReadByte
         
-        Dim user As String
+        Dim User As String
         Dim details As String
         
-        user = buffer.ReadASCIIString()
+        User = buffer.ReadASCIIString()
         
-        details = modGuilds.a_DetallesAspirante(UserIndex, user)
+        details = modGuilds.a_DetallesAspirante(UserIndex, User)
         
         If LenB(details) = 0 Then
             Call WriteConsoleMsg(UserIndex, "El personaje no ha mandado solicitud, o no estás habilitado para verla.", FontTypeNames.FONTTYPE_GUILD)
@@ -4911,7 +4912,7 @@ Private Sub HandleOnline(ByVal UserIndex As Integer)
         
         For i = 1 To LastUser
             If LenB(UserList(i).Name) <> 0 Then
-                If UserList(i).flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then _
+                If UserList(i).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then _
                     ListaUsers = ListaUsers & UserList(i).Name & ", "
             End If
         Next i
@@ -5040,7 +5041,7 @@ Private Sub HandleRequestAccountState(ByVal UserIndex As Integer)
                 Call WriteChatOverHead(UserIndex, "Tenés " & .Stats.Banco & " monedas de oro en tu cuenta.", Npclist(.flags.TargetNPC).Char.CharIndex, vbWhite)
             
             Case eNPCType.Timbero
-                If Not .flags.Privilegios And PlayerType.user Then
+                If Not .flags.Privilegios And PlayerType.User Then
                     earnings = Apuestas.Ganancias - Apuestas.Perdidas
                     
                     If earnings >= 0 And Apuestas.Ganancias <> 0 Then
@@ -5301,7 +5302,7 @@ Private Sub HandleMeditate(ByVal UserIndex As Integer)
         End If
         
         'Admins don't have to wait :D
-        If Not .flags.Privilegios And PlayerType.user Then
+        If Not .flags.Privilegios And PlayerType.User Then
             .Stats.MinMAN = .Stats.MaxMAN
             Call WriteConsoleMsg(UserIndex, "Mana restaurado", FontTypeNames.FONTTYPE_VENENO)
             Call WriteUpdateMana(UserIndex)
@@ -7159,12 +7160,12 @@ End Sub
 ' @param    userIndex The index of the user sending the message.
 
 Private Sub HandleGuild(ByVal UserIndex As Integer)
-Dim packetID As Byte
+Dim PacketID As Byte
 'Remove packet ID
 UserList(UserIndex).incomingData.ReadByte
     
-packetID = UserList(UserIndex).incomingData.PeekByte()
-Select Case packetID
+PacketID = UserList(UserIndex).incomingData.PeekByte()
+Select Case PacketID
         Case ClientPacketIDGuild.GuildAcceptPeace        'ACEPPEAT
             Call HandleGuildAcceptPeace(UserIndex)
         
@@ -7237,11 +7238,11 @@ End Select
 End Sub
 
 Private Sub HandleGM(ByVal UserIndex As Integer)
-Dim packetID As Byte
+Dim PacketID As Byte
 'Remove packet ID
-packetID = UserList(UserIndex).incomingData.ReadByte()
-packetID = UserList(UserIndex).incomingData.PeekByte()
-Select Case packetID
+PacketID = UserList(UserIndex).incomingData.ReadByte()
+PacketID = UserList(UserIndex).incomingData.PeekByte()
+Select Case PacketID
 
         Case ClientPacketIDGM.GMMessage               '/GMSG
             Call HandleGMMessage(UserIndex)
@@ -7636,7 +7637,7 @@ On Error GoTo errhandler
         
         message = buffer.ReadASCIIString()
         
-        If Not .flags.Privilegios And PlayerType.user Then
+        If Not .flags.Privilegios And PlayerType.User Then
             Call LogGM(.Name, "Mensaje a Gms:" & message)
         
             If LenB(message) <> 0 Then
@@ -7701,7 +7702,7 @@ Private Sub HandleOnlineRoyalArmy(ByVal UserIndex As Integer)
         'Remove packet ID
         .incomingData.ReadByte
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
     
         Dim i As Long
         Dim list As String
@@ -7709,7 +7710,7 @@ Private Sub HandleOnlineRoyalArmy(ByVal UserIndex As Integer)
         For i = 1 To LastUser
             If UserList(i).ConnID <> -1 Then
                 If UserList(i).Faccion.ArmadaReal = 1 Then
-                    If UserList(i).flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Or _
+                    If UserList(i).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Or _
                       .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then
                         list = list & UserList(i).Name & ", "
                     End If
@@ -7740,7 +7741,7 @@ Private Sub HandleOnlineChaosLegion(ByVal UserIndex As Integer)
         'Remove packet ID
         .incomingData.ReadByte
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
     
         Dim i As Long
         Dim list As String
@@ -7748,7 +7749,7 @@ Private Sub HandleOnlineChaosLegion(ByVal UserIndex As Integer)
         For i = 1 To LastUser
             If UserList(i).ConnID <> -1 Then
                 If UserList(i).Faccion.FuerzasCaos = 1 Then
-                    If UserList(i).flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Or _
+                    If UserList(i).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Or _
                       .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then
                         list = list & UserList(i).Name & ", "
                     End If
@@ -7879,7 +7880,7 @@ On Error GoTo errhandler
         Dim comment As String
         comment = buffer.ReadASCIIString()
         
-        If Not .flags.Privilegios And PlayerType.user Then
+        If Not .flags.Privilegios And PlayerType.User Then
             Call LogGM(.Name, "Comentario: " & comment)
             Call WriteConsoleMsg(UserIndex, "Comentario salvado...", FontTypeNames.FONTTYPE_INFO)
         End If
@@ -7915,7 +7916,7 @@ Private Sub HandleServerTime(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
     
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
     
         Call LogGM(.Name, "Hora.")
     End With
@@ -7953,12 +7954,12 @@ On Error GoTo errhandler
         
         UserName = buffer.ReadASCIIString()
         
-        If Not .flags.Privilegios And PlayerType.user Then
+        If Not .flags.Privilegios And PlayerType.User Then
             tUser = NameIndex(UserName)
             If tUser <= 0 Then
                 Call WriteConsoleMsg(UserIndex, "Usuario offline.", FontTypeNames.FONTTYPE_INFO)
             Else
-                If (UserList(tUser).flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios)) <> 0 Or ((UserList(tUser).flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) <> 0) And (.flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin)) <> 0) Then
+                If (UserList(tUser).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios)) <> 0 Or ((UserList(tUser).flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) <> 0) And (.flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin)) <> 0) Then
                     Call WriteConsoleMsg(UserIndex, "Ubicación  " & UserName & ": " & UserList(tUser).Pos.map & ", " & UserList(tUser).Pos.X & ", " & UserList(tUser).Pos.Y & ".", FontTypeNames.FONTTYPE_INFO)
                     Call LogGM(.Name, "/Donde " & UserName)
                 End If
@@ -8012,7 +8013,7 @@ Private Sub HandleCreaturesInMap(ByVal UserIndex As Integer)
         
         map = .incomingData.ReadInteger()
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
         AreaIndex = AreaUser(UserIndex)
         'If MapaValido(map) Then
             For i = 1 To LastNPC
@@ -8110,7 +8111,7 @@ Private Sub HandleWarpMeToTarget(ByVal UserIndex As Integer)
         Dim X As Integer
         Dim Y As Integer
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
         
         X = .incomingData.ReadInteger
         Y = .incomingData.ReadInteger
@@ -8157,7 +8158,7 @@ On Error GoTo errhandler
         X = buffer.ReadInteger()
         Y = buffer.ReadInteger()
         
-        If Not .flags.Privilegios And PlayerType.user Then
+        If Not .flags.Privilegios And PlayerType.User Then
             If MapaValido(map) And LenB(UserName) <> 0 Then
                 If UCase$(UserName) <> "YO" Then
                     If Not .flags.Privilegios And PlayerType.Consejero Then
@@ -8224,7 +8225,7 @@ On Error GoTo errhandler
         
         UserName = buffer.ReadASCIIString()
         
-        If Not .flags.Privilegios And PlayerType.user Then
+        If Not .flags.Privilegios And PlayerType.User Then
             tUser = NameIndex(UserName)
         
             If tUser <= 0 Then
@@ -8277,7 +8278,7 @@ Private Sub HandleSOSShowList(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
         Call WriteShowSOSForm(UserIndex)
     End With
 End Sub
@@ -8310,7 +8311,7 @@ On Error GoTo errhandler
         Dim UserName As String
         UserName = buffer.ReadASCIIString()
         
-        If Not .flags.Privilegios And PlayerType.user Then _
+        If Not .flags.Privilegios And PlayerType.User Then _
             Call Ayuda.Quitar(UserName)
         
         'If we got here then packet is complete, copy data back to original queue
@@ -8425,7 +8426,7 @@ Private Sub HandleInvisible(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
         
         Call DoAdminInvisible(UserIndex)
         Call LogGM(.Name, "/INVISIBLE")
@@ -8502,7 +8503,7 @@ Private Sub HandleGMPanel(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
         
         Call WriteShowGMPanelForm(UserIndex)
     End With
@@ -8528,14 +8529,14 @@ Private Sub HandleRequestUserList(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.RoleMaster) Then Exit Sub
         
         ReDim names(1 To LastUser) As String
         Count = 1
         
         For i = 1 To LastUser
             If (LenB(UserList(i).Name) <> 0) Then
-                If UserList(i).flags.Privilegios And PlayerType.user Then
+                If UserList(i).flags.Privilegios And PlayerType.User Then
                     names(Count) = UserList(i).Name
                     Count = Count + 1
                 End If
@@ -8564,7 +8565,7 @@ Private Sub HandleWorking(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.RoleMaster) Then Exit Sub
         
         For i = 1 To LastUser
             If UserList(i).flags.UserLogged And UserList(i).Counters.Trabajando > 0 Then
@@ -8603,7 +8604,7 @@ Private Sub HandleHiding(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.RoleMaster) Then Exit Sub
         
         For i = 1 To LastUser
             If (LenB(UserList(i).Name) <> 0) And UserList(i).Counters.Ocultando > 0 Then
@@ -8660,7 +8661,7 @@ On Error GoTo errhandler
         End If
         
         '/carcel nick@motivo@<tiempo>
-        If (Not .flags.Privilegios And PlayerType.RoleMaster) <> 0 And (Not .flags.Privilegios And PlayerType.user) <> 0 Then
+        If (Not .flags.Privilegios And PlayerType.RoleMaster) <> 0 And (Not .flags.Privilegios And PlayerType.User) <> 0 Then
             If LenB(UserName) = 0 Or LenB(Reason) = 0 Then
                 Call WriteConsoleMsg(UserIndex, "Utilice /carcel nick@motivo@tiempo", FontTypeNames.FONTTYPE_INFO)
             Else
@@ -8669,7 +8670,7 @@ On Error GoTo errhandler
                 If tUser <= 0 Then
                     Call WriteConsoleMsg(UserIndex, "El usuario no está online.", FontTypeNames.FONTTYPE_INFO)
                 Else
-                    If Not UserList(tUser).flags.Privilegios And PlayerType.user Then
+                    If Not UserList(tUser).flags.Privilegios And PlayerType.User Then
                         Call WriteConsoleMsg(UserIndex, "No podés encarcelar a administradores.", FontTypeNames.FONTTYPE_INFO)
                     ElseIf jailTime > 600 Then
                         Call WriteConsoleMsg(UserIndex, "No podés encarcelar por más de 600 minutos.", FontTypeNames.FONTTYPE_INFO)
@@ -8727,7 +8728,7 @@ Private Sub HandleKillNPC(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And PlayerType.user Then Exit Sub
+        If .flags.Privilegios And PlayerType.User Then Exit Sub
         
         Dim tNPC As Integer
         Dim auxNPC As NPC
@@ -8790,13 +8791,13 @@ On Error GoTo errhandler
         UserName = buffer.ReadASCIIString()
         Reason = buffer.ReadASCIIString()
         
-        If (Not .flags.Privilegios And PlayerType.RoleMaster) <> 0 And (Not .flags.Privilegios And PlayerType.user) <> 0 Then
+        If (Not .flags.Privilegios And PlayerType.RoleMaster) <> 0 And (Not .flags.Privilegios And PlayerType.User) <> 0 Then
             If LenB(UserName) = 0 Or LenB(Reason) = 0 Then
                 Call WriteConsoleMsg(UserIndex, "Utilice /advertencia nick@motivo", FontTypeNames.FONTTYPE_INFO)
             Else
                 privs = UserDarPrivilegioLevel(UserName)
                 
-                If Not privs And PlayerType.user Then
+                If Not privs And PlayerType.User Then
                     Call WriteConsoleMsg(UserIndex, "No podés advertir a administradores.", FontTypeNames.FONTTYPE_INFO)
                 Else
                     If (InStrB(UserName, "\") <> 0) Then
@@ -9263,7 +9264,7 @@ On Error GoTo errhandler
                 End If
             Else
                 'don't allow to retrieve administrator's info
-                If UserList(targetIndex).flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then
+                If UserList(targetIndex).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then
                     Call SendUserStatsTxt(UserIndex, targetIndex)
                 End If
             End If
@@ -9711,7 +9712,7 @@ Private Sub HandleOnlineGM(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then Exit Sub
 
         priv = PlayerType.Consejero Or PlayerType.SemiDios
         If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then priv = priv Or PlayerType.Dios Or PlayerType.Admin
@@ -9750,13 +9751,13 @@ Private Sub HandleOnlineMap(ByVal UserIndex As Integer)
         Dim map As Integer
         map = .incomingData.ReadInteger
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then Exit Sub
         
         Dim LoopC As Long
         Dim list As String
         Dim priv As PlayerType
         
-        priv = PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios
+        priv = PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios
         If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then priv = priv + (PlayerType.Dios Or PlayerType.Admin)
         
         For LoopC = 1 To LastUser
@@ -9930,7 +9931,7 @@ On Error GoTo errhandler
             tUser = NameIndex(UserName)
             
             If tUser > 0 Then
-                If Not UserList(tUser).flags.Privilegios And PlayerType.user Then
+                If Not UserList(tUser).flags.Privilegios And PlayerType.User Then
                     Call WriteConsoleMsg(UserIndex, "Estás loco?? como vas a piñatear un gm!!!! :@", FontTypeNames.FONTTYPE_INFO)
                 Else
                     Call UserDie(tUser)
@@ -10096,7 +10097,7 @@ Private Sub HandleNPCFollow(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then Exit Sub
         
         If .flags.TargetNPC > 0 Then
             Call DoFollow(.flags.TargetNPC, .Name)
@@ -10146,7 +10147,7 @@ On Error GoTo errhandler
                 Call WriteConsoleMsg(UserIndex, "El jugador no esta online.", FontTypeNames.FONTTYPE_INFO)
             Else
                 If (.flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin)) <> 0 Or _
-                  (UserList(tUser).flags.Privilegios And (PlayerType.Consejero Or PlayerType.user)) <> 0 Then
+                  (UserList(tUser).flags.Privilegios And (PlayerType.Consejero Or PlayerType.User)) <> 0 Then
                     Call WriteConsoleMsg(tUser, .Name & " te ha trasportado.", FontTypeNames.FONTTYPE_INFO)
                     X = .Pos.X
                     Y = .Pos.Y + 1
@@ -10190,7 +10191,7 @@ Private Sub HandleSpawnListRequest(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then Exit Sub
         
         Call EnviarSpawnList(UserIndex)
     End With
@@ -10245,7 +10246,7 @@ Private Sub HandleResetNPCInventory(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.RoleMaster) Then Exit Sub
         If .flags.TargetNPC = 0 Then Exit Sub
         
         Call ResetNpcInv(.flags.TargetNPC)
@@ -10268,7 +10269,7 @@ Private Sub HandleCleanWorld(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
 
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LimpiarMundo
     End With
@@ -10361,9 +10362,9 @@ On Error GoTo errhandler
             Call LogGM(.Name, "NICK2IP Solicito la IP de " & UserName)
 
             If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then
-                priv = PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.Dios Or PlayerType.Admin
+                priv = PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.Dios Or PlayerType.Admin
             Else
-                priv = PlayerType.user
+                priv = PlayerType.User
             End If
             
             If tUser > 0 Then
@@ -10436,14 +10437,14 @@ Private Sub HandleIPToNick(ByVal UserIndex As Integer)
         ip = ip & .incomingData.ReadByte() & "."
         ip = ip & .incomingData.ReadByte()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, "IP2NICK Solicito los Nicks de IP " & ip)
         
         If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then
-            priv = PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.Dios Or PlayerType.Admin
+            priv = PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.Dios Or PlayerType.Admin
         Else
-            priv = PlayerType.user
+            priv = PlayerType.User
         End If
 
         For LoopC = 1 To LastUser
@@ -10548,7 +10549,7 @@ Private Sub HandleTeleportCreate(ByVal UserIndex As Integer)
         X = .incomingData.ReadInteger()
         Y = .incomingData.ReadInteger()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         Call LogGM(.Name, "/CT " & mapa & "," & X & "," & Y)
         
@@ -10605,7 +10606,7 @@ Private Sub HandleTeleportDestroy(ByVal UserIndex As Integer)
         Call .incomingData.ReadByte
         
         '/dt
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         mapa = .flags.TargetMap
         X = .flags.targetX
@@ -10648,7 +10649,7 @@ Private Sub HandleRainToggle(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then Exit Sub
         
         Call LogGM(.Name, "/LLUVIA")
         Lloviendo = Not Lloviendo
@@ -11065,7 +11066,7 @@ Private Sub HandleDestroyAllItemsInArea(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         Dim X As Long
         Dim Y As Long
@@ -11226,7 +11227,7 @@ Private Sub HandleItemsInTheFloor(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         Dim tObj As Integer
         Dim lista As String
@@ -11374,7 +11375,7 @@ Private Sub HandleDumpIPTables(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         Call SecurityIp.DumpTables
     End With
@@ -11482,7 +11483,7 @@ Private Sub HandleSetTrigger(ByVal UserIndex As Integer)
         
         tTrigger = .incomingData.ReadByte()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         If tTrigger >= 0 Then
             MapData(.Pos.map).Tile(.Pos.X, .Pos.Y).Trigger = tTrigger
@@ -11511,7 +11512,7 @@ Private Sub HandleAskTrigger(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         tTrigger = MapData(.Pos.map).Tile(.Pos.X, .Pos.Y).Trigger
         
@@ -11538,7 +11539,7 @@ Private Sub HandleBannedIPList(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Dim lista As String
         Dim LoopC As Long
@@ -11570,7 +11571,7 @@ Private Sub HandleBannedIPReload(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call BanIpGuardar
         Call BanIpCargar
@@ -11782,7 +11783,7 @@ Private Sub HandleUnbanIP(ByVal UserIndex As Integer)
         bannedIP = bannedIP & .incomingData.ReadByte() & "."
         bannedIP = bannedIP & .incomingData.ReadByte()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         If BanIpQuita(bannedIP) Then
             Call WriteConsoleMsg(UserIndex, "La IP """ & bannedIP & """ se ha quitado de la lista de bans.", FontTypeNames.FONTTYPE_INFO)
@@ -11821,7 +11822,7 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
         
         ObjS = .incomingData.ReadASCIIString()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         
         
@@ -11886,7 +11887,7 @@ Private Sub HandleDestroyItems(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         If MapData(.Pos.map).Tile(.Pos.X, .Pos.Y).ObjInfo.ObjIndex = 0 Then Exit Sub
         
@@ -12070,7 +12071,7 @@ Private Sub HandleForceWAVEAll(ByVal UserIndex As Integer)
         Dim waveID As Byte
         waveID = .incomingData.ReadByte()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         Call SendData(SendTarget.ToAll, 0, PrepareMessagePlayWave(waveID, NO_3D_SOUND, NO_3D_SOUND))
     End With
@@ -12163,7 +12164,7 @@ Private Sub HandleTileBlockedToggle(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
 
         Call LogGM(.Name, "/BLOQ")
         
@@ -12192,7 +12193,7 @@ Private Sub HandleKillNPCNoRespawn(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         If .flags.TargetNPC = 0 Then Exit Sub
         
@@ -12216,7 +12217,7 @@ Private Sub HandleKillAllNearbyNPCs(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         Dim X As Long
         Dim Y As Long
@@ -12454,7 +12455,7 @@ Public Sub HandleResetAutoUpdate(ByVal UserIndex As Integer)
         'Remove packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         If UCase$(.Name) <> "MARAXUS" Then Exit Sub
         
         Call WriteConsoleMsg(UserIndex, "TID: " & CStr(ReiniciarAutoUpdate()), FontTypeNames.FONTTYPE_INFO)
@@ -12476,7 +12477,7 @@ Public Sub HandleRestart(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
     
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         If UCase$(.Name) <> "MARAXUS" Then Exit Sub
         
         'time and Time BUG!
@@ -12501,7 +12502,7 @@ Public Sub HandleReloadObjects(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha recargado a los objetos.")
         
@@ -12524,7 +12525,7 @@ Public Sub HandleReloadSpells(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha recargado los hechizos.")
         
@@ -12547,7 +12548,7 @@ Public Sub HandleReloadServerIni(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha recargado los INITs.")
         
@@ -12570,7 +12571,7 @@ Public Sub HandleReloadNPCs(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
          
         Call LogGM(.Name, .Name & " ha recargado los NPCs.")
     
@@ -12595,7 +12596,7 @@ Public Sub HandleKickAllChars(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha echado a todos los personajes.")
         
@@ -12619,7 +12620,7 @@ Public Sub HandleShowServerForm(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha solicitado mostrar el formulario del servidor.")
         Call frmMain.mnuMostrar_Click
@@ -12641,7 +12642,7 @@ Public Sub HandleCleanSOS(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha borrado los SOS")
         
@@ -12664,7 +12665,7 @@ Public Sub HandleSaveChars(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha guardado todos los chars")
         
@@ -12688,7 +12689,7 @@ Public Sub HandleSaveMap(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha guardado el mapa " & CStr(.Pos.map))
         
@@ -12763,7 +12764,7 @@ Public Sub HandleDoBackUp(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, .Name & " ha hecho un backup")
         
@@ -12787,7 +12788,7 @@ Public Sub HandleToggleCentinelActivated(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         centinelaActivado = Not centinelaActivado
         
@@ -13053,7 +13054,7 @@ Public Sub HandleCreateNPC(ByVal UserIndex As Integer)
         
         NpcIndex = .incomingData.ReadInteger()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         NpcIndex = SpawnNpc(NpcIndex, .Pos, True, False, UserList(UserIndex).zona)
         
@@ -13088,7 +13089,7 @@ Public Sub HandleCreateNPCWithRespawn(ByVal UserIndex As Integer)
         
         NpcIndex = .incomingData.ReadInteger()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
         
         NpcIndex = SpawnNpc(NpcIndex, .Pos, True, True, UserList(UserIndex).zona)
         
@@ -13124,7 +13125,7 @@ Public Sub HandleImperialArmour(ByVal UserIndex As Integer)
         index = .incomingData.ReadByte()
         ObjIndex = .incomingData.ReadInteger()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Select Case index
             Case 1
@@ -13168,7 +13169,7 @@ Public Sub HandleChaosArmour(ByVal UserIndex As Integer)
         index = .incomingData.ReadByte()
         ObjIndex = .incomingData.ReadInteger()
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Select Case index
             Case 1
@@ -13201,7 +13202,7 @@ Public Sub HandleNavigateToggle(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then Exit Sub
         
         If .flags.Navegando = 1 Then
             .flags.Navegando = 0
@@ -13229,7 +13230,7 @@ Public Sub HandleServerOpenToUsersToggle(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         If ServerSoloGMs > 0 Then
             Call WriteConsoleMsg(UserIndex, "Servidor habilitado para todos.", FontTypeNames.FONTTYPE_INFO)
@@ -13258,7 +13259,7 @@ Public Sub HandleTurnOffServer(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
+        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios Or PlayerType.RoleMaster) Then Exit Sub
         
         Call LogGM(.Name, "/APAGAR")
         Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(.Name & " VA A APAGAR EL SERVIDOR!!!", FontTypeNames.FONTTYPE_FIGHT))
@@ -13651,7 +13652,7 @@ Public Sub HandleChangeMOTD(ByVal UserIndex As Integer)
         'Remove Packet ID
         Call .incomingData.ReadByte
         
-        If (.flags.Privilegios And (PlayerType.RoleMaster Or PlayerType.user Or PlayerType.Consejero Or PlayerType.SemiDios)) Then
+        If (.flags.Privilegios And (PlayerType.RoleMaster Or PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios)) Then
             Exit Sub
         End If
         
@@ -15316,7 +15317,7 @@ End Sub
 ' @param    attackerIndex   The user index of the user that attacked.
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
-Public Sub WriteUserAttackedSwing(ByVal UserIndex As Integer, ByVal attackerIndex As Integer)
+Public Sub WriteUserAttackedSwing(ByVal UserIndex As Integer, ByVal AttackerIndex As Integer)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -15325,7 +15326,7 @@ Public Sub WriteUserAttackedSwing(ByVal UserIndex As Integer, ByVal attackerInde
 On Error GoTo errhandler
     With UserList(UserIndex).outgoingData
         Call .WriteByte(ServerPacketID.UserAttackedSwing)
-        Call .WriteInteger(UserList(attackerIndex).Char.CharIndex)
+        Call .WriteInteger(UserList(AttackerIndex).Char.CharIndex)
     End With
 Exit Sub
 
@@ -16324,7 +16325,7 @@ Cant = mySQL.SQLQuery("SELECT pjs.Nombre, pjs.Head, pjs.Body,pjs.PerteneceReal, 
                 ElseIf rs("PerteneceCaos") = 1 Then
                     .WriteByte (PlayerType.ChaosCouncil)
                 Else
-                    .WriteByte (PlayerType.user)
+                    .WriteByte (PlayerType.User)
                 End If
                 
             End If
@@ -19068,3 +19069,129 @@ Public Function PrepareMessageSendAura(ByVal UserIndex As Integer, ByVal Aurag A
     End With
 End Function
 'aura
+'eventos
+
+Public Sub HandleEventPacket(ByVal UserIndex As Integer)
+    If UserList(UserIndex).incomingData.Length < 2 Then
+        Err.Raise UserList(UserIndex).incomingData.NotEnoughDataErrCode
+        Exit Sub
+    End If
+
+    On Error GoTo errhandler
+    With UserList(UserIndex)
+        'This packet contains strings, make a copy of the data to prevent losses if it's not complete yet...
+        Dim buffer As New clsByteQueue
+        Call buffer.CopyBuffer(.incomingData)
+
+        'Remove packet ID
+        Call buffer.ReadByte
+        
+        Dim PacketID As Integer
+        Dim LoopC As Integer
+        Dim Modality As eModalityEvent, Quotas As Byte, LvlMin As Byte, LvlMax As Byte, GldInscription As Long, DspInscription As Long, CanjeInscription As Long, TimeInit As Long, TimeCancel As Long, AllowedClasses(1 To NUMCLASES) As Byte
+        
+        Dim TeamCant As Byte
+        PacketID = buffer.ReadByte
+        
+        Select Case PacketID
+            Case EventPacketID.eNewEvent
+                Modality = buffer.ReadByte()
+                Quotas = buffer.ReadByte()
+                LvlMin = buffer.ReadByte()
+                LvlMax = buffer.ReadByte()
+                GldInscription = buffer.ReadLong()
+                DspInscription = buffer.ReadLong()
+                CanjeInscription = buffer.ReadLong()
+                TimeInit = buffer.ReadLong()
+                TimeCancel = buffer.ReadLong()
+                
+                For LoopC = 1 To NUMCLASES
+                    AllowedClasses(LoopC) = buffer.ReadByte()
+                Next LoopC
+                
+                TeamCant = buffer.ReadByte()
+                
+                EventosAOyin.NewEvent UserIndex, Modality, Quotas, LvlMin, LvlMax, GldInscription, DspInscription, CanjeInscription, TimeInit, TimeCancel, TeamCant, AllowedClasses()
+                                
+            Case EventPacketID.eCloseEvent
+                EventosAOyin.CloseEvent buffer.ReadByte
+                
+            Case EventPacketID.RequiredEvents
+                WriteEventPacket UserIndex, SvEventPacketID.SendListEvent
+                
+            Case EventPacketID.RequiredDataEvent
+                WriteEventPacket UserIndex, SvEventPacketID.SendDataEvent, CByte(buffer.ReadByte())
+            
+            Case EventPacketID.eAbandonateEvent
+                EventosAOyin.AbandonateEvent UserIndex, , True
+                
+            Case EventPacketID.eParticipeEvent
+                EventosAOyin.ParticipeEvent UserIndex, buffer.ReadASCIIString
+        End Select
+        'If we got here then packet is complete, copy data back to original queue
+        Call .incomingData.CopyBuffer(buffer)
+    End With
+
+errhandler:
+    Dim error  As Long
+    error = Err.Number
+    On Error GoTo 0
+
+    'Destroy auxiliar buffer
+    Set buffer = Nothing
+
+    If error <> 0 Then _
+       Err.Raise error
+End Sub
+
+
+Public Sub WriteEventPacket(ByVal UserIndex As Integer, ByVal PacketID As Byte, Optional ByVal DataExtra As Long)
+    On Error GoTo errhandler
+
+    Dim LoopC As Integer
+    
+    With UserList(UserIndex).outgoingData
+        Call .WriteByte(ServerPacketID.EventPacketSv)
+        Call .WriteByte(PacketID)
+        
+        Select Case PacketID
+            Case SvEventPacketID.SendListEvent
+                For LoopC = 1 To EventosAOyin.MAX_EVENT_SIMULTANEO
+                    Call .WriteByte(IIf((Events(LoopC).Enabled = True), Events(LoopC).Modality, 0))
+                    
+                Next LoopC
+                
+            Case SvEventPacketID.SendDataEvent
+                Call .WriteByte(Events(DataExtra).Inscribed)
+                Call .WriteByte(Events(DataExtra).Quotas)
+                Call .WriteByte(Events(DataExtra).LvlMin)
+                Call .WriteByte(Events(DataExtra).LvlMax)
+                Call .WriteLong(Events(DataExtra).GldInscription * Events(DataExtra).Inscribed)
+                Call .WriteLong(Events(DataExtra).DspInscription * Events(DataExtra).Inscribed)
+                Call .WriteLong(Events(DataExtra).CanjeInscription * Events(DataExtra).Inscribed)
+                Call .WriteASCIIString(strUsersEvent(DataExtra))
+        End Select
+        
+    End With
+Exit Sub
+
+errhandler:
+    If Err.Number = UserList(UserIndex).outgoingData.NotEnoughSpaceErrCode Then
+        Call FlushBuffer(UserIndex)
+        Resume
+    End If
+End Sub
+
+
+Public Sub WriteUserInEvent(ByVal UserIndex As Integer)
+    On Error GoTo errhandler
+    Call UserList(UserIndex).outgoingData.WriteByte(ServerPacketID.UserInEvent)
+    Exit Sub
+
+errhandler:
+    If Err.Number = UserList(UserIndex).outgoingData.NotEnoughSpaceErrCode Then
+        Call FlushBuffer(UserIndex)
+        Resume
+    End If
+End Sub
+'Eventos

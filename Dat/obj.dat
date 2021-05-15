@@ -70,7 +70,7 @@ usar primero los nros más bajos.
 [INIT]
 'aca va el numero de OBJ mas alto, NO la cantidad de OBJs.
 'esto sirve para que los GMS puedan ver la lista completa de items para crear en una ventanita.
-NumOBJs=1100
+NumOBJs=1108
 
 
 
@@ -1389,7 +1389,7 @@ ObjType=2
 Agarrable=0
 Anim=1
 MinHit=6
-MaxHit=11
+MaxHit=17
 Valor=2310
 Crucial=1
 CP1=MAGO
@@ -12699,10 +12699,9 @@ GrhIndex=30497
 ObjType=4
 Agarrable=1
 
-
 [OBJ1100]
 Name=Balsa
-GrhIndex=638
+GrhIndex=30744
 ObjType=31
 NumRopaje=547
 Agarrable=0
@@ -12714,8 +12713,80 @@ Valor=12000
 Crucial=0
 MinSkill=10
 
+[OBJ1101] 'Puerta para negocio porque no tiene clave 'ulla
+Name=Puerta de madera abierta
+GrhIndex=30730
+ObjType=6
+Agarrable=1
+Abierta=0
+Llave=0
+IndexAbierta=1101
+IndexCerrada=1102
+IndexCerradaLlave=1102
 
+[OBJ1102] 'Puerta para negocio porque no tiene clave 'ulla
+Name=Puerta de madera cerrada
+GrhIndex=30731
+ObjType=6
+Abierta=1
+Agarrable=1
+Llave=0
+IndexAbierta=1101
+IndexCerrada=1102
+IndexCerradaLlave=1102
 
+[OBJ1103]
+Name=Teleport 
+GrhIndex=31304
+ObjType=19
+Agarrable=1
 
+[OBJ1104]
+Name=Teleport 
+GrhIndex=31311
+ObjType=19
+Agarrable=1
 
+[OBJ1105] 'Puerta piedra castillo
+Name=Puerta de piedra abierta
+GrhIndex=31350
+ObjType=6
+Agarrable=1
+Abierta=0
+Llave=0
+IndexAbierta=1105
+IndexCerrada=1106
+IndexCerradaLlave=1106
 
+[OBJ1106] 'Puerta piedra castillo
+Name=Puerta de piedra cerrada
+GrhIndex=31349
+ObjType=6
+Abierta=1
+Agarrable=1
+Llave=0
+IndexAbierta=1105
+IndexCerrada=1106
+IndexCerradaLlave=1106
+
+[OBJ1107] 'Puerta piedra suelo
+Name=Puerta de piedra en suelo abierta
+GrhIndex=31403
+ObjType=6
+Agarrable=1
+Abierta=0
+Llave=0
+IndexAbierta=1107
+IndexCerrada=1108
+IndexCerradaLlave=1108
+
+[OBJ1108] 'Puerta piedra suelo
+Name=Puerta de piedra en suelo cerrada
+GrhIndex=31404
+ObjType=6
+Abierta=1
+Agarrable=1
+Llave=0
+IndexAbierta=1107
+IndexCerrada=1108
+IndexCerradaLlave=1108

@@ -275,7 +275,7 @@ Private Sub MD5_dword(sMessage As String, a As Long, B As Long, c As Long, d As 
     Const S31 = 4
     Const S32 = 11
     Const S33 = 16
-    Const S34 = 23
+    Const S34 = 33
     Const S41 = 6
     Const S42 = 10
     Const S43 = 15

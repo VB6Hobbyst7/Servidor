@@ -197,6 +197,9 @@ Sub Main()
 
     ChDir App.Path
     ChDrive App.Path
+    'eventos
+   Call LoadMapEvent
+    'eventos
     'bots
     'inicializa los spells de los bots
     Call ModBots.ia_Spells
@@ -857,7 +860,7 @@ For LoopC = 1 To UBound(UserList())
     Set UserList(LoopC).outgoingData = Nothing
 Next LoopC
 
-ReDim UserList(1 To MaxUsers) As user
+ReDim UserList(1 To MaxUsers) As User
 
 For LoopC = 1 To MaxUsers
     UserList(LoopC).ConnID = -1
@@ -1355,7 +1358,7 @@ End Sub
 
 Public Sub HambreYSed(ByVal UserIndex As Integer, ByRef fenviarAyS As Boolean)
 
-If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Exit Sub
+If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Exit Sub
 
 'Sed
 If UserList(UserIndex).Stats.MinAGU > 0 Then
@@ -1423,15 +1426,66 @@ Public Sub CargaNpcsDat()
 End Sub
 
 Sub PasarSegundo()
-On Error GoTo errhandler
+    On Error GoTo errhandler
     Dim i As Long
+
+
+    'eventos
+
+    EventosAOyin.LoopEvent
     
-    If CuentaRegresivaTimer >= 0 Then
-        Call SendData(SendTarget.ToAll, 0, PrepareCounterMsg(CuentaRegresivaTimer))
+    
+
+    If CuentaRegresivaTimer > 0 Then
+        If CuentaRegresivaTimer > 1 Then
+            Call SendData(SendTarget.ToAll, 0, PrepareCounterMsg(CuentaRegresivaTimer))
+            Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("" & CuentaRegresivaTimer - 1, FontTypeNames.FONTTYPE_GUILD))
+
+        Else
+            Call SendData(SendTarget.ToAll, 0, PrepareCounterMsg(CuentaRegresivaTimer))
+            Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("YA!", FontTypeNames.FONTTYPE_FIGHT))
+
+        End If
         CuentaRegresivaTimer = CuentaRegresivaTimer - 1
     End If
-    
     For i = 1 To LastUser
+    With UserList(i)
+        If .Counters.TimeFight > 0 Then
+            .Counters.TimeFight = .Counters.TimeFight - 1
+
+            If .Counters.TimeFight = 0 Then
+                WriteConsoleMsg i, "Cuenta» ¡YA!", FontTypeNames.FONTTYPE_FIGHT
+
+                ' En los duelos desparalizamos el cliente
+                If .flags.SlotEvent > 0 Then
+                    If Events(.flags.SlotEvent).Modality = Enfrentamientos Then
+                        Call WriteUserInEvent(i)
+                    End If
+                End If
+
+
+            Else
+                WriteConsoleMsg i, "Cuenta» " & .Counters.TimeFight, FontTypeNames.FONTTYPE_GUILD
+
+            End If
+        End If
+
+        If .Counters.TimeCastleMode > 0 Then
+            .Counters.TimeCastleMode = .Counters.TimeCastleMode - 1
+
+            WriteConsoleMsg i, "Revivirás en " & .Counters.TimeCastleMode & " ...", FontTypeNames.FONTTYPE_GUILD
+
+            If .Counters.TimeCastleMode <= 0 Then
+                EventosAOyin.CastleMode_UserRevive i
+                WriteConsoleMsg i, "Has revivido. ¡Ve a defender a tu Rey!", FontTypeNames.FONTTYPE_GUILD
+            End If
+        End If
+
+    End With
+    'eventos
+    
+
+    
         If UserList(i).flags.UserLogged Then
             'Cerrar usuario
             If UserList(i).Counters.Saliendo Then
@@ -1440,18 +1494,18 @@ On Error GoTo errhandler
                     Call WriteConsoleMsg(i, "Gracias por jugar Argentum Online 2020", FontTypeNames.FONTTYPE_INFO)
                     Call WriteDisconnect(i)
                     Call FlushBuffer(i)
-                    
+
                     Call CloseSocket(i)
                 End If
-            
-             End If
-             
-             If UserList(i).flags.Nadando = True And UserList(i).flags.Navegando = 1 Then
+
+            End If
+
+            If UserList(i).flags.Nadando = True And UserList(i).flags.Navegando = 1 Then
                 Call EfectoNadando(i)
-             End If
+            End If
         End If
     Next i
-Exit Sub
+    Exit Sub
 
 errhandler:
     Call LogError("Error en PasarSegundo. Err: " & Err.Description & " - " & Err.Number & " - UserIndex: " & i)

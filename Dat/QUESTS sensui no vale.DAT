@@ -1,0 +1,128 @@
+[INIT]
+NumQuests=6
+ 
+
+
+
+----------------------------BONUS QUEST---------------------------------------
+
+[QUEST1]
+Nombre=Cazeria
+Desc=Estoy cansado y herido,me ataco un oso salvaje,ten cuidado,si lo matas y me traes unas pociones y viveres te recompensare amigo!
+DescFinal= Gracias,ya me siento bastante mejor.
+RequiredLevel=14
+ 
+RequiredOBJs=3
+RequiredOBJ1=38-25  'pocion roja
+RequiredOBJ1=1-4 ''manzana roja
+RequiredOBJ1=34-2 ' botella agua
+
+RequiredNPCs=1
+RequiredNPC1=538-1 'oso pardo
+ 
+RewardGLD=5000
+RewardEXP=10000
+ 
+RewardOBJs=0
+RewardOBJ1=0
+
+
+[QUEST2]
+Nombre=Catacumbas
+Desc=Tengo miedo,las catacumbas estan infectadas de arañas como pasar por ellas...mata 3 arañas para despejar la zona POR FAVOR!
+DescFinal= Gracias.. aun asi no se si entrare...
+RequiredLevel=16
+ 
+RequiredOBJs=0
+RequiredOBJ1=0
+
+RequiredNPCs=1
+RequiredNPC1=510-3
+ 
+RewardGLD=6000
+RewardEXP=11000
+ 
+RewardOBJs=0
+RewardOBJ1=0
+
+[QUEST3]
+Nombre=Minas de oro
+Desc=Siempre intento minar oro,pero me es imposible...no para de venir gente peligrosa...me faltan 2000 minerales de oro,me los puedes conseguir tu??
+DescFinal= Aja!! Ahora podre hacerme una espada mata dragones!
+RequiredLevel=25
+ 
+RequiredOBJs=1
+RequiredOBJ1=194-1
+
+RequiredNPCs=0
+RequiredNPC1=0
+ 
+RewardGLD=15000
+RewardEXP=50000
+ 
+RewardOBJs=0
+RewardOBJ1=0
+
+
+[QUEST4]
+Nombre=Pescados
+Desc=Vaya... uff.. se a roto mi caña,puedes pescarme 100 pescados PORFA VOR?
+DescFinal= Aja!! Los vendere al mercado para comprar otra caña. GRACIAS!
+RequiredLevel=10
+ 
+RequiredOBJs=1
+RequiredOBJ1=139-100
+
+RequiredNPCs=0
+RequiredNPC1=0
+ 
+RewardGLD=0
+RewardEXP=6000
+ 
+RewardOBJs=0
+RewardOBJ1=0
+
+
+[QUEST5]
+Nombre=Matadragones
+Desc=EH EH,Que tenga una espada matadragones,no quiere decir que te la de asi como asi....
+DescFinal= Esta bien..pense que no serias capaz de ello..pero toma la maldita espada...
+RequiredLevel=35
+ 
+RequiredOBJs=0
+RequiredOBJ1=0
+
+RequiredNPCs=5
+RequiredNPC1=553-2
+RequiredNPC2=554-5
+RequiredNPC3=550-3
+RequiredNPC4=552-1
+RequiredNPC5=567-10
+ 
+RewardGLD=20000
+RewardEXP=50000
+ 
+RewardOBJs=1
+RewardOBJ1=402
+
+[QUEST6]
+Nombre=Armamento
+Desc=No tengo armas y esta zona es muy peligrosa,traeme un arco y flechas para poder atacar a la distancai!
+DescFinal= Gracias!!! ahora me siento mucho mas seguro.
+RequiredLevel=15
+ 
+RequiredOBJs=2
+RequiredOBJ1=478-1
+RequiredOBJ1=480-2
+
+RequiredNPCs=0
+RequiredNPC1=0
+
+ 
+RewardGLD=5000
+RewardEXP=12000
+ 
+RewardOBJs=0
+RewardOBJ1=0
+
+

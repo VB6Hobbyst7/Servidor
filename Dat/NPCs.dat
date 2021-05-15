@@ -12,6 +12,9 @@
 7 ====== TIMBEROS
 8 ======
 9 ====== PUEDE RESUCITAR SOLAMENTE A LOS NEWBIES
+14 ====== objetivos de quest(revisar por que es de ao20 y no se si existe aca)
+17 ====== QUEST
+
 
 MOVEMENT
 10 ====== PATHFINDING
@@ -43,6 +46,7 @@ NPCS GUARDIAS LEGIÓN
 NPCS NO HOSTILES
 NPCS HOSTILES
 NPCS PRETORIANOS
+NPCS QUEST
 
 ##############################################
 ###############REVISIONES#####################
@@ -62,7 +66,7 @@ REVISAR ENTRENADOR ARKHEIN SI SUS NPCS QUE INVOCA, HAY QUE REVISAR QUE NO TENGAN
 580
 581
 
-Actual Npc con Nro más alto: 610
+Actual Npc con Nro más alto: 932
 
 ##############################################
 ###############OBSERVACIONES##################
@@ -80,7 +84,7 @@ Actual Npc con Nro más alto: 610
 'aca va el número de NPC más alto, NO la cantidad de NPCs.
 'esto sirve para que los GMS puedan ver la lista completa de npcs a invocar en una ventanita.
 
-NumNPCs=928
+NumNPCs=932
 
 [NPC148] 'VendeMagia Polo
 Name=Mago
@@ -9121,11 +9125,12 @@ EquitandoBody=512
 ############################################
 
 [NPC909]
-Name=Gran Orco Legendario
+Name=Gulfas Morgolock
+Desc=Yo soy el creador de estas tierras ! no te atrevas a retarme!
 NpcType=0
-Head=0
+Head=2
 Heading=3
-Body=537
+Body=56
 Movement=10
 AguaValida=0
 Attackable=1
@@ -9255,26 +9260,42 @@ PoderAtaque=350
 PoderEvasion=300
 BackUp=0Ç
 
-[NPC914]
-Name=Guardian Catas
-NpcType=0
-Desc=¡Soy el Guardian de esta entrada!No te dejare pasar!
-Head=1
-Heading=3
-Body=221
-Movement=1
-Attackable=0
+NPC914] 'Guardian Catas Boss
+Name=Guardian Nivel Dos
+NpcType=10
+Head=2
+Heading=221
+Arma=13
+Escudo=7
+Casco=8
+Movement=11
+Attackable=1
 ReSpawn=0
 Hostile=0
 Domable=0
 Alineacion=0
 Comercia=0
-BackUp=0
+GiveEXP=0
+GiveGLDMin=0
+MinHP=455
+MaxHP=455
+MaxHIT=200
+MinHIT=115
+DEF=30
+PoderAtaque=400
+PoderEvasion=190
+LanzaSpells=5
+Sp1=10
+Sp2=24
+Sp3=25
+Sp4=23
+Sp5=1
+
 
 [NPC915]
 Name=Cazador de osos
 NpcType=0
-Desc=¡Cuidado! Osos salvajes cerca!!
+Desc=¡Cuidado! Osos salvajes cerca!! /BONUSQUEST
 Head=1
 Heading=3
 Body=58
@@ -9286,9 +9307,10 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
+QuestNumber=1
 
 [NPC916]
-Name=Mago Veril
+Name=Mago Veril /BONUSQUEST
 NpcType=0
 Desc=¡Cuidado! Esta isla es muy peligrosa!
 Head=5
@@ -9302,6 +9324,7 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
+QuestNumber=3
 
 
 [NPC917]
@@ -9321,7 +9344,7 @@ Comercia=0
 BackUp=0
 
 [NPC918]
-Name=Pescador Nix
+Name=Pescador Nix /BONUSQUEST
 NpcType=0
 Desc=¡ He pescado algo !
 Head=1
@@ -9335,6 +9358,7 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
+QuestNumber=4
 
 [NPC919]
 Name=Misero
@@ -9371,7 +9395,7 @@ BackUp=0
 [NPC921]
 Name=Cazador dos
 NpcType=0
-Desc=Estos bosques son peligrosos..
+Desc=Ayudame!! /BONUSQUEST
 Head=2
 Heading=3
 Body=320
@@ -9383,11 +9407,12 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
+QuestNumber=6
 
 [NPC922]
 Name=Aviso DD
 NpcType=0
-Desc=Shhhh,este es el famoso DD,tienes una espada matadragones para dejarme?
+Desc=Shhhh,tengo una espada matadragones /BONUSQUEST
 Head=2
 Heading=3
 Body=170
@@ -9399,11 +9424,12 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
+QuestNumber=5
 
 [NPC923]
 Name=Entrada catas
 NpcType=0
-Desc= Las famosas catacumbas,muchos son los que entran,pocos los que sobreviven!
+Desc= Las famosas catacumbas,muchos son los que entran,pocos los que sobreviven! /BONUSQUEST
 Head=4
 Heading=3
 Body=35
@@ -9415,6 +9441,7 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
+QuestNumber=2
 
 [NPC924]
 Name=Camello
@@ -9474,14 +9501,14 @@ Alineacion=0
 Comercia=0
 BackUp=0
 
-
+-------------------------------- Quests -----------------------------------------------
 [NPC927]
 Name=Quest Newbie Dungeon
 NpcType=0
 Desc=¡Buen día ! El newbie dungeon es el lugar mas famoso de entreno para los principiantes! Puedo compensarte con algunas misiones /QUEST.
-Head=0
+Head=5
 Heading=3
-Body=4
+Body=3
 Movement=1
 Attackable=0
 ReSpawn=0
@@ -9490,15 +9517,15 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
-QuestNumber=1
+
 
 [NPC928]
 Name=Quest Ullathorpe
 NpcType=0
 Desc=¡Buen día ! Estas preparado para mis quest? jejeje veremos. /QUEST.
-Head=0
+Head=2
 Heading=3
-Body=4
+Body=135
 Movement=1
 Attackable=0
 ReSpawn=0
@@ -9507,4 +9534,92 @@ Domable=0
 Alineacion=0
 Comercia=0
 BackUp=0
-QuestNumber=1
+
+
+
+[NPC929]
+Name=Quest Nix
+NpcType=0
+Desc=¡Buen día ! Otro valiente!! Te pondre a prueba.. /QUEST.
+Head=5
+Heading=4
+Body=135
+Movement=1
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+
+[NPC930]
+Name=Margareth <Quest Newbie Dungeon> ' EJEMPLO DE NPC QUEST DEL NUEVO SISTEMA SACADO DE AO20
+NpcType=17
+Desc=Bienvenido a Newbie Dungeon!! Yo te enseñare lo basico para aprender!
+Showname=1
+Heading=3
+Body=537
+Movement=1
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+NumQuest=3
+QuestNumber1=2
+QuestNumber2=3
+QuestNumber3=4
+
+[NPC931]
+Name=Rey
+NpcType=0
+Head=1
+Heading=3
+Body=364
+Movement=0
+AguaValida=0
+Attackable=1
+ReSpawn=1
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=0
+GiveGLD=0
+MinHP=50000
+MaxHP=50000
+MaxHIT=300
+MinHIT=300
+DEF=30
+PoderAtaque=1000
+PoderEvasion=270
+LanzaSpells=3
+Sp1=3
+Sp2=10
+Sp3=1
+AfectaParalisis=1
+BackUp=1
+
+[NPC932] 'Asesino DagaRusa
+Name=Asesino
+NpcType=0
+Head=-1
+Heading=3
+Body=221
+Arma=3
+Casco=1
+Escudo=4
+Movement=0
+Attackable=0
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=0
+Comercia=0
+
+
+
+

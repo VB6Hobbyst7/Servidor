@@ -92,7 +92,7 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, ByVal map As Integer, ByVal 
 '***************************************************
     Dim nPos As WorldPos
     
-On Error GoTo errhandler
+On Error GoTo Errhandler
     'Controla las salidas
     If InMapBounds(map, X, Y) Then
         With MapData(map).Tile(X, Y)
@@ -171,7 +171,7 @@ On Error GoTo errhandler
     End If
 Exit Sub
 
-errhandler:
+Errhandler:
     Call LogError("Error en DotileEvents. Error: " & Err.Number & " - Desc: " & Err.Description)
 End Sub
 Sub CambiarOrigHeading(ByVal NpcIndex As Integer, ByVal Trigger As Byte)
@@ -269,7 +269,7 @@ End If
 
 End Sub
 
-Private Sub ClosestStablePos(Pos As WorldPos, ByRef nPos As WorldPos)
+Public Sub ClosestStablePos(Pos As WorldPos, ByRef nPos As WorldPos)
 '*****************************************************************
 'Encuentra la posicion legal mas cercana que no sea un portal y la guarda en nPos
 '*****************************************************************
@@ -696,7 +696,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 '13/02/2009: ZaMa - EL nombre del gm que aparece por consola al clickearlo, tiene el color correspondiente a su rango
 '***************************************************
 
-    On Error GoTo errhandler
+    On Error GoTo Errhandler
 
     'Responde al click del usuario sobre el mapa
     Dim FoundChar As Byte
@@ -771,7 +771,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
                 If ia_Bot(UserList(UserIndex).flags.targetBot).Invocado Then
                     Dim tmp_Font As FontTypeNames
 
-                    If ia_Bot(UserList(UserIndex).flags.targetBot).EsCriminal Then
+                    If ia_Bot(UserList(UserIndex).flags.targetBot).esCriminal Then
                         tmp_Font = FontTypeNames.FONTTYPE_FIGHT
                     Else
                         tmp_Font = FontTypeNames.FONTTYPE_CITIZEN
@@ -1049,7 +1049,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 
     Exit Sub
 
-errhandler:
+Errhandler:
     Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
 
 End Sub

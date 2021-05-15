@@ -75,7 +75,11 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
     MiNPC = Npclist(NpcIndex)
     Dim EraCriminal As Boolean
     Dim Area As Integer
-
+     
+     If MiNPC.Numero = 931 Then
+            FinishCastleMode UserList(UserIndex).flags.SlotEvent, UserList(UserIndex).flags.SlotUserEvent
+        End If
+     
     If (esPretoriano(NpcIndex) = 4) Then
         'Solo nos importa si fue matado en el mapa pretoriano.
         Area = Npclist(NpcIndex).zona
@@ -579,6 +583,16 @@ Dim CharIndex As Integer
 Dim Nombre As String
 Dim Criminal As Byte
 Dim Simbolo As Byte
+    Dim shield As Integer
+    Dim Helm As Integer
+    Dim weapon As Integer
+    
+    
+    
+    
+    
+    
+    
     If Npclist(NpcIndex).Char.CharIndex = 0 Then
         CharIndex = NextOpenCharIndex
         Npclist(NpcIndex).Char.CharIndex = CharIndex
@@ -586,6 +600,13 @@ Dim Simbolo As Byte
     End If
     
     MapData(map).Tile(X, Y).NpcIndex = NpcIndex
+    
+    
+     If Npclist(NpcIndex).Numero = 932 Then
+        shield = ObjData(Npclist(NpcIndex).Char.ShieldAnim).ShieldAnim
+        weapon = ObjData(Npclist(NpcIndex).Char.WeaponAnim).WeaponAnim
+        Helm = ObjData(Npclist(NpcIndex).Char.CascoAnim).CascoAnim
+    End If
     
     If Npclist(NpcIndex).MostrarNombre Then
         Nombre = "!" & Npclist(NpcIndex).Name

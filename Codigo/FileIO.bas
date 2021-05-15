@@ -194,7 +194,7 @@ ReDim Hechizos(1 To NumeroHechizos) As tHechizo
 
 frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumeroHechizos
-frmCargando.cargar.value = 0
+frmCargando.cargar.Value = 0
 
 'Llena la lista
 For hechizo = 1 To NumeroHechizos
@@ -285,7 +285,7 @@ For hechizo = 1 To NumeroHechizos
     Hechizos(hechizo).StaRequerido = val(Leer.GetValue("Hechizo" & hechizo, "StaRequerido"))
     
     Hechizos(hechizo).Target = val(Leer.GetValue("Hechizo" & hechizo, "Target"))
-    frmCargando.cargar.value = frmCargando.cargar.value + 1
+    frmCargando.cargar.Value = frmCargando.cargar.Value + 1
     
     Hechizos(hechizo).NeedStaff = val(Leer.GetValue("Hechizo" & hechizo, "NeedStaff"))
     Hechizos(hechizo).StaffAffected = CBool(val(Leer.GetValue("Hechizo" & hechizo, "StaffAffected")))
@@ -643,7 +643,7 @@ NumObjDatas = val(Leer.GetValue("INIT", "NumObjs"))
 
 frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumObjDatas
-frmCargando.cargar.value = 0
+frmCargando.cargar.Value = 0
 
 
 ReDim Preserve ObjData(1 To NumObjDatas) As ObjData
@@ -841,7 +841,7 @@ For Object = 1 To NumObjDatas
         ObjData(Object).Valor = ObjData(Object).Valor * MultiplicadorORO
     End If
     
-    frmCargando.cargar.value = frmCargando.cargar.value + 1
+    frmCargando.cargar.Value = frmCargando.cargar.Value + 1
 Next Object
 
 Set Leer = Nothing
@@ -1124,7 +1124,7 @@ On Error GoTo man
     
     frmCargando.cargar.min = 0
     frmCargando.cargar.max = NumMaps
-    frmCargando.cargar.value = 0
+    frmCargando.cargar.Value = 0
 
 
     For map = 1 To NumMaps
@@ -1192,16 +1192,16 @@ man:
     Call LogError(Date & " " & Err.Description & " " & Err.HelpContext & " " & Err.HelpFile & " " & Err.Source)
 
 End Sub
-Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Integer)
+Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef Value As Integer)
 
 'value = (Data(Pos + 1) And &H7F) * &H100 Or Data(Pos) Or -(Data(Pos + 1) > &H7F) * &H8000
 
-CopyMemory value, data(Pos), 2
+CopyMemory Value, data(Pos), 2
 
 Pos = Pos + 2
 End Sub
-Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Byte)
-value = data(Pos)
+Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef Value As Byte)
+Value = data(Pos)
 Pos = Pos + 1
 End Sub
 Public Sub CargarMapa(ByVal map As Long, ByVal MAPFl As String)
@@ -1330,7 +1330,7 @@ On Error GoTo errh
                 Call ReadByte(data, Pos, TempByte)
             End If
         Next X
-        frmCargando.cargar.value = Y
+        frmCargando.cargar.Value = Y
     Next Y
 
 Exit Sub
@@ -1556,12 +1556,12 @@ Encriptacion.StringValidacion = Encriptacion.ArmarStringValidacion
 
 End Sub
 
-Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal value As String)
+Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal Value As String)
 '*****************************************************************
 'Escribe VAR en un archivo
 '*****************************************************************
 
-writeprivateprofilestring Main, Var, value, file
+writeprivateprofilestring Main, Var, Value, file
     
 End Sub
 
@@ -1803,7 +1803,7 @@ For LoopC = 1 To MAXUSERHECHIZOS
     Query = Query & "H" & LoopC & "=" & cad & ", "
 Next
 'quest ver si no carca por el sql
-Call SaveQuestStats(UserIndex)
+'Call SaveQuestStats(UserIndex)
 'quest
 Dim NroMascotas As Long
 NroMascotas = UserList(UserIndex).NroMascotas

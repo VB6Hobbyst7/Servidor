@@ -1136,6 +1136,14 @@ End Type
 
 'Estadisticas de los usuarios
 Public Type UserStats
+    'eventos
+    TengoSet As Byte
+    OldHp As Integer
+    ViejaHP As Integer
+    ViejaMan As Integer
+    ViejaminHP As Integer
+    ViejaminMan As Integer
+    'eventos
     GLD As Long    'Dinero
     Banco As Long
 
@@ -1175,11 +1183,16 @@ Public Enum eNickColor
     ieCriminal = &H1
     ieCiudadano = &H2
     ieAtacable = &H4
-    ieTeamUno = &H1
-    ieTeamDos = &H2
+    ieTeamUno = 0
+    ieTeamDos = 1
 End Enum
 'Flags
 Public Type UserFlags
+    'eventos
+    SlotEvent As Byte
+    SlotUserEvent As Byte
+    SelectedEvent As Byte
+    'eventos
     'bots
     targetBot As Byte
     'bots
@@ -1294,6 +1307,10 @@ Public Type UserFlags
 End Type
 
 Public Type UserCounters
+    'eventos
+    TimeFight As Long
+    TimeCastleMode As Long
+    'eventos
     Chiquito As Integer
     Congelado As Integer
     IdleCount As Long
@@ -1373,6 +1390,9 @@ End Type
 
 'Tipo de los Usuarios
 Public Type user
+    'eventos
+    PosAnt As WorldPos
+    'eventos
     Name As String
     Id As Long
     MySQLId As Long
@@ -1536,6 +1556,12 @@ Public Type NpcCounters
 End Type
 
 Public Type NPCFlags
+    'eventos
+    SlotEvent As Byte
+    InscribedPrevio As Byte
+    Invocacion As Byte
+    TeamEvent As Byte
+    'eventos
     VuelveOrigPos As Byte
     WasAttackByGuards As Boolean
 
@@ -1688,9 +1714,9 @@ End Type
 
 
 Public Type MapBlock
-   'bots
+    'bots
     BotIndex As Integer
-   'bots
+    'bots
     Blocked As Byte
     Graphic(1 To 4) As Integer
     UserIndex As Integer

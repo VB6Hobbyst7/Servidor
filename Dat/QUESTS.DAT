@@ -1,296 +1,630 @@
 [INIT]
-NumQuests=7
- 
-
----------------------------Quest Newbie Dungeon Iniciales----------------------------
-
+NumQuests=36
+-----------------------------QUEST ULLA; NIX Y BANDER-----------------------------------------
 [QUEST1]
+Nombre=Bienvenido!
+Desc= Bienvenido forastero! Veo muchos rostros nuevos por estas tierras ultimamente. Si estás listo para la aventura dirígete al Newbie Dungeon y habla con mi amigo Makrom, el sabrá como ayudarte.
+RequiredLevel=1 
+RequiredOBJs=0
+RequiredOBJ1=0
+RequiredNPCs=0
+RequiredNPC1=0
+RewardGLD=0
+RewardEXP=100
+RequiredTargetNPCS=1
+RequiredTargetNPC1=407
+Repetible=0
+PosMap=34
+----------------------------QUEST Newbie Dungeon-----------------------------------------
+
+[QUEST2]
 Nombre=Estamina
 Desc=Aveces muchas muertes son causa de la mala alimentacion.. Debes de comer y beber para mantener siempre una buena energia que te permita viajar y defenderte! por cierto.. tengo hambre! me traes 1 pollo y un vino??
 DescFinal=Increible! un pollo bien hermoso y una botella de vino de calidad,agarra este hacha y tendre mas misiones para ti!
+NextQuest=
 RequiredLevel=1
- 
 RequiredOBJs=2
 RequiredOBJ1=26-1
 RequiredOBJ2=42-1
- 
 RequiredNPCs=0
-RequiredNPC1=
- 
+RequiredNPC1=0
 RewardGLD=100
 RewardEXP=150
- 
 RewardOBJs=1
 RewardOBJ1=127-1
- 
-[QUEST2]
+PosMap=34
+Repetible=0
+
+[QUEST3]
 Nombre=Cansancio
 Desc=Despues de comer tanto me siento muy cansado y tengo frio,una de las maneras de recuperar estamina rapida es haciendo una fogata,tengo ya una daga,pero necesitaria 3 maderas para hacer fuego,me las traes??
 Descfinal= Ahora si! estoy con energia suficiente para cualquier cosa! Toma esta espada,la puede usar cualquier clase!
 RequiredLevel=3
- 
 RequiredOBJs=1
 RequiredOBJ1=58-3
-
+RequiredNPCs=0
+RequiredNPC1=0
 RewardGLD=175 
 RewardEXP=250
- 
 RewardOBJs=1
 RewardOBJ1=2-1
- 
-[QUEST3]
+PosMap=55
+Repetible=0
+
+[QUEST4]
 Nombre=Combate
 Desc=Cualquiera se encuentra preocupado por el peligro que tienen criaturas que habitan aqui,pero armate de valor.. Mata unos cuantos NPC con la espada que te di y aprende a pegar y alegarte para no ser golpeado !
 DescFinal=Pareces un experto ya! toma estas pociones para curarte de el daño que ayas sufrido!
+NextQuest=
 RequiredLevel=5
- 
 RequiredOBJs=0
 RequiredOBJ1=0
- 
 RequiredNPCs=4
 RequiredNPC1=504-10
 RequiredNPC2=634-15
 RequiredNPC3=506-15
 RequiredNPC4=501-5
-
 RewardGLD=300
 RewardEXP=950
- 
 RewardOBJs=4
 RewardOBJ1=491-100
 RewardOBJ2=461-100
 RewardOBJ3=462-50
 RewardOBJ4=166-10
-
-
-[QUEST4]
-Nombre=Comercio
-Desc=El comercio es muy importante,ganar dinero es vital para poder equiparte,los npcs dropean objetos y oro,pero tambien puedes TRABAJAR! no seas vago!
-DescFinal=Veo que as pescado un buen rato! vende los pescados y mira cuanto oro!!! toma este piquete asi podras minar!
-RequiredLevel=7
- 
-
-RequiredSkill=1
-RequiredSkill1comercio=10
-
-RequiredOBJs=2
-RequiredOBJ1=138-1
-RequiredOBJ1=139-100
- 
-RequiredNPCs=0
-RequiredNPC1=0
-
-RewardGLD=100
-RewardEXP=1550
- 
-RewardOBJs=1
-RewardOBJ1=187-1
-
-
-
+PosMap=44
+Repetible=0
 
 [QUEST5]
-Nombre=Ocultarse
-Desc=Aveces es mas inteligente ocultarse que pelear!puedes sobrevivir ocultandote...aunque te llamen cobarde!! Practica con la tecla o hasta tener 18 Skills en Ocultar!
-DescFinal=Donde estas?? jejejeje ahi te veo,aun te falta aprender mucho para dominar este arte,pero no lo olvides!
-RequiredLevel=9
-
-RequiredSkill=1
-RequiredSkill1Ocultar=18
- 
+Nombre= Recetas de Alquimia
+Desc= He oído rumores de que en algún lugar de este dungeon existe un libro con las mejores recetas de alquimia.
+ Si logras dar con el tal vez pueda preparar varias posiones para ti.
+DescFinal=
+NextQuest=
+RequiredLevel=3
 RequiredOBJs=0
-RequiredOBJ1=0
- 
+RequiredOBJ1=0 
 RequiredNPCs=0
 RequiredNPC1=0
-
-RewardGLD=500
-RewardEXP=1975
- 
+RewardGLD=0
+RewardEXP=150
 RewardOBJs=0
-RewardOBJ1=0
+RewardObj1=0
+RequiredTargetNPCS=1
+RequiredTargetNPC1=401
+PosMap=47
+Repetible=0
 
 
 [QUEST6]
-Nombre=Carpinteria
-Desc=La carpinteria te abrira las puertas a todo un mundo por explorar! pues si aprendes este trabajo,podras crear un barco que te permita explorar el mundo de Argentum!creame una cuchara para ver si eres capaz!
-DescFinal=Cada vez estas mas preprado para dejar de ser Newbie! Y toma este martillo,que te explicare para que sirve!
-
-RequiredLevel=11
- 
+Nombre= Un libro en muy mal estado.
+Desc= El libro está en muy mal estado y al parecer le faltan muchas páginas, revisa por los alrededores no pueden estar demasiado lejos.
+Consigue las páginas restantes del libro (10)
+DescFinal=  
+NextQuest=
+RequiredLevel=5
 RequiredOBJs=1
-RequiredOBJ1=163=1
- 
+RequiredOBJ1=2496-10
 RequiredNPCs=0
 RequiredNPC1=0
-
-RewardGLD=500
-RewardEXP=2500
- 
-RewardOBJs=1
-RewardOBJ1=389=1
+RewardGLD=175
+RewardEXP=350
+PosMap=208
+Repetible=0
 
 
 [QUEST7]
-Nombre=Herreria
-Desc=Es la ultima cosa que te voy a enseñar! lo demas tendras que aprenderlo solo...Coje el martillo que te entrege y traeme una daga +1
-DescFinal=Lo siento pero..  Tu ya no eres newbie! Adelante Aventurero!!!
-
-RequiredLevel=12
- 
+Nombre= Recetas para pociones
+Desc= Vamos a probar si realmente funciona esto, necesito una pluma de gallo para poder apuntar mis recetas. tráeme dos por si acaso.
+DescFinal=
+NextQuest=
+RequiredLevel=7
 RequiredOBJs=1
-RequiredOBJ1=165=1
- 
+RequiredOBJ1=2596-2
 RequiredNPCs=0
 RequiredNPC1=0
+RewardGLD=250
+RewardEXP=300
+PosMap=218
+Repetible=0
 
-RewardGLD=1000
-RewardEXP=12142
- 
-RewardOBJs=1
-RewardOBJ1=389=1
-
-
-----------------------------Quest Ullathorpe Ciudad te taladores y carpinteros---------------------------------------
 
 [QUEST8]
-Nombre=Tortugas
-Desc=A la izquierda de esta ciudad ahi un bosque con tortugas,mata una y traeme su caparazon,asi podre defenderme con el!
-DescFinal= Gracias! el escudo de tortuga es usado por casi todas las clases! toma unas pociones!
-RequiredLevel=13
- 
-RequiredOBJs=1
-RequiredOBJ1=404-1
+Nombre= Ingredientes extraños
+Desc= ¡Fantástico! Ya podemos realizar todo tipo de pociones; si deseas que haga unas cuantas para ti deberás traerme los siguientes ingredientes: 
+tres Colmillos de serpiente, dos alas de murcielago y un cuerpo de serpiente.
+DescFinal= ¡Increíble! ha sido más rápido de lo que me esperaba, Toma aquí tienes tu recompensa.
+NextQuest=
+RequiredLevel=6
+RequiredOBJs=3
+RequiredOBJ1=2479-3
+RequiredOBJ2=2480-2
+RequiredOBJ3=2478-1
+RequiredNPCs=0
+RequiredNPC1=0
+RewardGLD=100
+RewardEXP=400
+PosMap=4
+Repetible=0
 
-RequiredNPCs=1
-RequiredNPC1=539=1
- 
-RewardGLD=500
-RewardEXP=1000
- 
-RewardOBJs=1
-RewardOBJ1=38-100
 
 
 [QUEST9]
-Nombre=Bosque Dork
-Desc=Debajo de esta ciudad esta el famoso bosque dork,un lugar muy peligroso,quiero viajar a las minas de esa zona,pero esta el camino invadido de criaturas,me despejas el camino?
-DescFinal= Gracias! ahora si me atrevo a pasar por el bosque! toma estos objetos que encontre!
-RequiredLevel=13
- 
-RequiredOBJs=0
-RequiredOBJ1=0
-
-RequiredNPCs=4
-RequiredNPC1=501=4
-RequiredNPC2=510=1
-RequiredNPC3=523=2
-RequiredNPC4=636=6
- 
-RewardGLD=2000
-RewardEXP=3500
- 
-RewardOBJs=2
-RewardOBJ1=19-1
-RewardOBJ2=204-1
-
-[QUEST10]
-Nombre=Infectados
-Desc=Hola de nuevo! ahi una plaga de zombies y mueros vivientes que me impide ir de Ullathorpe a Nix! porfavor mata a esos infectados!
-DescFinal= No es que yo no puediera matarlos eh... em... pero es que... enfin toma estos regalos por tu recompensa!si no te sirven... vendelos!
-RequiredLevel=14
- 
-RequiredOBJs=0
-RequiredOBJ1=0
-
-RequiredNPCs=1
-RequiredNPC1=507=3
-RequiredNPC1=502=4
-RequiredNPC1=503=5
- 
-RewardGLD=1750
-RewardEXP=3500
- 
-RewardOBJs=2
-RewardOBJ1=529-1
-RewardOBJ2=668-1
-
-[QUEST11]
-Nombre=Dungeon Marabel
-Desc=Unos malditos ogros andan a sus anchas en el dungeon marabel,esta aqui mismo,arriba a la izquierda,ten cuidado,esta mision es mucho mas peligrosa que las demas.
-DescFinal= como????? pense que no volverias con vida de alli! me as dejado sin palabras!!!
-RequiredLevel=15
- 
-RequiredOBJs=0
-RequiredOBJ1=0
-
-RequiredNPCs=1
-RequiredNPC1=511=2
- 
-RewardGLD=2000
-RewardEXP=5500
- 
-RewardOBJs=3
-RewardOBJ1=38-150
-RewardOBJ2=23-5
-RewardOBJ3=43-5
-
-[QUEST12]
-Nombre=Plaga escorpiones
-Desc=Estoy arto de las plagas,no te dejan viajar comodamente,en el desierto,a la derecha de esta ciudad,ahi una enorme plaga de escorpiones y soy muy sensible a su veneno,puedes limpiar un poco la zona?
-DescFinal=  Es increible el potencial que tienes,sin duda,debes ser recompensado!
-RequiredLevel=16
- 
-RequiredOBJs=0
-RequiredOBJ1=0
-
-RequiredNPCs=1
-RequiredNPC1=529=20
- 
-RewardGLD=2500
-RewardEXP=6500
- 
-RewardOBJs=1
-RewardOBJ1=166-15
-RewardOBJ2=365-1
-RewardOBJ3=203-1
-
-[QUEST13]
-Nombre=Asesino
-Desc=Ahi un asesino camino a Banderbill,esta causando estragos,son muchos los que an muerto en esa zona,puedes terminar con el?
-DescFinal= Siiiii!!!!!! contigo es tan facil todo..... Toma tengo cosas para ti!
-RequiredLevel=17
- 
-RequiredOBJs=0
-RequiredOBJ1=0
-
-RequiredNPCs=1
-RequiredNPC1=531=1
- 
-RewardGLD=4500
-RewardEXP=7500
- 
-RewardOBJs=1
-RewardOBJ1=478-1
-RewardOBJ2=480-150
-RewardOBJ3=36-30
-
-[QUEST14]
-Nombre=La Balsa
-Desc=Aqui no tienes nada que hacer ya..todo esta en paz,mMm espera.. traeme 2000 leños y te are una Balsa para que puedas navegar a zonas poco profundas.
-DescFinal= Aqui tienes! a Navegar!!!
-RequiredLevel=18
- 
-RequiredOBJs=1
-RequiredOBJ1=58=2000
-
+Nombre= ¡Oh no, maldita peste!
+Desc= ¡Ten cuidado! He oído rumores de que se ha desatado una peste entre las criaturas de este dungeon. Tráeme una muestra de sus fluidos, tal vez podamos hacer algo.
+DescFinal= Con estas muestras tengo suficiente. ¡Buen trabajo!
+NextQuest=
+RequiredLevel=7
+RequiredOBJs=4
+RequiredOBJ1=2491-1
+RequiredOBJ2=2492-1
+RequiredOBJ3=2494-1
+RequiredOBJ4=2495-1
 RequiredNPCs=0
 RequiredNPC1=0
- 
+RewardGLD=250
+RewardEXP=500
+RewardOBJs=0
+RewardObj1=0
+PosMap=206
+Repetible=0
+
+[QUEST10]
+Nombre= El guante
+Desc= ¡No lo vas a creer pero, por estos dungeons hay una serpiente naranja, más poderosa de lo normal, parecía inofensiva pero me mordio la mano y se trago mi guante!
+¡Ve con cuidado por favor, pero MATALA! y si puedes recupera mi guante, seguro que aún yace en sus tripas...
+DescFinal= Un excelente trabajo aventurero o debería llamarte... domador de serpientes Je Je Je, toma estas monedas.
+RequiredLevel=8
+RequiredOBJs=1
+RequiredOBJ1=2598-1
+RequiredNPCs=0
+RequiredNPC1=0
+RewardGLD=550
+RewardEXP=100
+PosMap=55
+Repetible=0
+
+
+[QUEST11]
+Nombre= Pelaje ártico
+Desc= Tal vez sea el cansancio pero siento demasiado frío. Ahora que la peste se ha ido tal vez puedas recolectar algunas pieles de lobo para mi.
+DescFinal= Un excelente trabajo, toma estas monedas.
+RequiredLevel=9
+RequiredOBJs=1
+RequiredOBJ1=414-10
+RequiredNPCs=0
+RequiredNPC1=0
+RewardGLD=250
+RewardEXP=1000
+PosMap=55
+Repetible=0
+
+
+
+
+
+
+[QUEST12]
+Nombre= Preparandose para partir
+Desc= ¡Has completado todas las misiones que te he encomendado con gran destreza y valor! Pero ten cuidado, ahí afuera no te será tan sencillo.
+Tengo un amigo que tal vez pueda ayudarle, ve a visitarlo de mi parte y llévale este objeto el sabra entender... Bendito Rodalf...
+NextQuest= 
+RequiredLevel=12 
+RequiredOBJs=0
+RequiredOBJ1=0
+RequiredNPCs=0
+RequiredNPC1=0
+RewardGLD=500
+RewardEXP=500
+PosMap=67
+Repetible=0
+
+''tiene que trasportarte a la isla''
+
+----------------------------QUEST Mision del Mago-----------------------------------------
+[QUEST13]
+Nombre= Un extraño ser.
+Desc= ¿Quién eres tú?, ¿Cómo has legado aquí? Ya veo, el buen Makrom ha vuelto a las andadas.
+NextQuest= 
+RequiredLevel=4 
+RequiredOBJs=1
+RequiredOBJ1=2487-1
+RequiredNPCs=1
+RequiredNPC1=941-1
+RewardGLD=50
+RewardEXP=150
+PosMap=67
+Repetible=0
+
+(Te lleva a la isla a hablar con el mago )
+
+----------------------------QUEST ULLA NIX O BANDER-----------------------------------------
+
+
+[QUEST14]
+Nombre=Segunda Etapa
+Desc=Qué raro verte aquí nuevamente, aunque siendo sincera. Lo imaginé! Como sabés... Se vienen días fríos y necesito tu ayuda. A las afueras de la ciudad hay una manada de Lobos salvajes, necesito que me traigas sus pieles.
+DescFinal=Realmente posees un gran valor y fortaleza! Déjame recompensarte.
+NextQuest=
+RequiredLevel=13 
+RequiredOBJs=1
+RequiredOBJ1=414-10
+RequiredNPCs=1
+RequiredNPC1=558-10
+RewardGLD=500
+RewardEXP=600
+PosMap=75
+Repetible=0
+
+[QUEST15]
+Nombre=Gracia de Nigromante.
+Desc=Pensarás que estoy loca, pero, cerca del Mausoleo de Nix se han levantados de sus criptas unas personas un tanto malignas. Tuvé que volverme de inmediato, por favor, acabá con ellas para facilitarme el camino.
+DescFinal= Gracias por tu ayuda nuevamente valiente! Ahora sé que no estoy loca. Ten esto.
+NextQuest=
+RequiredLevel=14
+RequiredOBJs=2
+RequiredOBJ1=2482-3
+RequiredOBJ2=2483-2
+RequiredNPCs=2
+RequiredNPC1=514-10
+RequiredNPC2=507-5
+RewardGLD=1500
+RewardEXP=1000
+RewardOBJs=1
+RewardObj1=38-50
+PosMap=75
+Repetible=0
+
+[QUEST16]
+Nombre=El Bandido
+Desc=Ullathorpe era conocida por su tranquilidad, ahora ni eso. Un bandido en camino hacía aquí ha arrebatado mis pertenencías. Acaba con él. El dinero no importa, te lo daré.
+DescFinal=Qué bien quedará esta cabeza en mi mesa de luz. Gracias.
+NextQuest=
+RequiredLevel=13
+RequiredNPCs=1
+RequiredNPC1=553-1
+RequiredOBJs=1
+RequiredOBJ1=2757-1
+RewardGLD=300
+RewardEXP=1000
+PosMap=270
+Repetible=0
+
+[QUEST17]
+Nombre=Ojos de Araña
+Desc=Hoy desperté con una sensación de almorzar un estofado con ojos de araña, raro, verdad? No me animo a adentrarme en las catacumbas, por favor. Traeme unos ojos.
+DescFinal=Mh, luego te comento como sabe.
+RequiredLevel=15
+RequiredNPCs=1
+RequiredNPC1=512-1
+RequiredOBJs=1
+RequiredOBJ1=2484-1
+RewardGLD=1000
+RewardEXP=2000
+PosMap=1
+Repetible=0
+
+
+[QUEST17]
+Nombre=El homicida.
+Desc=Necesito tu ayuda, en camino a las catacumbas se encuentra un Elfo Oscuro entre las sombras. El mismo lleva una Ropa Oscura, le arrebato la vida a mi hija y solo busco venganza. Traeme su corazón, serás recompensado y guardaremos el secreto.
+DescFinal=Que esto quede aquí, mi hija por fin descansa en paz. Ten esto como  muestra de agradecimiento.
+NextQuest=Le hablé de ti a un amigo mío, Román es su nombre. Está debajo del Muelle de Nix. Ve con él, tiene algo para ti.
+RequiredLevel=15
+RequiredNPCs=1
+RequiredNPC1=552-1
+RequiredOBJs=1
+RequiredOBJ1=2738-1
+RewardGLD=500
+RewardEXP=2300
+PosMap=98
+Repetible=0
+
+[QUEST18]
+Nombre=De Cacería.
+Desc=Que no te engañen, ¡las catacumbas son peligrosas! Pueden parecer bellas y dulces, pero son seres horripilantes, hemos perdido cientos de aventureros allí dentro, por culpa de arañas.
+Necesitamos acabar con esto, hagamos una cacería de arañas.
+¿Puedes matar 15 arañas para despejar la zona? si vuelves con vida, tendré un regalo para ti.
+DescFinal=Gracias por tu ayuda! Aquí tienes tu recompensa. Guarda las pociones, serán útiles.
+NextQuest=
+RequiredLevel=15
+RequiredNPCs=1
+RequiredNPC1=512-15
+RewardGLD=2000
+RewardEXP=2500
+RewardOBJs=1
+RewardObj1=38-120
+PosMap=20
+Repetible=0
+
+[QUEST19]
+Nombre=Baja temperatura.
+Desc=Nuestros mineros nos han dado aviso que una plaga de Osos Pardos indagan por el Bosque Dork. Es una buena oportunidad para conseguir Pieles de Calidad.
+Si crees poder con ellos, consigueme 20 pieles. Aquí estaré.
+DescFinal=Te agradezco la ayuda, necesitaba una Armadura de cuero. Quiero darte esto.
+NextQuest=Sí estás en busca de mayores desafios, habla con Federico!
+RequiredLevel=16
+RequiredNPCs=1
+RequiredNPC1=551-20
+RequiredOBJs=1
+RequiredObj1=415-20
+RewardGLD=1000
+RewardEXP=2500
+PosMap=20
+Repetible=0
+
+[QUEST20]
+Nombre=Nuevas especies.
+Desc=Es de público conocimiento que las Catacumbas no son un lugar de niños, pero, creíamos tenerlo controlado. Hace años que nuestros guerreros no aniquilan esas criáturas y han desarrollado nuevas especies. 
+Al parecer, estas no son tan débiles. Una de ellas es enorme, supuestamente yacé en el interior de las Catacumbas. Acabá con ella. 
+DescFinal=No puedo creerlo, estabamos desesperados. Creíamos que sería el fin de nuestra conexión hacia Ullathorpe. Esto es para tí. 
+NextQuest=
+RequiredLevel=18
+RequiredNPCs=1
+RequiredNPC1=979-1
+RewardGLD=2500
+RewardEXP=3000
+PosMap=174
+Repetible=0
+
+[QUEST21]
+Nombre=El Banquete
+Desc=Hola, qué suerte verte por aquí.Estoy con un gran problema, El Rey organizará un banquete ¡y adivina qué! Tendremos la presencia del gran cocinero Shoruk. El Tabernero del Mesón Hostigado ha solicitado que envíe varios ingredientes, pero, lamentablemente no los puedo ir a buscar.
+¿Podrías ayudarme? ¡Consígueme estos ingredientes y un poco de leña para cocinar! Tendrás una recompensa.
+DescFinal=¡Gracias! Me salvaste. Esto es para tí.
+NextQuest=Cuando estés listo nuevamente, ven.
+RequiredLevel=19
+RequiredNPCs=0
+RequiredOBJs=10
+RequiredObj1=26-10
+RequiredObj2=21-20
+RequiredObj3=27-20
+RequiredObj4=28-10
+RequiredObj5=2089-15
+RequiredObj6=2094-15
+RequiredObj7=42-25
+RequiredObj8=160-40
+RequiredObj9=163-50
+RequiredObj10=136=10
+RewardGLD=3000
+RewardEXP=3500
+PosMap=55
+Repetible=0
+
+[QUEST22]
+Nombre=Protección acuática. 
+Desc= Exploradores han comentado que existe una extraña Caverna cerca de Verill, algo como un... ¿Atlantis? No lo sé, investiguemos. En Muelles Olvidados suelen haber nadadores, acabá con dos de ellos para obtener sus trajes. 
+DescFinal=Excelente trabajo! Vamos para allá. 
+NextQuest=
+RequiredLevel=25
+RequiredNPCs=1
+RequiredNPC1=1000-2
+RequiredOBJs=1
+RequiredOBJ1=197=2
+RewardGLD=5000
+RewardEXP=5500
+RewardOBJs=1
+RequiredOBJ1=197-1
+PosMap=106
+Repetible=0
+
+[QUEST23]
+Nombre=Maldición!
+Desc=Agh, casi me desvanezco en aquella cueva. Pensé que mis pulmones daban, estoy equivocado. Necesito que te dirigas hacia la Isla de Morgolock y arranques ese Aliento a las Sirenas. Servirá para adentrarnos. 
+DescFinal= ¡Perfecto! Ahora sí que nada nos frena.
+NextQuest=
+RequiredLevel=26
+RequiredNPCs=1
+RequiredNPC1=515-5
+RequiredOBJs=1
+RequiredOBJ1=394-50
+RewardOBJs=1
+RewardOBJ1=394-25
+PosMap=106
+Repetible=0
+
+[QUEST24]
+Nombre=Continúa
+Desc=Creo que hasta aquí llego lo nuestro, Jovén aprendíz. Ve hasta Banderbill, Henry está buscando a alguien como tú.
+DescFinal=
+NextQuest=
+RequiredLevel=26
+RequiredNPCs=0
+RequiredNPC1=0
+RequiredTargetNPCS=1
+RequiredTargetNPC1=405
+RewardGLD=5000
+RewardEXP=15000
+PosMap=55
+Repetible=0
+
+[QUEST25]
+Nombre=El Corazón
+Desc=Mh, me han comentado de tí. Qué erés bueno, valiente, habilidoso y tienes la actitud necesaría. ¿De mi parte? Solo palabras. Compruébalo, necesito un Corazón de Gerier para un experimento botánico. Y sí, por supuesto: habrá premio.
+DescFinal=Já, quedé con la boca cerrada. Realmente, los rumores eran ciertos.
+NextQuest=
+RequiredLevel=27
+RequiredNPCs=1
+RequiredNPC1=571-1
+RequiredOBJs=1
+RequiredOBJ1=2739-1
+PosMap=106
+RewardGLD=10000
+RewardEXP=25000
+Repetible=0
+
+[QUEST26]
+Nombre=Malditos Piratas
+Desc=Esa horda de Pirátas han robado nuestros tesoros. No pretendo dejar todo como si nada, si lográs vencer una horda de ellos guardaré parte de la recompensa para tí. 
+DescFinal=Siendo sincero, creí que no podrías. ¡Aquí tienés!
+NextQuest=
+RequiredLevel=28
+RequiredNPCs=5
+RequiredNPC1=523-5
+RequiredNPC2=588-2
+RequiredNPC3=583-3
+RequiredNPC4=569-1
+RequiredNPC5=570-5
+PosMap=20
+RewardGLD=15000
+RewardEXP=45000
+Repetible=0
+
+[QUEST27]
+Nombre=¿Cacería?
+Desc=Muchas bocas comentan que hay sobrepoblación de Medusas ingresando a los pasillos de Verill, nunca he tenido la valentía para ingresar: acabá con ellas para terminar con el miedo de nuestros Mineros!
+Descfinal=Muy bien hecho, aquí tienes tu recompensa. 
+NextQuest=
+RequiredLevel=29
+RequiredNPCs=1
+RequiredNPC1=540-10
+RequiredNPC2=538-10
+RequiredOBJs=1
+RequiredObj1=2218-20
+PosMap=34
+RewardGLD=35000
+RewardOBJs=1
+RewardOBJ1=2229-1
+RewardEXP=50000
+Repetible=0
+
+[QUEST28]
+Nombre=La espada mítica.
+Desc=Pensé que era una leyenda, pero no... ¡En verdad existe! La Espada Matadragones, encontré el lugar y necesito tu ayuda para recolectar minerales.
+DescFinal=Has tardado mucho, ya tengo los minerales. De igual modo, te recompensaré por tu lealtad. 
+NextQuest=35
+RequiredLevel=30
+RequiredNPCs=0
+RequiredNPC1=0
+RequiredOBJs=3
+RequiredObj1=192-6000
+RequiredObj2=193-4000
+RequiredObj3=194-2000
+RewardOBJs=3
+RewardOBJ=1-192-8000
+RewardOBJ=2-193-6000
+RewardOBJ=3-194-4000
+PosMap=24
+RewardGLD=0
+RewardEXP=55000
+Repetible=0
+
+[QUEST29]
+Nombre=Una Ninfa extraña.
+Desc=Una tarde cualquiera en busca de cocodrilos me topé con una Ninfa quien ha robado todo mi equipo. No se saldrá con la suya, buscala, dale su merecido y trae mis objetos!
+DescFinal=Oí que te suplicó piedad. Muy buen trabajo.
+NextQuest=
+RequiredNPCs=0
+RequiredNPC1=0
+RequiredOBJs=3
+RequiredObj1=0-0
+RequiredObj2=0-0
+RequiredObj3=0-0
+RewardOBJs=3
+RewardOBJ=1-0-1
+RewardOBJ=2-0-1
+RewardOBJ=3-0-1
 RewardGLD=0
 RewardEXP=0
- 
-RewardOBJs=1
-RewardOBJ1=0
+PosMap=271
+Repetible=1
+
+[QUEST30]
+Nombre=Continua
+Desc=Creo que es momento de continuar tu camino sólo. Ya has cumplido todos los objetivos que tenía para tí, pero, tranquilo.
+Navega hasta Lindos, pregunta por Armando y dí que vienes de mi parte.
+DescFinal=Esta es tú recompensa! Te la merecés. Hasta luego.
+NextQuest=Si quieres trabajo estoy aquí!
+RequiredLevel=30
+RequiredNPCs=0
+PosMap=33
+RequiredTargetNPCS=1
+RequiredTargetNPC1=410
+RewardGLD=40000
+RewardEXP=40000
+Repetible=1
+
+[QUEST31]
+Nombre=El perdon
+Desc=En los juicios humanos, se castiga al que confiesa su culpa; en el divino, se perdona…
+DescFinal=No volveré a perdonar los pecados tuyos tan facilmente.
+NextQuest=
+RequiredNPCs=0
+RequiredNPC1=0
+RequiredOBJs=0
+RequiredObj1=0
+PosMap=271
+Repetible=1
+recompensaExtra=1
+
+
+[QUEST32]
+Nombre=La Cruz
+Desc=Unos bandidos han usurpado la iglesia! Nos han robado unas cuantas cruces. Podrías conseguirlas? Son patrimonio de la Humanidad.
+DescFinal=Oh, por dios! Te lo agradezco, el Padre te dará su bendición.
+NextQuest=
+RequiredNPCs=1
+RequiredNPC1=553-15
+RequiredOBJs=1
+RequiredObj1=2554-15
+PosMap=271
+Repetible=1
+recompensaExtra=1
+
+
+[QUEST33]
+Nombre=Justicia
+Desc=Paz y justicia no van en la misma linea. Y sin justicia no hay perdón. Asesina cinco miembros de la alianza caotica y podré perdonarte.
+DescFinal=El perdón es una decisión, no un sentimiento, porque cuando perdonamos no sentimos más la ofensa, no sentimos más rencor.
+NextQuest=
+RequiredNPCs=0
+RequiredNPC1=0
+RequiredOBJs=0
+RequiredObj1=0
+PosMap=271
+Repetible=1
+recompensaExtra=1
+
+[QUEST34]
+Nombre= El Débil
+Desc=Jamás oíras un Débil perdonar. Ese solo es un atributo de alguien Fuerte. Asesina 10 Guardias del Caos y obtendrás mi Perdón.
+DescFinal=Porque si aprendeis a perdonar a otro, también os perdonará a vosotros vuestro Padre Celestial!
+NextQuest=
+RequiredNPCs=0
+RequiredNPC1=0
+RequiredOBJs=0
+RequiredObj1=0
+PosMap=271
+Repetible=1
+recompensaExtra=1
+
+[QUEST35]
+Nombre= La Violencia
+Desc=El conjunto de violencia solo lo frena el milagro del perdón. Está es tu última oportunidad, vencé al diablo. 
+DescFinal=Si confesamos nuestros pecados, Dios nos perdonará y limpiara nuestra maldad interna.
+NextQuest=
+RequiredNPCs=1
+RequiredNPC1=304-1
+RequiredOBJs=0
+RequiredObj1=0
+PosMap=271
+Repetible=1
+recompensaExtra=1
+
+[QUEST36]
+Nombre= Continua
+Muchacho, yo ya no puedo aceptar tu perdón. Quizá el Cardenal pueda hacer algo por tí. Dirigite a la iglesia de Banderbille
+DescFinal=
+Nos limpiará toda la maldad.
+NextQuest=
+RequiredNPCs=1
+RequiredNPC1=304-1
+RequiredOBJs=0
+RequiredObj1=0
+RequiredTargetNPCS=1
+RequiredTargetNPC1=409
+PosMap=271
+Repetible=1
+
+
 
 
