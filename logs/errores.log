@@ -1287,3 +1287,171 @@
 14/05/2021 20:13:44 Error en LookAtTile. Error 9 : El subíndice está fuera del intervalo
 14/05/2021 20:13:44 Error en LookAtTile. Error 9 : El subíndice está fuera del intervalo
 14/05/2021 20:14:07 Error en LookAtTile. Error 9 : El subíndice está fuera del intervalo
+16/05/2021 19:42:08 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+16/05/2021 19:42:08 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+16/05/2021 19:42:08 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:510
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:510
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:510
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:523
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:523
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:523
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:535
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:535
+16/05/2021 19:42:10 60 iteraciones en CrearNpc Area:67 NroNpc:535
+16/05/2021 19:42:11 60 iteraciones en CrearNpc Area:92 NroNpc:91
+16/05/2021 19:42:11 60 iteraciones en CrearNpc Area:92 NroNpc:91
+16/05/2021 19:42:11 60 iteraciones en CrearNpc Area:92 NroNpc:91
+16/05/2021 19:42:11 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+16/05/2021 19:42:11 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+16/05/2021 20:32:02 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+16/05/2021 20:32:02 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+16/05/2021 20:32:02 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:500
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:510
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:510
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:510
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:523
+16/05/2021 20:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:523
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:523
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:535
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:535
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:535
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:92 NroNpc:91
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:92 NroNpc:91
+16/05/2021 20:32:05 60 iteraciones en CrearNpc Area:92 NroNpc:91
+16/05/2021 20:32:06 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+16/05/2021 20:32:06 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+17/05/2021 10:42:53 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+17/05/2021 10:42:53 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+17/05/2021 10:42:53 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:510
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:510
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:510
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:523
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:523
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:523
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:535
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:535
+17/05/2021 10:42:55 60 iteraciones en CrearNpc Area:67 NroNpc:535
+17/05/2021 10:42:56 60 iteraciones en CrearNpc Area:92 NroNpc:91
+17/05/2021 10:42:56 60 iteraciones en CrearNpc Area:92 NroNpc:91
+17/05/2021 10:42:56 60 iteraciones en CrearNpc Area:92 NroNpc:91
+17/05/2021 10:42:57 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+17/05/2021 10:42:57 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+17/05/2021 16:48:20 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+17/05/2021 16:48:20 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+17/05/2021 16:48:20 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:500
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:510
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:510
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:510
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:523
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:523
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:523
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:535
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:535
+17/05/2021 16:48:22 60 iteraciones en CrearNpc Area:67 NroNpc:535
+17/05/2021 16:48:23 60 iteraciones en CrearNpc Area:92 NroNpc:91
+17/05/2021 16:48:23 60 iteraciones en CrearNpc Area:92 NroNpc:91
+17/05/2021 16:48:23 60 iteraciones en CrearNpc Area:92 NroNpc:91
+17/05/2021 16:48:23 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+17/05/2021 16:48:23 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+18/05/2021 22:31:54 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+18/05/2021 22:31:54 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+18/05/2021 22:31:54 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+18/05/2021 22:32:02 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:32:02 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:32:03 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:32:03 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:32:04 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:32:05 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:32:06 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:32:06 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:32:07 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:32:07 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:32:08 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:32:09 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:32:09 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:32:11 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+18/05/2021 22:32:11 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+18/05/2021 22:35:19 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+18/05/2021 22:35:19 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+18/05/2021 22:35:19 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+18/05/2021 22:35:28 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:35:28 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:35:29 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:35:29 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:35:30 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:35:30 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:35:31 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:35:31 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:35:31 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:35:32 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:35:32 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:35:33 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:35:33 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:35:34 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:35:35 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:35:35 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:35:37 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+18/05/2021 22:35:37 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+18/05/2021 22:38:58 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+18/05/2021 22:38:58 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+18/05/2021 22:38:58 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+18/05/2021 22:39:53 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:39:53 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:39:54 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:39:54 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:39:55 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:39:55 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:39:56 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:39:56 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:39:57 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:39:57 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:39:57 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:39:58 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:39:58 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:40:00 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:40:00 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:40:01 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:40:03 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+18/05/2021 22:40:03 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+18/05/2021 22:43:24 Error cargando mapa: 26 - Pos: 154,92.El subíndice está fuera del intervalo
+18/05/2021 22:43:24 Error cargando mapa: 27 - Pos: 96,10.El subíndice está fuera del intervalo
+18/05/2021 22:43:24 Error cargando mapa: 29 - Pos: 98,113.El subíndice está fuera del intervalo
+18/05/2021 22:43:32 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:43:33 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:43:33 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:43:34 60 iteraciones en CrearNpc Area:67 NroNpc:500
+18/05/2021 22:43:34 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:43:34 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:43:35 60 iteraciones en CrearNpc Area:67 NroNpc:510
+18/05/2021 22:43:35 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:43:36 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:43:36 60 iteraciones en CrearNpc Area:67 NroNpc:523
+18/05/2021 22:43:37 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:43:37 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:43:38 60 iteraciones en CrearNpc Area:67 NroNpc:535
+18/05/2021 22:43:39 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:43:39 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:43:40 60 iteraciones en CrearNpc Area:92 NroNpc:91
+18/05/2021 22:43:42 Error en TIMER_AI_Timer Guardian Nivel Dos mapa:13X: 42Y: 675
+18/05/2021 22:43:42 Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo

@@ -214,7 +214,7 @@ Public Enum iMinerales
 End Enum
 
 Public Enum PlayerType
-    user = &H1
+    User = &H1
     Consejero = &H2
     SemiDios = &H4
     Dios = &H8
@@ -606,8 +606,8 @@ Public Const TileSizeX As Byte = 32
 Public Const TileSizeY As Byte = 32
 
 'Tamaño en Tiles de la pantalla de visualizacion
-Public Const XWindow As Byte = 17
-Public Const YWindow As Byte = 13
+Public Const XWindow As Byte = 32
+Public Const YWindow As Byte = 24
 
 'Sonidos
 Public Const SND_CRITICOH As Byte = 238
@@ -803,7 +803,7 @@ Public Type tHechizo
 
     Invoca As Byte
     NumNpc As Integer
-    Cant As Integer
+    cant As Integer
 
     '    Materializa As Byte
     '    ItemIndex As Byte
@@ -1023,7 +1023,7 @@ End Type
 
 'Quest
 Public Type tQuestNpc
-    NpcIndex As Integer
+    NPCIndex As Integer
     Amount As Integer
 End Type
 
@@ -1389,7 +1389,7 @@ Public Type tCrafting
 End Type
 
 'Tipo de los Usuarios
-Public Type user
+Public Type User
     'eventos
     PosAnt As WorldPos
     'eventos
@@ -1485,7 +1485,7 @@ Public Type user
 End Type
 
 Private Type tNpcs
-    NpcIndex As Integer
+    NPCIndex As Integer
     Cantidad As Integer
 End Type
 
@@ -1601,7 +1601,7 @@ Public Type NPCFlags
 End Type
 
 Public Type tCriaturasEntrenador
-    NpcIndex As Integer
+    NPCIndex As Integer
     NpcName As String
     tmpIndex As Integer
 End Type
@@ -1668,6 +1668,10 @@ Public Type NPC
     NumQuest As Integer
     QuestNumber() As Byte
     'quest
+    'NPC spameo
+    NumDropNPC As Byte
+    DropNPC() As String
+    'NPC spameo
     GiveEXP As Long
     GiveGLDMin As Long
     GiveGLDMax As Long
@@ -1720,7 +1724,7 @@ Public Type MapBlock
     Blocked As Byte
     Graphic(1 To 4) As Integer
     UserIndex As Integer
-    NpcIndex As Integer
+    NPCIndex As Integer
     ObjInfo As Obj
     TileExit As WorldPos
     Trigger As eTrigger
@@ -1800,7 +1804,7 @@ Public EnTesting As Boolean
 
 
 '*****************ARRAYS PUBLICOS*************************
-Public UserList() As user    'USUARIOS
+Public UserList() As User    'USUARIOS
 Public Npclist(1 To MAXNPCS) As NPC    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo

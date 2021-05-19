@@ -44,11 +44,11 @@ Attribute VB_Name = "NPCs"
 
 Option Explicit
 
-Sub QuitarMascota(ByVal UserIndex As Integer, ByVal NpcIndex As Integer)
+Sub QuitarMascota(ByVal UserIndex As Integer, ByVal NPCIndex As Integer)
     Dim i As Integer
     
     For i = 1 To MAXMASCOTAS
-      If UserList(UserIndex).MascotasIndex(i) = NpcIndex Then
+      If UserList(UserIndex).MascotasIndex(i) = NPCIndex Then
          UserList(UserIndex).MascotasIndex(i) = 0
          UserList(UserIndex).MascotasType(i) = 0
          
@@ -62,7 +62,7 @@ Sub QuitarMascotaNpc(ByVal Maestro As Integer)
     Npclist(Maestro).Mascotas = Npclist(Maestro).Mascotas - 1
 End Sub
 
-Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
+Sub MuereNpc(ByVal NPCIndex As Integer, ByVal UserIndex As Integer)
 '********************************************************
 'Author: Unknown
 'Llamado cuando la vida de un NPC llega a cero.
@@ -72,7 +72,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
 '********************************************************
     On Error GoTo errhandler
     Dim MiNPC As NPC
-    MiNPC = Npclist(NpcIndex)
+    MiNPC = Npclist(NPCIndex)
     Dim EraCriminal As Boolean
     Dim Area As Integer
      
@@ -80,9 +80,9 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
             FinishCastleMode UserList(UserIndex).flags.SlotEvent, UserList(UserIndex).flags.SlotUserEvent
         End If
      
-    If (esPretoriano(NpcIndex) = 4) Then
+    If (esPretoriano(NPCIndex) = 4) Then
         'Solo nos importa si fue matado en el mapa pretoriano.
-        Area = Npclist(NpcIndex).zona
+        Area = Npclist(NPCIndex).zona
         If Area = MAPA_PRETORIANO Then
             'seteamos todos estos 'flags' acorde para que cambien solos de alcoba
             Dim i As Integer
@@ -92,10 +92,10 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
             For i = Areas(Area).X1 To Areas(Area).X2
                 For j = Areas(Area).Y1 To Areas(Area).Y2
 
-                    NPCI = MapData(Npclist(NpcIndex).Pos.map).Tile(i, j).NpcIndex
+                    NPCI = MapData(Npclist(NPCIndex).Pos.map).Tile(i, j).NPCIndex
                     If NPCI > 0 Then
-                        If esPretoriano(NPCI) > 0 And NPCI <> NpcIndex Then
-                            If Npclist(NpcIndex).Pos.X > Areas(Area).X1 + 50 Then
+                        If esPretoriano(NPCI) > 0 And NPCI <> NPCIndex Then
+                            If Npclist(NPCIndex).Pos.X > Areas(Area).X1 + 50 Then
                                 If Npclist(NPCI).Pos.X > Areas(Area).X1 + 50 Then Npclist(NPCI).Invent.ArmourEqpSlot = 1
                             Else
                                 If Npclist(NPCI).Pos.X <= Areas(Area).X1 + 50 Then Npclist(NPCI).Invent.ArmourEqpSlot = 5
@@ -104,20 +104,20 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
                     End If
                 Next j
             Next i
-            Call CrearClanPretoriano(Npclist(NpcIndex).Pos.X)
+            Call CrearClanPretoriano(Npclist(NPCIndex).Pos.X)
         End If
-    ElseIf esPretoriano(NpcIndex) > 0 Then
-        If Npclist(NpcIndex).zona = MAPA_PRETORIANO Then
-            Npclist(NpcIndex).Invent.ArmourEqpSlot = 0
+    ElseIf esPretoriano(NPCIndex) > 0 Then
+        If Npclist(NPCIndex).zona = MAPA_PRETORIANO Then
+            Npclist(NPCIndex).Invent.ArmourEqpSlot = 0
             pretorianosVivos = pretorianosVivos - 1
         End If
     End If
 
     'Verificamos si es una criatura invocada...
-    Call VerificarInvocacion(NpcIndex)
+    Call VerificarInvocacion(NPCIndex)
 
     'Quitamos el npc
-    Call QuitarNPC(NpcIndex)
+    Call QuitarNPC(NPCIndex)
 
     If UserIndex > 0 Then    ' Lo mato un usuario?
         If MiNPC.flags.Snd3 > 0 Then
@@ -131,7 +131,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
             Dim t As Integer
             For t = 1 To MAXMASCOTAS
                 If UserList(UserIndex).MascotasIndex(t) > 0 Then
-                    If Npclist(UserList(UserIndex).MascotasIndex(t)).TargetNPC = NpcIndex Then
+                    If Npclist(UserList(UserIndex).MascotasIndex(t)).TargetNPC = NPCIndex Then
                         Call FollowAmo(UserList(UserIndex).MascotasIndex(t))
                     End If
                 End If
@@ -217,7 +217,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
         
                         For M = 1 To QuestList(.QuestIndex).RequiredNPCs
         
-                            If QuestList(.QuestIndex).RequiredNPC(M).NpcIndex = MiNPC.Numero Then
+                            If QuestList(.QuestIndex).RequiredNPC(M).NPCIndex = MiNPC.Numero Then
                                If QuestList(.QuestIndex).RequiredNPC(M).Amount > .NPCsKilled(M) Then
                                     .NPCsKilled(M) = .NPCsKilled(M) + 1
         
@@ -248,6 +248,7 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
             'Tiramos el oro
             Call NPCTirarOro(MiNPC)
             Call DropObjQuest(MiNPC, UserIndex)
+            Call DropNPCaNPC(MiNPC, UserIndex)
     
          '   'Item Magico!
         'Call NpcDropeo(MiNPC, UserIndex)
@@ -266,10 +267,10 @@ errhandler:
         Call LogError("Error en MuereNpc - Error: " & Err.Number & " - Desc: " & Err.Description)
     End Sub
 
-Private Sub ResetNpcFlags(ByVal NpcIndex As Integer)
+Private Sub ResetNpcFlags(ByVal NPCIndex As Integer)
     'Clear the npc's flags
     
-    With Npclist(NpcIndex).flags
+    With Npclist(NPCIndex).flags
         .WasAttackByGuards = False
         .AfectaParalisis = 0
         .AguaValida = 0
@@ -298,16 +299,16 @@ Private Sub ResetNpcFlags(ByVal NpcIndex As Integer)
     End With
 End Sub
 
-Private Sub ResetNpcCounters(ByVal NpcIndex As Integer)
-    With Npclist(NpcIndex).Contadores
+Private Sub ResetNpcCounters(ByVal NPCIndex As Integer)
+    With Npclist(NPCIndex).Contadores
         .Paralisis = 0
         .TiempoExistencia = 0
         .Congelado = 0
     End With
 End Sub
 
-Private Sub ResetNpcCharInfo(ByVal NpcIndex As Integer)
-    With Npclist(NpcIndex).Char
+Private Sub ResetNpcCharInfo(ByVal NPCIndex As Integer)
+    With Npclist(NPCIndex).Char
         .Body = 0
         .CascoAnim = 0
         .CharIndex = 0
@@ -320,12 +321,12 @@ Private Sub ResetNpcCharInfo(ByVal NpcIndex As Integer)
     End With
 End Sub
 
-Private Sub ResetNpcCriatures(ByVal NpcIndex As Integer)
+Private Sub ResetNpcCriatures(ByVal NPCIndex As Integer)
     Dim j As Long
     
-    With Npclist(NpcIndex)
+    With Npclist(NPCIndex)
         For j = 1 To .NroCriaturas
-            .Criaturas(j).NpcIndex = 0
+            .Criaturas(j).NPCIndex = 0
             .Criaturas(j).NpcName = vbNullString
         Next j
         
@@ -333,10 +334,10 @@ Private Sub ResetNpcCriatures(ByVal NpcIndex As Integer)
     End With
 End Sub
 
-Sub ResetExpresiones(ByVal NpcIndex As Integer)
+Sub ResetExpresiones(ByVal NPCIndex As Integer)
     Dim j As Long
     
-    With Npclist(NpcIndex)
+    With Npclist(NPCIndex)
         For j = 1 To .NroExpresiones
             .Expresiones(j) = vbNullString
         Next j
@@ -345,8 +346,8 @@ Sub ResetExpresiones(ByVal NpcIndex As Integer)
     End With
 End Sub
 
-Private Sub ResetNpcMainInfo(ByVal NpcIndex As Integer)
-    With Npclist(NpcIndex)
+Private Sub ResetNpcMainInfo(ByVal NPCIndex As Integer)
+    With Npclist(NPCIndex)
         .EquitandoBody = 0
         .Attackable = 0
         .CanAttack = 0
@@ -360,9 +361,13 @@ Private Sub ResetNpcMainInfo(ByVal NpcIndex As Integer)
         .InvReSpawn = 0
         .Mensaje = 0
         'quest
-        Npclist(NpcIndex).NumDropQuest = 0
+        Npclist(NPCIndex).NumDropQuest = 0
+        
         'quest
-        If .MaestroUser > 0 And .EquitandoBody = 0 Then Call QuitarMascota(.MaestroUser, NpcIndex)
+        'NPC Spanw
+        .NumDropNPC = 0
+        'NPC Spanw
+        If .MaestroUser > 0 And .EquitandoBody = 0 Then Call QuitarMascota(.MaestroUser, NPCIndex)
         If .MaestroNpc > 0 Then Call QuitarMascotaNpc(.MaestroNpc)
         
         .MaestroUser = 0
@@ -405,32 +410,32 @@ Private Sub ResetNpcMainInfo(ByVal NpcIndex As Integer)
         Next j
     End With
     
-    Call ResetNpcCharInfo(NpcIndex)
-    Call ResetNpcCriatures(NpcIndex)
-    Call ResetExpresiones(NpcIndex)
+    Call ResetNpcCharInfo(NPCIndex)
+    Call ResetNpcCriatures(NPCIndex)
+    Call ResetExpresiones(NPCIndex)
 End Sub
 
-Public Sub QuitarNPC(ByVal NpcIndex As Integer)
+Public Sub QuitarNPC(ByVal NPCIndex As Integer)
 
 On Error GoTo errhandler
 
-    With Npclist(NpcIndex)
+    With Npclist(NPCIndex)
         .flags.NPCActive = False
         
         If InMapBounds(.Pos.map, .Pos.X, .Pos.Y) Then
-            Call EraseNPCChar(NpcIndex)
+            Call EraseNPCChar(NPCIndex)
         End If
     End With
         
     'Nos aseguramos de que el inventario sea removido...
     'asi los lobos no volveran a tirar armaduras ;))
-    Call ResetNpcInv(NpcIndex)
-    Call ResetNpcFlags(NpcIndex)
-    Call ResetNpcCounters(NpcIndex)
+    Call ResetNpcInv(NPCIndex)
+    Call ResetNpcFlags(NPCIndex)
+    Call ResetNpcCounters(NPCIndex)
     
-    Call ResetNpcMainInfo(NpcIndex)
+    Call ResetNpcMainInfo(NPCIndex)
     
-    If NpcIndex = LastNPC Then
+    If NPCIndex = LastNPC Then
         Do Until Npclist(LastNPC).flags.NPCActive
             LastNPC = LastNPC - 1
             If LastNPC < 1 Then Exit Do
@@ -578,7 +583,7 @@ Dim Y As Integer
 
 End Sub
 
-Public Sub MakeNPCChar(ByVal toMap As Boolean, sndIndex As Integer, NpcIndex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)
+Public Sub MakeNPCChar(ByVal toMap As Boolean, sndIndex As Integer, NPCIndex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)
 Dim CharIndex As Integer
 Dim Nombre As String
 Dim Criminal As Byte
@@ -593,28 +598,28 @@ Dim Simbolo As Byte
     
     
     
-    If Npclist(NpcIndex).Char.CharIndex = 0 Then
+    If Npclist(NPCIndex).Char.CharIndex = 0 Then
         CharIndex = NextOpenCharIndex
-        Npclist(NpcIndex).Char.CharIndex = CharIndex
-        CharList(CharIndex) = NpcIndex
+        Npclist(NPCIndex).Char.CharIndex = CharIndex
+        CharList(CharIndex) = NPCIndex
     End If
     
-    MapData(map).Tile(X, Y).NpcIndex = NpcIndex
+    MapData(map).Tile(X, Y).NPCIndex = NPCIndex
     
     
-     If Npclist(NpcIndex).Numero = 932 Then
-        shield = ObjData(Npclist(NpcIndex).Char.ShieldAnim).ShieldAnim
-        weapon = ObjData(Npclist(NpcIndex).Char.WeaponAnim).WeaponAnim
-        Helm = ObjData(Npclist(NpcIndex).Char.CascoAnim).CascoAnim
+     If Npclist(NPCIndex).Numero = 932 Then
+        shield = ObjData(Npclist(NPCIndex).Char.ShieldAnim).ShieldAnim
+        weapon = ObjData(Npclist(NPCIndex).Char.WeaponAnim).WeaponAnim
+        Helm = ObjData(Npclist(NPCIndex).Char.CascoAnim).CascoAnim
     End If
     
-    If Npclist(NpcIndex).MostrarNombre Then
-        Nombre = "!" & Npclist(NpcIndex).Name
+    If Npclist(NPCIndex).MostrarNombre Then
+        Nombre = "!" & Npclist(NPCIndex).Name
     Else
         Nombre = vbNullString
     End If
-    Criminal = Npclist(NpcIndex).Stats.Alineacion
-    With Npclist(NpcIndex)
+    Criminal = Npclist(NPCIndex).Stats.Alineacion
+    With Npclist(NPCIndex)
     
     Dim tmpByte As Byte
     If Not toMap Then
@@ -668,31 +673,31 @@ Dim Simbolo As Byte
                 End If
 
     'quest
-        Call WriteCharacterCreate(sndIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, Npclist(NpcIndex).Char.heading, Npclist(NpcIndex).Char.CharIndex, X, Y, Npclist(NpcIndex).Char.WeaponAnim, Npclist(NpcIndex).Char.ShieldAnim, 0, 0, Npclist(NpcIndex).Char.CascoAnim, Nombre, Criminal, 0, Simbolo)
+        Call WriteCharacterCreate(sndIndex, Npclist(NPCIndex).Char.Body, Npclist(NPCIndex).Char.Head, Npclist(NPCIndex).Char.heading, Npclist(NPCIndex).Char.CharIndex, X, Y, Npclist(NPCIndex).Char.WeaponAnim, Npclist(NPCIndex).Char.ShieldAnim, 0, 0, Npclist(NPCIndex).Char.CascoAnim, Nombre, Criminal, 0, Simbolo)
         Call FlushBuffer(sndIndex)
     Else
-        Call AgregarNpc(NpcIndex)
+        Call AgregarNpc(NPCIndex)
     End If
     End With
 End Sub
 
-Public Sub ChangeNPCChar(ByVal NpcIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal heading As eHeading)
-    If NpcIndex > 0 Then
-        With Npclist(NpcIndex).Char
+Public Sub ChangeNPCChar(ByVal NPCIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal heading As eHeading)
+    If NPCIndex > 0 Then
+        With Npclist(NPCIndex).Char
             .Body = Body
             .Head = Head
             .heading = heading
             
-            Call SendData(SendTarget.ToNPCArea, NpcIndex, PrepareMessageCharacterChange(Body, Head, heading, .CharIndex, 0, 0, 0, 0, 0))
+            Call SendData(SendTarget.ToNPCArea, NPCIndex, PrepareMessageCharacterChange(Body, Head, heading, .CharIndex, 0, 0, 0, 0, 0))
         End With
     End If
 End Sub
 
-Private Sub EraseNPCChar(ByVal NpcIndex As Integer)
+Private Sub EraseNPCChar(ByVal NPCIndex As Integer)
 
-If Npclist(NpcIndex).Char.CharIndex <> 0 Then CharList(Npclist(NpcIndex).Char.CharIndex) = 0
+If Npclist(NPCIndex).Char.CharIndex <> 0 Then CharList(Npclist(NPCIndex).Char.CharIndex) = 0
 
-If Npclist(NpcIndex).Char.CharIndex = LastChar Then
+If Npclist(NPCIndex).Char.CharIndex = LastChar Then
     Do Until CharList(LastChar) > 0
         LastChar = LastChar - 1
         If LastChar <= 1 Then Exit Do
@@ -700,13 +705,13 @@ If Npclist(NpcIndex).Char.CharIndex = LastChar Then
 End If
 
 'Quitamos del mapa
-MapData(Npclist(NpcIndex).Pos.map).Tile(Npclist(NpcIndex).Pos.X, Npclist(NpcIndex).Pos.Y).NpcIndex = 0
+MapData(Npclist(NPCIndex).Pos.map).Tile(Npclist(NPCIndex).Pos.X, Npclist(NPCIndex).Pos.Y).NPCIndex = 0
 
 'Actualizamos los clientes
-Call SendData(SendTarget.ToNPCArea, NpcIndex, PrepareMessageCharacterRemove(Npclist(NpcIndex).Char.CharIndex))
+Call SendData(SendTarget.ToNPCArea, NPCIndex, PrepareMessageCharacterRemove(Npclist(NPCIndex).Char.CharIndex))
 
 'Update la lista npc
-Npclist(NpcIndex).Char.CharIndex = 0
+Npclist(NPCIndex).Char.CharIndex = 0
 
 
 'update NumChars
@@ -715,7 +720,7 @@ NumChars = NumChars - 1
 
 End Sub
 
-Public Sub MoveNPCChar(ByVal NpcIndex As Integer, ByVal nHeading As Byte)
+Public Sub MoveNPCChar(ByVal NPCIndex As Integer, ByVal nHeading As Byte)
 '***************************************************
 'Autor: Unknown (orginal version)
 'Last Modification: 06/04/2009
@@ -728,7 +733,7 @@ On Error GoTo errh
     Dim UserIndex As Integer
     Dim CasperHeading As Byte
     
-    With Npclist(NpcIndex)
+    With Npclist(NPCIndex)
         nPos = .Pos
         Call HeadtoPos(nHeading, nPos)
         ' es una posicion legal
@@ -760,17 +765,17 @@ On Error GoTo errh
 
 
             End If
-            Call SendData(SendTarget.ToNPCArea, NpcIndex, PrepareMessageCharacterMove(.Char.CharIndex, nPos.X, nPos.Y))
+            Call SendData(SendTarget.ToNPCArea, NPCIndex, PrepareMessageCharacterMove(.Char.CharIndex, nPos.X, nPos.Y))
 
             'Update map and user pos
-            MapData(.Pos.map).Tile(.Pos.X, .Pos.Y).NpcIndex = 0
+            MapData(.Pos.map).Tile(.Pos.X, .Pos.Y).NPCIndex = 0
             .Pos = nPos
             .Char.heading = nHeading
-            MapData(.Pos.map).Tile(nPos.X, nPos.Y).NpcIndex = NpcIndex
+            MapData(.Pos.map).Tile(nPos.X, nPos.Y).NPCIndex = NPCIndex
             
             'Actualizamos las áreas de ser necesario
             If UserIndex > 0 Then Call ModAreas.CheckUpdateNeededUser(UserIndex, CasperHeading)
-            Call CheckUpdateNeededNpc(NpcIndex, nHeading)
+            Call CheckUpdateNeededNpc(NPCIndex, nHeading)
         
         ElseIf .MaestroUser = 0 Then
             If .Movement = TipoAI.NpcPathfinding Then
@@ -778,12 +783,12 @@ On Error GoTo errh
                 .PFINFO.PathLenght = 0
             End If
         End If
-        CheckZonaNPC (NpcIndex)
+        CheckZonaNPC (NPCIndex)
     End With
 Exit Sub
 
 errh:
-    LogError ("Error en move npc " & NpcIndex)
+    LogError ("Error en move npc " & NPCIndex)
 End Sub
 
 Function NextOpenNPC() As Integer
@@ -815,7 +820,7 @@ End If
 
 End Sub
 
-Function SpawnNpc(ByVal NpcIndex As Integer, Pos As WorldPos, ByVal FX As Boolean, ByVal ReSpawn As Boolean, ByVal zona As Integer) As Integer
+Function SpawnNpc(ByVal NPCIndex As Integer, Pos As WorldPos, ByVal FX As Boolean, ByVal ReSpawn As Boolean, ByVal zona As Integer) As Integer
 '***************************************************
 'Autor: Unknown (orginal version)
 'Last Modification: 06/15/2008
@@ -834,7 +839,7 @@ Dim map As Integer
 Dim X As Integer
 Dim Y As Integer
 
-nIndex = OpenNPC(NpcIndex, ReSpawn)    'Conseguimos un indice
+nIndex = OpenNPC(NPCIndex, ReSpawn)    'Conseguimos un indice
 
 If nIndex > MAXNPCS Then
     SpawnNpc = 0
@@ -944,7 +949,7 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
 'Alejo
 '
 '###################################################
-    Dim NpcIndex As Integer
+    Dim NPCIndex As Integer
     Dim Leer As clsIniReader
     Dim LoopC As Long
     Dim ln As String
@@ -958,14 +963,14 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         Exit Function
     End If
 
-    NpcIndex = NextOpenNPC
+    NPCIndex = NextOpenNPC
 
-    If NpcIndex > MAXNPCS Then    'Limite de npcs
-        OpenNPC = NpcIndex
+    If NPCIndex > MAXNPCS Then    'Limite de npcs
+        OpenNPC = NPCIndex
         Exit Function
     End If
 
-    With Npclist(NpcIndex)
+    With Npclist(NPCIndex)
         .Numero = NpcNumber
         .Name = Leer.GetValue("NPC" & NpcNumber, "Name")
         .MostrarNombre = False
@@ -1023,16 +1028,16 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         aux2 = Leer.GetValue("NPC" & NpcNumber, "NumQuest")
 
         If LenB(aux2) = 0 Then
-            Npclist(NpcIndex).NumQuest = 0
+            Npclist(NPCIndex).NumQuest = 0
 
         Else
 
-            Npclist(NpcIndex).NumQuest = val(aux2)
+            Npclist(NPCIndex).NumQuest = val(aux2)
 
-            ReDim Npclist(NpcIndex).QuestNumber(1 To Npclist(NpcIndex).NumQuest) As Byte
+            ReDim Npclist(NPCIndex).QuestNumber(1 To Npclist(NPCIndex).NumQuest) As Byte
 
-            For LoopC = 1 To Npclist(NpcIndex).NumQuest
-                Npclist(NpcIndex).QuestNumber(LoopC) = val(Leer.GetValue("NPC" & NpcNumber, "QuestNumber" & LoopC))
+            For LoopC = 1 To Npclist(NPCIndex).NumQuest
+                Npclist(NPCIndex).QuestNumber(LoopC) = val(Leer.GetValue("NPC" & NpcNumber, "QuestNumber" & LoopC))
             Next LoopC
 
         End If
@@ -1041,26 +1046,47 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         aux2 = Leer.GetValue("NPC" & NpcNumber, "NumDropQuest")
 
         If LenB(aux2) = 0 Then
-            Npclist(NpcIndex).NumDropQuest = 0
+            Npclist(NPCIndex).NumDropQuest = 0
 
         Else
 
-            Npclist(NpcIndex).NumDropQuest = val(aux2)
+            Npclist(NPCIndex).NumDropQuest = val(aux2)
 
-            ReDim Npclist(NpcIndex).DropQuest(1 To Npclist(NpcIndex).NumDropQuest) As String
+            ReDim Npclist(NPCIndex).DropQuest(1 To Npclist(NPCIndex).NumDropQuest) As String
 
-            For LoopC = 1 To Npclist(NpcIndex).NumDropQuest
-                Npclist(NpcIndex).DropQuest(LoopC) = Leer.GetValue("NPC" & NpcNumber, "DropQuest" & LoopC)
+            For LoopC = 1 To Npclist(NPCIndex).NumDropQuest
+                Npclist(NPCIndex).DropQuest(LoopC) = Leer.GetValue("NPC" & NpcNumber, "DropQuest" & LoopC)
             Next LoopC
 
         End If
-        '.QuestNumber = val(Leer.GetValue("NPC" & NpcNumber, "QuestNumber"))
-
-
-
-
-
         'quest
+        
+       'Nuevo sistema de Drop NPC
+
+        aux2 = Leer.GetValue("NPC" & NpcNumber, "NumDropNPC")
+
+        If LenB(aux2) = 0 Then
+            Npclist(NPCIndex).NumDropNPC = 0
+
+        Else
+
+            Npclist(NPCIndex).NumDropNPC = val(aux2)
+
+            ReDim Npclist(NPCIndex).DropNPC(1 To Npclist(NPCIndex).NumDropNPC) As String
+
+            For LoopC = 1 To Npclist(NPCIndex).NumDropNPC
+                Npclist(NPCIndex).DropNPC(LoopC) = Leer.GetValue("NPC" & NpcNumber, "DropNPC" & LoopC)
+            Next LoopC
+
+        End If
+        
+        'Nuevo sistema de Drop NPC
+
+
+
+
+
+        
         .PoderAtaque = val(Leer.GetValue("NPC" & NpcNumber, "PoderAtaque"))
         .PoderEvasion = val(Leer.GetValue("NPC" & NpcNumber, "PoderEvasion"))
 
@@ -1093,7 +1119,7 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
             .NroCriaturas = val(Leer.GetValue("NPC" & NpcNumber, "NroCriaturas"))
             ReDim .Criaturas(1 To .NroCriaturas) As tCriaturasEntrenador
             For LoopC = 1 To .NroCriaturas
-                .Criaturas(LoopC).NpcIndex = Leer.GetValue("NPC" & NpcNumber, "CI" & LoopC)
+                .Criaturas(LoopC).NPCIndex = Leer.GetValue("NPC" & NpcNumber, "CI" & LoopC)
                 .Criaturas(LoopC).NpcName = Leer.GetValue("NPC" & NpcNumber, "CN" & LoopC)
             Next LoopC
         End If
@@ -1134,15 +1160,15 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
     End With
 
     'Update contadores de NPCs
-    If NpcIndex > LastNPC Then LastNPC = NpcIndex
+    If NPCIndex > LastNPC Then LastNPC = NPCIndex
     NumNPCs = NumNPCs + 1
 
     'Devuelve el nuevo Indice
-    OpenNPC = NpcIndex
+    OpenNPC = NPCIndex
 End Function
 
-Public Sub DoFollow(ByVal NpcIndex As Integer, ByVal UserName As String)
-    With Npclist(NpcIndex)
+Public Sub DoFollow(ByVal NPCIndex As Integer, ByVal UserName As String)
+    With Npclist(NPCIndex)
         If .flags.Follow Then
             .flags.AttackedBy = vbNullString
             .flags.Follow = False
@@ -1157,8 +1183,8 @@ Public Sub DoFollow(ByVal NpcIndex As Integer, ByVal UserName As String)
     End With
 End Sub
 
-Public Sub FollowAmo(ByVal NpcIndex As Integer)
-    With Npclist(NpcIndex)
+Public Sub FollowAmo(ByVal NPCIndex As Integer)
+    With Npclist(NPCIndex)
         .flags.Follow = True
         .Movement = TipoAI.SigueAmo
         .Hostile = 0

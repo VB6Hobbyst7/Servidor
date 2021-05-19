@@ -885,7 +885,7 @@ Sub ConnectUser(ByVal UserIndex As Integer, ByVal UserAccount As String, ByRef N
 Dim N As Integer
 Dim tStr As String
 Dim rs As clsMySQLRecordSet
-Dim Cant As Long
+Dim cant As Long
 
 If UserList(UserIndex).flags.UserLogged Then
     Call LogCheating("El usuario " & UserList(UserIndex).Name & " ha intentado loguear a " & Name & " desde la IP " & UserList(UserIndex).ip)
@@ -934,8 +934,8 @@ If Not PersonajeExiste(Name) Then
 End If
 
 '¿Es el passwd valido?
-Cant = mySQL.SQLQuery("SELECT pjs.Id, cuentas.Id as 'IdAccount' FROM cuentas, pjs WHERE cuentas.Nombre=" & Comillas(UserAccount) & " AND cuentas.Password=" & Comillas(password) & " AND pjs.IdAccount=cuentas.Id AND pjs.Nombre=" & Comillas(Name), rs)
-If Cant = 0 Then
+cant = mySQL.SQLQuery("SELECT pjs.Id, cuentas.Id as 'IdAccount' FROM cuentas, pjs WHERE cuentas.Nombre=" & Comillas(UserAccount) & " AND cuentas.Password=" & Comillas(password) & " AND pjs.IdAccount=cuentas.Id AND pjs.Nombre=" & Comillas(Name), rs)
+If cant = 0 Then
     Call WriteErrorMsg(UserIndex, "Password incorrecto.")
     Call FlushBuffer(UserIndex)
     Call CloseSocket(UserIndex)
@@ -971,7 +971,7 @@ ElseIf EsConsejero(Name) Then
     UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Consejero
     Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
 Else
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.user
+    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.User
     UserList(UserIndex).flags.AdminPerseguible = True
 End If
 
@@ -1063,7 +1063,7 @@ End If
 
 'Tratamos de evitar en lo posible el "Telefrag". Solo 1 intento de loguear en pos adjacentes.
 'Codigo por Pablo (ToxicWaste) y revisado por Nacho (Integer), corregido para que realmetne ande y no tire el server por Juan Martín Sotuyo Dodero (Maraxus)
-If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NpcIndex <> 0 Then
+If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NPCIndex <> 0 Then
     Dim FoundPlace As Boolean
     Dim esAgua As Boolean
     Dim tX As Long
@@ -1152,11 +1152,11 @@ Call WriteChangeMap(UserIndex, UserList(UserIndex).Pos.map) 'Carga el mapa
 
 If UserList(UserIndex).flags.Privilegios = PlayerType.Dios Then
     UserList(UserIndex).flags.ChatColor = RGB(250, 250, 150)
-ElseIf UserList(UserIndex).flags.Privilegios <> PlayerType.user And UserList(UserIndex).flags.Privilegios <> (PlayerType.user Or PlayerType.ChaosCouncil) And UserList(UserIndex).flags.Privilegios <> (PlayerType.user Or PlayerType.RoyalCouncil) Then
+ElseIf UserList(UserIndex).flags.Privilegios <> PlayerType.User And UserList(UserIndex).flags.Privilegios <> (PlayerType.User Or PlayerType.ChaosCouncil) And UserList(UserIndex).flags.Privilegios <> (PlayerType.User Or PlayerType.RoyalCouncil) Then
     UserList(UserIndex).flags.ChatColor = RGB(0, 255, 0)
-ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.user Or PlayerType.RoyalCouncil) Then
+ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.User Or PlayerType.RoyalCouncil) Then
     UserList(UserIndex).flags.ChatColor = RGB(0, 255, 255)
-ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.user Or PlayerType.ChaosCouncil) Then
+ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.User Or PlayerType.ChaosCouncil) Then
     UserList(UserIndex).flags.ChatColor = RGB(255, 128, 64)
 Else
     UserList(UserIndex).flags.ChatColor = vbWhite
@@ -1722,7 +1722,7 @@ With UserList(UserIndex).ComUsu
     .Acepto = False
     
     For i = 1 To MAX_OFFER_SLOTS
-        .Cant(i) = 0
+        .cant(i) = 0
         .Objeto(i) = 0
     Next i
     
@@ -1873,7 +1873,7 @@ Dim LoopC As Long
 
 For LoopC = 1 To LastUser
     If UserList(LoopC).flags.UserLogged And UserList(LoopC).ConnID >= 0 And UserList(LoopC).ConnIDValida Then
-        If UserList(LoopC).flags.Privilegios And PlayerType.user Then
+        If UserList(LoopC).flags.Privilegios And PlayerType.User Then
             Call CloseSocket(LoopC)
         End If
     End If

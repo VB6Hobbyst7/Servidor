@@ -66,7 +66,7 @@ REVISAR ENTRENADOR ARKHEIN SI SUS NPCS QUE INVOCA, HAY QUE REVISAR QUE NO TENGAN
 580
 581
 
-Actual Npc con Nro más alto: 932
+Actual Npc con Nro más alto: 937
 
 ##############################################
 ###############OBSERVACIONES##################
@@ -84,8 +84,7 @@ Actual Npc con Nro más alto: 932
 'aca va el número de NPC más alto, NO la cantidad de NPCs.
 'esto sirve para que los GMS puedan ver la lista completa de npcs a invocar en una ventanita.
 
-NumNPCs=932
-
+NumNPCs=937
 [NPC148] 'VendeMagia Polo
 Name=Mago
 NpcType=0
@@ -4517,6 +4516,8 @@ Snd1=35
 Snd2=9
 NROITEMS=1
 Obj1=414-1
+NumDropNPC=1
+DropNPC1=501-2-1
 BackUp=0
 
 ############################################
@@ -9258,7 +9259,7 @@ MinHIT=200
 DEF=10
 PoderAtaque=350
 PoderEvasion=300
-BackUp=0Ç
+BackUp=0
 
 NPC914] 'Guardian Catas Boss
 Name=Guardian Nivel Dos
@@ -9619,6 +9620,162 @@ Hostile=1
 Domable=0
 Alineacion=0
 Comercia=0
+
+[NPC933] 
+Name=Áncalon, el dragón dorado
+NpcType=0
+Head=0
+Heading=3
+Body=551
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=265000
+GiveGLDMin=30000
+GiveGLDMax=60000
+MinHP=200000
+MaxHP=200000
+MaxHIT=5000
+MinHIT=1000
+DEF=0
+PoderAtaque=400
+PoderEvasion=320
+LanzaSpells=2
+Sp1=15
+Sp2=25
+SND1=30
+SND2=31
+SND3=32
+NROITEMS=1
+Obj1=194-1500
+AfectaParalisis=1
+BackUp=0
+
+[NPC934] 
+Name=Cthulu
+NpcType=0
+Head=0
+Heading=3
+Body=550
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=265000
+GiveGLDMin=30000
+GiveGLDMax=60000
+MinHP=200000
+MaxHP=200000
+MaxHIT=5000
+MinHIT=1000
+DEF=0
+PoderAtaque=400
+PoderEvasion=320
+LanzaSpells=2
+Sp1=15
+Sp2=25
+SND1=30
+SND2=31
+SND3=32
+NROITEMS=1
+Obj1=194-1500
+AfectaParalisis=1
+BackUp=0
+
+[NPC935]
+Name=Yik'ahku
+NpcType=0
+Head=0
+Heading=3
+Body=549
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=265000
+GiveGLDMin=30000
+GiveGLDMax=60000
+MinHP=200000
+MaxHP=200000
+MaxHIT=5000
+MinHIT=1000
+DEF=0
+PoderAtaque=400
+PoderEvasion=320
+LanzaSpells=2
+Sp1=15
+Sp2=25
+SND1=30
+SND2=31
+SND3=32
+NROITEMS=1
+Obj1=194-1500
+AfectaParalisis=1
+BackUp=0
+
+[NPC936]
+Name=Reina Medusa
+NpcType=0
+Head=0
+Heading=3
+Body=548
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=265000
+GiveGLDMin=30000
+GiveGLDMax=60000
+MinHP=200000
+MaxHP=200000
+MaxHIT=5000
+MinHIT=1000
+DEF=0
+PoderAtaque=400
+PoderEvasion=320
+LanzaSpells=2
+Sp1=15
+Sp2=25
+SND1=30
+SND2=31
+SND3=32
+NROITEMS=1
+Obj1=194-1500
+AfectaParalisis=1
+BackUp=0
+
+[NPC937] 'Banquero de Banderville
+Name=pruebaa polenta
+NpcType=4
+Desc=Hola, bienvenido al Banco Central de finanzas Goliath en Banderville. Somos la sede Goliath donde guardamos toda la moneda de Argentum, contamos con bancos en las ciudades más importantes.
+Head=0
+Heading=3
+Body=552
+Movement=1
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
 
 
 
