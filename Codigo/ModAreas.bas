@@ -21,8 +21,9 @@ End Type
 
 Public Const USER_NUEVO As Byte = 255
 
-Public Const MargenX As Integer = 13
-Public Const MargenY As Integer = 11
+'arreglo del area de vision en server respecto al cliente render
+Public Const MargenX As Integer = 16
+Public Const MargenY As Integer = 12
 
 'Cuidado:
 ' ¡¡¡LAS AREAS ESTÁN HARDCODEADAS!!!
