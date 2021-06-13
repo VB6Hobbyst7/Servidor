@@ -885,7 +885,7 @@ Sub ConnectUser(ByVal UserIndex As Integer, ByVal UserAccount As String, ByRef N
 Dim N As Integer
 Dim tStr As String
 Dim rs As clsMySQLRecordSet
-Dim cant As Long
+Dim Cant As Long
 
 If UserList(UserIndex).flags.UserLogged Then
     Call LogCheating("El usuario " & UserList(UserIndex).Name & " ha intentado loguear a " & Name & " desde la IP " & UserList(UserIndex).ip)
@@ -934,8 +934,8 @@ If Not PersonajeExiste(Name) Then
 End If
 
 '¿Es el passwd valido?
-cant = mySQL.SQLQuery("SELECT pjs.Id, cuentas.Id as 'IdAccount' FROM cuentas, pjs WHERE cuentas.Nombre=" & Comillas(UserAccount) & " AND cuentas.Password=" & Comillas(password) & " AND pjs.IdAccount=cuentas.Id AND pjs.Nombre=" & Comillas(Name), rs)
-If cant = 0 Then
+Cant = mySQL.SQLQuery("SELECT pjs.Id, cuentas.Id as 'IdAccount' FROM cuentas, pjs WHERE cuentas.Nombre=" & Comillas(UserAccount) & " AND cuentas.Password=" & Comillas(password) & " AND pjs.IdAccount=cuentas.Id AND pjs.Nombre=" & Comillas(Name), rs)
+If Cant = 0 Then
     Call WriteErrorMsg(UserIndex, "Password incorrecto.")
     Call FlushBuffer(UserIndex)
     Call CloseSocket(UserIndex)
@@ -1063,7 +1063,7 @@ End If
 
 'Tratamos de evitar en lo posible el "Telefrag". Solo 1 intento de loguear en pos adjacentes.
 'Codigo por Pablo (ToxicWaste) y revisado por Nacho (Integer), corregido para que realmetne ande y no tire el server por Juan Martín Sotuyo Dodero (Maraxus)
-If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NPCIndex <> 0 Then
+If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NpcIndex <> 0 Then
     Dim FoundPlace As Boolean
     Dim esAgua As Boolean
     Dim tX As Long
@@ -1351,7 +1351,7 @@ Call mySQL.SQLQuery("SELECT * FROM quest_done WHERE user_id=" & UserList(UserInd
 'Cargamos los datos del personaje
 'Call LoadUserInit(UserIndex, rs)
 418    ' Call MakeQuery("SELECT * FROM quest_done WHERE user_id = " & .Id & ";")
-
+.QuestStats.NumQuestsDone = 0
 420     If Not rs Is Nothing Then
 422         .QuestStats.NumQuestsDone = rs.Count
                 
@@ -1722,7 +1722,7 @@ With UserList(UserIndex).ComUsu
     .Acepto = False
     
     For i = 1 To MAX_OFFER_SLOTS
-        .cant(i) = 0
+        .Cant(i) = 0
         .Objeto(i) = 0
     Next i
     
