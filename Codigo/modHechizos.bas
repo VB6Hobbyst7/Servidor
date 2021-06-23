@@ -2259,32 +2259,21 @@ Public Sub DesplazarHechizo(ByVal UserIndex As Integer, ByVal Dire As Integer, B
 '
 '***************************************************
 
-If (Dire <> 1 And Dire <> -1) Then Exit Sub
-If Not (HechizoDesplazado >= 1 And HechizoDesplazado <= MAXUSERHECHIZOS) Then Exit Sub
+'If (Dire <> 1 And Dire <> -1) Then Exit Sub
+'If Not (HechizoDesplazado >= 1 And HechizoDesplazado <= MAXUSERHECHIZOS) Then Exit Sub
 
 Dim TempHechizo As Integer
 
 With UserList(UserIndex)
-    If Dire = 1 Then 'Mover arriba
-        If HechizoDesplazado = 1 Then
-            Call WriteConsoleMsg(UserIndex, "No puedes mover el hechizo en esa dirección.", FontTypeNames.FONTTYPE_INFO)
-            Exit Sub
-        Else
+    
             TempHechizo = .Stats.UserHechizos(HechizoDesplazado)
-            .Stats.UserHechizos(HechizoDesplazado) = .Stats.UserHechizos(HechizoDesplazado - 1)
-            .Stats.UserHechizos(HechizoDesplazado - 1) = TempHechizo
-        End If
-    Else 'mover abajo
-        If HechizoDesplazado = MAXUSERHECHIZOS Then
-            Call WriteConsoleMsg(UserIndex, "No puedes mover el hechizo en esa dirección.", FontTypeNames.FONTTYPE_INFO)
-            Exit Sub
-        Else
-            TempHechizo = .Stats.UserHechizos(HechizoDesplazado)
-            .Stats.UserHechizos(HechizoDesplazado) = .Stats.UserHechizos(HechizoDesplazado + 1)
-            .Stats.UserHechizos(HechizoDesplazado + 1) = TempHechizo
-        End If
-    End If
+            .Stats.UserHechizos(HechizoDesplazado) = .Stats.UserHechizos(Dire)
+            .Stats.UserHechizos(Dire) = TempHechizo
+       
+   
 End With
+
+
 
 End Sub
 

@@ -210,7 +210,7 @@ For hechizo = 1 To NumeroHechizos
     Hechizos(hechizo).Tipo = val(Leer.GetValue("Hechizo" & hechizo, "Tipo"))
     Hechizos(hechizo).Wav = val(Leer.GetValue("Hechizo" & hechizo, "WAV"))
     Hechizos(hechizo).FXgrh = val(Leer.GetValue("Hechizo" & hechizo, "Fxgrh"))
-    
+    Hechizos(hechizo).GrhIndex = val(Leer.GetValue("Hechizo" & hechizo, "GrhIndex"))
     Hechizos(hechizo).Loops = val(Leer.GetValue("Hechizo" & hechizo, "Loops"))
     Hechizos(hechizo).Efecto = val(Leer.GetValue("Hechizo" & hechizo, "Efecto"))
     
@@ -806,14 +806,14 @@ For Object = 1 To NumObjDatas
     'CHECK: !!! Esto es provisorio hasta que los de Dateo cambien los valores de string a numerico
     Dim i As Integer
     Dim N As Integer
-    Dim s As String
+    Dim S As String
     For i = 1 To NUMCLASES
-        s = UCase$(Leer.GetValue("OBJ" & Object, "CP" & i))
+        S = UCase$(Leer.GetValue("OBJ" & Object, "CP" & i))
         N = 1
-        Do While LenB(s) > 0 And UCase$(ListaClases(N)) <> s
+        Do While LenB(S) > 0 And UCase$(ListaClases(N)) <> S
             N = N + 1
         Loop
-        ObjData(Object).ClaseProhibida(i) = IIf(LenB(s) > 0, N, 0)
+        ObjData(Object).ClaseProhibida(i) = IIf(LenB(S) > 0, N, 0)
     Next i
     
     ObjData(Object).DefensaMagicaMax = val(Leer.GetValue("OBJ" & Object, "DefensaMagicaMax"))
@@ -1505,7 +1505,7 @@ recordusuarios = val(GetVar(IniPath & "Server.ini", "INIT", "Record"))
 Temporal = val(GetVar(IniPath & "Server.ini", "INIT", "MaxUsers"))
 If MaxUsers = 0 Then
     MaxUsers = Temporal
-    ReDim UserList(1 To MaxUsers) As user
+    ReDim UserList(1 To MaxUsers) As User
 End If
 
 '&&&&&&&&&&&&&&&&&&&&& BALANCE &&&&&&&&&&&&&&&&&&&&&&&

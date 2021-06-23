@@ -749,6 +749,7 @@ Public Type tHechizo
 
     Wav As Integer
     FXgrh As Integer
+    GrhIndex As Integer
     Loops As Byte
     Efecto As Byte
 
@@ -803,7 +804,7 @@ Public Type tHechizo
 
     Invoca As Byte
     NumNpc As Integer
-    cant As Integer
+    Cant As Integer
 
     '    Materializa As Byte
     '    ItemIndex As Byte
@@ -1023,7 +1024,7 @@ End Type
 
 'Quest
 Public Type tQuestNpc
-    NPCIndex As Integer
+    NpcIndex As Integer
     Amount As Integer
 End Type
 
@@ -1485,7 +1486,7 @@ Public Type User
 End Type
 
 Private Type tNpcs
-    NPCIndex As Integer
+    NpcIndex As Integer
     Cantidad As Integer
 End Type
 
@@ -1601,7 +1602,7 @@ Public Type NPCFlags
 End Type
 
 Public Type tCriaturasEntrenador
-    NPCIndex As Integer
+    NpcIndex As Integer
     NpcName As String
     tmpIndex As Integer
 End Type
@@ -1724,7 +1725,7 @@ Public Type MapBlock
     Blocked As Byte
     Graphic(1 To 4) As Integer
     UserIndex As Integer
-    NPCIndex As Integer
+    NpcIndex As Integer
     ObjInfo As Obj
     TileExit As WorldPos
     Trigger As eTrigger

@@ -3633,17 +3633,20 @@ Private Sub HandleMoveSpell(ByVal UserIndex As Integer)
     
     With UserList(UserIndex).incomingData
         'Remove packet ID
+    
         Call .ReadByte
         
-        Dim Dir As Integer
+        Dim SlotAnt As Byte
+        Dim SlotNew As Byte
+        SlotAnt = .ReadByte()
+        SlotNew = .ReadByte()
+        'If .ReadBoolean() Then
+         '   Dir = 1
+        'Else
+         '   Dir = -1
+        'End If
         
-        If .ReadBoolean() Then
-            Dir = 1
-        Else
-            Dir = -1
-        End If
-        
-        Call DesplazarHechizo(UserIndex, Dir, .ReadByte())
+        Call DesplazarHechizo(UserIndex, SlotAnt, SlotNew)
     End With
 End Sub
 
@@ -16458,6 +16461,7 @@ On Error GoTo errhandler
         
         If UserList(UserIndex).Stats.UserHechizos(Slot) > 0 Then
             Call .WriteASCIIString(Hechizos(UserList(UserIndex).Stats.UserHechizos(Slot)).Nombre)
+             Call .WriteInteger(Hechizos(UserList(UserIndex).Stats.UserHechizos(Slot)).GrhIndex)
         Else
             Call .WriteASCIIString("(None)")
         End If
@@ -16469,6 +16473,7 @@ errhandler:
         Call FlushBuffer(UserIndex)
         Resume
     End If
+
 End Sub
 
 ''
