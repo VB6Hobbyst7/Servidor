@@ -21,7 +21,6 @@ End Type
 
 Public Const USER_NUEVO As Byte = 255
 
-'arreglo del area de vision en server respecto al cliente render
 Public Const MargenX As Integer = 16
 Public Const MargenY As Integer = 12
 

@@ -216,7 +216,7 @@ Private Sub cmdCrearbots_Click()
   
 
 
-    Call ia_Spawn(clase, Possbots, TxtNombrebots.Text & Clan, False, obpkbots.value, 0)
+    Call ia_Spawn(clase, Possbots, TxtNombrebots.Text & Clan, False, obpkbots.Value, 0)
     CantidadBots = CantidadBots + 1
     'ReDim NombreBost(CantidadBots) As String
     NombreBost(CantidadBots) = TxtNombrebots.Text
