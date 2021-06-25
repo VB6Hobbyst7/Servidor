@@ -1995,7 +1995,7 @@ If Npclist(NpcIndex).Invent.NroItems > 0 Then
         Call WriteVar(npcfile, "NPC" & NpcNumero, "Obj" & LoopC, Npclist(NpcIndex).Invent.Object(LoopC).ObjIndex & "-" & Npclist(NpcIndex).Invent.Object(LoopC).Amount)
    Next
 End If
-
+Call WriteVar(npcfile, "NPC" & NpcNumero, "Colorsangre", val(Npclist(NpcIndex).flags.Colorsangre))
 
 End Sub
 
@@ -2074,7 +2074,7 @@ Npclist(NpcIndex).flags.RespawnOrigPos = val(GetVar(npcfile, "NPC" & NpcNumber, 
 
 'Tipo de items con los que comercia
 Npclist(NpcIndex).TipoItems = val(GetVar(npcfile, "NPC" & NpcNumber, "TipoItems"))
-
+Npclist(NpcIndex).flags.Colorsangre = val(GetVar(npcfile, "NPC" & NpcNumber, "Colorsangre"))
 End Sub
 
 

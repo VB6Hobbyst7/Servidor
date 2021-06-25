@@ -1599,6 +1599,7 @@ Public Type NPCFlags
     Snd1 As Integer
     Snd2 As Integer
     Snd3 As Integer
+    Colorsangre  As Byte
 End Type
 
 Public Type tCriaturasEntrenador

@@ -345,7 +345,7 @@ Public Sub UserDañoNpc(ByVal UserIndex As Integer, ByVal NpcIndex As Integer, Op
         End If
         
         If daño < 32000 Then
-            Call WriteUserHitNPC(UserIndex, daño, .Char.CharIndex, .NpcType, HitArea)
+            Call WriteUserHitNPC(UserIndex, daño, .Char.CharIndex, .NpcType, HitArea, .flags.Colorsangre)
         End If
         
         Call CalcularDarExp(UserIndex, NpcIndex, daño)
