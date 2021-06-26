@@ -15289,7 +15289,7 @@ errhandler:
     End If
 End Sub
 
-Public Sub WriteUserSpellNPC(ByVal UserIndex As Integer, ByVal Damage As Integer, ByVal CharIndex As Integer, Optional ByVal NpcType As Byte = 0, Optional ByVal HitArea As Byte = 0)
+Public Sub WriteUserSpellNPC(ByVal UserIndex As Integer, ByVal Damage As Integer, ByVal CharIndex As Integer, Optional ByVal NpcType As Byte = 0, Optional ByVal HitArea As Byte = 0, Optional ByVal Colorsangre As Byte = 0)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -15304,6 +15304,7 @@ On Error GoTo errhandler
         Call .WriteInteger(CharIndex)
         Call .WriteByte(HitArea)
         Call .WriteByte(NpcType)
+        Call .WriteByte(Colorsangre)
     End With
 Exit Sub
 

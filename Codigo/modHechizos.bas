@@ -1643,7 +1643,7 @@ ElseIf Hechizos(hIndex).SubeHp = 2 Then
     
     'Call WriteConsoleMsg(UserIndex, "¡Le has causado " & daño & " puntos de daño a la criatura!", FontTypeNames.FONTTYPE_FIGHT)
     'Call WriteUserHitNPC(UserIndex, daño, UserList(UserIndex).Char.CharIndex, Npclist(NpcIndex).NpcType, 0)
-    Call WriteUserSpellNPC(UserIndex, daño, Npclist(NpcIndex).Char.CharIndex, Npclist(NpcIndex).NpcType, 0)
+    Call WriteUserSpellNPC(UserIndex, daño, Npclist(NpcIndex).Char.CharIndex, Npclist(NpcIndex).NpcType, 0, Npclist(NpcIndex).flags.Colorsangre)
     'Call WriteTooltip(UserIndex, Npclist(NpcIndex).Pos.x, Npclist(NpcIndex).Pos.Y, 0, daño)
     
     Call CalcularDarExp(UserIndex, NpcIndex, daño)
