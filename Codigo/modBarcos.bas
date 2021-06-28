@@ -411,7 +411,7 @@ Public Sub Anclar_Embarcacion(ByVal UserIndex As Integer)
         
         Call WriteConsoleMsg(UserIndex, "Hás saltado al agua!!", FontTypeNames.FONTTYPE_INFO)
         
-        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, tHeading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, tHeading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         Call ChangeNPCChar(EmbarcacionIndex, Npclist(EmbarcacionIndex).Char.Body, 0, Npclist(EmbarcacionIndex).Char.heading)
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageNadando(.Char.CharIndex, True))
     
@@ -457,7 +457,7 @@ Public Sub DesAnclar_Embarcacion(ByVal UserIndex As Integer)
         
         Call WriteConsoleMsg(UserIndex, "Hás subido a la embarcación!!", FontTypeNames.FONTTYPE_INFO)
     
-        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, tHeading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, tHeading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageNadando(.Char.CharIndex, False))
     
     
@@ -535,4 +535,5 @@ Public Sub Reset_Embarcacion(ByVal UserIndex As Integer)
     End With
     
 End Sub
+
 

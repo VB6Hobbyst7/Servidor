@@ -376,7 +376,7 @@ With ia_Bot(ProximoBot).Char
                tmp_Color = 0
             End If
     
-    PackageToSend = PrepareMessageCharacterCreate(.Body, .Head, eHeading.SOUTH, .CharIndex, ia_Bot(ProximoBot).Pos.X, ia_Bot(ProximoBot).Pos.Y, .WeaponAnim, .ShieldAnim, 0, 0, .CascoAnim, ia_Bot(ProximoBot).Tag, tmp_Color, 0, 0)
+    PackageToSend = PrepareMessageCharacterCreate(.Body, .Head, eHeading.SOUTH, .CharIndex, ia_Bot(ProximoBot).Pos.X, ia_Bot(ProximoBot).Pos.Y, .WeaponAnim, .ShieldAnim, 0, 0, .CascoAnim, ia_Bot(ProximoBot).Tag, tmp_Color, 0, 0, 0)
     
     'Actualizo el area.
     ia_SendToBotArea ProximoBot, PackageToSend
@@ -714,13 +714,13 @@ With ia_Bot(BotIndex)
      
      If HabiaAgua Then
         'Si hay agua cambio el cuerpo.
-        ia_SendToBotArea BotIndex, PrepareMessageCharacterChange(395, 0, Direccion, .Char.CharIndex, 0, 0, 0, 0, 0)
+        ia_SendToBotArea BotIndex, PrepareMessageCharacterChange(395, 0, Direccion, .Char.CharIndex, 0, 0, 0, 0, 0, 0)
         .Navegando = True
      Else
         'No habia agua, y... estaba navegando?
         If .Navegando Then
            'cambio el body y demas.
-           ia_SendToBotArea BotIndex, PrepareMessageCharacterChange(.Char.Body, .Char.Head, Direccion, .Char.CharIndex, .Char.WeaponAnim, .Char.ShieldAnim, 0, 0, .Char.CascoAnim)
+           ia_SendToBotArea BotIndex, PrepareMessageCharacterChange(.Char.Body, .Char.Head, Direccion, .Char.CharIndex, .Char.WeaponAnim, .Char.ShieldAnim, 0, 0, .Char.CascoAnim, .Char.alaIndex)
            .Navegando = False
         End If
     End If
@@ -963,7 +963,7 @@ With ia_Bot(BotIndex)
                tmp_Color = eNickColor.ieCiudadano
             End If
             
-            ia_SendToBotArea BotIndex, PrepareMessageCharacterCreate(.Char.Body, .Char.Head, .Char.heading, .Char.CharIndex, .Pos.X, .Pos.Y, .Char.WeaponAnim, .Char.ShieldAnim, 0, 0, .Char.CascoAnim, .Tag, tmp_Color, 0, 0)
+            ia_SendToBotArea BotIndex, PrepareMessageCharacterCreate(.Char.Body, .Char.Head, .Char.heading, .Char.CharIndex, .Pos.X, .Pos.Y, .Char.WeaponAnim, .Char.ShieldAnim, 0, 0, .Char.CascoAnim, .Tag, tmp_Color, 0, 0, 0)
         End If
      End If
      
@@ -1577,7 +1577,7 @@ Sub ia_EnviarChar(ByVal UserIndex As Integer, ByVal BotIndex As Byte)
                tmp_Color = eNickColor.ieCiudadano
             End If
             
-            Call Protocol.WriteCharacterCreate(UserIndex, .Body, .Head, eHeading.SOUTH, .CharIndex, ia_Bot(BotIndex).Pos.X, ia_Bot(BotIndex).Pos.Y, .WeaponAnim, .ShieldAnim, 0, 0, .CascoAnim, ia_Bot(BotIndex).Tag, tmp_Color, 0, 0)
+            Call Protocol.WriteCharacterCreate(UserIndex, .Body, .Head, eHeading.SOUTH, .CharIndex, ia_Bot(BotIndex).Pos.X, ia_Bot(BotIndex).Pos.Y, .WeaponAnim, .ShieldAnim, 0, 0, .CascoAnim, ia_Bot(BotIndex).Tag, tmp_Color, 0, 0, 0)
     End With
  
 End Sub
@@ -2062,4 +2062,5 @@ Next loopX
 IA_GetNextSlot = 0
  
 End Function
+
 

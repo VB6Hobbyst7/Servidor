@@ -100,13 +100,13 @@ Sub RevivirUsuario(ByVal UserIndex As Integer)
             .Char.Head = .OrigChar.Head
         End If
         
-        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         Call WriteUpdateUserStats(UserIndex)
     End With
 End Sub
 
 Sub ChangeUserChar(ByVal UserIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal heading As Byte, _
-                    ByVal Arma As Integer, ByVal Escudo As Integer, ByVal casco As Integer, Optional ByVal Transformation As Boolean = False)
+                    ByVal Arma As Integer, ByVal Escudo As Integer, ByVal casco As Integer, ByVal Alas As Integer, Optional ByVal Transformation As Boolean = False)
 
     With UserList(UserIndex).Char
         .Body = Body
@@ -115,6 +115,7 @@ Sub ChangeUserChar(ByVal UserIndex As Integer, ByVal Body As Integer, ByVal Head
         .WeaponAnim = Arma
         .ShieldAnim = Escudo
         .CascoAnim = casco
+        .alaIndex = Alas
         'eventos
          If Not Transformation Then
             If UserList(UserIndex).flags.SlotEvent > 0 Then
@@ -124,7 +125,7 @@ Sub ChangeUserChar(ByVal UserIndex As Integer, ByVal Body As Integer, ByVal Head
             End If
         End If
         'eventos
-        Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCharacterChange(Body, Head, heading, .CharIndex, Arma, Escudo, .FX, .Loops, casco))
+        Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCharacterChange(Body, Head, heading, .CharIndex, Arma, Escudo, .FX, .Loops, casco, Alas))
     End With
 End Sub
 
@@ -203,7 +204,7 @@ Sub RefreshCharStatus(ByVal UserIndex As Integer)
         If .flags.Navegando Then
             Call ToggleBoatBody(UserIndex)
             
-            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         End If
     End With
 End Sub
@@ -237,10 +238,10 @@ On Error GoTo hayerror
         If LenB(klan) <> 0 Then
             If Not toMap Then
                 If UserList(UserIndex).showName Then
-                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Name & " <" & klan & ">", bCr, UserList(UserIndex).flags.Privilegios, 0)
+                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Name & " <" & klan & ">", bCr, UserList(UserIndex).flags.Privilegios, 0, UserList(UserIndex).Char.alaIndex)
                 Else
                     'Hide the name and clan - set privs as normal user
-                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.User, 0)
+                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.User, 0, UserList(UserIndex).Char.alaIndex)
                 End If
             Else
                 Call AgregarUser(UserIndex, UserList(UserIndex).Pos.map)
@@ -248,9 +249,9 @@ On Error GoTo hayerror
         Else 'if tiene clan
             If Not toMap Then
                 If UserList(UserIndex).showName Then
-                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Name, bCr, UserList(UserIndex).flags.Privilegios, 0)
+                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Name, bCr, UserList(UserIndex).flags.Privilegios, 0, UserList(UserIndex).Char.alaIndex)
                 Else
-                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.User, 0)
+                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.User, 0, UserList(UserIndex).Char.alaIndex)
                 End If
             Else
                 Call AgregarUser(UserIndex, UserList(UserIndex).Pos.map)
@@ -1341,7 +1342,7 @@ Sub UserDie(ByVal UserIndex As Integer, Optional ByVal AttackerIndex As Integer 
         .NroMascotas = 0
 
         '<< Actualizamos clientes >>
-        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, NingunEscudo, NingunCasco)
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, NingunEscudo, NingunCasco, 0)
         Call WriteUpdateUserStats(UserIndex)
 
         '<<Castigos por party>>
@@ -1703,7 +1704,7 @@ Sub Cerrar_Usuario(ByVal UserIndex As Integer)
                             Call ToggleBoatBody(UserIndex)
                             Call WriteConsoleMsg(UserIndex, "¡Has recuperado tu apariencia normal!", FontTypeNames.FONTTYPE_INFO)
                             Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                                NingunEscudo, NingunCasco)
+                                                NingunEscudo, NingunCasco, 0)
                             'HiddenPirat = True
                         End If
                     End If
@@ -2134,4 +2135,6 @@ Public Function GetNickColor(ByVal UserIndex As Integer) As Byte
     End With
     
 End Function
+
+
 

@@ -180,6 +180,7 @@ Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Servidor> WorldSave
 
 End Sub
 
+
 Public Sub PurgarPenas()
     Dim i As Long
     
@@ -193,7 +194,7 @@ Public Sub PurgarPenas()
                     'Le quito la ropa carcelera
                     If UserList(i).flags.Muerto = 0 Then
                         UserList(i).Char.Body = ObjData(UserList(i).Invent.ArmourEqpObjIndex).Ropaje
-                        Call ChangeUserChar(i, UserList(i).Char.Body, UserList(i).Char.Head, UserList(i).Char.heading, UserList(i).Char.WeaponAnim, UserList(i).Char.ShieldAnim, UserList(i).Char.CascoAnim)
+                        Call ChangeUserChar(i, UserList(i).Char.Body, UserList(i).Char.Head, UserList(i).Char.heading, UserList(i).Char.WeaponAnim, UserList(i).Char.ShieldAnim, UserList(i).Char.CascoAnim, UserList(i).Char.alaIndex)
                     End If
                     Call WarpUserChar(i, Libertad.map, Libertad.X, Libertad.Y, True)
                     Call WriteConsoleMsg(i, "Has sido liberado!", FontTypeNames.FONTTYPE_INFO)
@@ -204,7 +205,6 @@ Public Sub PurgarPenas()
         End If
     Next i
 End Sub
-
 
 Public Sub Encarcelar(ByVal UserIndex As Integer, ByVal Minutos As Long, Optional ByVal GmName As String = vbNullString)
         
@@ -240,7 +240,7 @@ Public Sub Encarcelar(ByVal UserIndex As Integer, ByVal Minutos As Long, Optiona
             Else
                 UserList(UserIndex).Char.Body = ROPA_CARCEL_BAJOS
             End If
-            Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, 2, 2, 2)
+            Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, 2, 2, 2, 0)
 
         End If
         

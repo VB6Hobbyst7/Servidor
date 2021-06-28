@@ -1502,7 +1502,7 @@ On Error GoTo errhandler
                     Call ToggleBoatBody(UserIndex)
                     Call WriteConsoleMsg(UserIndex, "¡Has recuperado tu apariencia normal!", FontTypeNames.FONTTYPE_INFO)
                     Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                        NingunEscudo, NingunCasco)
+                                        NingunEscudo, NingunCasco, 0)
                 End If
             Else
                 If .flags.invisible = 0 Then
@@ -1588,7 +1588,7 @@ On Error GoTo errhandler
                         Call ToggleBoatBody(UserIndex)
                         Call WriteConsoleMsg(UserIndex, "¡Has recuperado tu apariencia normal!", FontTypeNames.FONTTYPE_INFO)
                         Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                            NingunEscudo, NingunCasco)
+                                            NingunEscudo, NingunCasco, 0)
                     End If
                 Else
                     If .flags.invisible = 0 Then
@@ -1844,7 +1844,7 @@ Private Sub HandleWalk(ByVal UserIndex As Integer)
                         Call ToggleBoatBody(UserIndex)
                         Call WriteConsoleMsg(UserIndex, "¡Has recuperado tu apariencia normal!", FontTypeNames.FONTTYPE_INFO)
                         Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                        NingunEscudo, NingunCasco)
+                                        NingunEscudo, NingunCasco, 0)
                     End If
                 Else
                     'If not under a spell effect, show char
@@ -1924,7 +1924,7 @@ Private Sub HandleAttack(ByVal UserIndex As Integer)
         
         If heading <> .Char.heading Then
             .Char.heading = heading
-            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         End If
         'If exiting, cancel
         Call CancelExit(UserIndex)
@@ -1943,7 +1943,7 @@ Private Sub HandleAttack(ByVal UserIndex As Integer)
                     Call ToggleBoatBody(UserIndex)
                     Call WriteConsoleMsg(UserIndex, "¡Has recuperado tu apariencia normal!", FontTypeNames.FONTTYPE_INFO)
                     Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                        NingunEscudo, NingunCasco)
+                                        NingunEscudo, NingunCasco, 0)
                 End If
             Else
                 If .flags.invisible = 0 Then
@@ -3267,6 +3267,7 @@ End Sub
 '
 ' @param    userIndex The index of the user sending the message.
 
+
 Private Sub HandleChangeHeading(ByVal UserIndex As Integer)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
@@ -3310,11 +3311,10 @@ Private Sub HandleChangeHeading(ByVal UserIndex As Integer)
         'Validate heading (VB won't say invalid cast if not a valid index like .Net languages would do... *sigh*)
         If heading > 0 And heading < 5 And heading <> .Char.heading Then
             .Char.heading = heading
-            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         End If
     End With
 End Sub
-
 ''
 ' Handles the "ModifySkills" message.
 '
@@ -8845,6 +8845,8 @@ End Sub
 '
 ' @param    userIndex The index of the user sending the message.
 
+
+
 Private Sub HandleEditChar(ByVal UserIndex As Integer)
 '***************************************************
 'Author: Nicolas Matias Gonzalez (NIGO)
@@ -8967,7 +8969,7 @@ On Error GoTo errhandler
                             modMySQL.Execute ("UPDATE pjs SET Body=" & val(Arg1) & " WHERE Nombre=" & Comillas(UserName))
                             Call WriteConsoleMsg(UserIndex, "Charfile Alterado: " & UserName, FontTypeNames.FONTTYPE_INFO)
                         Else
-                            Call ChangeUserChar(tUser, val(Arg1), UserList(tUser).Char.Head, UserList(tUser).Char.heading, UserList(tUser).Char.WeaponAnim, UserList(tUser).Char.ShieldAnim, UserList(tUser).Char.CascoAnim)
+                            Call ChangeUserChar(tUser, val(Arg1), UserList(tUser).Char.Head, UserList(tUser).Char.heading, UserList(tUser).Char.WeaponAnim, UserList(tUser).Char.ShieldAnim, UserList(tUser).Char.CascoAnim, UserList(tUser).Char.alaIndex)
                         End If
                         
                         ' Log it
@@ -8978,7 +8980,7 @@ On Error GoTo errhandler
                             modMySQL.Execute ("UPDATE pjs SET Head=" & val(Arg1) & " WHERE Nombre=" & Comillas(UserName))
                             Call WriteConsoleMsg(UserIndex, "Charfile Alterado: " & UserName, FontTypeNames.FONTTYPE_INFO)
                         Else
-                            Call ChangeUserChar(tUser, UserList(tUser).Char.Body, val(Arg1), UserList(tUser).Char.heading, UserList(tUser).Char.WeaponAnim, UserList(tUser).Char.ShieldAnim, UserList(tUser).Char.CascoAnim)
+                            Call ChangeUserChar(tUser, UserList(tUser).Char.Body, val(Arg1), UserList(tUser).Char.heading, UserList(tUser).Char.WeaponAnim, UserList(tUser).Char.ShieldAnim, UserList(tUser).Char.CascoAnim, UserList(tUser).Char.alaIndex)
                         End If
                         
                         ' Log it
@@ -9223,8 +9225,6 @@ On Error GoTo 0
     If error <> 0 Then _
         Err.Raise error
 End Sub
-
-
 ''
 ' Handles the "RequestCharInfo" message.
 '
@@ -9607,6 +9607,7 @@ End Sub
 '
 ' @param    userIndex The index of the user sending the message.
 
+
 Private Sub HandleReviveChar(ByVal UserIndex As Integer)
 '***************************************************
 'Author: Nicolas Matias Gonzalez (NIGO)
@@ -9662,7 +9663,7 @@ On Error GoTo errhandler
                         End If
                         
                         
-                        Call ChangeUserChar(tUser, .Char.Body, .OrigChar.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+                        Call ChangeUserChar(tUser, .Char.Body, .OrigChar.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
                         
                         Call WriteConsoleMsg(tUser, UserList(UserIndex).Name & " te ha resucitado.", FontTypeNames.FONTTYPE_INFO)
                     Else
@@ -9695,7 +9696,6 @@ On Error GoTo 0
     If error <> 0 Then _
         Err.Raise error
 End Sub
-
 ''
 ' Handles the "OnlineGM" message.
 '
@@ -15656,10 +15656,11 @@ End Sub
 ' @param    privileges Sets if the character is a normal one or any kind of administrative character.
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
+
 Public Sub WriteCharacterCreate(ByVal UserIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal heading As eHeading, _
                                 ByVal CharIndex As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal weapon As Integer, ByVal shield As Integer, _
                                 ByVal FX As Integer, ByVal FXLoops As Integer, ByVal helmet As Integer, ByVal Name As String, ByVal Criminal As Byte, _
-                                ByVal privileges As Byte, ByVal Simbolo As Byte)
+                                ByVal privileges As Byte, ByVal Simbolo As Byte, ByVal alaIndex As Byte)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -15667,7 +15668,7 @@ Public Sub WriteCharacterCreate(ByVal UserIndex As Integer, ByVal Body As Intege
 '***************************************************
 On Error GoTo errhandler
     Call UserList(UserIndex).outgoingData.WriteASCIIStringFixed(PrepareMessageCharacterCreate(Body, Head, heading, CharIndex, X, Y, weapon, shield, FX, FXLoops, _
-                                                            helmet, Name, Criminal, privileges, Simbolo))
+                                                            helmet, Name, Criminal, privileges, Simbolo, alaIndex))
 Exit Sub
 
 errhandler:
@@ -15676,7 +15677,6 @@ errhandler:
         Resume
     End If
 End Sub
-
 ''
 ' Writes the "CharacterRemove" message to the given user's outgoing data buffer.
 '
@@ -15761,14 +15761,14 @@ End Sub
 
 Public Sub WriteCharacterChange(ByVal UserIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal heading As eHeading, _
                                 ByVal CharIndex As Integer, ByVal weapon As Integer, ByVal shield As Integer, _
-                                ByVal FX As Integer, ByVal FXLoops As Integer, ByVal helmet As Integer)
+                                ByVal FX As Integer, ByVal FXLoops As Integer, ByVal helmet As Integer, ByVal Alas As Integer)
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
 'Writes the "CharacterChange" message to the given user's outgoing data buffer
 '***************************************************
 On Error GoTo errhandler
-    Call UserList(UserIndex).outgoingData.WriteASCIIStringFixed(PrepareMessageCharacterChange(Body, Head, heading, CharIndex, weapon, shield, FX, FXLoops, helmet))
+    Call UserList(UserIndex).outgoingData.WriteASCIIStringFixed(PrepareMessageCharacterChange(Body, Head, heading, CharIndex, weapon, shield, FX, FXLoops, helmet, Alas))
 Exit Sub
 
 errhandler:
@@ -18444,10 +18444,11 @@ End Function
 ' @return   The formated message ready to be writen as is on outgoing buffers.
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
+
 Public Function PrepareMessageCharacterCreate(ByVal Body As Integer, ByVal Head As Integer, ByVal heading As eHeading, _
                                 ByVal CharIndex As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal weapon As Integer, ByVal shield As Integer, _
                                 ByVal FX As Integer, ByVal FXLoops As Integer, ByVal helmet As Integer, ByVal Name As String, ByVal Criminal As Byte, _
-                                ByVal privileges As Byte, ByVal Simbolo As Byte) As String
+                                ByVal privileges As Byte, ByVal Simbolo As Byte, ByVal alaIndex As Byte) As String
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -18471,10 +18472,10 @@ Public Function PrepareMessageCharacterCreate(ByVal Body As Integer, ByVal Head 
         Call .WriteByte(Criminal)
         Call .WriteByte(privileges)
         Call .WriteByte(Simbolo)
+        Call .WriteByte(alaIndex)
         PrepareMessageCharacterCreate = .ReadASCIIStringFixed(.Length)
     End With
 End Function
-
 ''
 ' Prepares the "CharacterChange" message and returns it.
 '
@@ -18492,7 +18493,7 @@ End Function
 
 Public Function PrepareMessageCharacterChange(ByVal Body As Integer, ByVal Head As Integer, ByVal heading As eHeading, _
                                 ByVal CharIndex As Integer, ByVal weapon As Integer, ByVal shield As Integer, _
-                                ByVal FX As Integer, ByVal FXLoops As Integer, ByVal helmet As Integer) As String
+                                ByVal FX As Integer, ByVal FXLoops As Integer, ByVal helmet As Integer, ByVal Alas As Integer) As String
 '***************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -18510,6 +18511,7 @@ Public Function PrepareMessageCharacterChange(ByVal Body As Integer, ByVal Head 
         Call .WriteInteger(helmet)
         Call .WriteInteger(FX)
         Call .WriteInteger(FXLoops)
+         Call .WriteInteger(Alas)
         
         PrepareMessageCharacterChange = .ReadASCIIStringFixed(.Length)
     End With

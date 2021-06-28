@@ -60,7 +60,7 @@ If .flags.Equitando = False Then
         'Call WriteConsoleMsg(UserIndex, "Hás montado un " & Npclist(NpcIndex).Name & "!", FontTypeNames.FONTTYPE_INFO)
         Call WriteMultiMessage(UserIndex, eMessages.UserHaMontado)
         
-        Call ChangeUserChar(UserIndex, .Char.Body, UserList(UserIndex).Char.Head, tHeading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+        Call ChangeUserChar(UserIndex, .Char.Body, UserList(UserIndex).Char.Head, tHeading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, 0)
     
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageEquitando(.Char.CharIndex, True))
     
@@ -141,6 +141,8 @@ If .flags.NpcMonturaNumero > 0 And .flags.Equitando = True Then
             .Char.WeaponAnim = ObjData(.Invent.WeaponEqpObjIndex).WeaponAnim
         If .Invent.CascoEqpObjIndex > 0 Then _
             .Char.CascoAnim = ObjData(.Invent.CascoEqpObjIndex).CascoAnim
+             If .Invent.AlasEqpObjIndex > 0 Then _
+            .Char.alaIndex = ObjData(.Invent.AlasEqpObjIndex).alaIndex
     Else
     
         .Char.Body = iCuerpoMuerto
@@ -148,6 +150,7 @@ If .flags.NpcMonturaNumero > 0 And .flags.Equitando = True Then
         .Char.ShieldAnim = NingunEscudo
         .Char.WeaponAnim = NingunArma
         .Char.CascoAnim = NingunCasco
+        .Char.alaIndex = 0
         
     End If
            
@@ -173,7 +176,7 @@ If .flags.NpcMonturaNumero > 0 And .flags.Equitando = True Then
     'Call WriteConsoleMsg(UserIndex, "Te hás desmontado del animal!.", FontTypeNames.FONTTYPE_INFO)
     Call WriteMultiMessage(UserIndex, eMessages.UserHaDesmontado)
     
-    Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, UserList(UserIndex).Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+    Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, UserList(UserIndex).Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
     Call ChangeNPCChar(ind, Npclist(ind).Char.Body, Npclist(ind).Char.Head, eHeading.WEST)
     
     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageEquitando(.Char.CharIndex, False))
@@ -242,6 +245,8 @@ Dim porcAgonizando As Byte
     End If
     
 End Sub
+
+
 
 
 

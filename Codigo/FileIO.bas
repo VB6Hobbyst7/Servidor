@@ -652,6 +652,7 @@ ReDim Preserve ObjData(1 To NumObjDatas) As ObjData
 For Object = 1 To NumObjDatas
         
     ObjData(Object).Name = Leer.GetValue("OBJ" & Object, "Name")
+    ObjData(Object).alaIndex = val(Leer.GetValue("OBJ" & Object, "AlaIndex"))
     
     'Pablo (ToxicWaste) Log de Objetos.
     ObjData(Object).Log = val(Leer.GetValue("OBJ" & Object, "Log"))
@@ -986,7 +987,7 @@ UserList(UserIndex).OrigChar.Body = CInt(UserFile("Body"))
 UserList(UserIndex).OrigChar.WeaponAnim = CInt(UserFile("Arma"))
 UserList(UserIndex).OrigChar.ShieldAnim = CInt(UserFile("Escudo"))
 UserList(UserIndex).OrigChar.CascoAnim = CInt(UserFile("Casco"))
-
+UserList(UserIndex).OrigChar.alaIndex = CInt(UserFile("AlaIndex"))
 #If ConUpTime Then
     UserList(UserIndex).UpTime = CLng(UserFile("UpTime"))
 #End If
@@ -1679,7 +1680,7 @@ End If
 Query = Query & "Arma=" & CStr(UserList(UserIndex).Char.WeaponAnim) & ", "
 Query = Query & "Escudo=" & CStr(UserList(UserIndex).Char.ShieldAnim) & ", "
 Query = Query & "Casco=" & CStr(UserList(UserIndex).Char.CascoAnim) & ", "
-
+Query = Query & "AlaIndex=" & CStr(UserList(UserIndex).Char.alaIndex) & ", "
 #If ConUpTime Then
     Dim TempDate As Date
     TempDate = Now - UserList(UserIndex).LogOnTime

@@ -68,7 +68,7 @@ On Error GoTo errhandler
                     Call ToggleBoatBody(UserIndex)
                     Call WriteConsoleMsg(UserIndex, "¡Has recuperado tu apariencia normal!", FontTypeNames.FONTTYPE_INFO)
                     Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                        NingunEscudo, NingunCasco)
+                                        NingunEscudo, NingunCasco, 0)
                 End If
             Else
                 If .flags.invisible = 0 Then
@@ -136,7 +136,7 @@ On Error GoTo errhandler
                 .Char.Body = iFragataFantasmal
                 ' Actualizamos clientes
                 Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, NingunArma, _
-                                    NingunEscudo, NingunCasco)
+                                    NingunEscudo, NingunCasco, 0)
             End If
             
             Call SubirSkill(UserIndex, eSkill.Ocultarse)
@@ -440,7 +440,7 @@ Public Sub DoNavega(ByVal UserIndex As Integer, ByRef Barco As ObjData, ByVal Sl
         End If
         
         ' Actualizo clientes
-        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
     End With
     
     Call WriteNavigateToggle(UserIndex)
@@ -468,7 +468,7 @@ errhandler:
     Call LogError("Error en FundirMineral. Error " & Err.Number & " : " & Err.Description)
 
 End Sub
-Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer)
+Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal VictimIndex As Integer)
 '***************************************************
 'Author: ZaMa
 'Last Modif: 15/04/2010
@@ -492,7 +492,7 @@ Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer
         Probabilidad = WrestlingSkill * 0.2 + .Stats.ELV * 0.66
    End With
    
-   With UserList(victimIndex)
+   With UserList(VictimIndex)
         ' Si tiene escudo, intenta desequiparlo
         If .Invent.EscudoEqpObjIndex > 0 Then
             
@@ -500,7 +500,7 @@ Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer
             
             If Resultado <= Probabilidad Then
                 ' Se lo desequipo
-                Call Desequipar(victimIndex, .Invent.EscudoEqpSlot, True)
+                Call Desequipar(VictimIndex, .Invent.EscudoEqpSlot, True)
                 
                 'Call WriteConsoleMsg(UserIndex, "Has logrado desequipar el escudo de tu oponente!", FontTypeNames.FONTTYPE_FIGHT)
                 
@@ -511,7 +511,7 @@ Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer
                     Call WriteMultiMessage(UserIndex, eMessages.TeHanDesequipadoEscudo)
                 End If
                 
-                Call FlushBuffer(victimIndex)
+                Call FlushBuffer(VictimIndex)
                 
                 Exit Sub
             End If
@@ -526,17 +526,17 @@ Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer
             
             If Resultado <= Probabilidad Then
                 ' Se lo desequipo
-                Call Desequipar(victimIndex, .Invent.WeaponEqpSlot, True)
+                Call Desequipar(VictimIndex, .Invent.WeaponEqpSlot, True)
                 
                 'Call WriteConsoleMsg(UserIndex, "Has logrado desarmar a tu oponente!", FontTypeNames.FONTTYPE_FIGHT)
                 Call WriteMultiMessage(UserIndex, eMessages.HasDesarmadoAlOponente)
                 
                 If .Stats.ELV < 20 Then
                     'Call WriteConsoleMsg(VictimIndex, "¡Tu oponente te ha desarmado!", FontTypeNames.FONTTYPE_FIGHT)
-                    Call WriteMultiMessage(victimIndex, eMessages.TeHanDesarmado)
+                    Call WriteMultiMessage(VictimIndex, eMessages.TeHanDesarmado)
                 End If
                 
-                Call FlushBuffer(victimIndex)
+                Call FlushBuffer(VictimIndex)
                 
                 Exit Sub
             End If
@@ -551,17 +551,17 @@ Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer
             
             If Resultado <= Probabilidad Then
                 ' Se lo desequipo
-                Call Desequipar(victimIndex, .Invent.CascoEqpSlot, True)
+                Call Desequipar(VictimIndex, .Invent.CascoEqpSlot, True)
                 
                 'Call WriteConsoleMsg(UserIndex, "Has logrado desequipar el casco de tu oponente!", FontTypeNames.FONTTYPE_FIGHT)
-                Call WriteMultiMessage(victimIndex, eMessages.HasDesequipadoCascoOponente)
+                Call WriteMultiMessage(VictimIndex, eMessages.HasDesequipadoCascoOponente)
                 
                 If .Stats.ELV < 20 Then
                     'Call WriteConsoleMsg(VictimIndex, "¡Tu oponente te ha desequipado el casco!", FontTypeNames.FONTTYPE_FIGHT)
-                    Call WriteMultiMessage(victimIndex, eMessages.TeHanDesequipadoCasco)
+                    Call WriteMultiMessage(VictimIndex, eMessages.TeHanDesequipadoCasco)
                 End If
                 
-                Call FlushBuffer(victimIndex)
+                Call FlushBuffer(VictimIndex)
                 
                 Exit Sub
             End If
@@ -571,10 +571,10 @@ Public Sub DoDesequipar(ByVal UserIndex As Integer, ByVal victimIndex As Integer
     
         If AlgoEquipado Then
             'Call WriteConsoleMsg(UserIndex, "Tu oponente no tiene equipado items!", FontTypeNames.FONTTYPE_FIGHT)
-            Call WriteMultiMessage(victimIndex, eMessages.OponenteNoTienEquipadoItems)
+            Call WriteMultiMessage(VictimIndex, eMessages.OponenteNoTienEquipadoItems)
         Else
             'Call WriteConsoleMsg(UserIndex, "No has logrado desequipar ningún item a tu oponente!", FontTypeNames.FONTTYPE_FIGHT)
-            Call WriteMultiMessage(victimIndex, eMessages.NoHasLogradoDesarmarATuOponente)
+            Call WriteMultiMessage(VictimIndex, eMessages.NoHasLogradoDesarmarATuOponente)
         End If
     
     End With
@@ -1361,6 +1361,7 @@ Sub DoAdminInvisible(ByVal UserIndex As Integer)
             UserList(UserIndex).Char.CascoAnim = UserList(UserIndex).CharMimetizado.CascoAnim
             UserList(UserIndex).Char.ShieldAnim = UserList(UserIndex).CharMimetizado.ShieldAnim
             UserList(UserIndex).Char.WeaponAnim = UserList(UserIndex).CharMimetizado.WeaponAnim
+            UserList(UserIndex).Char.alaIndex = UserList(UserIndex).CharMimetizado.alaIndex
             UserList(UserIndex).Counters.Mimetismo = 0
             UserList(UserIndex).flags.Mimetizado = 0
         End If
@@ -1370,8 +1371,10 @@ Sub DoAdminInvisible(ByVal UserIndex As Integer)
         UserList(UserIndex).flags.Oculto = 1
         UserList(UserIndex).flags.OldBody = UserList(UserIndex).Char.Body
         UserList(UserIndex).flags.OldHead = UserList(UserIndex).Char.Head
+        UserList(UserIndex).flags.OldAlas = UserList(UserIndex).Char.alaIndex
         UserList(UserIndex).Char.Body = 0
         UserList(UserIndex).Char.Head = 0
+        UserList(UserIndex).Char.alaIndex = 0
         
     Else
         
@@ -1381,11 +1384,11 @@ Sub DoAdminInvisible(ByVal UserIndex As Integer)
         UserList(UserIndex).Counters.TiempoOculto = 0
         UserList(UserIndex).Char.Body = UserList(UserIndex).flags.OldBody
         UserList(UserIndex).Char.Head = UserList(UserIndex).flags.OldHead
-        
+        UserList(UserIndex).Char.alaIndex = UserList(UserIndex).flags.OldAlas
     End If
     
     'vuelve a ser visible por la fuerza
-    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSetInvisible(UserList(UserIndex).Char.CharIndex, False))
 End Sub
 
@@ -1714,7 +1717,7 @@ On Error GoTo errhandler
     
         If .Invent.AnilloEqpObjIndex = GUANTE_HURTO Then GuantesHurto = True
         
-        If UserList(VictimaIndex).flags.Privilegios And PlayerType.user Then
+        If UserList(VictimaIndex).flags.Privilegios And PlayerType.User Then
             
             Dim Suerte As Integer
             Dim res As Integer
@@ -2399,7 +2402,7 @@ Public Sub DoHandInmo(ByVal UserIndex As Integer, ByVal VictimaIndex As Integer)
 
 End Sub
 
-Public Sub Desarmar(ByVal UserIndex As Integer, ByVal victimIndex As Integer)
+Public Sub Desarmar(ByVal UserIndex As Integer, ByVal VictimIndex As Integer)
 
 '***************************************************
 'Author: Unknown
@@ -2419,12 +2422,12 @@ Public Sub Desarmar(ByVal UserIndex As Integer, ByVal victimIndex As Integer)
         Resultado = RandomNumber(1, 100)
         
         If Resultado <= Probabilidad Then
-            Call Desequipar(victimIndex, UserList(victimIndex).Invent.WeaponEqpSlot, True)
+            Call Desequipar(VictimIndex, UserList(VictimIndex).Invent.WeaponEqpSlot, True)
             Call WriteConsoleMsg(UserIndex, "Has logrado desarmar a tu oponente!", FontTypeNames.FONTTYPE_FIGHT)
-            If UserList(victimIndex).Stats.ELV < 20 Then
-                Call WriteConsoleMsg(victimIndex, "¡Tu oponente te ha desarmado!", FontTypeNames.FONTTYPE_FIGHT)
+            If UserList(VictimIndex).Stats.ELV < 20 Then
+                Call WriteConsoleMsg(VictimIndex, "¡Tu oponente te ha desarmado!", FontTypeNames.FONTTYPE_FIGHT)
             End If
-            Call FlushBuffer(victimIndex)
+            Call FlushBuffer(VictimIndex)
         End If
     End With
     
@@ -2647,5 +2650,7 @@ Public Function MaxItemsExtraibles(ByVal UserLevel As Integer) As Integer
     MaxItemsExtraibles = MaximoInt(1, CInt((UserLevel - 2) * 0.2)) + 1
 
 End Function
+
+
 
 

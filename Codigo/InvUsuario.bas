@@ -62,7 +62,7 @@ On Error GoTo manejador
 Dim flag As Boolean
 
 'Admins can use ANYTHING!
-If UserList(UserIndex).flags.Privilegios And PlayerType.user Then
+If UserList(UserIndex).flags.Privilegios And PlayerType.User Then
     If ObjData(ObjIndex).ClaseProhibida(1) <> 0 Then
         Dim i As Integer
         For i = 1 To NUMCLASES
@@ -323,7 +323,7 @@ If Num > 0 Then
             Call WriteConsoleMsg(UserIndex, "¡¡ATENCION!! ¡ACABAS DE TIRAR TU BARCA!", FontTypeNames.FONTTYPE_TALK)
         End If
         
-        If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Call LogGM(UserList(UserIndex).Name, "Tiro cantidad:" & Num & " Objeto:" & ObjData(Obj.ObjIndex).Name)
+        If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Call LogGM(UserList(UserIndex).Name, "Tiro cantidad:" & Num & " Objeto:" & ObjData(Obj.ObjIndex).Name)
         
         'Log de Objetos que se tiran al piso. Pablo (ToxicWaste) 07/09/07
         'Es un Objeto que tenemos que loguear?
@@ -466,7 +466,7 @@ If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList
             If Agarro Then
                 'Quitamos el objeto
                 Call EraseObj(MapData(UserList(UserIndex).Pos.map).Tile(X, Y).ObjInfo.Amount, UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
-                If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Call LogGM(UserList(UserIndex).Name, "Agarro:" & MiObj.Amount & " Objeto:" & ObjData(MiObj.ObjIndex).Name)
+                If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Call LogGM(UserList(UserIndex).Name, "Agarro:" & MiObj.Amount & " Objeto:" & ObjData(MiObj.ObjIndex).Name)
                 
                 'Log de Objetos que se agarran del piso. Pablo (ToxicWaste) 07/09/07
                 'Es un Objeto que tenemos que loguear?
@@ -559,7 +559,7 @@ On Error GoTo errhandler
                         .WeaponAnim = NingunArma
                         
                         If RefreshChar And UserList(UserIndex).flags.Navegando <> 1 Then
-                            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+                            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
                         End If
                     End With
                 End If
@@ -585,12 +585,32 @@ On Error GoTo errhandler
                     .ArmourEqpSlot = 0
                 End With
                 
+           
                 If .flags.Navegando <> 1 Then Call DarCuerpoDesnudo(UserIndex, .flags.Mimetizado = 1)
                 .flags.Desnudo = 1 '[TEMPORAL]
                 
                 If RefreshChar Then
                     With .Char
-                        Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+                        Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
+                    End With
+                End If
+                
+                
+                Case eOBJType.otALAS
+                With .Invent
+                    .Object(Slot).Equipped = 0
+                    .AlasEqpObjIndex = 0
+                    .AlasEqpSlot = 0
+                   
+                    
+                End With
+                   .Char.alaIndex = 0
+           
+              
+                
+                If RefreshChar Then
+                    With .Char
+                        Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
                     End With
                 End If
                 
@@ -606,7 +626,7 @@ On Error GoTo errhandler
                         .CascoAnim = NingunCasco
                         
                         If RefreshChar Then
-                            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+                            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
                         End If
                     End With
                 End If
@@ -623,7 +643,7 @@ On Error GoTo errhandler
                         .ShieldAnim = NingunEscudo
                         
                         If RefreshChar Then
-                            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+                            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
                         End If
                     End With
                 End If
@@ -684,49 +704,50 @@ End If
 End Function
 
 Sub EquiparInvItem(ByVal UserIndex As Integer, ByVal Slot As Byte)
-On Error GoTo errhandler
+    On Error GoTo errhandler
 
-'Equipa un item del inventario
-Dim Obj As ObjData
-Dim ObjIndex As Integer
+    'Equipa un item del inventario
+    Dim Obj As ObjData
+    Dim ObjIndex As Integer
 
-ObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
-Obj = ObjData(ObjIndex)
+    ObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
+    Obj = ObjData(ObjIndex)
 
-If UserList(UserIndex).flags.Nadando = True Then
-     Call WriteConsoleMsg(UserIndex, "No puedes equipar objetos nadando...", FontTypeNames.FONTTYPE_INFO)
-     Exit Sub
-End If
-
-If Obj.Newbie = 1 And Not EsNewbie(UserIndex) Then
-     Call WriteConsoleMsg(UserIndex, "Solo los newbies puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
-     Exit Sub
-End If
-
-If UserList(UserIndex).Counters.Pena > 0 Then
-    Call WriteConsoleMsg(UserIndex, "No se puede usar objetos en prisión.", FontTypeNames.FONTTYPE_INFO)
-    Exit Sub
-End If
-If UserList(UserIndex).flags.Embarcado Then
-    Call WriteConsoleMsg(UserIndex, "No se puede equipar objetos dentro del barco.", FontTypeNames.FONTTYPE_INFO)
-    Exit Sub
-End If
-
-If UserList(UserIndex).flags.Navegando = 0 And ObjIndex = BALA_CANON Then
-    If UserList(UserIndex).Invent.WeaponEqpObjIndex <> BALA_CANON Then
-        Call WriteConsoleMsg(UserIndex, "No puedes introducir la Bala al cañon ya que no estás en una embarcación.", FontTypeNames.FONTTYPE_INFO)
+    If UserList(UserIndex).flags.Nadando = True Then
+        Call WriteConsoleMsg(UserIndex, "No puedes equipar objetos nadando...", FontTypeNames.FONTTYPE_INFO)
         Exit Sub
     End If
-End If
-        
-Select Case Obj.OBJType
+
+    If Obj.Newbie = 1 And Not EsNewbie(UserIndex) Then
+        Call WriteConsoleMsg(UserIndex, "Solo los newbies puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
+        Exit Sub
+    End If
+
+
+    If UserList(UserIndex).Counters.Pena > 0 Then
+        Call WriteConsoleMsg(UserIndex, "No se puede usar objetos en prisión.", FontTypeNames.FONTTYPE_INFO)
+        Exit Sub
+    End If
+    If UserList(UserIndex).flags.Embarcado Then
+        Call WriteConsoleMsg(UserIndex, "No se puede equipar objetos dentro del barco.", FontTypeNames.FONTTYPE_INFO)
+        Exit Sub
+    End If
+
+    If UserList(UserIndex).flags.Navegando = 0 And ObjIndex = BALA_CANON Then
+        If UserList(UserIndex).Invent.WeaponEqpObjIndex <> BALA_CANON Then
+            Call WriteConsoleMsg(UserIndex, "No puedes introducir la Bala al cañon ya que no estás en una embarcación.", FontTypeNames.FONTTYPE_INFO)
+            Exit Sub
+        End If
+    End If
+
+    Select Case Obj.OBJType
     Case eOBJType.otWeapon
-       If UserList(UserIndex).flags.Equitando = True Then
+        If UserList(UserIndex).flags.Equitando = True Then
             Call WriteConsoleMsg(UserIndex, "No podes equiparte este objeto equitando!", FontTypeNames.FONTTYPE_INFO)
             Exit Sub
         End If
-       If ClasePuedeUsarItem(UserIndex, ObjIndex) And _
-          FaccionPuedeUsarItem(UserIndex, ObjIndex) Then
+        If ClasePuedeUsarItem(UserIndex, ObjIndex) And _
+           FaccionPuedeUsarItem(UserIndex, ObjIndex) Then
             'Si esta equipado lo quita
             If UserList(UserIndex).Invent.Object(Slot).Equipped Then
                 'Quitamos del inv el item
@@ -736,126 +757,166 @@ Select Case Obj.OBJType
                     UserList(UserIndex).CharMimetizado.WeaponAnim = NingunArma
                 Else
                     UserList(UserIndex).Char.WeaponAnim = NingunArma
-                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
                 End If
                 Exit Sub
             End If
-            
+
             'Quitamos el elemento anterior
             If UserList(UserIndex).Invent.WeaponEqpObjIndex > 0 Then
                 Call Desequipar(UserIndex, UserList(UserIndex).Invent.WeaponEqpSlot, False)
             End If
-            
+
             UserList(UserIndex).Invent.Object(Slot).Equipped = 1
             UserList(UserIndex).Invent.WeaponEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
             UserList(UserIndex).Invent.WeaponEqpSlot = Slot
-            
+
             'Sonido
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SACARARMA, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
-            
+
             If UserList(UserIndex).flags.Mimetizado = 1 Then
                 UserList(UserIndex).CharMimetizado.WeaponAnim = Obj.WeaponAnim
             Else
-                UserList(UserIndex).Char.WeaponAnim = GetWeaponAnim(UserIndex, ObjIndex) 'Obj.WeaponAnim
-                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+                UserList(UserIndex).Char.WeaponAnim = GetWeaponAnim(UserIndex, ObjIndex)    'Obj.WeaponAnim
+                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
             End If
-       Else
+        Else
             Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
-       End If
-    
+        End If
+
     Case eOBJType.otAnillo
-       If ClasePuedeUsarItem(UserIndex, ObjIndex) And _
-          FaccionPuedeUsarItem(UserIndex, ObjIndex) Then
-                'Si esta equipado lo quita
-                If UserList(UserIndex).Invent.Object(Slot).Equipped Then
-                    'Quitamos del inv el item
-                    Call Desequipar(UserIndex, Slot, True)
-                    Exit Sub
-                End If
-                
-                'Quitamos el elemento anterior
-                If UserList(UserIndex).Invent.AnilloEqpObjIndex > 0 Then
-                    Call Desequipar(UserIndex, UserList(UserIndex).Invent.AnilloEqpSlot, True)
-                End If
-        
-                UserList(UserIndex).Invent.Object(Slot).Equipped = 1
-                UserList(UserIndex).Invent.AnilloEqpObjIndex = ObjIndex
-                UserList(UserIndex).Invent.AnilloEqpSlot = Slot
-                
-       Else
+        If ClasePuedeUsarItem(UserIndex, ObjIndex) And _
+           FaccionPuedeUsarItem(UserIndex, ObjIndex) Then
+            'Si esta equipado lo quita
+            If UserList(UserIndex).Invent.Object(Slot).Equipped Then
+                'Quitamos del inv el item
+                Call Desequipar(UserIndex, Slot, True)
+                Exit Sub
+            End If
+
+            'Quitamos el elemento anterior
+            If UserList(UserIndex).Invent.AnilloEqpObjIndex > 0 Then
+                Call Desequipar(UserIndex, UserList(UserIndex).Invent.AnilloEqpSlot, True)
+            End If
+
+            UserList(UserIndex).Invent.Object(Slot).Equipped = 1
+            UserList(UserIndex).Invent.AnilloEqpObjIndex = ObjIndex
+            UserList(UserIndex).Invent.AnilloEqpSlot = Slot
+
+        Else
             Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
-       End If
-    
+        End If
+
     Case eOBJType.otFlechas
-       If ClasePuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
-          FaccionPuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) Then
-                
-                'Si esta equipado lo quita
-                If UserList(UserIndex).Invent.Object(Slot).Equipped Then
-                    'Quitamos del inv el item
-                    Call Desequipar(UserIndex, Slot, True)
-                    Exit Sub
-                End If
-                
-                'Quitamos el elemento anterior
-                If UserList(UserIndex).Invent.MunicionEqpObjIndex > 0 Then
-                    Call Desequipar(UserIndex, UserList(UserIndex).Invent.MunicionEqpSlot, True)
-                End If
-        
-                UserList(UserIndex).Invent.Object(Slot).Equipped = 1
-                UserList(UserIndex).Invent.MunicionEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
-                UserList(UserIndex).Invent.MunicionEqpSlot = Slot
-                
-       Else
+        If ClasePuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
+           FaccionPuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) Then
+
+            'Si esta equipado lo quita
+            If UserList(UserIndex).Invent.Object(Slot).Equipped Then
+                'Quitamos del inv el item
+                Call Desequipar(UserIndex, Slot, True)
+                Exit Sub
+            End If
+
+            'Quitamos el elemento anterior
+            If UserList(UserIndex).Invent.MunicionEqpObjIndex > 0 Then
+                Call Desequipar(UserIndex, UserList(UserIndex).Invent.MunicionEqpSlot, True)
+            End If
+
+            UserList(UserIndex).Invent.Object(Slot).Equipped = 1
+            UserList(UserIndex).Invent.MunicionEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
+            UserList(UserIndex).Invent.MunicionEqpSlot = Slot
+
+        Else
             Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
-       End If
-    
+        End If
+
     Case eOBJType.otArmadura
         If UserList(UserIndex).flags.Navegando = 1 Then Exit Sub
         If UserList(UserIndex).flags.Equitando = True Then
             Call WriteConsoleMsg(UserIndex, "No podes equiparte este objeto equitando!", FontTypeNames.FONTTYPE_INFO)
             Exit Sub
         End If
-        
+
         'Nos aseguramos que puede usarla
         If ClasePuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
            SexoPuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
            CheckRazaUsaRopa(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
            FaccionPuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) Then
-           
-           'Si esta equipado lo quita
+
+            'Si esta equipado lo quita
             If UserList(UserIndex).Invent.Object(Slot).Equipped Then
                 Call Desequipar(UserIndex, Slot, False)
                 Call DarCuerpoDesnudo(UserIndex, UserList(UserIndex).flags.Mimetizado = 1)
                 If Not UserList(UserIndex).flags.Mimetizado = 1 Then
-                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
                 End If
                 Exit Sub
             End If
-    
+
             'Quita el anterior
             If UserList(UserIndex).Invent.ArmourEqpObjIndex > 0 Then
                 Call Desequipar(UserIndex, UserList(UserIndex).Invent.ArmourEqpSlot, True)
             End If
-    
+
             'Lo equipa
             UserList(UserIndex).Invent.Object(Slot).Equipped = 1
             UserList(UserIndex).Invent.ArmourEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
             UserList(UserIndex).Invent.ArmourEqpSlot = Slot
-                
+
             If UserList(UserIndex).flags.Mimetizado = 1 Then
                 UserList(UserIndex).CharMimetizado.Body = Obj.Ropaje
             Else
                 UserList(UserIndex).Char.Body = Obj.Ropaje
-                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
             End If
             UserList(UserIndex).flags.Desnudo = 0
-            
+
 
         Else
             Call WriteConsoleMsg(UserIndex, "Tu clase,genero o raza no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
         End If
-    
+
+
+
+
+
+    Case eOBJType.otALAS
+        If ClasePuedeUsarItem(UserIndex, ObjIndex) And _
+           FaccionPuedeUsarItem(UserIndex, ObjIndex) Then
+            'Si esta equipado lo quita
+            If UserList(UserIndex).Invent.Object(Slot).Equipped Then
+                'Quitamos del inv el item
+                Call Desequipar(UserIndex, Slot, True)
+                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, 0)
+
+
+                Exit Sub
+            End If
+
+            'Quitamos el elemento anterior
+            If UserList(UserIndex).Invent.AlasEqpObjIndex > 0 Then
+                UserList(UserIndex).Char.alaIndex = 0
+                Call Desequipar(UserIndex, UserList(UserIndex).Invent.AlasEqpSlot, True)
+                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, 0)
+
+
+            End If
+            UserList(UserIndex).Char.alaIndex = Obj.alaIndex
+            Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
+            UserList(UserIndex).Invent.Object(Slot).Equipped = 1
+            UserList(UserIndex).Invent.AlasEqpObjIndex = ObjIndex
+            UserList(UserIndex).Invent.AlasEqpSlot = Slot
+
+        Else
+            Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
+        End If
+
+
+
+
+
+
     Case eOBJType.otCASCO
         If UserList(UserIndex).flags.Navegando = 1 Then Exit Sub
         If UserList(UserIndex).flags.Equitando = True Then
@@ -870,18 +931,18 @@ Select Case Obj.OBJType
                     UserList(UserIndex).CharMimetizado.CascoAnim = NingunCasco
                 Else
                     UserList(UserIndex).Char.CascoAnim = NingunCasco
-                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
                 End If
                 Exit Sub
             End If
-    
+
             'Quita el anterior
             If UserList(UserIndex).Invent.CascoEqpObjIndex > 0 Then
                 Call Desequipar(UserIndex, UserList(UserIndex).Invent.CascoEqpSlot, False)
             End If
-    
+
             'Lo equipa
-            
+
             UserList(UserIndex).Invent.Object(Slot).Equipped = 1
             UserList(UserIndex).Invent.CascoEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
             UserList(UserIndex).Invent.CascoEqpSlot = Slot
@@ -889,65 +950,65 @@ Select Case Obj.OBJType
                 UserList(UserIndex).CharMimetizado.CascoAnim = Obj.CascoAnim
             Else
                 UserList(UserIndex).Char.CascoAnim = Obj.CascoAnim
-                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
+                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
             End If
         Else
             Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
         End If
-    
+
     Case eOBJType.otESCUDO
         If UserList(UserIndex).flags.Equitando = True Then
             Call WriteConsoleMsg(UserIndex, "No podes equiparte este objeto equitando!", FontTypeNames.FONTTYPE_INFO)
             Exit Sub
         End If
         If UserList(UserIndex).flags.Navegando = 1 Then Exit Sub
-         If ClasePuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
-             FaccionPuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) Then
+        If ClasePuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) And _
+           FaccionPuedeUsarItem(UserIndex, UserList(UserIndex).Invent.Object(Slot).ObjIndex) Then
 
-             'Si esta equipado lo quita
-             If UserList(UserIndex).Invent.Object(Slot).Equipped Then
-                 Call Desequipar(UserIndex, Slot, False)
-                 If UserList(UserIndex).flags.Mimetizado = 1 Then
-                     UserList(UserIndex).CharMimetizado.ShieldAnim = NingunEscudo
-                 Else
-                     UserList(UserIndex).Char.ShieldAnim = NingunEscudo
-                     Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
-                 End If
-                 Exit Sub
-             End If
-     
-             'Quita el anterior
-             If UserList(UserIndex).Invent.EscudoEqpObjIndex > 0 Then
-                 Call Desequipar(UserIndex, UserList(UserIndex).Invent.EscudoEqpSlot, False)
-             End If
-     
-             'Lo equipa
-             
-             UserList(UserIndex).Invent.Object(Slot).Equipped = 1
-             UserList(UserIndex).Invent.EscudoEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
-             UserList(UserIndex).Invent.EscudoEqpSlot = Slot
-             
-             If UserList(UserIndex).flags.Mimetizado = 1 Then
-                 UserList(UserIndex).CharMimetizado.ShieldAnim = Obj.ShieldAnim
-             Else
-                 UserList(UserIndex).Char.ShieldAnim = Obj.ShieldAnim
-                 
-                 Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim)
-             End If
-         Else
-             Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
-         End If
-End Select
+            'Si esta equipado lo quita
+            If UserList(UserIndex).Invent.Object(Slot).Equipped Then
+                Call Desequipar(UserIndex, Slot, False)
+                If UserList(UserIndex).flags.Mimetizado = 1 Then
+                    UserList(UserIndex).CharMimetizado.ShieldAnim = NingunEscudo
+                Else
+                    UserList(UserIndex).Char.ShieldAnim = NingunEscudo
+                    Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
+                End If
+                Exit Sub
+            End If
 
-'Actualiza
-'aura
-Call ActualizarAuras(UserIndex)
-'aura
-Call UpdateUserInv(False, UserIndex, Slot)
+            'Quita el anterior
+            If UserList(UserIndex).Invent.EscudoEqpObjIndex > 0 Then
+                Call Desequipar(UserIndex, UserList(UserIndex).Invent.EscudoEqpSlot, False)
+            End If
 
-Exit Sub
+            'Lo equipa
+
+            UserList(UserIndex).Invent.Object(Slot).Equipped = 1
+            UserList(UserIndex).Invent.EscudoEqpObjIndex = UserList(UserIndex).Invent.Object(Slot).ObjIndex
+            UserList(UserIndex).Invent.EscudoEqpSlot = Slot
+
+            If UserList(UserIndex).flags.Mimetizado = 1 Then
+                UserList(UserIndex).CharMimetizado.ShieldAnim = Obj.ShieldAnim
+            Else
+                UserList(UserIndex).Char.ShieldAnim = Obj.ShieldAnim
+
+                Call ChangeUserChar(UserIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Char.alaIndex)
+            End If
+        Else
+            Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
+        End If
+    End Select
+
+    'Actualiza
+    'aura
+    Call ActualizarAuras(UserIndex)
+    'aura
+    Call UpdateUserInv(False, UserIndex, Slot)
+
+    Exit Sub
 errhandler:
-Call LogError("EquiparInvItem Slot:" & Slot & " - Error: " & Err.Number & " - Error Description : " & Err.Description)
+    Call LogError("EquiparInvItem Slot:" & Slot & " - Error: " & Err.Number & " - Error Description : " & Err.Description)
 End Sub
 
 Private Function CheckRazaUsaRopa(ByVal UserIndex As Integer, ItemIndex As Integer) As Boolean
@@ -1188,7 +1249,7 @@ Select Case Obj.OBJType
                 Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, 2, 0))
                 
             Case 6  ' Pocion Negra
-                If .flags.Privilegios And PlayerType.user Then
+                If .flags.Privilegios And PlayerType.User Then
                     Call QuitarUserInvItem(UserIndex, Slot, 1)
                     Call UserDie(UserIndex)
                     Call WriteConsoleMsg(UserIndex, "Sientes un gran mareo y pierdes el conocimiento.", FontTypeNames.FONTTYPE_FIGHT)
@@ -1716,6 +1777,8 @@ Public Function UserNoPuedeUsarItem(ByVal UserIndex As Integer, ByVal ObjIndex A
     End If
 
 End Function
+
+
 
 
 

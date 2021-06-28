@@ -364,7 +364,7 @@ With UserList(UserIndex)
     
     If bRefresh Then
         With .Char
-            Call ChangeUserChar(UserIndex, .Body, .Head, .Heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
         End With
         Call WriteUpdateUserStats(UserIndex)
     End If
@@ -409,7 +409,7 @@ With UserList(UserIndex)
     
     If bRefresh Then
         With .Char
-            Call ChangeUserChar(UserIndex, .Body, .Head, .Heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
         End With
         Call WriteUpdateUserStats(UserIndex)
     End If
@@ -789,4 +789,6 @@ Select Case UserList(UserIndex).Faccion.RecompensasCaos
 End Select
 
 End Function
+
+
 

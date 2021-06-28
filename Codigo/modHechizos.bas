@@ -1003,8 +1003,8 @@ If Hechizos(H).Mimetiza = 1 Then
         .Char.CascoAnim = UserList(tU).Char.CascoAnim
         .Char.ShieldAnim = UserList(tU).Char.ShieldAnim
         .Char.WeaponAnim = UserList(tU).Char.WeaponAnim
-    
-        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+        .Char.alaIndex = UserList(tU).Char.alaIndex
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
     End With
    
    Call InfoHechizo(UserIndex)
@@ -1538,7 +1538,7 @@ If Hechizos(hIndex).Mimetiza = 1 Then
             .CharMimetizado.CascoAnim = .Char.CascoAnim
             .CharMimetizado.ShieldAnim = .Char.ShieldAnim
             .CharMimetizado.WeaponAnim = .Char.WeaponAnim
-            
+            .CharMimetizado.alaIndex = .Char.alaIndex
             .flags.Mimetizado = 1
             
             'ahora pongo lo del NPC.
@@ -1547,8 +1547,9 @@ If Hechizos(hIndex).Mimetiza = 1 Then
             .Char.CascoAnim = NingunCasco
             .Char.ShieldAnim = NingunEscudo
             .Char.WeaponAnim = NingunArma
+            .Char.alaIndex = Npclist(NpcIndex).Char.alaIndex
         
-            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim)
+            Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.alaIndex)
         End With
     Else
         Call WriteConsoleMsg(UserIndex, "Solo los druidas pueden mimetizarse con criaturas.", FontTypeNames.FONTTYPE_INFO)
@@ -2273,10 +2274,7 @@ With UserList(UserIndex)
    
 End With
 
-
-
 End Sub
-
 
 Public Sub DisNobAuBan(ByVal UserIndex As Integer, NoblePts As Long, BandidoPts As Long)
 'disminuye la nobleza NoblePts puntos y aumenta el bandido BandidoPts puntos
@@ -2371,5 +2369,7 @@ End Sub
 '        Call DecirPalabrasMagicas(Hechizos(uh).PalabrasMagicas, UserIndex)
 '    End If
 'End Sub
+
+
 
 

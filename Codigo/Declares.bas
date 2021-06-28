@@ -693,6 +693,7 @@ Public Enum eOBJType
     otMapaTesoro = 37
     otContenedoresAbiertos = 38
     otManualClan = 39
+    otALAS = 40
     otCualquiera = 1000
 End Enum
 
@@ -847,6 +848,8 @@ Public Type Inventario
     MunicionEqpSlot As Byte
     AnilloEqpObjIndex As Integer
     AnilloEqpSlot As Byte
+    AlasEqpObjIndex As Integer
+    AlasEqpSlot As Byte
     BarcoObjIndex As Integer
     BarcoSlot As Byte
     NroItems As Integer
@@ -877,6 +880,7 @@ End Type
 
 'Datos de user o npc
 Public Type Char
+    alaIndex As Byte
     CharIndex As Integer
     Head As Integer
     Body As Integer
@@ -895,6 +899,7 @@ End Type
 
 'Tipos de objetos
 Public Type ObjData
+    alaIndex As Byte
     'aura
     Aura As Byte
     'aura
@@ -1278,6 +1283,7 @@ Public Type UserFlags
 
     OldBody As Integer
     OldHead As Integer
+    OldAlas As Integer
     AdminInvisible As Byte
     AdminPerseguible As Boolean
 
@@ -1599,7 +1605,7 @@ Public Type NPCFlags
     Snd1 As Integer
     Snd2 As Integer
     Snd3 As Integer
-    Colorsangre  As Byte
+    Colorsangre As Byte
 End Type
 
 Public Type tCriaturasEntrenador

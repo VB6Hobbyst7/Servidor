@@ -1150,7 +1150,7 @@ Public Sub EfectoMimetismo(ByVal UserIndex As Integer)
             End If
             
             With .Char
-                Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim)
+            Call ChangeUserChar(UserIndex, .Body, .Head, .heading, .WeaponAnim, .ShieldAnim, .CascoAnim, .alaIndex)
             End With
             
             .Counters.Mimetismo = 0

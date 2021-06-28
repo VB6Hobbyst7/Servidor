@@ -297,7 +297,7 @@ Public Sub DropNPCaNPC(ByRef NPC As NPC, ByRef UserIndex As Integer)
 116         Probabilidad = RandomNumber(1, Probabilidad)    'Spaw NPC?
 118         If Probabilidad = 1 Then
 120             For Cant = 1 To Amount
-                    SpawnedNpc = SpawnNpc(NpcIndex, NPC.Pos, True, True, NPC.zona)
+                    SpawnedNpc = SpawnNpc(NpcIndex, NPC.Pos, True, False, NPC.zona)
                     Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SWING, NPC.Pos.X, NPC.Pos.Y))
 
                 Next Cant
