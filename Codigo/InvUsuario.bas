@@ -654,7 +654,7 @@ On Error GoTo errhandler
     If RefreshChar Then
         Call WriteUpdateUserStats(UserIndex)
     End If
-    
+     Call QuitarEfecto(UserIndex)
     Call UpdateUserInv(False, UserIndex, Slot)
     'auras
     ActualizarAuras UserIndex
@@ -999,7 +999,7 @@ Sub EquiparInvItem(ByVal UserIndex As Integer, ByVal Slot As Byte)
             Call WriteConsoleMsg(UserIndex, "Tu clase no puede usar este objeto.", FontTypeNames.FONTTYPE_INFO)
         End If
     End Select
-
+Call AgregarEfecto(UserIndex)
     'Actualiza
     'aura
     Call ActualizarAuras(UserIndex)

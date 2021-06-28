@@ -198,7 +198,7 @@ Sub Main()
     ChDir App.Path
     ChDrive App.Path
     'eventos
-   Call LoadMapEvent
+    Call LoadMapEvent
     'eventos
     'bots
     'inicializa los spells de los bots
@@ -345,8 +345,8 @@ Sub Main()
     MaxUsers = 0
     Call LoadSini
     Call CargaApuestas
-
-
+    frmCargando.Label1(2).Caption = "Cargando Sets.Dat"
+    Call CargarSets
     '*************************************************
     frmCargando.Label1(2).Caption = "Cargando NPCs.Dat"
     Call CargaNpcsDat

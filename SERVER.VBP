@@ -85,6 +85,7 @@ Module=ModAuras; Codigo\ModAuras.bas
 Module=ModBots; Codigo\ModBots.bas
 Form=Codigo\FrmBots.frm
 Module=EventosAOyin; Codigo\EventosAOyin.bas
+Module=ModSets; Codigo\ModSets.bas
 IconForm="frmMain"
 Startup="Sub Main"
 HelpFile=""

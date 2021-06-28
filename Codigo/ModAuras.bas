@@ -9,8 +9,9 @@ Public Enum UpdateAuras
     Sets
 End Enum
 
+
 Public Sub ActualizarAuras(ByVal UserIndex As Integer)
-On Error GoTo errh
+    On Error GoTo errh
     With UserList(UserIndex)
         If .Invent.ArmourEqpObjIndex <> 0 Then
             With ObjData(.Invent.ArmourEqpObjIndex)
@@ -23,7 +24,7 @@ On Error GoTo errh
         Else
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.Armadura))
         End If
-     
+
         If .Invent.WeaponEqpObjIndex <> 0 Then
             With ObjData(.Invent.WeaponEqpObjIndex)
                 If .Aura <> 0 Then
@@ -35,7 +36,7 @@ On Error GoTo errh
         Else
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.Arma))
         End If
-     
+
         If .Invent.EscudoEqpObjIndex <> 0 Then
             With ObjData(.Invent.EscudoEqpObjIndex)
                 If .Aura <> 0 Then
@@ -47,7 +48,7 @@ On Error GoTo errh
         Else
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.Escudo))
         End If
-     
+
         If .Invent.CascoEqpObjIndex <> 0 Then
             With ObjData(.Invent.CascoEqpObjIndex)
                 If .Aura <> 0 Then
@@ -59,7 +60,7 @@ On Error GoTo errh
         Else
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.casco))
         End If
-     
+
         If .Invent.AnilloEqpObjIndex <> 0 Then
             With ObjData(.Invent.AnilloEqpObjIndex)
                 If .Aura <> 0 Then
@@ -71,10 +72,23 @@ On Error GoTo errh
         Else
             Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.Anillo))
         End If
-     
+
+
+        If TieneSet(UserIndex) <> 0 Then
+
+            If SetsAura <> 0 Then
+                Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, SetsAura, UpdateAuras.Sets))
+            Else
+                Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.Sets))
+            End If
+
+        Else
+            Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageSendAura(UserIndex, 0, UpdateAuras.Sets))
+        End If
+
     End With
     Exit Sub
 errh:
-MsgBox "Error: " & Err.Number & " " & Err.Description
+    MsgBox "Error: " & Err.Number & " " & Err.Description
 End Sub
 
