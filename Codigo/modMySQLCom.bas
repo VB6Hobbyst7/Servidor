@@ -169,5 +169,5 @@ Public Const MYSQL_SERVER_VERSION = "3.23.49"
 Public Const MYSQL_SERVER_SUFFIX = ""
 Public Const FRM_VER = 6
 Public Const MYSQL_VERSION_ID = 32349
-Public Const MYSQL_PORT = 34776 '3306
+Public Const MYSQL_PORT = 3306
 Public Const MYSQL_UNIX_ADDR = "/tmp/mysql.sock"

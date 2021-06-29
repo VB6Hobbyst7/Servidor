@@ -37,8 +37,8 @@ Public Function SQLConnect(ByVal Hostname As String, ByVal Database As String, B
     conn_exec = mysql_init(0)
     conn_stored = mysql_init(0)
         
-    If mysql_real_connect(conn_main, Hostname, UserName, password, Database, 34776, vbNullString, 0) <> 0 And mysql_real_connect(conn_exec, Hostname, UserName, password, Database, 34776, vbNullString, 0) <> 0 _
-        And mysql_real_connect(conn_stored, Hostname, UserName, password, Database, 34776, vbNullString, CLIENT_MULTI_RESULTS) <> 0 Then
+    If mysql_real_connect(conn_main, Hostname, UserName, password, Database, 3306, vbNullString, 0) <> 0 And mysql_real_connect(conn_exec, Hostname, UserName, password, Database, 3306, vbNullString, 0) <> 0 _
+        And mysql_real_connect(conn_stored, Hostname, UserName, password, Database, 3306, vbNullString, CLIENT_MULTI_RESULTS) <> 0 Then
                                                                     
         m_Hostname = Hostname
         m_Database = Database
