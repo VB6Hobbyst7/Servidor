@@ -1168,6 +1168,7 @@ Sub UserDie(ByVal UserIndex As Integer, Optional ByVal AttackerIndex As Integer 
         .flags.AtacadoPorUser = 0
         .flags.Envenenado = 0
         .flags.Muerto = 1
+        .Stats.MuertesPropias = .Stats.MuertesPropias + 1
         ' No se activa en arenas
         If TriggerZonaPelea(UserIndex, UserIndex) <> TRIGGER6_PERMITE Then
             .flags.SeguroResu = True
@@ -1288,6 +1289,11 @@ Sub UserDie(ByVal UserIndex As Integer, Optional ByVal AttackerIndex As Integer 
         'desequipar escudo
         If .Invent.EscudoEqpObjIndex > 0 Then
             Call Desequipar(UserIndex, .Invent.EscudoEqpSlot, False)
+        End If
+        
+         'desequipar alas
+        If .Invent.AlasEqpObjIndex > 0 Then
+            Call Desequipar(UserIndex, .Invent.AlasEqpSlot, False)
         End If
 
         ' << Reseteamos los posibles FX sobre el personaje >>

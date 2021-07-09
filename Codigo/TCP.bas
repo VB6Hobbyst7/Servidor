@@ -402,6 +402,7 @@ UserList(UserIndex).OrigChar = UserList(UserIndex).Char
 UserList(UserIndex).Char.WeaponAnim = NingunArma
 UserList(UserIndex).Char.ShieldAnim = NingunEscudo
 UserList(UserIndex).Char.CascoAnim = NingunCasco
+UserList(UserIndex).Char.alaIndex = 0
 
 Dim MiInt As Long
 MiInt = RandomNumber(2, UserList(UserIndex).Stats.UserAtributos(eAtributos.Constitucion) \ 3)
@@ -882,160 +883,161 @@ Sub ConnectUser(ByVal UserIndex As Integer, ByVal UserAccount As String, ByRef N
 '26/03/2009: ZaMa - Agrego por default que el color de dialogo de los dioses, sea como el de su nick.
 '12/06/2009: ZaMa - Agrego chequeo de nivel al loguear
 '***************************************************
-Dim N As Integer
-Dim tStr As String
-Dim rs As clsMySQLRecordSet
-Dim Cant As Long
+    Dim N As Integer
+    Dim tStr As String
+    Dim rs As clsMySQLRecordSet
+    Dim Cant As Long
 
-If UserList(UserIndex).flags.UserLogged Then
-    Call LogCheating("El usuario " & UserList(UserIndex).Name & " ha intentado loguear a " & Name & " desde la IP " & UserList(UserIndex).ip)
-    
-    'Kick player ( and leave character inside :D )!
-    Call CloseSocketSL(UserIndex)
-    Call Cerrar_Usuario(UserIndex)
-    
-    Exit Sub
-End If
+    If UserList(UserIndex).flags.UserLogged Then
+        Call LogCheating("El usuario " & UserList(UserIndex).Name & " ha intentado loguear a " & Name & " desde la IP " & UserList(UserIndex).ip)
 
-'Reseteamos los FLAGS
-UserList(UserIndex).flags.Escondido = 0
-UserList(UserIndex).flags.Equitando = False
-UserList(UserIndex).flags.TargetNPC = 0
-UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
-UserList(UserIndex).flags.TargetObj = 0
-UserList(UserIndex).flags.TargetUser = 0
-UserList(UserIndex).Char.FX = 0
-UserList(UserIndex).CurrentInventorySlots = 20
+        'Kick player ( and leave character inside :D )!
+        Call CloseSocketSL(UserIndex)
+        Call Cerrar_Usuario(UserIndex)
 
-'Controlamos no pasar el maximo de usuarios
-If NumUsers >= MaxUsers Then
-    Call WriteErrorMsg(UserIndex, "El servidor ha alcanzado el maximo de usuarios soportado, por favor vuelva a intertarlo mas tarde.")
-    Call FlushBuffer(UserIndex)
-    Call CloseSocket(UserIndex)
-    Exit Sub
-End If
+        Exit Sub
+    End If
 
-'¿Este IP ya esta conectado?
-If AllowMultiLogins = 0 Then
-    If CheckForSameIP(UserIndex, UserList(UserIndex).ip) = True Then
-        Call WriteErrorMsg(UserIndex, "No es posible usar mas de un personaje al mismo tiempo.")
+    'Reseteamos los FLAGS
+    UserList(UserIndex).flags.Escondido = 0
+    UserList(UserIndex).flags.Equitando = False
+    UserList(UserIndex).flags.TargetNPC = 0
+    UserList(UserIndex).flags.TargetNpcTipo = eNPCType.Comun
+    UserList(UserIndex).flags.TargetObj = 0
+    UserList(UserIndex).flags.TargetUser = 0
+    UserList(UserIndex).Char.FX = 0
+    UserList(UserIndex).CurrentInventorySlots = 20
+
+    'Controlamos no pasar el maximo de usuarios
+    If NumUsers >= MaxUsers Then
+        Call WriteErrorMsg(UserIndex, "El servidor ha alcanzado el maximo de usuarios soportado, por favor vuelva a intertarlo mas tarde.")
         Call FlushBuffer(UserIndex)
         Call CloseSocket(UserIndex)
         Exit Sub
     End If
-End If
 
-'¿Existe el personaje?
-If Not PersonajeExiste(Name) Then
-    Call WriteErrorMsg(UserIndex, "El personaje no existe.")
-    Call FlushBuffer(UserIndex)
-    Call CloseSocket(UserIndex)
-    Exit Sub
-End If
+    '¿Este IP ya esta conectado?
+    If AllowMultiLogins = 0 Then
+        If CheckForSameIP(UserIndex, UserList(UserIndex).ip) = True Then
+            Call WriteErrorMsg(UserIndex, "No es posible usar mas de un personaje al mismo tiempo.")
+            Call FlushBuffer(UserIndex)
+            Call CloseSocket(UserIndex)
+            Exit Sub
+        End If
+    End If
 
-'¿Es el passwd valido?
-Cant = mySQL.SQLQuery("SELECT pjs.Id, cuentas.Id as 'IdAccount' FROM cuentas, pjs WHERE cuentas.Nombre=" & Comillas(UserAccount) & " AND cuentas.Password=" & Comillas(password) & " AND pjs.IdAccount=cuentas.Id AND pjs.Nombre=" & Comillas(Name), rs)
-If Cant = 0 Then
-    Call WriteErrorMsg(UserIndex, "Password incorrecto.")
-    Call FlushBuffer(UserIndex)
-    Call CloseSocket(UserIndex)
-    Exit Sub
-End If
+    '¿Existe el personaje?
+    If Not PersonajeExiste(Name) Then
+        Call WriteErrorMsg(UserIndex, "El personaje no existe.")
+        Call FlushBuffer(UserIndex)
+        Call CloseSocket(UserIndex)
+        Exit Sub
+    End If
 
-'¿Ya esta conectado el personaje?
-If CheckForSameName(Name) Then
-    If UserList(NameIndex(Name)).Counters.Saliendo Then
-        Call WriteErrorMsg(UserIndex, "El usuario está saliendo.")
+    '¿Es el passwd valido?
+    Cant = mySQL.SQLQuery("SELECT pjs.Id, cuentas.Id as 'IdAccount' FROM cuentas, pjs WHERE cuentas.Nombre=" & Comillas(UserAccount) & " AND cuentas.Password=" & Comillas(password) & " AND pjs.IdAccount=cuentas.Id AND pjs.Nombre=" & Comillas(Name), rs)
+    If Cant = 0 Then
+        Call WriteErrorMsg(UserIndex, "Password incorrecto.")
+        Call FlushBuffer(UserIndex)
+        Call CloseSocket(UserIndex)
+        Exit Sub
+    End If
+
+    '¿Ya esta conectado el personaje?
+    If CheckForSameName(Name) Then
+        If UserList(NameIndex(Name)).Counters.Saliendo Then
+            Call WriteErrorMsg(UserIndex, "El usuario está saliendo.")
+        Else
+            Call WriteErrorMsg(UserIndex, "Perdón, un usuario con el mismo nombre se ha logueado.")
+        End If
+        Call FlushBuffer(UserIndex)
+        Call CloseSocket(UserIndex)
+        Exit Sub
+    End If
+
+    'Reseteamos los privilegios
+    UserList(UserIndex).flags.Privilegios = 0
+
+    'Vemos que clase de user es (se lo usa para setear los privilegios al loguear el PJ)
+    If EsAdmin(Name) Then
+        UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Admin
+        Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
+    ElseIf EsDios(Name) Then
+        UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Dios
+        Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
+    ElseIf EsSemiDios(Name) Then
+        UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.SemiDios
+        Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
+    ElseIf EsConsejero(Name) Then
+        UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Consejero
+        Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
     Else
-        Call WriteErrorMsg(UserIndex, "Perdón, un usuario con el mismo nombre se ha logueado.")
+        UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.User
+        UserList(UserIndex).flags.AdminPerseguible = True
     End If
-    Call FlushBuffer(UserIndex)
-    Call CloseSocket(UserIndex)
-    Exit Sub
-End If
 
-'Reseteamos los privilegios
-UserList(UserIndex).flags.Privilegios = 0
+    'Add RM flag if needed
+    If EsRolesMaster(Name) Then
+        UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.RoleMaster
+    End If
 
-'Vemos que clase de user es (se lo usa para setear los privilegios al loguear el PJ)
-If EsAdmin(Name) Then
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Admin
-    Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
-ElseIf EsDios(Name) Then
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Dios
-    Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
-ElseIf EsSemiDios(Name) Then
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.SemiDios
-    Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
-ElseIf EsConsejero(Name) Then
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.Consejero
-    Call LogGM(Name, "Se conecto con ip:" & UserList(UserIndex).ip)
-Else
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.User
-    UserList(UserIndex).flags.AdminPerseguible = True
-End If
+    If ServerSoloGMs > 0 Then
+        If (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero)) = 0 Then
+            Call WriteErrorMsg(UserIndex, "Servidor restringido a administradores. Por favor reintente en unos momentos.")
+            Call FlushBuffer(UserIndex)
+            Call CloseSocket(UserIndex)
+            Exit Sub
+        End If
+    End If
 
-'Add RM flag if needed
-If EsRolesMaster(Name) Then
-    UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.RoleMaster
-End If
+    'Cargamos el personaje
 
-If ServerSoloGMs > 0 Then
-    If (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero)) = 0 Then
-        Call WriteErrorMsg(UserIndex, "Servidor restringido a administradores. Por favor reintente en unos momentos.")
-        Call FlushBuffer(UserIndex)
+
+    Call mySQL.SQLQuery("SELECT * FROM pjs WHERE Id=" & rs("Id"), rs)
+
+    'Cargamos los datos del personaje
+    Call LoadUserInit(UserIndex, rs)
+
+    Call LoadUserStats(UserIndex, rs)
+
+    'quest ver
+    'Call LoadQuestStats(UserIndex, rs)
+    'quest
+    If Not ValidateChr(UserIndex) Then
+        Call WriteErrorMsg(UserIndex, "Error en el personaje.")
         Call CloseSocket(UserIndex)
         Exit Sub
     End If
-End If
 
-'Cargamos el personaje
+    Call LoadUserReputacion(UserIndex, rs)
 
+    Set rs = Nothing
 
-Call mySQL.SQLQuery("SELECT * FROM pjs WHERE Id=" & rs("Id"), rs)
+    If UserList(UserIndex).Invent.EscudoEqpSlot = 0 Then UserList(UserIndex).Char.ShieldAnim = NingunEscudo
+    If UserList(UserIndex).Invent.CascoEqpSlot = 0 Then UserList(UserIndex).Char.CascoAnim = NingunCasco
+    If UserList(UserIndex).Invent.WeaponEqpSlot = 0 Then UserList(UserIndex).Char.WeaponAnim = NingunArma
+    If UserList(UserIndex).Invent.AlasEqpObjIndex = 0 Then UserList(UserIndex).Char.alaIndex = 0
+    
+    If (UserList(UserIndex).flags.Muerto = 0) Then
+        UserList(UserIndex).flags.SeguroResu = False
+        Call WriteResuscitationSafeOff(UserIndex)
+    Else
+        UserList(UserIndex).flags.SeguroResu = True
+        Call WriteResuscitationSafeOn(UserIndex)
+    End If
 
-'Cargamos los datos del personaje
-Call LoadUserInit(UserIndex, rs)
+    Call UpdateUserInv(True, UserIndex, 0)
+    Call UpdateUserHechizos(True, UserIndex, 0)
 
-Call LoadUserStats(UserIndex, rs)
+    ''
+    'TODO : Feo, esto tiene que ser parche cliente
+    If UserList(UserIndex).flags.Estupidez = 0 Then
+        Call WriteDumbNoMore(UserIndex)
+    End If
 
-'quest ver
-'Call LoadQuestStats(UserIndex, rs)
-'quest
-If Not ValidateChr(UserIndex) Then
-    Call WriteErrorMsg(UserIndex, "Error en el personaje.")
-    Call CloseSocket(UserIndex)
-    Exit Sub
-End If
-
-Call LoadUserReputacion(UserIndex, rs)
-
-Set rs = Nothing
-
-If UserList(UserIndex).Invent.EscudoEqpSlot = 0 Then UserList(UserIndex).Char.ShieldAnim = NingunEscudo
-If UserList(UserIndex).Invent.CascoEqpSlot = 0 Then UserList(UserIndex).Char.CascoAnim = NingunCasco
-If UserList(UserIndex).Invent.WeaponEqpSlot = 0 Then UserList(UserIndex).Char.WeaponAnim = NingunArma
-
-If (UserList(UserIndex).flags.Muerto = 0) Then
-    UserList(UserIndex).flags.SeguroResu = False
-    Call WriteResuscitationSafeOff(UserIndex)
-Else
-    UserList(UserIndex).flags.SeguroResu = True
-    Call WriteResuscitationSafeOn(UserIndex)
-End If
-
-Call UpdateUserInv(True, UserIndex, 0)
-Call UpdateUserHechizos(True, UserIndex, 0)
-
-''
-'TODO : Feo, esto tiene que ser parche cliente
-If UserList(UserIndex).flags.Estupidez = 0 Then
-    Call WriteDumbNoMore(UserIndex)
-End If
-
-'Posicion de comienzo
-If UserList(UserIndex).Pos.map = 0 Then
-    Select Case UserList(UserIndex).Hogar
+    'Posicion de comienzo
+    If UserList(UserIndex).Pos.map = 0 Then
+        Select Case UserList(UserIndex).Hogar
         Case eCiudad.cNix
             UserList(UserIndex).Pos = Nix
         Case eCiudad.cUllathorpe
@@ -1051,255 +1053,263 @@ If UserList(UserIndex).Pos.map = 0 Then
         Case Else
             UserList(UserIndex).Hogar = eCiudad.cUllathorpe
             UserList(UserIndex).Pos = Ullathorpe
-    End Select
-Else
-    If Not MapaValido(UserList(UserIndex).Pos.map) Then
-        Call WriteErrorMsg(UserIndex, "EL PJ se encuenta en un mapa invalido.")
+        End Select
+    Else
+        If Not MapaValido(UserList(UserIndex).Pos.map) Then
+            Call WriteErrorMsg(UserIndex, "EL PJ se encuenta en un mapa invalido.")
+            Call FlushBuffer(UserIndex)
+            Call CloseSocket(UserIndex)
+            Exit Sub
+        End If
+    End If
+
+    'Tratamos de evitar en lo posible el "Telefrag". Solo 1 intento de loguear en pos adjacentes.
+    'Codigo por Pablo (ToxicWaste) y revisado por Nacho (Integer), corregido para que realmetne ande y no tire el server por Juan Martín Sotuyo Dodero (Maraxus)
+    If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NpcIndex <> 0 Then
+        Dim FoundPlace As Boolean
+        Dim esAgua As Boolean
+        Dim tX As Long
+        Dim tY As Long
+
+        FoundPlace = False
+        esAgua = HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
+
+        For tY = UserList(UserIndex).Pos.Y - 1 To UserList(UserIndex).Pos.Y + 1
+            For tX = UserList(UserIndex).Pos.X - 1 To UserList(UserIndex).Pos.X + 1
+                If esAgua Then
+                    'reviso que sea pos legal en agua, que no haya User ni NPC para poder loguear.
+                    If LegalPos(UserList(UserIndex).Pos.map, tX, tY, True, False) Then
+                        FoundPlace = True
+                        Exit For
+                    End If
+                Else
+                    'reviso que sea pos legal en tierra, que no haya User ni NPC para poder loguear.
+                    If LegalPos(UserList(UserIndex).Pos.map, tX, tY, False, True) Then
+                        FoundPlace = True
+                        Exit For
+                    End If
+                End If
+            Next tX
+
+            If FoundPlace Then _
+               Exit For
+        Next tY
+
+        If FoundPlace Then    'Si encontramos un lugar, listo, nos quedamos ahi
+            UserList(UserIndex).Pos.X = tX
+            UserList(UserIndex).Pos.Y = tY
+        Else
+            'Si no encontramos un lugar, sacamos al usuario que tenemos abajo, y si es un NPC, lo pisamos.
+            If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Then
+                'Si no encontramos lugar, y abajo teniamos a un usuario, lo pisamos y cerramos su comercio seguro
+                If UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu > 0 Then
+                    'Le avisamos al que estaba comerciando que se tuvo que ir.
+                    If UserList(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu).flags.UserLogged Then
+                        Call FinComerciarUsu(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
+                        Call WriteConsoleMsg(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu, "Comercio cancelado. El otro usuario se ha desconectado.", FontTypeNames.FONTTYPE_TALK)
+                        Call FlushBuffer(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
+                    End If
+                    'Lo sacamos.
+                    If UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).flags.UserLogged Then
+                        Call FinComerciarUsu(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+                        Call WriteErrorMsg(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex, "Alguien se ha conectado donde te encontrabas, por favor reconéctate...")
+                        Call FlushBuffer(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+                    End If
+                End If
+
+                Call CloseSocket(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+            End If
+        End If
+    End If
+
+    'Nombre de sistema
+    UserList(UserIndex).Name = Name
+
+    UserList(UserIndex).showName = True    'Por default los nombres son visibles
+
+    'If in the water, and has a boat, equip it!
+    If UserList(UserIndex).Invent.BarcoObjIndex > 0 And _
+       (HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y) Or BodyIsBoat(UserList(UserIndex).Char.Body)) Then
+        Dim Barco As ObjData
+        Barco = ObjData(UserList(UserIndex).Invent.BarcoObjIndex)
+        UserList(UserIndex).Char.Head = 0
+        If UserList(UserIndex).flags.Muerto = 0 Then
+
+            Call ToggleBoatBody(UserIndex)
+        Else
+            UserList(UserIndex).Char.Body = iFragataFantasmal
+        End If
+
+        UserList(UserIndex).Char.ShieldAnim = NingunEscudo
+        UserList(UserIndex).Char.WeaponAnim = NingunArma
+        UserList(UserIndex).Char.CascoAnim = NingunCasco
+        UserList(UserIndex).Char.alaIndex = 0
+        UserList(UserIndex).flags.Navegando = 1
+    End If
+
+
+    'Info
+    Call WriteChangeMap(UserIndex, UserList(UserIndex).Pos.map)    'Carga el mapa
+    'Call WriteUserIndexInServer(UserIndex) 'Enviamos el User index
+
+
+    If UserList(UserIndex).flags.Privilegios = PlayerType.Dios Then
+        UserList(UserIndex).flags.ChatColor = RGB(250, 250, 150)
+    ElseIf UserList(UserIndex).flags.Privilegios <> PlayerType.User And UserList(UserIndex).flags.Privilegios <> (PlayerType.User Or PlayerType.ChaosCouncil) And UserList(UserIndex).flags.Privilegios <> (PlayerType.User Or PlayerType.RoyalCouncil) Then
+        UserList(UserIndex).flags.ChatColor = RGB(0, 255, 0)
+    ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.User Or PlayerType.RoyalCouncil) Then
+        UserList(UserIndex).flags.ChatColor = RGB(0, 255, 255)
+    ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.User Or PlayerType.ChaosCouncil) Then
+        UserList(UserIndex).flags.ChatColor = RGB(255, 128, 64)
+    Else
+        UserList(UserIndex).flags.ChatColor = vbWhite
+    End If
+
+    ''[EL OSO]: TRAIGO ESTO ACA ARRIBA PARA DARLE EL IP!
+    #If ConUpTime Then
+        UserList(UserIndex).LogOnTime = Now
+    #End If
+
+    'Crea  el personaje del usuario
+    Call MakeUserChar(True, UserList(UserIndex).Pos.map, UserIndex, UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
+
+    Call WriteUserCharIndexInServer(UserIndex)
+    ''[/el oso]
+
+    If UserList(UserIndex).flags.Paralizado Then
+        Call WriteParalizeOK(UserIndex)
+    End If
+
+
+
+    Call CheckUserLevel(UserIndex)
+    Call WriteUpdateUserStats(UserIndex)
+    Call WriteFirstInfo(UserIndex)
+
+    Call WriteUpdateHungerAndThirst(UserIndex)
+
+    Call SendMOTD(UserIndex)
+
+    If haciendoBK Then
+        Call WritePauseToggle(UserIndex)
+        Call WriteConsoleMsg(UserIndex, "Servidor> Por favor espera algunos segundos, WorldSave esta ejecutandose.", FontTypeNames.FONTTYPE_SERVER)
+    End If
+
+    If EnPausa Then
+        Call WritePauseToggle(UserIndex)
+        Call WriteConsoleMsg(UserIndex, "Servidor> Lo sentimos mucho pero el servidor se encuentra actualmente detenido. Intenta ingresar más tarde.", FontTypeNames.FONTTYPE_SERVER)
+    End If
+
+    If EnTesting And UserList(UserIndex).Stats.ELV >= 18 Then
+        Call WriteErrorMsg(UserIndex, "Servidor en Testing por unos minutos, conectese con PJs de nivel menor a 18. No se conecte con Pjs que puedan resultar importantes por ahora pues pueden arruinarse.")
         Call FlushBuffer(UserIndex)
         Call CloseSocket(UserIndex)
         Exit Sub
     End If
-End If
 
-'Tratamos de evitar en lo posible el "Telefrag". Solo 1 intento de loguear en pos adjacentes.
-'Codigo por Pablo (ToxicWaste) y revisado por Nacho (Integer), corregido para que realmetne ande y no tire el server por Juan Martín Sotuyo Dodero (Maraxus)
-If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).NpcIndex <> 0 Then
-    Dim FoundPlace As Boolean
-    Dim esAgua As Boolean
-    Dim tX As Long
-    Dim tY As Long
-    
-    FoundPlace = False
-    esAgua = HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
-    
-    For tY = UserList(UserIndex).Pos.Y - 1 To UserList(UserIndex).Pos.Y + 1
-        For tX = UserList(UserIndex).Pos.X - 1 To UserList(UserIndex).Pos.X + 1
-            If esAgua Then
-                'reviso que sea pos legal en agua, que no haya User ni NPC para poder loguear.
-                If LegalPos(UserList(UserIndex).Pos.map, tX, tY, True, False) Then
-                    FoundPlace = True
-                    Exit For
-                End If
-            Else
-                'reviso que sea pos legal en tierra, que no haya User ni NPC para poder loguear.
-                If LegalPos(UserList(UserIndex).Pos.map, tX, tY, False, True) Then
-                    FoundPlace = True
-                    Exit For
+    'Actualiza el Num de usuarios
+    'DE ACA EN ADELANTE GRABA EL CHARFILE, OJO!
+    NumUsers = NumUsers + 1
+    UserList(UserIndex).flags.UserLogged = True
+
+    'usado para borrar Pjs
+    Execute ("UPDATE pjs SET Logged=1 WHERE Nombre=" & Comillas(UserList(UserIndex).Name))
+
+    Call EstadisticasWeb.Informar(CANTIDAD_ONLINE, NumUsers)
+
+
+    If UserList(UserIndex).Stats.SkillPts > 0 Then
+        Call WriteSendSkills(UserIndex)
+        Call WriteLevelUp(UserIndex, UserList(UserIndex).Stats.SkillPts)
+    End If
+
+    If NumUsers > recordusuarios Then
+        Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Record de usuarios conectados simultaneamente." & "Hay " & NumUsers & " usuarios.", FontTypeNames.FONTTYPE_INFO))
+        recordusuarios = NumUsers
+        Call WriteVar(IniPath & "Server.ini", "INIT", "Record", str(recordusuarios))
+
+        Call EstadisticasWeb.Informar(RECORD_USUARIOS, recordusuarios)
+    End If
+
+    If UserList(UserIndex).NroMascotas > 0 And Zonas(UserList(UserIndex).zona).Segura = 0 Then
+        Dim i As Integer
+        For i = 1 To MAXMASCOTAS
+            If UserList(UserIndex).MascotasType(i) > 0 Then
+                UserList(UserIndex).MascotasIndex(i) = SpawnNpc(UserList(UserIndex).MascotasType(i), UserList(UserIndex).Pos, True, True, UserList(UserIndex).zona)
+
+                If UserList(UserIndex).MascotasIndex(i) > 0 Then
+                    Npclist(UserList(UserIndex).MascotasIndex(i)).MaestroUser = UserIndex
+                    Call FollowAmo(UserList(UserIndex).MascotasIndex(i))
+                Else
+                    UserList(UserIndex).MascotasIndex(i) = 0
                 End If
             End If
-        Next tX
-        
-        If FoundPlace Then _
-            Exit For
-    Next tY
-    
-    If FoundPlace Then 'Si encontramos un lugar, listo, nos quedamos ahi
-        UserList(UserIndex).Pos.X = tX
-        UserList(UserIndex).Pos.Y = tY
+        Next i
+    End If
+
+    If UserList(UserIndex).flags.Navegando = 1 Then
+        Call WriteNavigateToggle(UserIndex)
+    End If
+
+    If Criminal(UserIndex) Then
+        Call WriteSafeModeOff(UserIndex)
+        UserList(UserIndex).flags.Seguro = False
     Else
-        'Si no encontramos un lugar, sacamos al usuario que tenemos abajo, y si es un NPC, lo pisamos.
-        If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex <> 0 Then
-            'Si no encontramos lugar, y abajo teniamos a un usuario, lo pisamos y cerramos su comercio seguro
-            If UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu > 0 Then
-                'Le avisamos al que estaba comerciando que se tuvo que ir.
-                If UserList(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu).flags.UserLogged Then
-                    Call FinComerciarUsu(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
-                    Call WriteConsoleMsg(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu, "Comercio cancelado. El otro usuario se ha desconectado.", FontTypeNames.FONTTYPE_TALK)
-                    Call FlushBuffer(UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).ComUsu.DestUsu)
-                End If
-                'Lo sacamos.
-                If UserList(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex).flags.UserLogged Then
-                    Call FinComerciarUsu(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
-                    Call WriteErrorMsg(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex, "Alguien se ha conectado donde te encontrabas, por favor reconéctate...")
-                    Call FlushBuffer(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
-                End If
-            End If
-            
-            Call CloseSocket(MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).UserIndex)
+        UserList(UserIndex).flags.Seguro = True
+        Call WriteSafeModeOn(UserIndex)
+    End If
+
+    If UserList(UserIndex).GuildIndex > 0 Then
+        'welcome to the show baby...
+        If Not modGuilds.m_ConectarMiembroAClan(UserIndex, UserList(UserIndex).GuildIndex) Then
+            Call WriteConsoleMsg(UserIndex, "Tu estado no te permite entrar al clan.", FontTypeNames.FONTTYPE_GUILD)
         End If
     End If
-End If
 
-'Nombre de sistema
-UserList(UserIndex).Name = Name
+    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, FXIDs.FXWARP, 0))
 
-UserList(UserIndex).showName = True 'Por default los nombres son visibles
+    Call SendData(SendTarget.ToAll, UserIndex, PrepareMessageUsersOnline())
+    Call WriteLoggedMessage(UserIndex)
 
-'If in the water, and has a boat, equip it!
-If UserList(UserIndex).Invent.BarcoObjIndex > 0 And _
-        (HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y) Or BodyIsBoat(UserList(UserIndex).Char.Body)) Then
-    Dim Barco As ObjData
-    Barco = ObjData(UserList(UserIndex).Invent.BarcoObjIndex)
-    UserList(UserIndex).Char.Head = 0
-    If UserList(UserIndex).flags.Muerto = 0 Then
+    Call modGuilds.SendGuildNews(UserIndex)
 
-        Call ToggleBoatBody(UserIndex)
-    Else
-        UserList(UserIndex).Char.Body = iFragataFantasmal
+
+    If Lloviendo Then
+        Call WriteRainToggle(UserIndex)
     End If
-    
-    UserList(UserIndex).Char.ShieldAnim = NingunEscudo
-    UserList(UserIndex).Char.WeaponAnim = NingunArma
-    UserList(UserIndex).Char.CascoAnim = NingunCasco
-    UserList(UserIndex).flags.Navegando = 1
-End If
 
+    Call WriteAttributes(UserIndex, True)
 
-'Info
-Call WriteChangeMap(UserIndex, UserList(UserIndex).Pos.map) 'Carga el mapa
-'Call WriteUserIndexInServer(UserIndex) 'Enviamos el User index
+    tStr = modGuilds.a_ObtenerRechazoDeChar(UserList(UserIndex).Name)
 
-
-If UserList(UserIndex).flags.Privilegios = PlayerType.Dios Then
-    UserList(UserIndex).flags.ChatColor = RGB(250, 250, 150)
-ElseIf UserList(UserIndex).flags.Privilegios <> PlayerType.User And UserList(UserIndex).flags.Privilegios <> (PlayerType.User Or PlayerType.ChaosCouncil) And UserList(UserIndex).flags.Privilegios <> (PlayerType.User Or PlayerType.RoyalCouncil) Then
-    UserList(UserIndex).flags.ChatColor = RGB(0, 255, 0)
-ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.User Or PlayerType.RoyalCouncil) Then
-    UserList(UserIndex).flags.ChatColor = RGB(0, 255, 255)
-ElseIf UserList(UserIndex).flags.Privilegios = (PlayerType.User Or PlayerType.ChaosCouncil) Then
-    UserList(UserIndex).flags.ChatColor = RGB(255, 128, 64)
-Else
-    UserList(UserIndex).flags.ChatColor = vbWhite
-End If
-
-''[EL OSO]: TRAIGO ESTO ACA ARRIBA PARA DARLE EL IP!
-#If ConUpTime Then
-    UserList(UserIndex).LogOnTime = Now
-#End If
-
-'Crea  el personaje del usuario
-Call MakeUserChar(True, UserList(UserIndex).Pos.map, UserIndex, UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y)
-
-Call WriteUserCharIndexInServer(UserIndex)
-''[/el oso]
-
-If UserList(UserIndex).flags.Paralizado Then
-    Call WriteParalizeOK(UserIndex)
-End If
-
-
-
-Call CheckUserLevel(UserIndex)
-Call WriteUpdateUserStats(UserIndex)
-Call WriteFirstInfo(UserIndex)
-
-Call WriteUpdateHungerAndThirst(UserIndex)
-
-Call SendMOTD(UserIndex)
-
-If haciendoBK Then
-    Call WritePauseToggle(UserIndex)
-    Call WriteConsoleMsg(UserIndex, "Servidor> Por favor espera algunos segundos, WorldSave esta ejecutandose.", FontTypeNames.FONTTYPE_SERVER)
-End If
-
-If EnPausa Then
-    Call WritePauseToggle(UserIndex)
-    Call WriteConsoleMsg(UserIndex, "Servidor> Lo sentimos mucho pero el servidor se encuentra actualmente detenido. Intenta ingresar más tarde.", FontTypeNames.FONTTYPE_SERVER)
-End If
-
-If EnTesting And UserList(UserIndex).Stats.ELV >= 18 Then
-    Call WriteErrorMsg(UserIndex, "Servidor en Testing por unos minutos, conectese con PJs de nivel menor a 18. No se conecte con Pjs que puedan resultar importantes por ahora pues pueden arruinarse.")
-    Call FlushBuffer(UserIndex)
-    Call CloseSocket(UserIndex)
-    Exit Sub
-End If
-
-'Actualiza el Num de usuarios
-'DE ACA EN ADELANTE GRABA EL CHARFILE, OJO!
-NumUsers = NumUsers + 1
-UserList(UserIndex).flags.UserLogged = True
-
-'usado para borrar Pjs
-Execute ("UPDATE pjs SET Logged=1 WHERE Nombre=" & Comillas(UserList(UserIndex).Name))
-
-Call EstadisticasWeb.Informar(CANTIDAD_ONLINE, NumUsers)
-
-
-If UserList(UserIndex).Stats.SkillPts > 0 Then
-    Call WriteSendSkills(UserIndex)
-    Call WriteLevelUp(UserIndex, UserList(UserIndex).Stats.SkillPts)
-End If
-
-If NumUsers > recordusuarios Then
-    Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Record de usuarios conectados simultaneamente." & "Hay " & NumUsers & " usuarios.", FontTypeNames.FONTTYPE_INFO))
-    recordusuarios = NumUsers
-    Call WriteVar(IniPath & "Server.ini", "INIT", "Record", str(recordusuarios))
-    
-    Call EstadisticasWeb.Informar(RECORD_USUARIOS, recordusuarios)
-End If
-
-If UserList(UserIndex).NroMascotas > 0 And Zonas(UserList(UserIndex).zona).Segura = 0 Then
-    Dim i As Integer
-    For i = 1 To MAXMASCOTAS
-        If UserList(UserIndex).MascotasType(i) > 0 Then
-            UserList(UserIndex).MascotasIndex(i) = SpawnNpc(UserList(UserIndex).MascotasType(i), UserList(UserIndex).Pos, True, True, UserList(UserIndex).zona)
-            
-            If UserList(UserIndex).MascotasIndex(i) > 0 Then
-                Npclist(UserList(UserIndex).MascotasIndex(i)).MaestroUser = UserIndex
-                Call FollowAmo(UserList(UserIndex).MascotasIndex(i))
-            Else
-                UserList(UserIndex).MascotasIndex(i) = 0
-            End If
-        End If
-    Next i
-End If
-
-If UserList(UserIndex).flags.Navegando = 1 Then
-    Call WriteNavigateToggle(UserIndex)
-End If
-
-If Criminal(UserIndex) Then
-    Call WriteSafeModeOff(UserIndex)
-    UserList(UserIndex).flags.Seguro = False
-Else
-    UserList(UserIndex).flags.Seguro = True
-    Call WriteSafeModeOn(UserIndex)
-End If
-
-If UserList(UserIndex).GuildIndex > 0 Then
-    'welcome to the show baby...
-    If Not modGuilds.m_ConectarMiembroAClan(UserIndex, UserList(UserIndex).GuildIndex) Then
-        Call WriteConsoleMsg(UserIndex, "Tu estado no te permite entrar al clan.", FontTypeNames.FONTTYPE_GUILD)
+    If LenB(tStr) <> 0 Then
+        Call WriteShowMessageBox(UserIndex, "Tu solicitud de ingreso al clan ha sido rechazada. El clan te explica que: " & tStr)
     End If
-End If
+    'Ingresamos al Ranking
+    CheckRankingUser UserIndex, TopFrags
+    CheckRankingUser UserIndex, TopLevel
+    CheckRankingUser UserIndex, TopOro
+    CheckRankingUser UserIndex, TopRetos
+    CheckRankingUser UserIndex, TopTorneos
+    CheckRankingUser UserIndex, TopClanes
+    CheckRankingUser UserIndex, TopMuertesP
+    'Load the user statistics
+    Call Statistics.UserConnected(UserIndex)
 
-Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, FXIDs.FXWARP, 0))
+    Call MostrarNumUsers
+    'Auras
+    ActualizarAuras UserIndex
+    'Auras
+    Call AgregarEfecto(UserIndex)
 
-Call SendData(SendTarget.ToAll, UserIndex, PrepareMessageUsersOnline())
-Call WriteLoggedMessage(UserIndex)
+    With UserList(UserIndex)
 
-Call modGuilds.SendGuildNews(UserIndex)
+        Call mySQL.SQLQuery("SELECT * FROM quest WHERE user_id=" & UserList(UserIndex).MySQLId, rs)
 
-
-If Lloviendo Then
-    Call WriteRainToggle(UserIndex)
-End If
-
-Call WriteAttributes(UserIndex, True)
-
-tStr = modGuilds.a_ObtenerRechazoDeChar(UserList(UserIndex).Name)
-
-If LenB(tStr) <> 0 Then
-    Call WriteShowMessageBox(UserIndex, "Tu solicitud de ingreso al clan ha sido rechazada. El clan te explica que: " & tStr)
-End If
-
-'Load the user statistics
-Call Statistics.UserConnected(UserIndex)
-
-Call MostrarNumUsers
-'Auras
-ActualizarAuras UserIndex
-'Auras
-Call AgregarEfecto(UserIndex)
-
-With UserList(UserIndex)
-
-Call mySQL.SQLQuery("SELECT * FROM quest WHERE user_id=" & UserList(UserIndex).MySQLId, rs)
-
-'Cargamos los datos del personaje
-'Call LoadUserInit(UserIndex, rs)
-Dim LoopC As Byte
-'User quests
+        'Cargamos los datos del personaje
+        'Call LoadUserInit(UserIndex, rs)
+        Dim LoopC As Byte
+        'User quests
 380     'Call MakeQuery("SELECT * FROM quest WHERE user_id = " & .Id & ";")
 
 382     If Not rs Is Nothing Then
@@ -1308,7 +1318,7 @@ Dim LoopC As Byte
 386         While Not rs.EOF
 
 388             .QuestStats.Quests(rs!Number).QuestIndex = rs!quest_id
-                
+
 390             If .QuestStats.Quests(rs!Number).QuestIndex > 0 Then
 392                 If QuestList(.QuestStats.Quests(rs!Number).QuestIndex).RequiredNPCs Then
 
@@ -1322,8 +1332,8 @@ Dim LoopC As Byte
 402                     Next LoopC
 
                     End If
-                    
-                    
+
+
 404                 If QuestList(.QuestStats.Quests(rs!Number).QuestIndex).RequiredTargetNPCs Then
 
                         Dim NPCsTarget() As String
@@ -1343,26 +1353,26 @@ Dim LoopC As Byte
             Wend
 
         End If
-        
-        'User quests done
-        
-Call mySQL.SQLQuery("SELECT * FROM quest_done WHERE user_id=" & UserList(UserIndex).MySQLId, rs)
 
-'Cargamos los datos del personaje
-'Call LoadUserInit(UserIndex, rs)
-418    ' Call MakeQuery("SELECT * FROM quest_done WHERE user_id = " & .Id & ";")
+        'User quests done
+
+        Call mySQL.SQLQuery("SELECT * FROM quest_done WHERE user_id=" & UserList(UserIndex).MySQLId, rs)
+
+        'Cargamos los datos del personaje
+        'Call LoadUserInit(UserIndex, rs)
+418     ' Call MakeQuery("SELECT * FROM quest_done WHERE user_id = " & .Id & ";")
 
 420     If Not rs Is Nothing Then
 422         .QuestStats.NumQuestsDone = rs.Count
-                
+
 424         ReDim .QuestStats.QuestsDone(1 To .QuestStats.NumQuestsDone)
-        
+
 426
-            
+
 428         LoopC = 1
 
 430         While Not rs.EOF
-            
+
 432             .QuestStats.QuestsDone(LoopC) = rs!quest_id
 434             LoopC = LoopC + 1
 
@@ -1371,7 +1381,7 @@ Call mySQL.SQLQuery("SELECT * FROM quest_done WHERE user_id=" & UserList(UserInd
 
         End If
 
-End With
+    End With
 
 
 
@@ -1379,20 +1389,20 @@ End With
 
 
 
-#If SeguridadAlkon Then
-    Call Security.UserConnected(UserIndex)
-#End If
+    #If SeguridadAlkon Then
+        Call Security.UserConnected(UserIndex)
+    #End If
 
-N = FreeFile
-Open LogPath & "\numusers.log" For Output As N
-Print #N, NumUsers
-Close #N
+    N = FreeFile
+    Open LogPath & "\numusers.log" For Output As N
+    Print #N, NumUsers
+    Close #N
 
-N = FreeFile
-'Log
-Open LogPath & "\Connect.log" For Append Shared As #N
-Print #N, UserList(UserIndex).Name & " ha entrado al juego. UserIndex:" & UserIndex & " " & time & " " & Date
-Close #N
+    N = FreeFile
+    'Log
+    Open LogPath & "\Connect.log" For Append Shared As #N
+    Print #N, UserList(UserIndex).Name & " ha entrado al juego. UserIndex:" & UserIndex & " " & time & " " & Date
+    Close #N
 
 End Sub
 
@@ -1537,6 +1547,7 @@ Sub ResetBasicUserInfo(ByVal UserIndex As Integer)
             '.CriminalesMatados = 0
             .NPCsMuertos = 0
             .UsuariosMatados = 0
+            .MuertesPropias = 0
             .SkillPts = 0
             .GLD = 0
             .UserAtributos(1) = 0

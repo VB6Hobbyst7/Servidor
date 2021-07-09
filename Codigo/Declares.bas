@@ -961,7 +961,7 @@ Public Type ObjData
     ShieldAnim As Integer    ' Apunta a una anim de escudo
     CascoAnim As Integer
 
-    Valor As Long     ' Precio
+    valor As Long     ' Precio
 
     Cerrada As Integer
     Llave As Byte
@@ -1180,7 +1180,7 @@ Public Type UserStats
     UsuariosMatados As Long
     CriminalesMatados As Long
     NPCsMuertos As Integer
-
+    MuertesPropias As Long
     SkillPts As Integer
 
 End Type

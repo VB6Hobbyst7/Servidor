@@ -1733,6 +1733,12 @@ With UserList(UserIndex)
         .Invent.EscudoEqpSlot = Slot1
     End If
     
+        If .Invent.AlasEqpSlot = Slot1 Then
+        .Invent.AlasEqpSlot = Slot2
+    ElseIf .Invent.AlasEqpSlot = Slot2 Then
+        .Invent.AlasEqpSlot = Slot1
+    End If
+    
     If .Invent.MunicionEqpSlot = Slot1 Then
         .Invent.MunicionEqpSlot = Slot2
     ElseIf .Invent.MunicionEqpSlot = Slot2 Then

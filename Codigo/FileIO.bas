@@ -194,7 +194,7 @@ ReDim Hechizos(1 To NumeroHechizos) As tHechizo
 
 frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumeroHechizos
-frmCargando.cargar.Value = 0
+frmCargando.cargar.value = 0
 
 'Llena la lista
 For hechizo = 1 To NumeroHechizos
@@ -285,7 +285,7 @@ For hechizo = 1 To NumeroHechizos
     Hechizos(hechizo).StaRequerido = val(Leer.GetValue("Hechizo" & hechizo, "StaRequerido"))
     
     Hechizos(hechizo).Target = val(Leer.GetValue("Hechizo" & hechizo, "Target"))
-    frmCargando.cargar.Value = frmCargando.cargar.Value + 1
+    frmCargando.cargar.value = frmCargando.cargar.value + 1
     
     Hechizos(hechizo).NeedStaff = val(Leer.GetValue("Hechizo" & hechizo, "NeedStaff"))
     Hechizos(hechizo).StaffAffected = CBool(val(Leer.GetValue("Hechizo" & hechizo, "StaffAffected")))
@@ -643,7 +643,7 @@ NumObjDatas = val(Leer.GetValue("INIT", "NumObjs"))
 
 frmCargando.cargar.min = 0
 frmCargando.cargar.max = NumObjDatas
-frmCargando.cargar.Value = 0
+frmCargando.cargar.value = 0
 
 
 ReDim Preserve ObjData(1 To NumObjDatas) As ObjData
@@ -783,7 +783,7 @@ For Object = 1 To NumObjDatas
     ObjData(Object).RazaGnoma = val(Leer.GetValue("OBJ" & Object, "RazaGnoma"))
     ObjData(Object).RazaHumana = val(Leer.GetValue("OBJ" & Object, "RazaHumana"))
     
-    ObjData(Object).Valor = val(Leer.GetValue("OBJ" & Object, "Valor"))
+    ObjData(Object).valor = val(Leer.GetValue("OBJ" & Object, "Valor"))
     
     ObjData(Object).Crucial = val(Leer.GetValue("OBJ" & Object, "Crucial"))
     ObjData(Object).CanUse = val(Leer.GetValue("OBJ" & Object, "CanUse"))
@@ -807,14 +807,14 @@ For Object = 1 To NumObjDatas
     'CHECK: !!! Esto es provisorio hasta que los de Dateo cambien los valores de string a numerico
     Dim i As Integer
     Dim N As Integer
-    Dim S As String
+    Dim s As String
     For i = 1 To NUMCLASES
-        S = UCase$(Leer.GetValue("OBJ" & Object, "CP" & i))
+        s = UCase$(Leer.GetValue("OBJ" & Object, "CP" & i))
         N = 1
-        Do While LenB(S) > 0 And UCase$(ListaClases(N)) <> S
+        Do While LenB(s) > 0 And UCase$(ListaClases(N)) <> s
             N = N + 1
         Loop
-        ObjData(Object).ClaseProhibida(i) = IIf(LenB(S) > 0, N, 0)
+        ObjData(Object).ClaseProhibida(i) = IIf(LenB(s) > 0, N, 0)
     Next i
     
     ObjData(Object).DefensaMagicaMax = val(Leer.GetValue("OBJ" & Object, "DefensaMagicaMax"))
@@ -839,10 +839,10 @@ For Object = 1 To NumObjDatas
     ObjData(Object).Efecto = val(Leer.GetValue("OBJ" & Object, "Efecto"))
     
     If Object = 414 Or Object = 415 Or Object = 416 Or Object = 1067 Then
-        ObjData(Object).Valor = ObjData(Object).Valor * MultiplicadorORO
+        ObjData(Object).valor = ObjData(Object).valor * MultiplicadorORO
     End If
     
-    frmCargando.cargar.Value = frmCargando.cargar.Value + 1
+    frmCargando.cargar.value = frmCargando.cargar.value + 1
 Next Object
 
 Set Leer = Nothing
@@ -902,7 +902,7 @@ UserList(UserIndex).Stats.ELV = CByte(UserFile("ELV"))
 
 UserList(UserIndex).Stats.UsuariosMatados = CLng(UserFile("UserMuertes"))
 UserList(UserIndex).Stats.NPCsMuertos = CInt(UserFile("NpcsMuertes"))
-
+UserList(UserIndex).Stats.MuertesPropias = CInt(UserFile("MuertesPropias"))
 If CByte(UserFile("PerteneceReal")) Then _
     UserList(UserIndex).flags.Privilegios = UserList(UserIndex).flags.Privilegios Or PlayerType.RoyalCouncil
 
@@ -1059,6 +1059,11 @@ UserList(UserIndex).Invent.EscudoEqpSlot = CByte(UserFile("EscudoEqpSlot"))
 If UserList(UserIndex).Invent.EscudoEqpSlot > 0 Then
     UserList(UserIndex).Invent.EscudoEqpObjIndex = UserList(UserIndex).Invent.Object(UserList(UserIndex).Invent.EscudoEqpSlot).ObjIndex
 End If
+'Obtiene el indice-objeto de las Alas
+UserList(UserIndex).Invent.AlasEqpSlot = CByte(UserFile("AlaEqpSlot"))
+If UserList(UserIndex).Invent.AlasEqpSlot > 0 Then
+    UserList(UserIndex).Invent.AlasEqpObjIndex = UserList(UserIndex).Invent.Object(UserList(UserIndex).Invent.AlasEqpSlot).ObjIndex
+End If
 
 'Obtiene el indice-objeto del casco
 UserList(UserIndex).Invent.CascoEqpSlot = CByte(UserFile("CascoEqpSlot"))
@@ -1125,7 +1130,7 @@ On Error GoTo man
     
     frmCargando.cargar.min = 0
     frmCargando.cargar.max = NumMaps
-    frmCargando.cargar.Value = 0
+    frmCargando.cargar.value = 0
 
 
     For map = 1 To NumMaps
@@ -1193,16 +1198,16 @@ man:
     Call LogError(Date & " " & Err.Description & " " & Err.HelpContext & " " & Err.HelpFile & " " & Err.Source)
 
 End Sub
-Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef Value As Integer)
+Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Integer)
 
 'value = (Data(Pos + 1) And &H7F) * &H100 Or Data(Pos) Or -(Data(Pos + 1) > &H7F) * &H8000
 
-CopyMemory Value, data(Pos), 2
+CopyMemory value, data(Pos), 2
 
 Pos = Pos + 2
 End Sub
-Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef Value As Byte)
-Value = data(Pos)
+Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Byte)
+value = data(Pos)
 Pos = Pos + 1
 End Sub
 Public Sub CargarMapa(ByVal map As Long, ByVal MAPFl As String)
@@ -1331,7 +1336,7 @@ On Error GoTo errh
                 Call ReadByte(data, Pos, TempByte)
             End If
         Next X
-        frmCargando.cargar.Value = Y
+        frmCargando.cargar.value = Y
     Next Y
 
 Exit Sub
@@ -1557,12 +1562,12 @@ Encriptacion.StringValidacion = Encriptacion.ArmarStringValidacion
 
 End Sub
 
-Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal Value As String)
+Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal value As String)
 '*****************************************************************
 'Escribe VAR en un archivo
 '*****************************************************************
 
-writeprivateprofilestring Main, Var, Value, file
+writeprivateprofilestring Main, Var, value, file
     
 End Sub
 
@@ -1745,6 +1750,7 @@ Query = Query & "ELV=" & CStr(UserList(UserIndex).Stats.ELV) & ", "
 
 Query = Query & "ELU=" & CStr(UserList(UserIndex).Stats.ELU) & ", "
 Query = Query & "UserMuertes=" & CStr(UserList(UserIndex).Stats.UsuariosMatados) & ", "
+Query = Query & "MuertesPropias=" & CStr(UserList(UserIndex).Stats.MuertesPropias) & ", "
 'Query = Query & "CrimMuertes" & CStr(UserList(UserIndex).Stats.CriminalesMatados) & ", "
 Query = Query & "NpcsMuertes=" & CStr(UserList(UserIndex).Stats.NPCsMuertos) & ", "
   
@@ -1772,6 +1778,7 @@ Query = Query & "WeaponEqpSlot=" & CStr(UserList(UserIndex).Invent.WeaponEqpSlot
 Query = Query & "ArmourEqpSlot=" & CStr(UserList(UserIndex).Invent.ArmourEqpSlot) & ", "
 Query = Query & "CascoEqpSlot=" & CStr(UserList(UserIndex).Invent.CascoEqpSlot) & ", "
 Query = Query & "EscudoEqpSlot=" & CStr(UserList(UserIndex).Invent.EscudoEqpSlot) & ", "
+Query = Query & "AlaEqpSlot=" & CStr(UserList(UserIndex).Invent.AlasEqpSlot) & ", "
 Query = Query & "BarcoSlot=" & CStr(UserList(UserIndex).Invent.BarcoSlot) & ", "
 Query = Query & "MunicionSlot=" & CStr(UserList(UserIndex).Invent.MunicionEqpSlot) & ", "
 '/Nacho

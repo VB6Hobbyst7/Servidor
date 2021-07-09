@@ -128,8 +128,8 @@ Private Enum ClientPacketIDGM
     CriminalMessage         '/CRIMSG
     TalkAsNPC               '/TALKAS
     DestroyAllItemsInArea   '/MASSDEST
-    AcceptRoyalCouncilMember '/ACEPTCONSE
-    AcceptChaosCouncilMember '/ACEPTCONSECAOS
+    AcceptRoyalCouncilMember    '/ACEPTCONSE
+    AcceptChaosCouncilMember    '/ACEPTCONSECAOS
     ItemsInTheFloor         '/PISO
     MakeDumb                '/ESTUPIDO
     MakeDumbNoMore          '/NOESTUPIDO
@@ -161,7 +161,7 @@ Private Enum ClientPacketIDGM
     ImperialArmour          '/AI1 - 4
     ChaosArmour             '/AC1 - 4
     NavigateToggle          '/NAVE
-    ServerOpenToUsersToggle '/HABILITAR
+    ServerOpenToUsersToggle    '/HABILITAR
     TurnOffServer           '/APAGAR
     TurnCriminal            '/CONDEN
     ResetFactions           '/RAJAR
@@ -170,7 +170,7 @@ Private Enum ClientPacketIDGM
     AlterPassword           '/APASS
     AlterMail               '/AEMAIL
     AlterName               '/ANAME
-    ToggleCentinelActivated '/CENTINELAACTIVADO
+    ToggleCentinelActivated    '/CENTINELAACTIVADO
     DoBackUp                '/DOBACKUP
     ShowGuildMessages       '/SHOWCMSG
     SaveMap                 '/GUARDAMAPA
@@ -208,6 +208,7 @@ Private Enum ServerPacketID
     UserCommerceEnd         ' FINCOMUSUOK
     UserOfferConfirm
     CancelOfferItem
+    EnviarDatosRanking
     SendAura                ' AURA
     ShowBlacksmithForm      ' SFH
     ShowCarpenterForm       ' SFC
@@ -466,7 +467,7 @@ Private Enum ClientPacketID
     CreateEfectoClientAction     'Hago la accion (daño, etc)
     AnclarEmbarcacion
     EventPacketCL
-      
+    SolicitaRranking
 End Enum
 'eventos
 Public Enum EventPacketID
@@ -872,11 +873,12 @@ Public Function HandleIncomingData(ByVal UserIndex As Integer) As Boolean
 
     Case ClientPacketID.Ping                    '/PING
         Call HandlePing(UserIndex)
-    
+
     Case ClientPacketID.EventPacketCL          'Eventos
         Call HandleEventPacket(UserIndex)
 
-
+    Case ClientPacketID.SolicitaRranking
+        Call HandleSolicitarRanking(UserIndex)
     Case ClientPacketID.InitCrafting
         Call HandleInitCrafting(UserIndex)
 
@@ -6971,15 +6973,15 @@ Private Sub HandlePartySetLeader(ByVal UserIndex As Integer)
         
         Dim UserName As String
         Dim tUser As Integer
-        Dim rank As Integer
-        rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
+        Dim Rank As Integer
+        Rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
         
         UserName = buffer.ReadASCIIString()
         If UserPuedeEjecutarComandos(UserIndex) Then
             tUser = NameIndex(UserName)
             If tUser > 0 Then
                 'Don't allow users to spoof online GMs
-                If (UserDarPrivilegioLevel(UserName) And rank) <= (.flags.Privilegios And rank) Then
+                If (UserDarPrivilegioLevel(UserName) And Rank) <= (.flags.Privilegios And Rank) Then
                     Call mdParty.TransformarEnLider(UserIndex, tUser)
                 Else
                     Call WriteConsoleMsg(UserIndex, LCase(UserList(tUser).Name) & " no pertenece a tu party.", FontTypeNames.FONTTYPE_INFO)
@@ -7037,10 +7039,10 @@ On Error GoTo errhandler
         
         Dim UserName As String
         Dim tUser As Integer
-        Dim rank As Integer
+        Dim Rank As Integer
         Dim bUserVivo As Boolean
         
-        rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
+        Rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
         
         UserName = buffer.ReadASCIIString()
         If UserList(UserIndex).flags.Muerto Then
@@ -7053,7 +7055,7 @@ On Error GoTo errhandler
             tUser = NameIndex(UserName)
             If tUser > 0 Then
                 'Validate administrative ranks - don't allow users to spoof online GMs
-                If (UserList(tUser).flags.Privilegios And rank) <= (.flags.Privilegios And rank) Then
+                If (UserList(tUser).flags.Privilegios And Rank) <= (.flags.Privilegios And Rank) Then
                     Call mdParty.AprobarIngresoAParty(UserIndex, tUser)
                 Else
                     Call WriteConsoleMsg(UserIndex, "No puedes incorporar a tu party a personajes de mayor jerarquía.", FontTypeNames.FONTTYPE_INFO)
@@ -7064,7 +7066,7 @@ On Error GoTo errhandler
                 End If
                 
                 'Don't allow users to spoof online GMs
-                If (UserDarPrivilegioLevel(UserName) And rank) <= (.flags.Privilegios And rank) Then
+                If (UserDarPrivilegioLevel(UserName) And Rank) <= (.flags.Privilegios And Rank) Then
                     Call WriteConsoleMsg(UserIndex, LCase(UserName) & " no ha solicitado ingresar a tu party.", FontTypeNames.FONTTYPE_PARTY)
                 Else
                     Call WriteConsoleMsg(UserIndex, "No puedes incorporar a tu party a personajes de mayor jerarquía.", FontTypeNames.FONTTYPE_INFO)
@@ -9862,9 +9864,9 @@ On Error GoTo errhandler
         
         Dim UserName As String
         Dim tUser As Integer
-        Dim rank As Integer
+        Dim Rank As Integer
         
-        rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
+        Rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
         
         UserName = buffer.ReadASCIIString()
         
@@ -9874,7 +9876,7 @@ On Error GoTo errhandler
             If tUser <= 0 Then
                 Call WriteConsoleMsg(UserIndex, "El usuario no esta online.", FontTypeNames.FONTTYPE_INFO)
             Else
-                If (UserList(tUser).flags.Privilegios And rank) > (.flags.Privilegios And rank) Then
+                If (UserList(tUser).flags.Privilegios And Rank) > (.flags.Privilegios And Rank) Then
                     Call WriteConsoleMsg(UserIndex, "No podes echar a alguien con jerarquia mayor a la tuya.", FontTypeNames.FONTTYPE_INFO)
                 Else
                     'Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(.Name & " echo a " & UserName & ".", FontTypeNames.FONTTYPE_INFO))
@@ -11811,7 +11813,7 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
         Err.Raise UserList(UserIndex).incomingData.NotEnoughDataErrCode
         Exit Sub
     End If
-    
+
     With UserList(UserIndex)
         'Remove packet ID
         Call .incomingData.ReadByte
@@ -11822,18 +11824,18 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
         Dim Listado As String
         Dim found As Integer
         Cant = .incomingData.ReadInteger()
-        
+
         ObjS = .incomingData.ReadASCIIString()
-        
+
         If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.SemiDios) Then Exit Sub
-        
-        
-        
+
+
+
         If MapData(.Pos.map).Tile(.Pos.X, .Pos.Y - 1).ObjInfo.ObjIndex > 0 Then _
-            Exit Sub
-        
+           Exit Sub
+
         If MapData(.Pos.map).Tile(.Pos.X, .Pos.Y - 1).TileExit.map > 0 Then _
-            Exit Sub
+           Exit Sub
         Dim i As Integer
         ObjIndex = val(ObjS)
         If ObjIndex = 0 Then
@@ -11844,8 +11846,8 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
                     ObjIndex = i
                 End If
             Next i
-        
-        
+
+
             If found = 0 Then
                 Call WriteConsoleMsg(UserIndex, "No se han encontrado objetos que contengan '" & ObjS & "'", FontTypeNames.FONTTYPE_GUILD)
                 Exit Sub
@@ -11857,21 +11859,29 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
                 Exit Sub
             End If
         End If
-        
+
         If ObjIndex < 1 Or ObjIndex > NumObjDatas Then _
-            Exit Sub
-        
+           Exit Sub
+
         'Is the object not null?
         If LenB(ObjData(ObjIndex).Name) = 0 Then Exit Sub
+
         
-        Call LogGM(.Name, "/CI: " & ObjIndex & " - " & ObjData(ObjIndex).Name & " - " & Cant)
-        
+
         Dim Objeto As Obj
-        Call WriteConsoleMsg(UserIndex, "ATENCION: FUERON CREADOS ***" & Cant & "*** ITEMS!, TIRE Y /DEST LOS QUE NO NECESITE!!", FontTypeNames.FONTTYPE_GUILD)
-        
+        ' Call WriteConsoleMsg(UserIndex, "ATENCION: FUERON CREADOS ***" & Cant & "*** ITEMS!, TIRE Y /DEST LOS QUE NO NECESITE!!", FontTypeNames.FONTTYPE_GUILD)
+
         Objeto.Amount = Cant
         Objeto.ObjIndex = ObjIndex
-        Call MakeObj(Objeto, .Pos.map, .Pos.X, .Pos.Y - 1)
+        If MeterItemEnInventario(UserIndex, Objeto) Then
+            Call WriteConsoleMsg(UserIndex, "Has creado " & Objeto.Amount & " unidades de " & ObjData(ObjIndex).Name & ".", FontTypeNames.FONTTYPE_INFO)
+            Call LogGM(.Name, "/CI: " & ObjIndex & " - " & ObjData(ObjIndex).Name & " - " & Cant)
+        Else
+            Call WriteConsoleMsg(UserIndex, "No tenes espacio en tu inventario para crear el item.", FontTypeNames.FONTTYPE_INFO)
+        End If
+
+
+        'Call MakeObj(Objeto, .Pos.map, .Pos.X, .Pos.Y - 1)
     End With
 End Sub
 
@@ -16385,7 +16395,7 @@ On Error GoTo errhandler
         Call .WriteInteger(obData.MinHIT)
         Call .WriteInteger(obData.MinDef)
         Call .WriteInteger(obData.MaxDef)
-        Call .WriteSingle(SalePrice(obData.Valor))
+        Call .WriteSingle(SalePrice(obData.valor))
         Call .WriteByte(UserNoPuedeUsarItem(UserIndex, ObjIndex))
     End With
 Exit Sub
@@ -16430,7 +16440,7 @@ On Error GoTo errhandler
         Call .WriteInteger(obData.MaxHIT)
         Call .WriteInteger(obData.MinHIT)
         Call .WriteInteger(obData.def)
-        Call .WriteLong(obData.Valor)
+        Call .WriteLong(obData.valor)
         Call .WriteByte(UserNoPuedeUsarItem(UserIndex, ObjIndex))
     End With
 Exit Sub
@@ -19204,3 +19214,49 @@ errhandler:
     End If
 End Sub
 'Eventos
+
+Private Sub HandleSolicitarRanking(ByVal UserIndex As Integer)
+    With UserList(UserIndex)
+        Call .incomingData.ReadByte
+
+        Dim TipoRank As eRanking
+
+        TipoRank = .incomingData.ReadByte
+
+        ' @ Enviamos el ranking
+        Call WriteEnviarRanking(UserIndex, TipoRank)
+
+    End With
+End Sub
+Public Sub WriteEnviarRanking(ByVal UserIndex As Integer, ByVal Rank As eRanking)
+
+'@ Shak
+    On Error GoTo errhandler
+    Call UserList(UserIndex).outgoingData.WriteByte(ServerPacketID.EnviarDatosRanking)
+
+    Dim i      As Integer
+    Dim Cadena As String
+    Dim Cadena2 As String
+
+    For i = 1 To MAX_TOP
+        If i = 1 Then
+            Cadena = Cadena & Ranking(Rank).Nombre(i)
+            Cadena2 = Cadena2 & Ranking(Rank).value(i)
+        Else
+            Cadena = Cadena & "-" & Ranking(Rank).Nombre(i)
+            Cadena2 = Cadena2 & "-" & Ranking(Rank).value(i)
+        End If
+    Next i
+
+
+    ' @ Enviamos la cadena
+    Call UserList(UserIndex).outgoingData.WriteASCIIString(Cadena)
+    Call UserList(UserIndex).outgoingData.WriteASCIIString(Cadena2)
+    Exit Sub
+
+errhandler:
+    If Err.Number = UserList(UserIndex).outgoingData.NotEnoughSpaceErrCode Then
+        Call FlushBuffer(UserIndex)
+        Resume
+    End If
+End Sub
