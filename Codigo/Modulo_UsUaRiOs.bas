@@ -1332,6 +1332,7 @@ Sub UserDie(ByVal UserIndex As Integer, Optional ByVal AttackerIndex As Integer 
             .Char.ShieldAnim = NingunEscudo
             .Char.WeaponAnim = NingunArma
             .Char.CascoAnim = NingunCasco
+            .Char.alaIndex = 0
         Else
             .Char.Body = iFragataFantasmal
         End If

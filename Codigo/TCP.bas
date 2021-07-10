@@ -1016,7 +1016,7 @@ Sub ConnectUser(ByVal UserIndex As Integer, ByVal UserAccount As String, ByRef N
     If UserList(UserIndex).Invent.EscudoEqpSlot = 0 Then UserList(UserIndex).Char.ShieldAnim = NingunEscudo
     If UserList(UserIndex).Invent.CascoEqpSlot = 0 Then UserList(UserIndex).Char.CascoAnim = NingunCasco
     If UserList(UserIndex).Invent.WeaponEqpSlot = 0 Then UserList(UserIndex).Char.WeaponAnim = NingunArma
-    If UserList(UserIndex).Invent.AlasEqpObjIndex = 0 Then UserList(UserIndex).Char.alaIndex = 0
+    If UserList(UserIndex).Invent.AlasEqpSlot = 0 Then UserList(UserIndex).Char.alaIndex = 0
     
     If (UserList(UserIndex).flags.Muerto = 0) Then
         UserList(UserIndex).flags.SeguroResu = False
