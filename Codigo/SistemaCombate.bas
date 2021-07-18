@@ -1424,13 +1424,7 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
         If EsGuardiaCaos(NpcIndex) Or EsMercader(NpcIndex, False) Then
             'Lo quiere atacar un caos?
             If esCaos(AttackerIndex) Then
-                'Neo ataque de npcs prohibidos
-                If EsMercader(NpcIndex, False) Then
-                    Call WriteConsoleMsg(AttackerIndex, "No puedes atacar a un aliado del Caos siendo Legionario", FontTypeNames.FONTTYPE_INFO)
-                Else
-                    Call WriteConsoleMsg(AttackerIndex, "No puedes atacar guardias del Caos siendo Legionario", FontTypeNames.FONTTYPE_INFO)
-                End If
-                
+                Call WriteConsoleMsg(AttackerIndex, "No puedes atacar guardias del Caos siendo Legionario", FontTypeNames.FONTTYPE_INFO)
                 PuedeAtacarNPC = False
                 Exit Function
             End If
@@ -1438,35 +1432,17 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
         ElseIf EsGuardiaReal(NpcIndex) Or EsMercader(NpcIndex, True) Then
             'Lo quiere atacar un Armada?
             If esArmada(AttackerIndex) Then
-                'Neo
-                If EsMercader(NpcIndex, True) Then
-                    Call WriteConsoleMsg(AttackerIndex, "No puedes atacar a un aliado real siendo de la Armada Real", FontTypeNames.FONTTYPE_INFO)
-                Else
-                    Call WriteConsoleMsg(AttackerIndex, "No puedes atacar guardias reales siendo de la armada real", FontTypeNames.FONTTYPE_INFO)
-                End If
-                
+                Call WriteConsoleMsg(AttackerIndex, "No puedes atacar guardias reales siendo de la armada real", FontTypeNames.FONTTYPE_INFO)
                 PuedeAtacarNPC = False
                 Exit Function
             End If
             'Tienes el seguro puesto?
             If UserList(AttackerIndex).flags.Seguro Then
-                'Neo
-                If EsMercader(NpcIndex, True) Then
-                    Call WriteConsoleMsg(AttackerIndex, "Debes quitar el seguro para poder atacar, utilizando /SEG", FontTypeNames.FONTTYPE_INFO)
-                Else
-                    Call WriteConsoleMsg(AttackerIndex, "Debes quitar el seguro para poder atacar guardias reales utilizando /SEG", FontTypeNames.FONTTYPE_INFO)
-                End If
-                
+                Call WriteConsoleMsg(AttackerIndex, "Debes quitar el seguro para poder atacar guardias reales utilizando /SEG", FontTypeNames.FONTTYPE_INFO)
                 PuedeAtacarNPC = False
                 Exit Function
             Else
-                'Neo
-                If EsMercader(NpcIndex, True) Then
-                    Call WriteConsoleMsg(AttackerIndex, "¡Atacaste a un aliado de la Armada Real! Ahora eres un Criminal.", FontTypeNames.FONTTYPE_INFO)
-                Else
-                    Call WriteConsoleMsg(AttackerIndex, "¡Atacaste un Guardia Real! Eres un Criminal.", FontTypeNames.FONTTYPE_INFO)
-                End If
-                
+                Call WriteConsoleMsg(AttackerIndex, "¡Atacaste un Guardia Real! Eres un Criminal.", FontTypeNames.FONTTYPE_INFO)
                 Call VolverCriminal(AttackerIndex)
                 PuedeAtacarNPC = True
                 Exit Function

@@ -643,9 +643,7 @@ Public Const SND_ESCUDO As Byte = 37
 Public Const MARTILLOHERRERO As Byte = 41
 Public Const LABUROCARPINTERO As Byte = 42
 Public Const SND_BEBER As Byte = 46
-'neo
-Public Const SND_COMER As Byte = 7
-'neo
+
 ''
 ' Cantidad maxima de objetos por slot de inventario
 Public Const MAX_INVENTORY_OBJS As Integer = 10000
@@ -735,62 +733,6 @@ Public Const STAT_MAXDEF As Byte = 99
 ' ************************ TIPOS *******************************
 ' **************************************************************
 ' **************************************************************
-
-'Neo Ruta de un npc inteligente
-Public Type tRutaNpcInteligente
-    Camino As String
-End Type
-
-'Neo Ruta para los trabajadores
-Public Type tRutaTrabajador
-    Ruta As String
-    DireccionInicio As String
-    DireccionFin As String
-End Type
-
-'Neo Frases para trabajadores
-Public Type tFraseTrabajador
-    texto As String
-End Type
-
-'Neo Npc trabajadores
-Public Type tNpcTrabajador
-    NumeroNPC As Integer
-    Profesion As String
-End Type
-
-'Neo Se declara tipo Npc Inteligente
-Public Type tNpcInteligente
-    NumeroNPC As Integer
-    Clan As String
-    Fijo As Integer
-    TiempoEsperaMinuto As Integer
-    CrearInicioServer As Integer
-    TiempoRenacer As Integer
-    Mana As Integer
-    PocionesRojas As Integer
-    PocionesAzules As Integer
-    OroInicial As Integer
-    IncrementoOro As Integer
-    OroMaximo As Integer
-    TiraRemo As Integer
-    TiraInmo As Integer
-    TiraApoca As Integer
-    TiraDescarga As Integer
-    TiraTormentaFuego As Integer
-    TiraVerInvi As Integer
-    NroHechizoInvocacion As Integer
-    MsjAgresorInvi As String
-    MsjNuevoAgresor As String
-    MsjAgresorRandom1 As String
-    MsjAgresorRandom2 As String
-    MsjAgresorRandom3 As String
-    MsjAvisoPosibleAgresor As String
-    MsjNoMolestes As String
-    MsjAlHacerClick As String
-    NroRutas As Integer
-    Ruta() As tRutaNpcInteligente
-End Type
 
 Public Type tHechizo
     Nombre As String
@@ -1844,36 +1786,6 @@ Public NumFX As Integer
 Public NumMaps As Integer
 Public NumObjDatas As Integer
 Public NumeroHechizos As Integer
-'Neo
-Public NumeroNpcInteligente As Integer
-Public NumeroNpcTrabajador As Integer
-Public NumeroRutaPescador As Integer
-Public NumeroRutaTalador As Integer
-Public NumeroRutaMinero As Integer
-Public NumeroRutaCarpintero As Integer
-Public NumeroRutaHerrero As Integer
-Public TiempoMinimoTrabajo As Integer
-Public TiempoMaximoTrabajo As Integer
-Public TiempoMinimoHablar As Integer
-Public TiempoMaximoHablar As Integer
-Public TiempoMinimoLogin As Integer
-Public TiempoMaximoLogin As Integer
-Public TiempoMinimoResucitar As Integer
-Public TiempoMaximoResucitar As Integer
-Public TiempoMinimoComerBeber As Integer
-Public TiempoMaximoComerBeber As Integer
-Public IntervaloMinimoTrabajo As Integer
-Public IntervaloMaximoTrabajo As Integer
-Public CantidadMinimaBotManiana As Integer
-Public CantidadMaximaBotManiana As Integer
-Public CantidadMinimaBotTarde As Integer
-Public CantidadMaximaBotTarde As Integer
-Public CantidadMinimaBotNoche As Integer
-Public CantidadMaximaBotNoche As Integer
-Public CantidadMinimaBotMadrugada As Integer
-Public CantidadMaximaBotMadrugada As Integer
-Public NumeroFraseTrabajador As Integer
-Public NumeroTrabajadores As Integer
 Public AllowMultiLogins As Byte
 Public IdleLimit As Integer
 Public MaxUsers As Integer
@@ -1887,7 +1799,6 @@ Public MultiplicadorEXP As Single
 Public MultiplicadorORO As Single
 Public MultiplicadorOroMuerte As Single
 Public MultiplicadorOficio As Integer
-'Neo
 
 Public Const OBJ_CARRO_MINERIA As Integer = 561
 
@@ -1906,18 +1817,6 @@ Public Npclist(1 To MAXNPCS) As NPC    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo
 Public Hechizos() As tHechizo
-'Neo
-Public NpcInteligentes() As tNpcInteligente
-Public NpcTrabajadores() As tNpcTrabajador
-Public RutaPescadores() As tRutaTrabajador
-Public RutaTaladores() As tRutaTrabajador
-Public RutaCarpinteros() As tRutaTrabajador
-Public RutaHerreros() As tRutaTrabajador
-Public RutaMineros() As tRutaTrabajador
-Public FraseTrabajadores() As tFraseTrabajador
-Public ListaNpcIA() As clsMercader
-Public ListaTrabajadorIA() As clsMercader
-'Neo
 Public CharList(1 To MAXCHARS) As Integer
 Public ObjData() As ObjData
 Public FX() As FXdata
@@ -1935,7 +1834,6 @@ Public ModRaza(1 To NUMRAZAS) As ModRaza
 Public ModVida(1 To NUMCLASES) As Double
 Public DistribucionEnteraVida(1 To 5) As Integer
 Public DistribucionSemienteraVida(1 To 4) As Integer
-
 'quest
 Public QuestList() As tQuest
 'quest
