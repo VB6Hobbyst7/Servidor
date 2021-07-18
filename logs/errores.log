@@ -38,3 +38,9 @@
 7/18/2021 12:19:57 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
 7/18/2021 12:20:00 PM Se intento CrearNpc con Area 0 NroNpc:501
 7/18/2021 12:20:02 PM Se intento CrearNpc con Area 0 NroNpc:501
+7/18/2021 2:18:29 PM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+7/18/2021 2:18:30 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
+7/18/2021 2:18:30 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
+7/18/2021 2:26:35 PM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+7/18/2021 2:26:35 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
+7/18/2021 2:26:35 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
