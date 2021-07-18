@@ -4910,26 +4910,21 @@ Private Sub HandleOnline(ByVal UserIndex As Integer)
     Dim i As Long
     Dim Count As Long
     Dim ListaUsers As String
-    Dim ListaUsers2 As String
+    
     With UserList(UserIndex)
         'Remove packet ID
         Call .incomingData.ReadByte
         
         For i = 1 To LastUser
             If LenB(UserList(i).Name) <> 0 Then
-                If UserList(i).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then
-                    If UserList(i).Counters.trabajando = 0 Then
+                If UserList(i).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then _
                     ListaUsers = ListaUsers & UserList(i).Name & ", "
-                    Else
-                    ListaUsers = ListaUsers & UserList(i).Name & "(Trabajando), "
-                    End If
-                   End If
             End If
         Next i
         If ListaUsers <> "" Then
             ListaUsers = left$(ListaUsers, Len(ListaUsers) - 2)
         End If
-        Call WriteConsoleMsg(UserIndex, "Número de usuarios: " & NumUsers & vbCrLf & " Nombres: " & ListaUsers, FontTypeNames.FONTTYPE_INFO)
+        Call WriteConsoleMsg(UserIndex, "Número de usuarios: " & NumUsers & vbCrLf & ListaUsers, FontTypeNames.FONTTYPE_INFO)
     End With
 End Sub
 
@@ -8372,39 +8367,19 @@ On Error GoTo errhandler
         
         UserName = buffer.ReadASCIIString()
         tUser = NameIndex(UserName)
-        Dim cont As Integer
-        Dim npcIA As Integer
-        npcIA = 0
         
         If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin Or PlayerType.SemiDios Or PlayerType.Consejero) Then
             'Si es dios o Admins no podemos salvo que nosotros también lo seamos
-            'Neo teleport a mercaderes con su nick
             If UserName = "merc1" Then
-                npcIA = GetNpcIAByNumNpc(617)
-                If npcIA > 0 Then
-                    X = Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.X
-                    Y = Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.Y + 1
-                    Call FindLegalPos(UserIndex, Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.map, X, Y)
-                    Call WarpUserChar(UserIndex, Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.map, X, Y, True, True)
-                End If
-                
-                'X = Npclist(MercaderReal.NpcIndex).Pos.X
-                'Y = Npclist(MercaderReal.NpcIndex).Pos.Y + 1
-                'Call FindLegalPos(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y)
-                'Call WarpUserChar(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y, True, True)
+                X = Npclist(MercaderReal.NpcIndex).Pos.X
+                Y = Npclist(MercaderReal.NpcIndex).Pos.Y + 1
+                Call FindLegalPos(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y)
+                Call WarpUserChar(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y, True, True)
             ElseIf UserName = "merc2" Then
-                npcIA = GetNpcIAByNumNpc(618)
-                If npcIA > 0 Then
-                    X = Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.X
-                    Y = Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.Y + 1
-                    Call FindLegalPos(UserIndex, Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.map, X, Y)
-                    Call WarpUserChar(UserIndex, Npclist(ListaNpcIA(npcIA).NpcIndex).Pos.map, X, Y, True, True)
-                End If
-                
-            '    X = Npclist(MercaderCaos.NpcIndex).Pos.X
-            '    Y = Npclist(MercaderCaos.NpcIndex).Pos.Y + 1
-            '    Call FindLegalPos(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y)
-            '    Call WarpUserChar(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y, True, True)
+                X = Npclist(MercaderCaos.NpcIndex).Pos.X
+                Y = Npclist(MercaderCaos.NpcIndex).Pos.Y + 1
+                Call FindLegalPos(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y)
+                Call WarpUserChar(UserIndex, Npclist(MercaderReal.NpcIndex).Pos.map, X, Y, True, True)
             ElseIf Not (EsDios(UserName) Or EsAdmin(UserName)) Or (.flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin)) <> 0 Then
                 If tUser <= 0 Then
                     Call WriteConsoleMsg(UserIndex, "Usuario offline.", FontTypeNames.FONTTYPE_INFO)
@@ -8598,7 +8573,7 @@ Private Sub HandleWorking(ByVal UserIndex As Integer)
         If .flags.Privilegios And (PlayerType.User Or PlayerType.RoleMaster) Then Exit Sub
         
         For i = 1 To LastUser
-            If UserList(i).flags.UserLogged And UserList(i).Counters.trabajando > 0 Then
+            If UserList(i).flags.UserLogged And UserList(i).Counters.Trabajando > 0 Then
                 Users = Users & ", " & UserList(i).Name
                 
                 ' Display the user being checked by the centinel
@@ -11892,10 +11867,9 @@ Private Sub HandleCreateItem(ByVal UserIndex As Integer)
         If LenB(ObjData(ObjIndex).Name) = 0 Then Exit Sub
 
         
-        Call LogGM(.Name, "/CI: " & ObjIndex & " - " & ObjData(ObjIndex).Name & " - " & Cant)
-        
+
         Dim Objeto As Obj
-        Call WriteConsoleMsg(UserIndex, "ATENCION: FUERON CREADOS ***" & Cant & "*** ITEMS!, TIRE Y /DEST LOS QUE NO NECESITE!!", FontTypeNames.FONTTYPE_GUILD)
+        ' Call WriteConsoleMsg(UserIndex, "ATENCION: FUERON CREADOS ***" & Cant & "*** ITEMS!, TIRE Y /DEST LOS QUE NO NECESITE!!", FontTypeNames.FONTTYPE_GUILD)
 
         Objeto.Amount = Cant
         Objeto.ObjIndex = ObjIndex

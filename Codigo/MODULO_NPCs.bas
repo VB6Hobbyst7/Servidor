@@ -616,6 +616,7 @@ Dim Simbolo As Byte
     
     If Npclist(NpcIndex).MostrarNombre Then
         Nombre = "!" & Npclist(NpcIndex).Name
+        
     Else
         Nombre = vbNullString
     End If
@@ -977,7 +978,9 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         .MostrarNombre = False
         If .Name <> "" Then
             If left(.Name, 1) = "!" Then
+                       
                 .Name = Right(.Name, Len(.Name) - 1)
+                .Name = Replace(.Name, "!", "")
                 .MostrarNombre = True
             End If
         End If

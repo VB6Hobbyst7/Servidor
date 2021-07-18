@@ -92,7 +92,7 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, ByVal map As Integer, ByVal 
 '***************************************************
     Dim nPos As WorldPos
     
-On Error GoTo Errhandler
+On Error GoTo errhandler
     'Controla las salidas
     If InMapBounds(map, X, Y) Then
         With MapData(map).Tile(X, Y)
@@ -171,7 +171,7 @@ On Error GoTo Errhandler
     End If
 Exit Sub
 
-Errhandler:
+errhandler:
     Call LogError("Error en DotileEvents. Error: " & Err.Number & " - Desc: " & Err.Description)
 End Sub
 Sub CambiarOrigHeading(ByVal NpcIndex As Integer, ByVal Trigger As Byte)
@@ -696,7 +696,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 '13/02/2009: ZaMa - EL nombre del gm que aparece por consola al clickearlo, tiene el color correspondiente a su rango
 '***************************************************
 
-    On Error GoTo Errhandler
+    On Error GoTo errhandler
 
     'Responde al click del usuario sobre el mapa
     Dim FoundChar As Byte
@@ -850,7 +850,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
                         Stat = Stat & " [CONCILIO DE LAS SOMBRAS]"
                         ft = FontTypeNames.FONTTYPE_CONSEJOCAOSVesA
                     Else
-                        If Not UserList(TempCharIndex).flags.Privilegios And PlayerType.user Then
+                        If Not UserList(TempCharIndex).flags.Privilegios And PlayerType.User Then
                             Stat = Stat & " <GAME MASTER>"
 
                             ' Elijo el color segun el rango del GM:
@@ -953,7 +953,11 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
             If Npclist(TempCharIndex).NpcType = Marinero Then
                 Call HablaMarinero(UserIndex, TempCharIndex)
             ElseIf Len(Npclist(TempCharIndex).desc) > 1 Then
+               If UserList(UserIndex).genero = Hombre Then
                 Call WriteChatOverHead(UserIndex, Npclist(TempCharIndex).desc, Npclist(TempCharIndex).Char.CharIndex, vbWhite)
+                Else
+                Call WriteChatOverHead(UserIndex, "No tenes Descripcion sos Mujer", Npclist(TempCharIndex).Char.CharIndex, vbWhite)
+                End If
             ElseIf TempCharIndex = CentinelaNPCIndex Then
                 'Enviamos nuevamente el texto del centinela según quien pregunta
                 Call modCentinela.CentinelaSendClave(UserIndex)
@@ -1049,7 +1053,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
 
     Exit Sub
 
-Errhandler:
+errhandler:
     Call LogError("Error en LookAtTile. Error " & Err.Number & " : " & Err.Description)
 
 End Sub
