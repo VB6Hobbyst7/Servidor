@@ -29,7 +29,8 @@ Attribute VB_Name = "Declaraciones"
 
 Option Explicit
 
-
+Public invoca As Boolean
+Public control As Integer
 Public Enum ePicRenderType
     BloodDie
     Blood
@@ -861,7 +862,7 @@ Public Type tHechizo
     Mimetiza As Byte
     RemueveInvisibilidadParcial As Byte
 
-    Invoca As Byte
+    invoca As Byte
     NumNpc As Integer
     Cant As Integer
 
@@ -1469,7 +1470,8 @@ Public Type User
     CharMimetizado As Char
     OrigChar As Char
 
-    desc As String    ' Descripcion
+    desc As String ' Descripcion
+    
     DescRM As String
 
     clase As eClass
@@ -1700,6 +1702,7 @@ Public Type NPC
     MostrarNombre As Boolean
     Char As Char    'Define como se vera
     desc As String
+    desc2 As String
     Mensaje As Byte
 
     NpcType As eNPCType

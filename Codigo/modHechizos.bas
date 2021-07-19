@@ -639,60 +639,124 @@ Sub HechizoInvocacion(ByVal UserIndex As Integer, ByRef B As Boolean)
 'Last modification: 06/15/2008 (NicoNZ)
 'Sale del sub si no hay una posición valida.
 '***************************************************
-If UserList(UserIndex).NroMascotas >= MAXMASCOTAS Then Exit Sub
-
-'No permitimos se invoquen criaturas en zonas seguras
-If Zonas(UserList(UserIndex).zona).Segura = 1 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).Trigger = eTrigger.ZONASEGURA Then
-    Call WriteConsoleMsg(UserIndex, "En zona segura no puedes invocar criaturas.", FontTypeNames.FONTTYPE_INFO)
-    Exit Sub
-End If
-If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).Trigger = eTrigger.ZONAPELEA Then
-    Call WriteConsoleMsg(UserIndex, "No se permite invocar criaturas en este lugar.", FontTypeNames.FONTTYPE_INFO)
-    Exit Sub
-End If
-
-Dim H As Integer, j As Integer, ind As Integer, index As Integer
-Dim TargetPos As WorldPos
-
-
-TargetPos.map = UserList(UserIndex).flags.TargetMap
-TargetPos.X = UserList(UserIndex).flags.targetX
-TargetPos.Y = UserList(UserIndex).flags.targetY
-
-H = UserList(UserIndex).flags.hechizo
-    
-    
-For j = 1 To Hechizos(H).Cant
-    
-    If UserList(UserIndex).NroMascotas < MAXMASCOTAS Then
-        ind = SpawnNpc(Hechizos(H).NumNpc, TargetPos, True, False, UserList(UserIndex).zona)
-        If ind > 0 Then
-            UserList(UserIndex).NroMascotas = UserList(UserIndex).NroMascotas + 1
-            
-            index = FreeMascotaIndex(UserIndex)
-            
-            UserList(UserIndex).MascotasIndex(index) = ind
-            UserList(UserIndex).MascotasType(index) = Npclist(ind).Numero
-            
-            Npclist(ind).MaestroUser = UserIndex
-            Npclist(ind).Contadores.TiempoExistencia = IntervaloInvocacion
-            Npclist(ind).GiveGLDMin = 0
-            Npclist(ind).GiveGLDMax = 0
-            
-            Call FollowAmo(ind)
-        Else
+'If UserList(UserIndex).NroMascotas >= MAXMASCOTAS Then Exit Sub
+    With UserList(UserIndex)
+        'No permitimos se invoquen criaturas en zonas seguras
+        If Zonas(UserList(UserIndex).zona).Segura = 1 Or MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).Trigger = eTrigger.ZONASEGURA Then
+            Call WriteConsoleMsg(UserIndex, "En zona segura no puedes invocar criaturas.", FontTypeNames.FONTTYPE_INFO)
             Exit Sub
         End If
-            
-    Else
-        Exit For
-    End If
-    
-Next j
+        If MapData(UserList(UserIndex).Pos.map).Tile(UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y).Trigger = eTrigger.ZONAPELEA Then
+            Call WriteConsoleMsg(UserIndex, "No se permite invocar criaturas en este lugar.", FontTypeNames.FONTTYPE_INFO)
+            Exit Sub
+        End If
+
+        Dim H As Integer, j As Integer, ind As Integer, index As Integer
+        Dim TargetPos As WorldPos
+        Dim petIndex, LoopC, cad As Integer
 
 
-Call InfoHechizo(UserIndex)
-B = True
+        TargetPos.map = UserList(UserIndex).flags.TargetMap
+        TargetPos.X = UserList(UserIndex).flags.targetX
+        TargetPos.Y = UserList(UserIndex).flags.targetY
+
+        H = UserList(UserIndex).flags.hechizo
+
+        If Hechizos(H).Nombre = "Invocar Mascota" Then
+            petIndex = FarthestPet(UserIndex)
+
+            ' La invoco cerca mio
+            'If Npclist(.MascotasType(.NroMascotas)).Contadores.TiempoExistencia = 0 Then
+           ' petIndex = FarthestPet(UserIndex)
+If petIndex <> 0 Then control = petIndex
+
+
+            ' La invoco cerca mio
+            If Npclist(.MascotasType(control)).Contadores.TiempoExistencia = 0 Then
+                If invoca = True Then
+                    WarpMascotas UserIndex, False
+                    .NroMascotas = 0
+                    For LoopC = 1 To MAXMASCOTAS
+                        ' Mascota valida?
+                        If UserList(UserIndex).MascotasIndex(LoopC) > 0 Then
+                            ' Nos aseguramos que la criatura no fue invocada
+                            If Npclist(UserList(UserIndex).MascotasIndex(LoopC)).Contadores.TiempoExistencia = 0 Then
+                                cad = UserList(UserIndex).MascotasType(LoopC)
+                            Else    'Si fue invocada no la guardamos
+                                cad = "0"
+                                .NroMascotas = .NroMascotas - 1
+                            End If
+                            .NroMascotas = .NroMascotas + 1
+                        Else
+                            cad = UserList(UserIndex).MascotasType(LoopC)
+
+                            If cad <> "0" Then .NroMascotas = .NroMascotas + 1
+
+                        End If
+
+                    Next
+                    invoca = False
+
+
+                Else
+                    WarpMascotas UserIndex, True
+                    .NroMascotas = 0
+                    For LoopC = 1 To MAXMASCOTAS
+                        ' Mascota valida?
+                        If UserList(UserIndex).MascotasIndex(LoopC) > 0 Then
+                            ' Nos aseguramos que la criatura no fue invocada
+                            If Npclist(UserList(UserIndex).MascotasIndex(LoopC)).Contadores.TiempoExistencia = 0 Then
+                                cad = UserList(UserIndex).MascotasType(LoopC)
+                            Else    'Si fue invocada no la guardamos
+                                cad = "0"
+                                .NroMascotas = .NroMascotas - 1
+                            End If
+                            .NroMascotas = .NroMascotas + 1
+                        Else
+                            cad = UserList(UserIndex).MascotasType(LoopC)
+
+                            If cad <> "0" Then .NroMascotas = .NroMascotas + 1
+
+                        End If
+
+                    Next
+                    invoca = True     '.NroMascotas = 3
+                End If
+            End If
+            ' Invocacion normal
+        Else
+            For j = 1 To Hechizos(H).Cant
+
+                If UserList(UserIndex).NroMascotas < MAXMASCOTAS Then
+                    ind = SpawnNpc(Hechizos(H).NumNpc, TargetPos, True, False, UserList(UserIndex).zona)
+                    If ind > 0 Then
+                        UserList(UserIndex).NroMascotas = UserList(UserIndex).NroMascotas + 1
+
+                        index = FreeMascotaIndex(UserIndex)
+
+                        UserList(UserIndex).MascotasIndex(index) = ind
+                        UserList(UserIndex).MascotasType(index) = Npclist(ind).Numero
+
+                        Npclist(ind).MaestroUser = UserIndex
+                        Npclist(ind).Contadores.TiempoExistencia = IntervaloInvocacion
+                        Npclist(ind).GiveGLDMin = 0
+                        Npclist(ind).GiveGLDMax = 0
+
+                        Call FollowAmo(ind)
+                    Else
+                        Exit Sub
+                    End If
+
+                Else
+                    Exit For
+                End If
+
+            Next j
+        End If
+
+    End With
+    Call InfoHechizo(UserIndex)
+    B = True
 
 
 End Sub
@@ -858,8 +922,8 @@ If PuedeLanzar(UserIndex, uh) Then
     
 End If
 
-If UserList(UserIndex).Counters.Trabajando Then _
-    UserList(UserIndex).Counters.Trabajando = UserList(UserIndex).Counters.Trabajando - 1
+If UserList(UserIndex).Counters.trabajando Then _
+    UserList(UserIndex).Counters.trabajando = UserList(UserIndex).Counters.trabajando - 1
 
 If UserList(UserIndex).Counters.Ocultando Then _
     UserList(UserIndex).Counters.Ocultando = UserList(UserIndex).Counters.Ocultando - 1

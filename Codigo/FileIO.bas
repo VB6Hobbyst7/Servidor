@@ -649,7 +649,7 @@ For hechizo = 1 To NumeroHechizos
     Hechizos(hechizo).Ceguera = val(Leer.GetValue("Hechizo" & hechizo, "Ceguera"))
     Hechizos(hechizo).Estupidez = val(Leer.GetValue("Hechizo" & hechizo, "Estupidez"))
     
-    Hechizos(hechizo).Invoca = val(Leer.GetValue("Hechizo" & hechizo, "Invoca"))
+    Hechizos(hechizo).invoca = val(Leer.GetValue("Hechizo" & hechizo, "Invoca"))
     Hechizos(hechizo).NumNpc = val(Leer.GetValue("Hechizo" & hechizo, "NumNpc"))
     Hechizos(hechizo).Cant = val(Leer.GetValue("Hechizo" & hechizo, "Cant"))
     Hechizos(hechizo).Mimetiza = val(Leer.GetValue("hechizo" & hechizo, "Mimetiza"))
@@ -2195,22 +2195,28 @@ Next
 'Call SaveQuestStats(UserIndex)
 'quest
 Dim NroMascotas As Long
-NroMascotas = UserList(UserIndex).NroMascotas
+Dim cad2 As String
+'NroMascotas = UserList(UserIndex).NroMascotas
 
 For LoopC = 1 To MAXMASCOTAS
     ' Mascota valida?
     If UserList(UserIndex).MascotasIndex(LoopC) > 0 Then
         ' Nos aseguramos que la criatura no fue invocada
         If Npclist(UserList(UserIndex).MascotasIndex(LoopC)).Contadores.TiempoExistencia = 0 Then
-            cad = UserList(UserIndex).MascotasType(LoopC)
+            cad2 = UserList(UserIndex).MascotasType(LoopC)
+            NroMascotas = NroMascotas + 1
+             Query = Query & "Masc" & LoopC & "=" & cad2 & ", "
         Else 'Si fue invocada no la guardamos
-            cad = "0"
-            NroMascotas = NroMascotas - 1
+            cad2 = "0"
+            Query = Query & "Masc" & LoopC & "=" & cad2 & ", "
+            'NroMascotas = NroMascotas - 1
         End If
-        Query = Query & "Masc" & LoopC & "=" & cad & ", "
+        
     Else
-        cad = UserList(UserIndex).MascotasType(LoopC)
-        Query = Query & "Masc" & LoopC & "=" & cad & ", "
+        cad2 = UserList(UserIndex).MascotasType(LoopC)
+        Query = Query & "Masc" & LoopC & "=" & cad2 & ", "
+        'If cad <> "0" Then NroMascotas = NroMascotas + 1
+       
     End If
 
 Next
@@ -2344,6 +2350,7 @@ NpcNumero = Npclist(NpcIndex).Numero
 'General
 Call WriteVar(npcfile, "NPC" & NpcNumero, "Name", Npclist(NpcIndex).Name)
 Call WriteVar(npcfile, "NPC" & NpcNumero, "Desc", Npclist(NpcIndex).desc)
+Call WriteVar(npcfile, "NPC" & NpcNumero, "Desc2", Npclist(NpcIndex).desc2)
 Call WriteVar(npcfile, "NPC" & NpcNumero, "Head", val(Npclist(NpcIndex).Char.Head))
 Call WriteVar(npcfile, "NPC" & NpcNumero, "Body", val(Npclist(NpcIndex).Char.Body))
 Call WriteVar(npcfile, "NPC" & NpcNumero, "Heading", val(Npclist(NpcIndex).Char.heading))
@@ -2406,6 +2413,7 @@ Dim npcfile As String
 Npclist(NpcIndex).Numero = NpcNumber
 Npclist(NpcIndex).Name = GetVar(npcfile, "NPC" & NpcNumber, "Name")
 Npclist(NpcIndex).desc = GetVar(npcfile, "NPC" & NpcNumber, "Desc")
+Npclist(NpcIndex).desc2 = GetVar(npcfile, "NPC" & NpcNumber, "Desc2")
 Npclist(NpcIndex).Movement = val(GetVar(npcfile, "NPC" & NpcNumber, "Movement"))
 Npclist(NpcIndex).NpcType = val(GetVar(npcfile, "NPC" & NpcNumber, "NpcType"))
 

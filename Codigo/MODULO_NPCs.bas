@@ -978,7 +978,7 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         .MostrarNombre = False
         If .Name <> "" Then
             If left(.Name, 1) = "!" Then
-                       
+
                 .Name = Right(.Name, Len(.Name) - 1)
                 .Name = Replace(.Name, "!", "")
                 .MostrarNombre = True
@@ -986,10 +986,10 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
         End If
 
         .desc = Leer.GetValue("NPC" & NpcNumber, "Desc")
-
+        .desc2 = Leer.GetValue("NPC" & NpcNumber, "Desc2")
         .Movement = val(Leer.GetValue("NPC" & NpcNumber, "Movement"))
         .flags.OldMovement = .Movement
-        
+
         .flags.AguaValida = val(Leer.GetValue("NPC" & NpcNumber, "AguaValida"))
         .flags.TierraInvalida = val(Leer.GetValue("NPC" & NpcNumber, "TierraInValida"))
         .flags.Faccion = val(Leer.GetValue("NPC" & NpcNumber, "Faccion"))
@@ -1064,8 +1064,8 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
 
         End If
         'quest
-        
-       'Nuevo sistema de Drop NPC
+
+        'Nuevo sistema de Drop NPC
 
         aux2 = Leer.GetValue("NPC" & NpcNumber, "NumDropNPC")
 
@@ -1083,14 +1083,14 @@ Public Function OpenNPC(ByVal NpcNumber As Integer, Optional ByVal ReSpawn = Tru
             Next LoopC
 
         End If
-        
+
         'Nuevo sistema de Drop NPC
 
 
 
 
 
-        
+
         .PoderAtaque = val(Leer.GetValue("NPC" & NpcNumber, "PoderAtaque"))
         .PoderEvasion = val(Leer.GetValue("NPC" & NpcNumber, "PoderEvasion"))
 

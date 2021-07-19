@@ -91,16 +91,16 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, ByVal map As Integer, ByVal 
 'Uses: Mapinfo(map).Restringir = "NEWBIE" (newbies), "ARMADA", "CAOS", "FACCION" or "NO".
 '***************************************************
     Dim nPos As WorldPos
-    
-On Error GoTo errhandler
+
+    On Error GoTo errhandler
     'Controla las salidas
     If InMapBounds(map, X, Y) Then
         With MapData(map).Tile(X, Y)
-            
+
             If .Trigger = AUTORESU Then
                 Call ResucitarOCurar(UserIndex)
             End If
-            
+
             If .Trigger = TCHIQUITO Then
                 If UserList(UserIndex).flags.Chiquito = False Then
                     If Not UserList(UserIndex).flags.UltimoMensaje = 23 Then
@@ -110,7 +110,7 @@ On Error GoTo errhandler
                     Exit Sub
                 End If
             End If
-            
+
             If .TileExit.map > 0 And .TileExit.map <= NumMaps Then
                 '¿Es mapa de newbies?
                 If Zonas(BuscarZona(.TileExit.map, .TileExit.X, .TileExit.Y)).Restringir = 13 Then
@@ -124,15 +124,15 @@ On Error GoTo errhandler
                                 Call WarpUserChar(UserIndex, nPos.map, nPos.X, nPos.Y, True)
                             End If
                         End If
-                    Else 'No es newbie
+                    Else    'No es newbie
                         Call WriteConsoleMsg(UserIndex, "Mapa exclusivo para newbies.", FontTypeNames.FONTTYPE_INFO)
                         Call ClosestStablePos(UserList(UserIndex).Pos, nPos)
-        
+
                         If nPos.X <> 0 And nPos.Y <> 0 Then
                             Call WarpUserChar(UserIndex, nPos.map, nPos.X, nPos.Y, False)
                         End If
                     End If
-                Else 'No es un mapa de newbies, ni Armadas, ni Caos, ni faccionario.
+                Else    'No es un mapa de newbies, ni Armadas, ni Caos, ni faccionario.
                     If LegalPos(.TileExit.map, .TileExit.X, .TileExit.Y, PuedeAtravesarAgua(UserIndex)) Then
                         Call WarpUserChar(UserIndex, .TileExit.map, .TileExit.X, .TileExit.Y, False)
                     Else
@@ -142,17 +142,23 @@ On Error GoTo errhandler
                         End If
                     End If
                 End If
-                
+
+
+               
+
+               Call RestringirMapaItem(UserIndex, map, X, Y, 23, 1112, 166, 1227, nPos)
+                Call RestringirMapa(UserIndex, map, X, Y, "Dungeon Infierno", 40, 722, 629, nPos)
+
                 'Te fusite del mapa. La criatura ya no es más tuya ni te reconoce como que vos la atacaste.
                 Dim aN As Integer
-                
+
                 aN = UserList(UserIndex).flags.AtacadoPorNpc
                 If aN > 0 Then
-                   Npclist(aN).Movement = Npclist(aN).flags.OldMovement
-                   Npclist(aN).Hostile = Npclist(aN).flags.OldHostil
-                   Npclist(aN).flags.AttackedBy = vbNullString
+                    Npclist(aN).Movement = Npclist(aN).flags.OldMovement
+                    Npclist(aN).Hostile = Npclist(aN).flags.OldHostil
+                    Npclist(aN).flags.AttackedBy = vbNullString
                 End If
-            
+
                 aN = UserList(UserIndex).flags.NPCAtacado
                 If aN > 0 Then
                     If Npclist(aN).flags.AttackedFirstBy = UserList(UserIndex).Name Then
@@ -162,14 +168,14 @@ On Error GoTo errhandler
                 UserList(UserIndex).flags.AtacadoPorNpc = 0
                 UserList(UserIndex).flags.NPCAtacado = 0
             End If
-            
+
             If Zonas(UserList(UserIndex).zona).TieneNpcInvocacion > 0 Then
                 Call InvocarCriaturaMisteriosa(UserIndex)
             End If
-            
+
         End With
     End If
-Exit Sub
+    Exit Sub
 
 errhandler:
     Call LogError("Error en DotileEvents. Error: " & Err.Number & " - Desc: " & Err.Description)
@@ -956,7 +962,7 @@ Sub LookatTile(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Inte
                If UserList(UserIndex).genero = Hombre Then
                 Call WriteChatOverHead(UserIndex, Npclist(TempCharIndex).desc, Npclist(TempCharIndex).Char.CharIndex, vbWhite)
                 Else
-                Call WriteChatOverHead(UserIndex, "No tenes Descripcion sos Mujer", Npclist(TempCharIndex).Char.CharIndex, vbWhite)
+                Call WriteChatOverHead(UserIndex, Npclist(TempCharIndex).desc2, Npclist(TempCharIndex).Char.CharIndex, vbWhite)
                 End If
             ElseIf TempCharIndex = CentinelaNPCIndex Then
                 'Enviamos nuevamente el texto del centinela según quien pregunta
@@ -1169,3 +1175,62 @@ Else
     min = val2
 End If
 End Function
+
+
+Sub RestringirMapa(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer, Nombre As String, Lvl As Integer, mx As Integer, my As Integer, nPos As WorldPos)
+   With MapData(map).Tile(X, Y)
+   If Zonas(BuscarZona(.TileExit.map, .TileExit.X, .TileExit.Y)).Nombre = Nombre Then
+                      If UserList(UserIndex).Stats.ELV >= Lvl Then
+                            If LegalPos(.TileExit.map, .TileExit.X, .TileExit.Y, PuedeAtravesarAgua(UserIndex)) Then
+                                Call WarpUserChar(UserIndex, .TileExit.map, .TileExit.X, .TileExit.Y, True)
+                            Else
+                                Call ClosestLegalPos(.TileExit, nPos)
+                                If nPos.X <> 0 And nPos.Y <> 0 Then
+                                    Call WarpUserChar(UserIndex, nPos.map, nPos.X, nPos.Y, True)
+                                End If
+                            End If
+                       Else
+                           Call WriteConsoleMsg(UserIndex, "Este mapa es demasiado peligroso para tu nivel.", FontTypeNames.FONTTYPE_INFO)
+                           Call ClosestStablePos(UserList(UserIndex).Pos, nPos)
+ 
+                           If nPos.X <> 0 And nPos.Y <> 0 Then
+                               Call WarpUserChar(UserIndex, 1, mx, my, False)
+                           End If
+                       End If
+                End If
+                End With
+End Sub
+
+
+Sub RestringirMapaItem(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal zona As Integer, ByVal Item As Integer, mx As Integer, my As Integer, nPos As WorldPos)
+   
+   
+   
+  With MapData(map).Tile(X, Y)
+   
+    If UserList(UserIndex).zona = zona Then
+                    '¿El usuario es un newbie?
+                    If UsuarioTineItem(UserIndex, Item) = 1 Then
+                        If LegalPos(.TileExit.map, .TileExit.X, .TileExit.Y, PuedeAtravesarAgua(UserIndex)) Then
+                            Call WarpUserChar(UserIndex, .TileExit.map, .TileExit.X, .TileExit.Y, True)
+                        Else
+                            Call ClosestLegalPos(.TileExit, nPos)
+                            If nPos.X <> 0 And nPos.Y <> 0 Then
+                                Call WarpUserChar(UserIndex, nPos.map, nPos.X, nPos.Y, True)
+                            End If
+                        End If
+                    Else    'No es newbie
+                        Call WriteConsoleMsg(UserIndex, "Si no tienes la llave no puedes entrar", FontTypeNames.FONTTYPE_INFO)
+                        Call ClosestStablePos(UserList(UserIndex).Pos, nPos)
+
+                        If nPos.X <> 0 And nPos.Y <> 0 Then
+                            Call WarpUserChar(UserIndex, 1, mx, my, False)
+                        End If
+                    End If
+
+                End If
+   
+   
+ End With
+End Sub
+

@@ -1785,6 +1785,23 @@ Public Function UserNoPuedeUsarItem(ByVal UserIndex As Integer, ByVal ObjIndex A
 End Function
 
 
+Public Function UsuarioTineItem(ByVal UserIndex As Integer, ByVal ObjIndex As Integer) As Byte
+Dim i As Byte
 
+Dim MiObj As Obj
+Dim ItemIndex As Integer
+
+
+For i = 1 To MAX_INVENTORY_SLOTS
+    ItemIndex = UserList(UserIndex).Invent.Object(i).ObjIndex
+    If ItemIndex = ObjIndex Then
+       UsuarioTineItem = 1
+       Exit Function
+       Else
+       UsuarioTineItem = 0
+    End If
+Next i
+
+End Function
 
 

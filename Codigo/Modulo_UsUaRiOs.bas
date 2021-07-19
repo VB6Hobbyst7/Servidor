@@ -653,8 +653,8 @@ Sub MoveUserChar(ByVal UserIndex As Integer, ByVal nHeading As eHeading)
         Call WritePosUpdate(UserIndex)
     End If
     
-    If UserList(UserIndex).Counters.Trabajando Then _
-        UserList(UserIndex).Counters.Trabajando = UserList(UserIndex).Counters.Trabajando - 1
+    If UserList(UserIndex).Counters.trabajando Then _
+        UserList(UserIndex).Counters.trabajando = UserList(UserIndex).Counters.trabajando - 1
 
     If UserList(UserIndex).Counters.Ocultando Then _
         UserList(UserIndex).Counters.Ocultando = UserList(UserIndex).Counters.Ocultando - 1
@@ -1581,7 +1581,12 @@ Sub WarpUserChar(ByVal UserIndex As Integer, ByVal map As Integer, ByVal X As In
     End With
 End Sub
 
-Private Sub WarpMascotas(ByVal UserIndex As Integer)
+
+''
+' Se inicia la salida de un usuario.
+'
+' @param    UserIndex   El index del usuario que va a salir
+Public Sub WarpMascotas(ByVal UserIndex As Integer, Optional CanWarp As Boolean)
 '************************************************
 'Author: Uknown
 'Last Modified: 11/05/2009
@@ -1595,12 +1600,12 @@ Private Sub WarpMascotas(ByVal UserIndex As Integer)
     Dim PetTiempoDeVida As Integer
     Dim NroPets As Integer
     Dim InvocadosMatados As Integer
-    Dim canWarp As Boolean
+ '   Dim CanWarp As Boolean
     Dim index As Integer
     Dim iMinHP As Integer
     
     NroPets = UserList(UserIndex).NroMascotas
-    canWarp = (Zonas(UserList(UserIndex).zona).Segura = 0)
+   ' CanWarp = (MapInfo(UserList(UserIndex).Pos.Map).Pk = True)
     
     For i = 1 To MAXMASCOTAS
         index = UserList(UserIndex).MascotasIndex(i)
@@ -1614,6 +1619,7 @@ Private Sub WarpMascotas(ByVal UserIndex As Integer)
                 NroPets = NroPets - 1
                 
                 petType = 0
+                UserList(UserIndex).NroMascotas = UserList(UserIndex).NroMascotas - 1
             Else
                 'Store data and remove NPC to recreate it after warp
                 'PetRespawn = Npclist(index).flags.Respawn = 0
@@ -1638,8 +1644,8 @@ Private Sub WarpMascotas(ByVal UserIndex As Integer)
             petType = 0
         End If
         
-        If petType > 0 And canWarp Then
-            index = SpawnNpc(petType, UserList(UserIndex).Pos, False, PetRespawn, UserList(UserIndex).zona)
+        If petType > 0 And CanWarp Then
+            index = SpawnNpc(petType, UserList(UserIndex).Pos, True, PetRespawn, UserList(UserIndex).zona)
             
             'Controlamos que se sumoneo OK - should never happen. Continue to allow removal of other pets if not alone
             ' Exception: Pets don't spawn in water if they can't swim
@@ -1649,7 +1655,6 @@ Private Sub WarpMascotas(ByVal UserIndex As Integer)
                 UserList(UserIndex).MascotasIndex(i) = index
 
                 ' Nos aseguramos de que conserve el hp, si estaba dañado
-                
                 Npclist(index).Stats.MinHP = IIf(iMinHP = 0, Npclist(index).Stats.MinHP, iMinHP)
             
                 Npclist(index).MaestroUser = UserIndex
@@ -1659,13 +1664,6 @@ Private Sub WarpMascotas(ByVal UserIndex As Integer)
                 Npclist(index).Contadores.TiempoExistencia = PetTiempoDeVida
                 Call FollowAmo(index)
             End If
-            
-            Npclist(index).MaestroUser = UserIndex
-            Npclist(index).Movement = TipoAI.SigueAmo
-            Npclist(index).Target = 0
-            Npclist(index).TargetNPC = 0
-            Npclist(index).Contadores.TiempoExistencia = PetTiempoDeVida
-            Call FollowAmo(index)
         End If
     Next i
     
@@ -1673,17 +1671,12 @@ Private Sub WarpMascotas(ByVal UserIndex As Integer)
         Call WriteConsoleMsg(UserIndex, "Pierdes el control de tus mascotas invocadas.", FontTypeNames.FONTTYPE_INFO)
     End If
     
-    If Not canWarp Then
-        Call WriteConsoleMsg(UserIndex, "No se permiten mascotas en zona segura. Éstas te esperarán afuera.", FontTypeNames.FONTTYPE_INFO)
+    If Not CanWarp Then
+     '   Call WriteConsoleMsg(UserIndex, "No se permiten mascotas en zona segura. Éstas te esperarán afuera.", FontTypeNames.FONTTYPE_INFO)
     End If
     
     UserList(UserIndex).NroMascotas = NroPets
 End Sub
-
-''
-' Se inicia la salida de un usuario.
-'
-' @param    UserIndex   El index del usuario que va a salir
 
 Sub Cerrar_Usuario(ByVal UserIndex As Integer)
 '***************************************************
@@ -2143,5 +2136,52 @@ Public Function GetNickColor(ByVal UserIndex As Integer) As Byte
     
 End Function
 
+
+
+Public Function FarthestPet(ByVal UserIndex As Integer) As Integer
+'**************************************************************
+'Author: ZaMa
+'Last Modify Date: 18/11/2009
+'Devuelve el indice de la mascota mas lejana.
+'**************************************************************
+On Error GoTo errhandler
+    
+    Dim petIndex As Integer
+    Dim Distancia As Integer
+    Dim OtraDistancia As Integer
+    
+    With UserList(UserIndex)
+        If .NroMascotas = 0 Then Exit Function
+    
+        For petIndex = 1 To MAXMASCOTAS
+            ' Solo pos invocar criaturas que exitan!
+            If .MascotasIndex(petIndex) > 0 Then
+                ' Solo aplica a mascota, nada de elementales..
+                If Npclist(.MascotasIndex(petIndex)).Contadores.TiempoExistencia = 0 Then
+                    If FarthestPet = 0 Then
+                        ' Por si tiene 1 sola mascota
+                        FarthestPet = petIndex
+                        Distancia = Abs(.Pos.X - Npclist(.MascotasIndex(petIndex)).Pos.X) + _
+                                    Abs(.Pos.Y - Npclist(.MascotasIndex(petIndex)).Pos.Y)
+                    Else
+                        ' La distancia de la proxima mascota
+                        OtraDistancia = Abs(.Pos.X - Npclist(.MascotasIndex(petIndex)).Pos.X) + _
+                                        Abs(.Pos.Y - Npclist(.MascotasIndex(petIndex)).Pos.Y)
+                        ' Esta mas lejos?
+                        If OtraDistancia > Distancia Then
+                            Distancia = OtraDistancia
+                            FarthestPet = petIndex
+                        End If
+                    End If
+                End If
+            End If
+        Next petIndex
+    End With
+
+    Exit Function
+    
+errhandler:
+    'Call LogError("Error en FarthestPet")
+End Function
 
 
