@@ -874,19 +874,19 @@ End Sub
 Sub CargarZonas()
 'on error Resume Next
     Dim archivoC As String
-    
+
     archivoC = DatPath & "zonas.dat"
-    
+
     If Not FileExist(archivoC, vbArchive) Then
-'TODO : Si hay que reinstalar, porque no cierra???
+        'TODO : Si hay que reinstalar, porque no cierra???
         Call MsgBox("ERROR: no se ha podido cargar las zonas. Falta el archivo zonas.dat, reinstale el juego", vbCritical + vbOKOnly)
         Exit Sub
     End If
-    
+
     Dim i As Integer
-    
+
     NumZonas = GetVar(archivoC, "Config", "Cantidad")
-    
+
     ReDim Zonas(0 To NumZonas)
     For i = 1 To NumZonas
         Zonas(i).Nombre = GetVar(archivoC, "Zona" & CStr(i), "Nombre")
@@ -900,6 +900,9 @@ Sub CargarZonas()
         Zonas(i).InviSinEfecto = val(GetVar(archivoC, "Zona" & CStr(i), "InviSinEfecto"))
         Zonas(i).MagiaSinEfecto = val(GetVar(archivoC, "Zona" & CStr(i), "MagiaSinEfecto"))
         Zonas(i).Restringir = val(GetVar(archivoC, "Zona" & CStr(i), "Restringir"))
+        Zonas(i).RestringirM = val(GetVar(archivoC, "Zona" & CStr(i), "RestringirM"))
+        Zonas(i).Item = val(GetVar(archivoC, "Zona" & CStr(i), "Item"))
+        Zonas(i).itemDes = val(GetVar(archivoC, "Zona" & CStr(i), "ItemDes"))
         Zonas(i).ResuSinEfecto = val(GetVar(archivoC, "Zona" & CStr(i), "ResuSinEfecto"))
         Zonas(i).Musica1 = val(GetVar(archivoC, "Zona" & CStr(i), "Musica1"))
         Zonas(i).Musica2 = val(GetVar(archivoC, "Zona" & CStr(i), "Musica2"))
@@ -1164,7 +1167,7 @@ For Object = 1 To NumObjDatas
     ObjData(Object).RazaGnoma = val(Leer.GetValue("OBJ" & Object, "RazaGnoma"))
     ObjData(Object).RazaHumana = val(Leer.GetValue("OBJ" & Object, "RazaHumana"))
     
-    ObjData(Object).valor = val(Leer.GetValue("OBJ" & Object, "Valor"))
+    ObjData(Object).Valor = val(Leer.GetValue("OBJ" & Object, "Valor"))
     
     ObjData(Object).Crucial = val(Leer.GetValue("OBJ" & Object, "Crucial"))
     ObjData(Object).CanUse = val(Leer.GetValue("OBJ" & Object, "CanUse"))
@@ -1220,7 +1223,7 @@ For Object = 1 To NumObjDatas
     ObjData(Object).Efecto = val(Leer.GetValue("OBJ" & Object, "Efecto"))
     
     If Object = 414 Or Object = 415 Or Object = 416 Or Object = 1067 Then
-        ObjData(Object).valor = ObjData(Object).valor * MultiplicadorORO
+        ObjData(Object).Valor = ObjData(Object).Valor * MultiplicadorORO
     End If
     
     frmCargando.cargar.value = frmCargando.cargar.value + 1

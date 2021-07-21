@@ -1804,4 +1804,30 @@ Next i
 
 End Function
 
+Public Function QuitarItemInv(ByVal UserIndex As Integer, ByVal ObjIndex As Integer) As Byte
+Dim i As Byte
+
+Dim MiObj As Obj
+Dim ItemIndex As Integer
+
+
+For i = 1 To MAX_INVENTORY_SLOTS
+    ItemIndex = UserList(UserIndex).Invent.Object(i).ObjIndex
+    If ItemIndex = ObjIndex Then
+       Call WriteConsoleMsg(UserIndex, "Una fuerza misteriosa ha destruido el Item de Nombre: " & ObjData(UserList(UserIndex).Invent.Object(i).ObjIndex).Name, FontTypeNames.FONTTYPE_INFO)
+        
+       Call QuitarUserInvItem(UserIndex, i, MAX_INVENTORY_OBJS)
+       Call UpdateUserInv(False, UserIndex, i)
+                       
+       Exit Function
+       
+    End If
+Next i
+
+End Function
+
+
+                    
+
+
 

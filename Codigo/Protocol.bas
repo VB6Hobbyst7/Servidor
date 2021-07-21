@@ -6978,15 +6978,15 @@ Private Sub HandlePartySetLeader(ByVal UserIndex As Integer)
         
         Dim UserName As String
         Dim tUser As Integer
-        Dim Rank As Integer
-        Rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
+        Dim rank As Integer
+        rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
         
         UserName = buffer.ReadASCIIString()
         If UserPuedeEjecutarComandos(UserIndex) Then
             tUser = NameIndex(UserName)
             If tUser > 0 Then
                 'Don't allow users to spoof online GMs
-                If (UserDarPrivilegioLevel(UserName) And Rank) <= (.flags.Privilegios And Rank) Then
+                If (UserDarPrivilegioLevel(UserName) And rank) <= (.flags.Privilegios And rank) Then
                     Call mdParty.TransformarEnLider(UserIndex, tUser)
                 Else
                     Call WriteConsoleMsg(UserIndex, LCase(UserList(tUser).Name) & " no pertenece a tu party.", FontTypeNames.FONTTYPE_INFO)
@@ -7044,10 +7044,10 @@ On Error GoTo errhandler
         
         Dim UserName As String
         Dim tUser As Integer
-        Dim Rank As Integer
+        Dim rank As Integer
         Dim bUserVivo As Boolean
         
-        Rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
+        rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
         
         UserName = buffer.ReadASCIIString()
         If UserList(UserIndex).flags.Muerto Then
@@ -7060,7 +7060,7 @@ On Error GoTo errhandler
             tUser = NameIndex(UserName)
             If tUser > 0 Then
                 'Validate administrative ranks - don't allow users to spoof online GMs
-                If (UserList(tUser).flags.Privilegios And Rank) <= (.flags.Privilegios And Rank) Then
+                If (UserList(tUser).flags.Privilegios And rank) <= (.flags.Privilegios And rank) Then
                     Call mdParty.AprobarIngresoAParty(UserIndex, tUser)
                 Else
                     Call WriteConsoleMsg(UserIndex, "No puedes incorporar a tu party a personajes de mayor jerarquía.", FontTypeNames.FONTTYPE_INFO)
@@ -7071,7 +7071,7 @@ On Error GoTo errhandler
                 End If
                 
                 'Don't allow users to spoof online GMs
-                If (UserDarPrivilegioLevel(UserName) And Rank) <= (.flags.Privilegios And Rank) Then
+                If (UserDarPrivilegioLevel(UserName) And rank) <= (.flags.Privilegios And rank) Then
                     Call WriteConsoleMsg(UserIndex, LCase(UserName) & " no ha solicitado ingresar a tu party.", FontTypeNames.FONTTYPE_PARTY)
                 Else
                     Call WriteConsoleMsg(UserIndex, "No puedes incorporar a tu party a personajes de mayor jerarquía.", FontTypeNames.FONTTYPE_INFO)
@@ -9889,9 +9889,9 @@ On Error GoTo errhandler
         
         Dim UserName As String
         Dim tUser As Integer
-        Dim Rank As Integer
+        Dim rank As Integer
         
-        Rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
+        rank = PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios Or PlayerType.Consejero
         
         UserName = buffer.ReadASCIIString()
         
@@ -9901,7 +9901,7 @@ On Error GoTo errhandler
             If tUser <= 0 Then
                 Call WriteConsoleMsg(UserIndex, "El usuario no esta online.", FontTypeNames.FONTTYPE_INFO)
             Else
-                If (UserList(tUser).flags.Privilegios And Rank) > (.flags.Privilegios And Rank) Then
+                If (UserList(tUser).flags.Privilegios And rank) > (.flags.Privilegios And rank) Then
                     Call WriteConsoleMsg(UserIndex, "No podes echar a alguien con jerarquia mayor a la tuya.", FontTypeNames.FONTTYPE_INFO)
                 Else
                     'Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(.Name & " echo a " & UserName & ".", FontTypeNames.FONTTYPE_INFO))
@@ -19254,7 +19254,7 @@ Private Sub HandleSolicitarRanking(ByVal UserIndex As Integer)
 
     End With
 End Sub
-Public Sub WriteEnviarRanking(ByVal UserIndex As Integer, ByVal Rank As eRanking)
+Public Sub WriteEnviarRanking(ByVal UserIndex As Integer, ByVal rank As eRanking)
 
 '@ Shak
     On Error GoTo errhandler
@@ -19266,11 +19266,11 @@ Public Sub WriteEnviarRanking(ByVal UserIndex As Integer, ByVal Rank As eRanking
 
     For i = 1 To MAX_TOP
         If i = 1 Then
-            Cadena = Cadena & Ranking(Rank).Nombre(i)
-            Cadena2 = Cadena2 & Ranking(Rank).value(i)
+            Cadena = Cadena & Ranking(rank).Nombre(i)
+            Cadena2 = Cadena2 & Ranking(rank).value(i)
         Else
-            Cadena = Cadena & "-" & Ranking(Rank).Nombre(i)
-            Cadena2 = Cadena2 & "-" & Ranking(Rank).value(i)
+            Cadena = Cadena & "-" & Ranking(rank).Nombre(i)
+            Cadena2 = Cadena2 & "-" & Ranking(rank).value(i)
         End If
     Next i
 

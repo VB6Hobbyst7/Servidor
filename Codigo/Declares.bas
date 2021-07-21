@@ -1020,7 +1020,7 @@ Public Type ObjData
     ShieldAnim As Integer    ' Apunta a una anim de escudo
     CascoAnim As Integer
 
-    valor As Long     ' Precio
+    Valor As Long     ' Precio
 
     Cerrada As Integer
     Llave As Byte
@@ -1580,6 +1580,9 @@ Private Type tZona
     InviSinEfecto As Byte
     ResuSinEfecto As Byte
     Restringir As Byte
+    RestringirM As Byte
+    item As Integer
+    itemDes As Byte
     Musica1 As Byte
     Musica2 As Byte
     Musica3 As Byte
