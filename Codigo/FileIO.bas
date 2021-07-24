@@ -199,7 +199,7 @@ errhandler:
 End Sub
 Public Sub CargarRutaTalador()
 '###################################################
-'Neo
+'Jota y añadido por Neo
 ' Se cargan las rutas para los taladores
 '###################################################
 On Error GoTo errhandler
@@ -489,7 +489,7 @@ frmCargando.cargar.max = NumeroNpcInteligente
 frmCargando.cargar.value = 0
 
 'Leo npc por npc y lo cargo en el array
-'Neo Se agregan nuevas variables y varias rutas posibles
+'Jota y añadido por Neo Se agregan nuevas variables y varias rutas posibles
 For NPCI = 1 To NumeroNpcInteligente
     NpcInteligentes(NPCI).NumeroNPC = val(Leer.GetValue("NpcInteligente" & NPCI, "NumeroNPC"))
     NpcInteligentes(NPCI).Clan = Leer.GetValue("NpcInteligente" & NPCI, "Clan")

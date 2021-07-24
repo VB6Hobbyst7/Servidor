@@ -644,9 +644,9 @@ Public Const SND_ESCUDO As Byte = 37
 Public Const MARTILLOHERRERO As Byte = 41
 Public Const LABUROCARPINTERO As Byte = 42
 Public Const SND_BEBER As Byte = 46
-'neo
+'Jota y añadido por Neo
 Public Const SND_COMER As Byte = 7
-'neo
+'Jota y añadido por Neo
 ''
 ' Cantidad maxima de objetos por slot de inventario
 Public Const MAX_INVENTORY_OBJS As Integer = 10000
@@ -737,30 +737,30 @@ Public Const STAT_MAXDEF As Byte = 99
 ' **************************************************************
 ' **************************************************************
 
-'Neo Ruta de un npc inteligente
+'Jota y añadido por Neo Ruta de un npc inteligente
 Public Type tRutaNpcInteligente
     Camino As String
 End Type
 
-'Neo Ruta para los trabajadores
+'Jota y añadido por Neo Ruta para los trabajadores
 Public Type tRutaTrabajador
     Ruta As String
     DireccionInicio As String
     DireccionFin As String
 End Type
 
-'Neo Frases para trabajadores
+'Jota y añadido por Neo Frases para trabajadores
 Public Type tFraseTrabajador
     texto As String
 End Type
 
-'Neo Npc trabajadores
+'Jota y añadido por Neo Npc trabajadores
 Public Type tNpcTrabajador
     NumeroNPC As Integer
     Profesion As String
 End Type
 
-'Neo Se declara tipo Npc Inteligente
+'Jota y añadido por Neo Se declara tipo Npc Inteligente
 Public Type tNpcInteligente
     NumeroNPC As Integer
     Clan As String
@@ -1581,7 +1581,7 @@ Private Type tZona
     ResuSinEfecto As Byte
     Restringir As Byte
     RestringirM As Byte
-    item As Integer
+    Item As Integer
     itemDes As Byte
     Musica1 As Byte
     Musica2 As Byte
@@ -1851,7 +1851,7 @@ Public NumFX As Integer
 Public NumMaps As Integer
 Public NumObjDatas As Integer
 Public NumeroHechizos As Integer
-'Neo
+'Jota y añadido por Neo
 Public NumeroNpcInteligente As Integer
 Public NumeroNpcTrabajador As Integer
 Public NumeroRutaPescador As Integer
@@ -1894,9 +1894,9 @@ Public MultiplicadorEXP As Single
 Public MultiplicadorORO As Single
 Public MultiplicadorOroMuerte As Single
 Public MultiplicadorOficio As Integer
-'Neo
+'Jota y añadido por Neo
 
-Public Const OBJ_CARRO_MINERIA As Integer = 561
+Public Const OBJ_CARRO_MINERIA As Integer = 561 'neo tener en cuenta
 
 ''
 'Esta activada la verificacion MD5 ?
@@ -1913,7 +1913,7 @@ Public Npclist(1 To MAXNPCS) As NPC    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo
 Public Hechizos() As tHechizo
-'Neo
+'Jota y añadido por Neo
 Public NpcInteligentes() As tNpcInteligente
 Public NpcTrabajadores() As tNpcTrabajador
 Public RutaPescadores() As tRutaTrabajador
@@ -1924,7 +1924,7 @@ Public RutaMineros() As tRutaTrabajador
 Public FraseTrabajadores() As tFraseTrabajador
 Public ListaNpcIA() As clsMercader
 Public ListaTrabajadorIA() As clsMercader
-'Neo
+'Jota y añadido por Neo
 Public CharList(1 To MAXCHARS) As Integer
 Public ObjData() As ObjData
 Public FX() As FXdata

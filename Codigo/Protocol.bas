@@ -8378,7 +8378,7 @@ On Error GoTo errhandler
         
         If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin Or PlayerType.SemiDios Or PlayerType.Consejero) Then
             'Si es dios o Admins no podemos salvo que nosotros también lo seamos
-            'Neo teleport a mercaderes con su nick
+            'Jota y añadido por Neo teleport a mercaderes con su nick
             If UserName = "merc1" Then
                 npcIA = GetNpcIAByNumNpc(617)
                 If npcIA > 0 Then
@@ -16421,7 +16421,7 @@ On Error GoTo errhandler
         Call .WriteInteger(obData.MinHIT)
         Call .WriteInteger(obData.MinDef)
         Call .WriteInteger(obData.MaxDef)
-        Call .WriteSingle(SalePrice(obData.valor))
+        Call .WriteSingle(SalePrice(obData.Valor))
         Call .WriteByte(UserNoPuedeUsarItem(UserIndex, ObjIndex))
     End With
 Exit Sub
@@ -16466,7 +16466,7 @@ On Error GoTo errhandler
         Call .WriteInteger(obData.MaxHIT)
         Call .WriteInteger(obData.MinHIT)
         Call .WriteInteger(obData.def)
-        Call .WriteLong(obData.valor)
+        Call .WriteLong(obData.Valor)
         Call .WriteByte(UserNoPuedeUsarItem(UserIndex, ObjIndex))
     End With
 Exit Sub

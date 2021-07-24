@@ -359,7 +359,7 @@ Sub Main()
     frmCargando.Label1(2).Caption = "Cargando Hechizos.Dat"
     Call CargarHechizos
 
-    'Neo
+    'Jota y añadido por Neo
     frmCargando.Label1(2).Caption = "Cargando conf. de trabajadores"
     Call CargarConfiguracionTrabajador
     frmCargando.Label1(2).Caption = "Cargando NpcInteligente.Dat"
@@ -378,7 +378,7 @@ Sub Main()
     Call CargarFrasesTrabajador
     frmCargando.Label1(2).Caption = "Cargando trabajadores"
     Call CargarNpcTrabajador
-    'Neo
+    'Jota y añadido por Neo
     frmCargando.Label1(2).Caption = "Cargando Objetos de Herrería"
     Call LoadArmasHerreria
     Call LoadArmadurasHerreria
@@ -494,9 +494,9 @@ Sub Main()
     Call LoadQuests
     'quest
 
-    'Neo
+    'Jota y añadido por Neo
     Call initMercader
-    'Neo
+    'Jota y añadido por Neo
     Call initFortalezas
 
 
@@ -1367,9 +1367,9 @@ If UserList(UserIndex).flags.DuracionEfecto > 0 Then
         UserList(UserIndex).flags.TomoPocion = False
         UserList(UserIndex).flags.TipoPocion = 0
         'volvemos los atributos al estado normal
-        Dim LoopX As Integer
-        For LoopX = 1 To NUMATRIBUTOS
-              UserList(UserIndex).Stats.UserAtributos(LoopX) = UserList(UserIndex).Stats.UserAtributosBackUP(LoopX)
+        Dim loopX As Integer
+        For loopX = 1 To NUMATRIBUTOS
+              UserList(UserIndex).Stats.UserAtributos(loopX) = UserList(UserIndex).Stats.UserAtributosBackUP(loopX)
         Next
         Call WriteAttributes(UserIndex, True)
    End If
