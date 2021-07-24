@@ -1,5 +1,5 @@
 #####################################################################################################
-######################### NEOSEFIROT - ¿Como se configura un NPC inteligente? #############################
+######################### - ¿Como se configura un NPC inteligente? #############################
 ########################## Archivo del servidor: NpcInteligente.dat #################################
 
 Paso 1) Crear un nuevo npc basado en el modelo del Mercader

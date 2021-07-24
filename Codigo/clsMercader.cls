@@ -18,6 +18,7 @@ Attribute VB_Exposed = False
 '%%%%% Modificado: 24/02/2012 %%%%%
 '%%%%% Modificado: 16/05/2021 Jota
 '%%%%% Modificado 18/5/2021 por Juan Pablo Pereira y añadido y arreglado ataque por NeoSefirot
+'%%%%% Modificado: 15/7/2021 A?adido los bots y areeglado el no poder atacar.
 '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Option Explicit
