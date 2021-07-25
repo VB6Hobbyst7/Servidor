@@ -8378,7 +8378,7 @@ On Error GoTo errhandler
         
         If .flags.Privilegios And (PlayerType.Dios Or PlayerType.Admin Or PlayerType.SemiDios Or PlayerType.Consejero) Then
             'Si es dios o Admins no podemos salvo que nosotros también lo seamos
-            'Jota y añadido por Neo teleport a mercaderes con su nick
+            'Jota: al poner merc1 o merc2 va directamente a los mercaderes, por ahora lo saco, luego vemos como pensamos la logica
             If UserName = "merc1" Then
                 npcIA = GetNpcIAByNumNpc(617)
                 If npcIA > 0 Then

@@ -163,7 +163,7 @@ Close N
 End Sub
 Public Sub CargarFrasesTrabajador()
 '###################################################
-' Neo
+' 24/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan las frases que dicen los trabajadores cada un tiempo RANDOM
 '###################################################
 On Error GoTo errhandler
@@ -199,7 +199,7 @@ errhandler:
 End Sub
 Public Sub CargarRutaTalador()
 '###################################################
-'Jota y añadido por Neo
+' 24/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan las rutas para los taladores
 '###################################################
 On Error GoTo errhandler
@@ -237,7 +237,7 @@ errhandler:
 End Sub
 Public Sub CargarRutHerreros()
 '###################################################
-' Neo
+' 28/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan las rutas para los herreros
 '###################################################
 On Error GoTo errhandler
@@ -275,7 +275,7 @@ errhandler:
 End Sub
 Public Sub CargarRutaCarpinteros()
 '###################################################
-' Neo
+' 28/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan las rutas para los carpinteros
 '###################################################
 On Error GoTo errhandler
@@ -313,10 +313,9 @@ errhandler:
 End Sub
 Public Sub CargarRutaMineros()
 '###################################################
-' Neo
+' 28/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan las rutas para los mineros
-'###################################################
-On Error GoTo errhandler
+'###################################################On Error GoTo errhandler
 'Informo en la consola que estoy cargando los npc
 If frmMain.Visible Then frmMain.txStatus.Caption = "Cargando Rutas para los mineros."
 Dim NPCI As Integer
@@ -351,7 +350,7 @@ errhandler:
 End Sub
 Public Sub CargarRutaPescador()
 '###################################################
-' Neo
+' 24/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan las rutas para los pescadores
 '###################################################
 On Error GoTo errhandler
@@ -389,7 +388,7 @@ errhandler:
 End Sub
 Public Sub CargarConfiguracionTrabajador()
 '###################################################
-' Neo
+' 28/05/2021 - Juan Pablo Pereyra - Jota
 ' Se carga la configuracion para los trabajadores
 '###################################################
 On Error GoTo errhandler
@@ -429,7 +428,7 @@ errhandler:
 End Sub
 Public Sub CargarNpcTrabajador()
 '###################################################
-' Neo
+' 22/05/2021 - Juan Pablo Pereyra - Jota
 ' Se cargan los npc inteligentes trabajadores
 '###################################################
 On Error GoTo errhandler
@@ -468,11 +467,10 @@ errhandler:
 End Sub
 Public Sub CargarNpcInteligente()
 '###################################################
-' Neo
+' 16/05/2021 - Juan Pablo Pereyra - Jota
 ' En base al metodo de abajo, CargarHechizos() creado por Alejo, lo adapte y cargo todos los npc inteligentes de NpcInteligente.dat
 ' Un npc inteligente tiene la inteligencia del mercader y se configura por medio de variables
-'###################################################
-On Error GoTo errhandler
+'###################################################On Error GoTo errhandler
 'Informo en la consola que estoy cargando los npc
 If frmMain.Visible Then frmMain.txStatus.Caption = "Cargando NPCs Inteligentes."
 Dim NPCI As Integer
@@ -489,7 +487,7 @@ frmCargando.cargar.max = NumeroNpcInteligente
 frmCargando.cargar.value = 0
 
 'Leo npc por npc y lo cargo en el array
-'Jota y añadido por Neo Se agregan nuevas variables y varias rutas posibles
+'18/05/2021 - Jota - Se agregan nuevas variables y varias rutas posibles
 For NPCI = 1 To NumeroNpcInteligente
     NpcInteligentes(NPCI).NumeroNPC = val(Leer.GetValue("NpcInteligente" & NPCI, "NumeroNPC"))
     NpcInteligentes(NPCI).Clan = Leer.GetValue("NpcInteligente" & NPCI, "Clan")

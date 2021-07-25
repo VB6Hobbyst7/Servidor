@@ -359,11 +359,13 @@ Sub Main()
     frmCargando.Label1(2).Caption = "Cargando Hechizos.Dat"
     Call CargarHechizos
 
-    'Jota y añadido por Neo
+    'Jota: Se carga la configuracion de los trabajadores
     frmCargando.Label1(2).Caption = "Cargando conf. de trabajadores"
     Call CargarConfiguracionTrabajador
+    'Jota: Se cargan los npc inteligentes
     frmCargando.Label1(2).Caption = "Cargando NpcInteligente.Dat"
     Call CargarNpcInteligente
+    'Jota: Se cargan los trabajadores, sus frases y rutas
     frmCargando.Label1(2).Caption = "Cargando rutas de carpinteros"
     Call CargarRutaCarpinteros
     frmCargando.Label1(2).Caption = "Cargando rutas de mineros"
@@ -378,7 +380,6 @@ Sub Main()
     Call CargarFrasesTrabajador
     frmCargando.Label1(2).Caption = "Cargando trabajadores"
     Call CargarNpcTrabajador
-    'Jota y añadido por Neo
     frmCargando.Label1(2).Caption = "Cargando Objetos de Herrería"
     Call LoadArmasHerreria
     Call LoadArmadurasHerreria
@@ -494,9 +495,8 @@ Sub Main()
     Call LoadQuests
     'quest
 
-    'Jota y añadido por Neo
+    'Jota: Los mercaderes se cargan con el listado de npc inteligentes
     Call initMercader
-    'Jota y añadido por Neo
     Call initFortalezas
 
 
