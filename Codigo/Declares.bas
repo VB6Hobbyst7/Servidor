@@ -1929,8 +1929,6 @@ Public RutaHerreros() As tRutaTrabajador
 Public RutaMineros() As tRutaTrabajador
 'Jota: Frase de trabajadores
 Public FraseTrabajadores() As tFraseTrabajador
-Public ListaNpcIA() As clsMercader
-Public ListaTrabajadorIA() As clsMercader
 Public CharList(1 To MAXCHARS) As Integer
 Public ObjData() As ObjData
 Public FX() As FXdata
