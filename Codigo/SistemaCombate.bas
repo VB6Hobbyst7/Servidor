@@ -841,7 +841,7 @@ Public Sub UsuarioAtaca(ByVal UserIndex As Integer)
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SWING, .Pos.X, .Pos.Y))
         Call WriteUpdateUserStats(UserIndex)
 
-        If .Counters.Trabajando Then .Counters.Trabajando = .Counters.Trabajando - 1
+        If .Counters.trabajando Then .Counters.trabajando = .Counters.trabajando - 1
 
         If .Counters.Ocultando Then .Counters.Ocultando = .Counters.Ocultando - 1
     End With
@@ -1413,7 +1413,7 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
     End If
 
     If Zonas(Npclist(NpcIndex).zona).Segura And Npclist(NpcIndex).NpcType = eNPCType.Mercader Then
-        Call WriteConsoleMsg(AttackerIndex, "No puedes atacar a un mercader dentro de una zona segura.", FontTypeNames.FONTTYPE_FIGHT)
+        Call WriteConsoleMsg(AttackerIndex, "No puedes atacar al personaje dentro de una zona segura.", FontTypeNames.FONTTYPE_FIGHT)
         PuedeAtacarNPC = False
         Exit Function
     End If
