@@ -16421,7 +16421,7 @@ On Error GoTo errhandler
         Call .WriteInteger(obData.MinHIT)
         Call .WriteInteger(obData.MinDef)
         Call .WriteInteger(obData.MaxDef)
-        Call .WriteSingle(SalePrice(obData.valor))
+        Call .WriteSingle(SalePrice(obData.Valor))
         Call .WriteByte(UserNoPuedeUsarItem(UserIndex, ObjIndex))
     End With
 Exit Sub
@@ -16466,7 +16466,7 @@ On Error GoTo errhandler
         Call .WriteInteger(obData.MaxHIT)
         Call .WriteInteger(obData.MinHIT)
         Call .WriteInteger(obData.def)
-        Call .WriteLong(obData.valor)
+        Call .WriteLong(obData.Valor)
         Call .WriteByte(UserNoPuedeUsarItem(UserIndex, ObjIndex))
     End With
 Exit Sub
@@ -17013,6 +17013,7 @@ Public Sub WriteGotHome(ByVal UserIndex As Integer, ByVal ok As Boolean)
 On Error GoTo errhandler
     With UserList(UserIndex).outgoingData
         Call .WriteByte(ServerPacketID.GotHome)
+      
         Call .WriteBoolean(ok)
     End With
 Exit Sub
@@ -17027,6 +17028,7 @@ Public Sub WriteGoHome(ByVal UserIndex As Integer, ByVal Tiempo As Integer)
 On Error GoTo errhandler
     With UserList(UserIndex).outgoingData
         Call .WriteByte(ServerPacketID.goHome)
+       
         Call .WriteInteger(Tiempo)
     End With
 Exit Sub
