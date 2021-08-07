@@ -425,7 +425,6 @@ potasRojas = NUM_ROJAS
 potasAzules = NUM_AZULES
 
 Mana = MAX_MANA
-'If pNpcIndex <> 0 Then
 Npclist(pNpcIndex).Stats.MinHP = Npclist(pNpcIndex).Stats.MaxHP
 
 Oro = Oro + INCREMENTO_ORO * MultiplicadorORO
@@ -447,7 +446,6 @@ Set pRuta = Nothing
 LastAgresor = -1
 Tiempo = Now
 estado = 0
-'End If
 End Sub
 
 Private Function BuscarCamino() As Boolean
@@ -812,7 +810,6 @@ End If
 End Function
 
 Public Sub ReSpawn()
-
 pPaso = 0
 Yendo = True
 Oro = ORO_INICIAL * MultiplicadorORO
@@ -821,11 +818,9 @@ Pos.map = 1
 Pos.X = Camino(0).X
 Pos.Y = Camino(0).Y
 pNpcIndex = SpawnNpc(pNroNPC, Pos, True, True, 1)
-'If pNpcIndex <> 0 Then
 Npclist(pNpcIndex).GiveGLDMin = Oro
 Npclist(pNpcIndex).GiveGLDMax = Oro
 Call CheckZonaNPC(pNpcIndex)
-'End If
 ResetMercader
 End Sub
 
