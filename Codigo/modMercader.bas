@@ -12,7 +12,7 @@ Private posicionNpcI As Integer
 Private TotalNpcIA As Integer
 
 
-'Jota: Ahora tengo un listado de mercaderes, o sea npc inteligentes
+'Neo
 'Public MercaderNpc As clsMercader
 
 'Public MercaderReal As clsMercader
@@ -20,7 +20,6 @@ Private TotalNpcIA As Integer
 
 Public Sub initMercader()
 
-'16/05/2021 - Juan Pablo Pereyra - Jota
 'Cuando se arranca el servidor, se carga la lista de npc inteligentes, por lo tanto, si la tiene tiene datos,
 'entonces la recorro y voy creando npc utilizando la clase clsMercader, en base a su alineacion y todas las variables definidas.
 'Se respetan los mercaderes originales (armada real y kaos), y se agregan todos los npcs inteligentes definidos en NpcInteligente.dat
@@ -134,8 +133,7 @@ End If
 'Call MercaderByIndex(byvalNpcIndex).Clicked(UserIndex)
 End Sub
 Public Sub QuitarAgresorMercader(ByVal UserIndex As Integer)
- 'Jota: Cuando un usuario muere o se va del juego, se quita como agreso de cualquier npc inteligente que ataco
-
+'Neo Cuando un usuario muere o se va del juego, se quita como agreso de cualquier npc inteligente que ataco
 If (TotalNpcIA > 0) Then
         Dim Contador As Integer
         For Contador = 1 To TotalNpcIA
@@ -176,7 +174,7 @@ EsMercader = Resultado
     'EsMercader = Npclist(NpcIndex).Stats.Alineacion = IIf(Bueno, 0, 1)
 'End If
 End Function
-'Jota: En base al index del npc, retorna el npc inteligente, en caso de encontrarlo. Caso contrario, retorna nothing
+'Neo En base al index del npc, retorna el npc inteligente, en caso de encontrarlo. Caso contrario, retorna nothing
 Public Function GetNpcIA(ByVal NpcIndex As Integer) As Integer
     Dim Resultado As Integer
     Resultado = 0
@@ -191,7 +189,7 @@ Public Function GetNpcIA(ByVal NpcIndex As Integer) As Integer
     End If
     GetNpcIA = Resultado
 End Function
-'Jota: En base al numero del npc, retorna el npc inteligente, en caso de encontrarlo. Caso contrario, retorna nothing
+'Neo En base al numero del npc, retorna el npc inteligente, en caso de encontrarlo. Caso contrario, retorna nothing
 Public Function GetNpcIAByNumNpc(ByVal NumNpc As Integer) As Integer
     Dim Resultado As Integer
     Resultado = 0

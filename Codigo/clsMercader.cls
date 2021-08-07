@@ -14,12 +14,9 @@ Attribute VB_Exposed = False
 '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '%%%%%   Creado por El Yind   %%%%%
 '%%%%%       23/01/2012       %%%%%
-'%%%%% Build: 4               %%%%%
+'%%%%% Build: 3               %%%%%
 '%%%%% Modificado: 24/02/2012 %%%%%
-'%%%%% Modificado: 16/05/2021 por Jota - Juan Pablo Pereyra %%%%%
-'%%%%% Ahora tenemos un listado de npc inteligentes, por lo tanto, se cofigura todo por medio de variables %%%%%
-'%%%%% Modificado: 19/05/2021 por Jota - Se agrega listado de nuevas variables %%%%%
-'%%%%% Modificado: 15/7/2021 Añadido los bots y arreglado el no poder atacar NeoSefirot %%%%%
+'%%%%% Modificado: 16/05/2021 NeoSefirot
 '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Option Explicit
@@ -31,7 +28,7 @@ Private TIEMPO_ESPERA As Integer 'Minutos
 Private NUM_ROJAS As Integer
 Private NUM_AZULES As Integer
 
-'18/05/2021 - Jota - Nuevas variables que setea el usuario para NPC
+'Neo Nuevas variables que setea el usuario para NPC
 Private Clan As String
 Private TiraRemo As Integer
 Private TiraInmo As Integer
@@ -106,7 +103,7 @@ Private PasosEnemigo As Integer 'Cuenta cuantos pasos hace con alguien cerca que
 Private LanzoAtaque As Integer
 Private Trabajador As Boolean
 
-'####################JOTA######################
+'####################NEO######################
 'Tiempos minimos y maximos configurados en el dat de configuracion
 Private TiempoTotalTrabajo As Integer
 Private TiempoTrabajado As Date
@@ -205,7 +202,7 @@ If esTrabajador = False Then
     TiraVerInvi = NpcInteligentes(NPCI).TiraVerInvi
     NroHechizoInvocacion = NpcInteligentes(NPCI).NroHechizoInvocacion
 Else
-     'Jota - 22/05/2021 - Inicia un nuevo trabajador
+    'Neo Inicia un nuevo trabajador
     'Es un npc trabajador
     pNroNPC = NpcTrabajadores(NPCI).NumeroNPC
     FinalCamino = False
@@ -284,7 +281,7 @@ ReSpawn
 
 End Sub
 Private Sub SetTiempoRandom()
-'Jota: Por cada npc, se toma un tiempo random en base a los tiempos globales
+'Neo Por cada npc, se toma un tiempo random en base a los tiempos globales
 'Tiempo total que el npc trabaja
 TiempoTotalTrabajo = GetTiempoTrabajo
 'Cada cuando ejecuta el ruido del trabajo
@@ -298,7 +295,7 @@ TiempoComer = Now
 CadaCuantoComo = GetTiempoComerBeber
 End Sub
 Private Sub InitDatoTrabajador()
-'Jota: Se inician los datos para un trabajador
+'Neo Se inician los datos para un trabajador
     MAX_MANA = 2000
     ORO_INICIAL = 1
     INCREMENTO_ORO = 1
@@ -329,7 +326,7 @@ Private Sub InitDatoTrabajador()
     Destino(2) = ""
 End Sub
 Private Sub InitMensaje(ByVal NPCI As Integer)
-'Jota: Setea mensajes para npc, configurados en el .dat
+'Neo Setea mensajes para npc, configurados en el .dat
 MsjAgresorInvi = NpcInteligentes(NPCI).MsjAgresorInvi
 MsjNuevoAgresor = NpcInteligentes(NPCI).MsjNuevoAgresor
 MsjAgresorRandom1 = NpcInteligentes(NPCI).MsjAgresorRandom1
@@ -353,7 +350,7 @@ If Yendo Then
         SiguientePaso = True
     Else
         'Llegue al final de la ruta
-        'Jota: Si es trabajador, lo giro y seteo que llego al fin
+        'Neo Si es trabajador, lo giro y seteo que llego al fin
         If Trabajador Then
             LlegueAlFinal
         End If
@@ -501,7 +498,7 @@ Dim i As Integer
     End If
     
     If .flags.Inmovilizado = 1 Or .flags.Paralizado = 1 Then
-        'Jota: El npc tira remo?
+        'Neo El npc tira remo?
         If TiraRemo = 1 And Trabajador = False Then
             CPRemo = CPRemo + 1
             If CPRemo > 4 And LanzoAtaque < 2 And RandomNumber(1, 3) = 1 Then
@@ -557,7 +554,7 @@ Dim i As Integer
             Exit Sub
         Else
             If Trabajador = False Then
-            'Jota: Los trabajadores no usan magia :D
+            'Neo Los trabajadores no usan magia
                 Call AtacaConMagia(agresorIndex)
             End If
         End If
@@ -607,12 +604,12 @@ Dim i As Integer
                         End If
                     Next i
                 End If
-                'Jota: Si no es una criatura, entonces habla
+                'Neo Si no es una criatura, entonces habla
                 If Criatura = 0 Then
                     CPDialogo = CPDialogo + 1
                     If CPDialogo > 25 And RandomNumber(1, 10) = 1 Then
                         CPDialogo = 0
-                        'Jota: Mensajes que puede tirar el bicho al azar
+                        'Neo Mensajes que puede tirar el bicho al azar
                         Dim frasesRandomAgresor As Integer
                         frasesRandomAgresor = 0
                         If MsjAgresorRandom1 <> "" Then
@@ -709,7 +706,7 @@ Dim i As Integer
                 'Solo trabajo, si NO esta lloviendo
                 If Lloviendo = False Then
                     If DateDiff("s", TiempoTrabajo, Now) >= SegundosTrabajo Then
-                        'Jota: Segun la profesion, ejecuta el ruido de trabajo que corresponde
+                        'Neo Segun la profesion, ejecuta el ruido de trabajo que corresponde
                         RuidoTrabajo .Pos.X, .Pos.Y
                         SegundosTrabajo = GetIntarvaloTrabajo
                         TiempoTrabajo = Now
@@ -745,7 +742,7 @@ errhandler:
 Exit Sub
 End Sub
 Private Sub ComoBebo(ByVal posX As Integer, ByVal posY As Integer)
-'Jota: El npc come o bebe
+'Neo El npc come o bebe
 Dim comer As Integer
 comer = RandomNumber(1, 2)
 If comer = 1 Then
@@ -757,7 +754,7 @@ Else
 End If
 End Sub
 Private Sub RuidoTrabajo(ByVal posX As Integer, ByVal posY As Integer)
-'Jota: En base a la profesion del trabajador, ejecuta el ruido del trabajo que corresponde
+'Neo En base a la profesion del trabajador, ejecuta el ruido del trabajo que corresponde
     If Pescador = True Then
         Call SendData(SendTarget.ToNPCArea, pNpcIndex, PrepareMessagePlayWave(SND_PESCAR, posX, posY))
     ElseIf Talador = True Then
@@ -771,7 +768,7 @@ Private Sub RuidoTrabajo(ByVal posX As Integer, ByVal posY As Integer)
     End If
 End Sub
 Private Sub GiroPersonaje(ByVal index, ByVal Giro As String, ByVal Body As Integer, ByVal Head As Integer)
-'Jota: Posiciona un personaje, segun el orden que le demos
+'Neo Posiciona un personaje, segun el orden que le demos
 Dim tHeading As Byte
 
 If Giro = "NORTE" Then
@@ -902,7 +899,7 @@ Next i
 End Function
 
 Private Sub AtacaConMagia(UserIndex As Integer)
-'Jota: Los trabajadores no pueden atacar con magia
+'Neo Los trabajadores no pueden atacar con magia
 If Trabajador = False Then
     CPAtaca = CPAtaca + 1
     
@@ -1026,26 +1023,26 @@ End If
 
 End Sub
 Private Function GetTiempoTrabajo() As Integer
-    'Jota: Retorna un nro random de trabajo
+    'Neo Retorna un nro random de trabajo
     GetTiempoTrabajo = RandomNumber(TiempoMinimoTrabajo, TiempoMaximoTrabajo)
 End Function
 Private Function GetTiempoHablar() As Integer
-    'Jota: Retorna un nro random para hablar
+    'Neo Retorna un nro random para hablar
     GetTiempoHablar = RandomNumber(TiempoMinimoHablar, TiempoMaximoHablar)
 End Function
 Private Function GetTiempoLogin() As Integer
-    'Jota: Retorna un nro random para el login del npc
+    'Neo Retorna un nro random para el login del npc
     GetTiempoLogin = RandomNumber(TiempoMinimoLogin, TiempoMaximoLogin)
 End Function
 Private Function GetTiempoResucitar() As Integer
-     'Jota: Retorna un nro random para el login del npc
+    'Neo Retorna un nro random para el login del npc
     GetTiempoResucitar = RandomNumber(TiempoMinimoResucitar, TiempoMaximoResucitar)
 End Function
 Private Function GetTiempoComerBeber() As Integer
-    'Jota: Retorna un nro random para comer, beber del npc
+    'Neo Retorna un nro random para comer, beber del npc
     GetTiempoComerBeber = RandomNumber(TiempoMinimoComerBeber, TiempoMaximoComerBeber)
 End Function
 Private Function GetIntarvaloTrabajo() As Integer
-    'Jota: Retorna un nro random para el intervalo de trabajo
+    'Neo Retorna un nro random para el intervalo de trabajo
     GetIntarvaloTrabajo = RandomNumber(IntervaloMinimoTrabajo, IntervaloMaximoTrabajo)
 End Function

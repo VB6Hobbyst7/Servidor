@@ -45,19 +45,3 @@
 7/18/2021 2:26:35 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
 7/18/2021 2:26:35 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
 7/18/2021 2:32:28 PM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
-7/29/2021 8:52:29 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
-7/29/2021 8:52:31 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
-7/29/2021 8:52:31 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
-7/29/2021 8:52:31 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
-7/29/2021 8:52:31 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
-7/29/2021 8:52:31 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
-7/29/2021 8:52:31 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
-7/29/2021 9:00:29 AM MySQL server has gone away 96085253 - UPDATE pjs SET TrainningTime=1903 WHERE Nombre='Aldebaran'
-7/29/2021 9:00:29 AM Database went down. Reconnecting. 96085253 - UPDATE pjs SET TrainningTime=1903 WHERE Nombre='Aldebaran'
-7/29/2021 9:00:40 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
-7/29/2021 9:00:42 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
-7/29/2021 9:00:42 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
-7/29/2021 9:00:42 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
-7/29/2021 9:00:42 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
-7/29/2021 9:00:42 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
-7/29/2021 9:00:42 AM 60 iteraciones en CrearNpc Area:92 NroNpc:91
