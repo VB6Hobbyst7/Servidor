@@ -59,3 +59,28 @@
 07/08/2021 11:00:18 60 iteraciones en CrearNpc Area:68 NroNpc:531
 07/08/2021 11:00:19 60 iteraciones en CrearNpc Area:68 NroNpc:510
 07/08/2021 11:00:19 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 10:39:42 AM Error cargando mapa: 31 - Pos: 62,69.El subíndice está fuera del intervalo
+8/7/2021 10:39:51 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/7/2021 10:39:51 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 10:39:52 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 10:46:20 AM Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+8/7/2021 10:46:22 AM Error en MuereNpc - Error: 9 - Desc: El subíndice está fuera del intervalo
+8/7/2021 10:56:51 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/7/2021 10:56:53 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/7/2021 10:56:53 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 10:56:53 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 11:10:02 AM MySQL server has gone away 67314941 - UPDATE pjs SET TrainningTime=9359 WHERE Nombre='neosefirot'
+8/7/2021 11:10:02 AM Database went down. Reconnecting. 67314941 - UPDATE pjs SET TrainningTime=9359 WHERE Nombre='neosefirot'
+8/7/2021 11:22:47 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/7/2021 11:22:49 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/7/2021 11:22:49 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 11:22:50 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 11:23:38 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/7/2021 11:23:40 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/7/2021 11:23:40 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 11:23:40 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 11:27:09 AM Error: 9 [Subscript out of range]  Source: ServidorArgentum	 HelpFile: 	 HelpContext: 1000009	 LastDllError: 0	 - UserIndex: 1 - producido al manejar el paquete: 111
+8/7/2021 11:53:37 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/7/2021 11:53:39 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/7/2021 11:53:39 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/7/2021 11:53:39 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
