@@ -62,8 +62,8 @@ Public Function RenameValue(ByVal UserIndex As Integer, ByVal Ranking As eRankin
         Case eRanking.TopMuertesP
             RenameValue = .Stats.MuertesPropias
 
-            ' Case eRanking.TopRetos
-            '  RenameValue = .Stats.RetosGanados
+        Case eRanking.TopRetos
+            RenameValue = .RetosGanados
             ' Case eRanking.TopTorneos
             ' RenameValue = .Stats.TorneosGanados
         End Select
@@ -74,36 +74,36 @@ Public Sub LoadRanking()
     ' @ Cargamos los rankings
    
     Dim LoopI As Integer
-    Dim LoopX As Integer
+    Dim loopX As Integer
     Dim ln As String
    
-    For LoopX = 1 To MAX_RANKINGS
+    For loopX = 1 To MAX_RANKINGS
         For LoopI = 1 To MAX_TOP
-            ln = GetVar(DatPath & "Ranking.Dat", RenameRanking(LoopX), "Top" & LoopI)
-            Ranking(LoopX).Nombre(LoopI) = ReadField(1, ln, 45)
-            Ranking(LoopX).value(LoopI) = val(ReadField(2, ln, 45))
+            ln = GetVar(DatPath & "Ranking.Dat", RenameRanking(loopX), "Top" & LoopI)
+            Ranking(loopX).Nombre(LoopI) = ReadField(1, ln, 45)
+            Ranking(loopX).value(LoopI) = val(ReadField(2, ln, 45))
         Next LoopI
-    Next LoopX
+    Next loopX
    
 End Sub
    
-Public Sub SaveRanking(ByVal Rank As eRanking)
+Public Sub SaveRanking(ByVal rank As eRanking)
 ' @ Guardamos el ranking
 
     Dim LoopI As Integer
    
         For LoopI = 1 To MAX_TOP
-            Call WriteVar(DatPath & "Ranking.Dat", RenameRanking(Rank), _
-                "Top" & LoopI, Ranking(Rank).Nombre(LoopI) & "-" & Ranking(Rank).value(LoopI))
+            Call WriteVar(DatPath & "Ranking.Dat", RenameRanking(rank), _
+                "Top" & LoopI, Ranking(rank).Nombre(LoopI) & "-" & Ranking(rank).value(LoopI))
         Next LoopI
 End Sub
 
-Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal Rank As eRanking)
+Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal rank As eRanking)
     ' @ Desde aca nos hacemos la siguientes preguntas
     ' @ El personaje está en el ranking?
     ' @ El personaje puede ingresar al ranking?
    
-    Dim LoopX As Integer
+    Dim loopX As Integer
     Dim LoopY As Integer
     Dim loopZ As Integer
     Dim i As Integer
@@ -117,11 +117,11 @@ Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal Rank As eRanking)
         ' @ Not gms
         If EsGM(UserIndex) Then Exit Sub
        
-        value = RenameValue(UserIndex, Rank)
+        value = RenameValue(UserIndex, rank)
        
         ' @ Buscamos al personaje en el ranking
         For i = 1 To MAX_TOP
-            If Ranking(Rank).Nombre(i) = UCase$(.Name) Then
+            If Ranking(rank).Nombre(i) = UCase$(.Name) Then
                 PosRanking = i
                 Exit For
             End If
@@ -130,8 +130,8 @@ Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal Rank As eRanking)
         ' @ Si el personaje esta en el ranking actualizamos los valores.
         If PosRanking <> 0 Then
             ' ¿Si está actualizado pa que?
-            If value <> Ranking(Rank).value(PosRanking) Then
-                Call ActualizarPosRanking(PosRanking, Rank, value)
+            If value <> Ranking(rank).value(PosRanking) Then
+                Call ActualizarPosRanking(PosRanking, rank, value)
                
                
                 ' ¿Es la pos 1? No hace falta ordenarlos
@@ -140,17 +140,17 @@ Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal Rank As eRanking)
                     For LoopY = 1 To MAX_TOP
                         For loopZ = 1 To MAX_TOP - LoopY
                                
-                            If Ranking(Rank).value(loopZ) < Ranking(Rank).value(loopZ + 1) Then
+                            If Ranking(rank).value(loopZ) < Ranking(rank).value(loopZ + 1) Then
                                
                                 ' Actualizamos el valor
-                                Auxiliar = Ranking(Rank).value(loopZ)
-                                Ranking(Rank).value(loopZ) = Ranking(Rank).value(loopZ + 1)
-                                Ranking(Rank).value(loopZ + 1) = Auxiliar
+                                Auxiliar = Ranking(rank).value(loopZ)
+                                Ranking(rank).value(loopZ) = Ranking(rank).value(loopZ + 1)
+                                Ranking(rank).value(loopZ + 1) = Auxiliar
                                
                                 ' Actualizamos el nombre
-                                Auxiliar = Ranking(Rank).Nombre(loopZ)
-                                Ranking(Rank).Nombre(loopZ) = Ranking(Rank).Nombre(loopZ + 1)
-                                Ranking(Rank).Nombre(loopZ + 1) = Auxiliar
+                                Auxiliar = Ranking(rank).Nombre(loopZ)
+                                Ranking(rank).Nombre(loopZ) = Ranking(rank).Nombre(loopZ + 1)
+                                Ranking(rank).Nombre(loopZ + 1) = Auxiliar
                                 Actualizacion = 1
                             End If
                         Next loopZ
@@ -158,7 +158,7 @@ Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal Rank As eRanking)
                 End If
                    
                 If Actualizacion <> 0 Then
-                    Call SaveRanking(Rank)
+                    Call SaveRanking(rank)
                 End If
             End If
            
@@ -166,52 +166,52 @@ Public Sub CheckRankingUser(ByVal UserIndex As Integer, ByVal Rank As eRanking)
         End If
        
         ' @ Nos fijamos si podemos ingresar al ranking
-        For LoopX = 1 To MAX_TOP
-            If value > Ranking(Rank).value(LoopX) Then
-                Call ActualizarRanking(LoopX, Rank, .Name, value)
+        For loopX = 1 To MAX_TOP
+            If value > Ranking(rank).value(loopX) Then
+                Call ActualizarRanking(loopX, rank, .Name, value)
                 Exit For
             End If
-        Next LoopX
+        Next loopX
        
     End With
 End Sub
 
-Public Sub ActualizarPosRanking(ByVal Top As Byte, ByVal Rank As eRanking, ByVal value As Long)
+Public Sub ActualizarPosRanking(ByVal Top As Byte, ByVal rank As eRanking, ByVal value As Long)
     ' @ Actualizamos la pos indicada en caso de que el personaje esté en el ranking
-    Dim LoopX As Integer
+    Dim loopX As Integer
 
-    With Ranking(Rank)
+    With Ranking(rank)
        
         .value(Top) = value
     End With
 End Sub
-Public Sub ActualizarRanking(ByVal Top As Byte, ByVal Rank As eRanking, ByVal UserName As String, ByVal value As Long)
+Public Sub ActualizarRanking(ByVal Top As Byte, ByVal rank As eRanking, ByVal UserName As String, ByVal value As Long)
    
     '@ Actualizamos la lista de ranking
    
     Dim LoopC As Integer
     Dim i As Integer
     Dim j As Integer
-    Dim valor(1 To MAX_TOP) As Long
+    Dim Valor(1 To MAX_TOP) As Long
     Dim Nombre(1 To MAX_TOP) As String
    
     ' @ Copia necesaria para evitar que se dupliquen repetidamente
     For LoopC = 1 To MAX_TOP
-        valor(LoopC) = Ranking(Rank).value(LoopC)
-        Nombre(LoopC) = Ranking(Rank).Nombre(LoopC)
+        Valor(LoopC) = Ranking(rank).value(LoopC)
+        Nombre(LoopC) = Ranking(rank).Nombre(LoopC)
     Next LoopC
    
     ' @ Corremos las pos, desde el "Top" que es la primera
     For LoopC = Top To MAX_TOP - 1
-        Ranking(Rank).value(LoopC + 1) = valor(LoopC)
-        Ranking(Rank).Nombre(LoopC + 1) = Nombre(LoopC)
+        Ranking(rank).value(LoopC + 1) = Valor(LoopC)
+        Ranking(rank).Nombre(LoopC + 1) = Nombre(LoopC)
     Next LoopC
 
 
    
-    Ranking(Rank).Nombre(Top) = UCase$(UserName)
-    Ranking(Rank).value(Top) = value
-    Call SaveRanking(Rank)
-    Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Ranking de " & RenameRanking(Rank) & "»" & UserName & " ha subido al TOP " & Top & ".", FontTypeNames.FONTTYPE_GUILD))
+    Ranking(rank).Nombre(Top) = UCase$(UserName)
+    Ranking(rank).value(Top) = value
+    Call SaveRanking(rank)
+    Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Ranking de " & RenameRanking(rank) & "»" & UserName & " ha subido al TOP " & Top & ".", FontTypeNames.FONTTYPE_GUILD))
 End Sub
 

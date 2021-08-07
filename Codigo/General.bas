@@ -1367,9 +1367,9 @@ If UserList(UserIndex).flags.DuracionEfecto > 0 Then
         UserList(UserIndex).flags.TomoPocion = False
         UserList(UserIndex).flags.TipoPocion = 0
         'volvemos los atributos al estado normal
-        Dim LoopX As Integer
-        For LoopX = 1 To NUMATRIBUTOS
-              UserList(UserIndex).Stats.UserAtributos(LoopX) = UserList(UserIndex).Stats.UserAtributosBackUP(LoopX)
+        Dim loopX As Integer
+        For loopX = 1 To NUMATRIBUTOS
+              UserList(UserIndex).Stats.UserAtributos(loopX) = UserList(UserIndex).Stats.UserAtributosBackUP(loopX)
         Next
         Call WriteAttributes(UserIndex, True)
    End If
@@ -1512,7 +1512,7 @@ Sub PasarSegundo()
             If UserList(i).Counters.Saliendo Then
                 UserList(i).Counters.Salir = UserList(i).Counters.Salir - 1
                 If UserList(i).Counters.Salir <= 0 Then
-                    Call WriteConsoleMsg(i, "Gracias por jugar Argentum Online 2020", FontTypeNames.FONTTYPE_INFO)
+                    Call WriteConsoleMsg(i, "Gracias por jugar AOYind3", FontTypeNames.FONTTYPE_INFO)
                     Call WriteDisconnect(i)
                     Call FlushBuffer(i)
 

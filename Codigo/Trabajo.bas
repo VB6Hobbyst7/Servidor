@@ -900,7 +900,7 @@ With UserList(UserIndex)
                 .Reputacion.PlebeRep = MAXREP
         End If
         
-        .Counters.Trabajando = .Counters.Trabajando + 1
+        .Counters.trabajando = .Counters.trabajando + 1
     End If
 End With
 End Sub
@@ -1037,7 +1037,7 @@ On Error GoTo errhandler
                     .Reputacion.PlebeRep = MAXREP
             End If
             
-            .Counters.Trabajando = .Counters.Trabajando + 1
+            .Counters.trabajando = .Counters.trabajando + 1
         End If
     End With
     
@@ -1121,7 +1121,7 @@ Public Sub DoLingotes(ByVal UserIndex As Integer)
         Call WriteConsoleMsg(UserIndex, "¡Has obtenido " & CantidadItems & " lingote" & _
                             IIf(CantidadItems = 1, "", "s") & "!", FontTypeNames.FONTTYPE_INFO)
     
-        .Counters.Trabajando = .Counters.Trabajando + 1
+        .Counters.trabajando = .Counters.trabajando + 1
     End With
 End Sub
 
@@ -1521,6 +1521,7 @@ If res <= DificultadPescar Then
     
 Else
     '[CDT 17-02-2004]
+    Call WriteTooltip(UserIndex, .Pos.X, .Pos.Y, 2, "¡Nada!")
     If Not UserList(UserIndex).flags.UltimoMensaje = 6 Then
       'Call WriteConsoleMsg(UserIndex, "¡No has pescado nada!", FontTypeNames.FONTTYPE_INFO)
       Call WriteMultiMessage(UserIndex, eMessages.NoHasPescado)
@@ -1533,7 +1534,7 @@ UserList(UserIndex).Reputacion.PlebeRep = UserList(UserIndex).Reputacion.PlebeRe
 If UserList(UserIndex).Reputacion.PlebeRep > MAXREP Then _
     UserList(UserIndex).Reputacion.PlebeRep = MAXREP
 
-UserList(UserIndex).Counters.Trabajando = UserList(UserIndex).Counters.Trabajando + 1
+UserList(UserIndex).Counters.trabajando = UserList(UserIndex).Counters.trabajando + 1
 
 End With
 
@@ -1628,7 +1629,7 @@ End If
     If .Reputacion.PlebeRep > MAXREP Then _
         .Reputacion.PlebeRep = MAXREP
            
-        .Counters.Trabajando = .Counters.Trabajando + 1
+        .Counters.trabajando = .Counters.trabajando + 1
         
 End With
 
@@ -2136,6 +2137,7 @@ If res <= DificultadTalar Then
     Call SubirSkill(UserIndex, eSkill.Talar)
 Else
     '[CDT 17-02-2004]
+    Call WriteTooltip(UserIndex, .Pos.X, .Pos.Y, 4, "¡Nada!")
     If Not .flags.UltimoMensaje = 8 Then
         'Call WriteConsoleMsg(UserIndex, "¡No has obtenido leña!", FontTypeNames.FONTTYPE_INFO)
         Call WriteMultiMessage(UserIndex, eMessages.NoHasConseguidoLena)
@@ -2149,7 +2151,7 @@ End If
 If .Reputacion.PlebeRep > MAXREP Then _
     .Reputacion.PlebeRep = MAXREP
 
-.Counters.Trabajando = .Counters.Trabajando + 1
+.Counters.trabajando = .Counters.trabajando + 1
 
 End With
 
@@ -2218,10 +2220,11 @@ If res <= DificultadMinar Then
     
 Else
     '[CDT 17-02-2004]
+     Call WriteTooltip(UserIndex, .Pos.X, .Pos.Y, 3, "¡Nada!")
     If Not .flags.UltimoMensaje = 9 Then
         'Call WriteConsoleMsg(UserIndex, "¡No has conseguido nada!", FontTypeNames.FONTTYPE_INFO)
         Call WriteMultiMessage(UserIndex, eMessages.NoHasExtraidoMinerales)
-        .flags.UltimoMensaje = 9
+       ' .flags.UltimoMensaje = 9
     End If
     '[/CDT]
 End If
@@ -2232,7 +2235,7 @@ If .Reputacion.PlebeRep > MAXREP Then _
     
 Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_MINERO, .Pos.X, .Pos.Y))
 
-.Counters.Trabajando = .Counters.Trabajando + 1
+.Counters.trabajando = .Counters.trabajando + 1
 
 End With
 
@@ -2563,7 +2566,7 @@ With UserList(UserIndex)
     If .Reputacion.PlebeRep > MAXREP Then _
         .Reputacion.PlebeRep = MAXREP
         
-    .Counters.Trabajando = .Counters.Trabajando + 1
+    .Counters.trabajando = .Counters.trabajando + 1
 End With
 End Sub
 Function TieneMaterialesUpgrade(ByVal UserIndex As Integer, ByVal ItemIndex As Integer) As Boolean
