@@ -644,9 +644,9 @@ Public Const SND_ESCUDO As Byte = 37
 Public Const MARTILLOHERRERO As Byte = 41
 Public Const LABUROCARPINTERO As Byte = 42
 Public Const SND_BEBER As Byte = 46
-'neo
+'Jota: Comida para los npc
 Public Const SND_COMER As Byte = 7
-'neo
+
 ''
 ' Cantidad maxima de objetos por slot de inventario
 Public Const MAX_INVENTORY_OBJS As Integer = 10000
@@ -737,30 +737,30 @@ Public Const STAT_MAXDEF As Byte = 99
 ' **************************************************************
 ' **************************************************************
 
-'Neo Ruta de un npc inteligente
+'18/05/2021 - Jota - Ruta de un npc inteligente
 Public Type tRutaNpcInteligente
     Camino As String
 End Type
 
-'Neo Ruta para los trabajadores
+'Jota y añadido por Neo Ruta para los trabajadores
 Public Type tRutaTrabajador
     Ruta As String
     DireccionInicio As String
     DireccionFin As String
 End Type
 
-'Neo Frases para trabajadores
+'24/05/2021 - Jota: Ruta para los trabajadores
 Public Type tFraseTrabajador
     texto As String
 End Type
 
-'Neo Npc trabajadores
+'22/05/2021 - Jota: Npc trabajadores
 Public Type tNpcTrabajador
     NumeroNPC As Integer
     Profesion As String
 End Type
 
-'Neo Se declara tipo Npc Inteligente
+'18/05/2021 - Jota: Se declara tipo Npc Inteligente
 Public Type tNpcInteligente
     NumeroNPC As Integer
     Clan As String
@@ -1853,14 +1853,16 @@ Public NumFX As Integer
 Public NumMaps As Integer
 Public NumObjDatas As Integer
 Public NumeroHechizos As Integer
-'Neo
+'Jota: Numero de npc inteligentes
 Public NumeroNpcInteligente As Integer
 Public NumeroNpcTrabajador As Integer
+'Jota: Rutas para los trabajadores
 Public NumeroRutaPescador As Integer
 Public NumeroRutaTalador As Integer
 Public NumeroRutaMinero As Integer
 Public NumeroRutaCarpintero As Integer
 Public NumeroRutaHerrero As Integer
+'Jota: Tiempos para los npc trabajadores
 Public TiempoMinimoTrabajo As Integer
 Public TiempoMaximoTrabajo As Integer
 Public TiempoMinimoHablar As Integer
@@ -1881,7 +1883,9 @@ Public CantidadMinimaBotNoche As Integer
 Public CantidadMaximaBotNoche As Integer
 Public CantidadMinimaBotMadrugada As Integer
 Public CantidadMaximaBotMadrugada As Integer
+'Jota: Frase para los trabajadores
 Public NumeroFraseTrabajador As Integer
+'Jota: 22/05/2021 - Se agregan trabajadores
 Public NumeroTrabajadores As Integer
 Public AllowMultiLogins As Byte
 Public IdleLimit As Integer
@@ -1896,7 +1900,7 @@ Public MultiplicadorEXP As Single
 Public MultiplicadorORO As Single
 Public MultiplicadorOroMuerte As Single
 Public MultiplicadorOficio As Integer
-'Neo
+
 
 Public Const OBJ_CARRO_MINERIA As Integer = 561
 
@@ -1915,18 +1919,18 @@ Public Npclist(1 To MAXNPCS) As NPC    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo
 Public Hechizos() As tHechizo
-'Neo
+'Jota: Array de npc inteligentes
 Public NpcInteligentes() As tNpcInteligente
+'Jota: 22/05/2021 - Trabajadores
 Public NpcTrabajadores() As tNpcTrabajador
+'Jota: Ruta para trabjadores
 Public RutaPescadores() As tRutaTrabajador
 Public RutaTaladores() As tRutaTrabajador
 Public RutaCarpinteros() As tRutaTrabajador
 Public RutaHerreros() As tRutaTrabajador
 Public RutaMineros() As tRutaTrabajador
+'Jota: Frase de trabajadores
 Public FraseTrabajadores() As tFraseTrabajador
-Public ListaNpcIA() As clsMercader
-Public ListaTrabajadorIA() As clsMercader
-'Neo
 Public CharList(1 To MAXCHARS) As Integer
 Public ObjData() As ObjData
 Public FX() As FXdata
@@ -1944,7 +1948,10 @@ Public ModRaza(1 To NUMRAZAS) As ModRaza
 Public ModVida(1 To NUMCLASES) As Double
 Public DistribucionEnteraVida(1 To 5) As Integer
 Public DistribucionSemienteraVida(1 To 4) As Integer
-
+'Jota: Se agrega una lista de mercaderes 'neo comprobar si da error
+Public ListaNpcIA() As clsMercader
+'Jota: 22/05/2021 - Se agregan trabajadores 'neo comprobar si da error
+Public ListaTrabajadorIA() As clsMercader
 'quest
 Public QuestList() As tQuest
 'quest

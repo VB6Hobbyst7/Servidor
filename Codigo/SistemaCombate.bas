@@ -841,7 +841,7 @@ Public Sub UsuarioAtaca(ByVal UserIndex As Integer)
         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(SND_SWING, .Pos.X, .Pos.Y))
         Call WriteUpdateUserStats(UserIndex)
 
-        If .Counters.Trabajando Then .Counters.Trabajando = .Counters.Trabajando - 1
+        If .Counters.trabajando Then .Counters.trabajando = .Counters.trabajando - 1
 
         If .Counters.Ocultando Then .Counters.Ocultando = .Counters.Ocultando - 1
     End With
@@ -1424,7 +1424,7 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
         If EsGuardiaCaos(NpcIndex) Or EsMercader(NpcIndex, False) Then
             'Lo quiere atacar un caos?
             If esCaos(AttackerIndex) Then
-                'Neo ataque de npcs prohibidos
+                ''Jota: Si es mercader del kaos y el pj agreso criminal, no lo puede atacar
                 If EsMercader(NpcIndex, False) Then
                     Call WriteConsoleMsg(AttackerIndex, "No puedes atacar a un aliado del Caos siendo Legionario", FontTypeNames.FONTTYPE_INFO)
                 Else
@@ -1438,7 +1438,7 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
         ElseIf EsGuardiaReal(NpcIndex) Or EsMercader(NpcIndex, True) Then
             'Lo quiere atacar un Armada?
             If esArmada(AttackerIndex) Then
-                'Neo
+                'Jota
                 If EsMercader(NpcIndex, True) Then
                     Call WriteConsoleMsg(AttackerIndex, "No puedes atacar a un aliado real siendo de la Armada Real", FontTypeNames.FONTTYPE_INFO)
                 Else
@@ -1450,7 +1450,7 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
             End If
             'Tienes el seguro puesto?
             If UserList(AttackerIndex).flags.Seguro Then
-                'Neo
+                'Jota
                 If EsMercader(NpcIndex, True) Then
                     Call WriteConsoleMsg(AttackerIndex, "Debes quitar el seguro para poder atacar, utilizando /SEG", FontTypeNames.FONTTYPE_INFO)
                 Else
@@ -1460,7 +1460,7 @@ Public Function PuedeAtacarNPC(ByVal AttackerIndex As Integer, ByVal NpcIndex As
                 PuedeAtacarNPC = False
                 Exit Function
             Else
-                'Neo
+                'Jota
                 If EsMercader(NpcIndex, True) Then
                     Call WriteConsoleMsg(AttackerIndex, "¡Atacaste a un aliado de la Armada Real! Ahora eres un Criminal.", FontTypeNames.FONTTYPE_INFO)
                 Else
