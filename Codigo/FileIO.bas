@@ -1330,6 +1330,8 @@ UserList(UserIndex).Faccion.RecibioExpInicialReal = CByte(UserFile("rExReal"))
 UserList(UserIndex).Faccion.RecompensasCaos = CLng(UserFile("recCaos"))
 UserList(UserIndex).Faccion.RecompensasReal = CLng(UserFile("recReal"))
 UserList(UserIndex).Faccion.Reenlistadas = CByte(UserFile("Reenlistadas"))
+UserList(UserIndex).RetosGanados = CInt(UserFile("RetosGanados"))
+UserList(UserIndex).RetosPerdidos = CInt(UserFile("RetosPerdidos"))
 UserList(UserIndex).Faccion.NivelIngreso = CInt(UserFile("NivelIngreso"))
 If UserFile("FechaIngreso") <> "" Then
     UserList(UserIndex).Faccion.FechaIngreso = UserFile("FechaIngreso")

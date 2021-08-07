@@ -1470,8 +1470,8 @@ Public Type User
     CharMimetizado As Char
     OrigChar As Char
 
-    desc As String ' Descripcion
-    
+    desc As String    ' Descripcion
+
     DescRM As String
 
     clase As eClass
@@ -1535,6 +1535,8 @@ Public Type User
 
     RetoIndex As Integer
     SalaIndex As Integer
+    RetosGanados As Integer
+    RetosPerdidos As Integer
     RetoAntPos As WorldPos
 
     KeyCrypt As Integer
@@ -1549,7 +1551,7 @@ Public Type User
     'quest
     QuestStats As tQuestStats
     'quest
-    
+
 End Type
 
 Private Type tNpcs
@@ -1581,7 +1583,7 @@ Private Type tZona
     ResuSinEfecto As Byte
     Restringir As Byte
     RestringirM As Byte
-    item As Integer
+    Item As Integer
     itemDes As Byte
     Musica1 As Byte
     Musica2 As Byte

@@ -290,82 +290,87 @@ End If
 End Sub
 Public Sub FinalizarReto(SI As Integer, Ganador As Byte)
 'Entrego los premios y devuelvo cada quien a donde estaba.
-Dim RI As Integer
-Dim G1 As Integer, G2 As Integer
-Dim P1 As Integer, P2 As Integer
-RI = SalasRetos(SI).RetoIndex
-If Ganador = 1 Then
-    G1 = Retos(RI).Pj(1)
-    G2 = Retos(RI).Pj(3)
-    P1 = Retos(RI).Pj(2)
-    P2 = Retos(RI).Pj(4)
-Else
-    G1 = Retos(RI).Pj(2)
-    G2 = Retos(RI).Pj(4)
-    P1 = Retos(RI).Pj(1)
-    P2 = Retos(RI).Pj(3)
-End If
-
-UserList(G1).Stats.GLD = UserList(G1).Stats.GLD + Retos(RI).Oro * 2
-Call WriteUpdateGold(G1)
-
-Call WarpUserChar(P1, UserList(P1).RetoAntPos.map, UserList(P1).RetoAntPos.X, UserList(P1).RetoAntPos.Y, True)
-UserList(G1).RetoIndex = 0
-UserList(G1).SalaIndex = 0
-'UserList(G1).RetosGanados = UserList(G1).RetosGanados + 1
-UserList(P1).RetoIndex = 0
-UserList(P1).SalaIndex = 0
-'UserList(P1).RetosPerdidos = UserList(P1).RetosPerdidos - 1
-    
-If Retos(RI).Vs = 2 Then
-    UserList(G2).Stats.GLD = UserList(G2).Stats.GLD + Retos(RI).Oro * 2
-    Call WriteUpdateGold(G2)
-    Call WarpUserChar(P2, UserList(P2).RetoAntPos.map, UserList(P2).RetoAntPos.X, UserList(P2).RetoAntPos.Y, True)
-
-    'Libero el buffer porque sino quedan mal los mensajes :S
-    Call FlushBuffer(G1)
-    Call FlushBuffer(G2)
-
-    Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(UserList(G1).Name & " y " & UserList(G2).Name & " le han ganado el reto a " & UserList(P1).Name & " y " & UserList(P2).Name & " por " & Retos(RI).Oro & " monedas de oro" & IIf(Retos(RI).PorItems, " y los items", ""), FontTypeNames.FONTTYPE_RETOS))
-    UserList(G2).RetoIndex = 0
-    UserList(G2).SalaIndex = 0
-    'UserList(G2).RetosGanados = UserList(G2).RetosGanados + 1
-    UserList(P2).RetoIndex = 0
-    UserList(P2).SalaIndex = 0
-    'UserList(P2).RetosPerdidos = UserList(P2).RetosPerdidos - 1
-Else
-    'Libero el buffer porque sino quedan mal los mensajes :S
-    Call FlushBuffer(G1)
-    Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(UserList(G1).Name & " le ha ganado el reto a " & UserList(P1).Name & " por " & Retos(RI).Oro & " monedas de oro" & IIf(Retos(RI).PorItems, " y los items", ""), FontTypeNames.FONTTYPE_RETOS))
-End If
-
-If Retos(RI).PorItems Then
-    If UserList(G1).flags.Muerto = 1 Then
-        'Si lo habian matado antes
-        Call RevivirUsuarioReto(G1)
-        Call WarpUserChar(G1, 2, UserList(G1).Pos.X, UserList(G1).Pos.Y + 7, False)
+    Dim RI As Integer
+    Dim G1 As Integer, G2 As Integer
+    Dim P1 As Integer, P2 As Integer
+    RI = SalasRetos(SI).RetoIndex
+    If Ganador = 1 Then
+        G1 = Retos(RI).Pj(1)
+        G2 = Retos(RI).Pj(3)
+        P1 = Retos(RI).Pj(2)
+        P2 = Retos(RI).Pj(4)
+    Else
+        G1 = Retos(RI).Pj(2)
+        G2 = Retos(RI).Pj(4)
+        P1 = Retos(RI).Pj(1)
+        P2 = Retos(RI).Pj(3)
     End If
 
-    Call TirarTodoReto(P1, G1)
+    UserList(G1).Stats.GLD = UserList(G1).Stats.GLD + Retos(RI).Oro * 2
+    Call WriteUpdateGold(G1)
 
-    'Si es por los items les dejo 30 segundos para agarrar las cosas y depositar
-    Call WriteConsoleMsg(G1, "Tienes " & SEGUNDOS_RETO_ITEMS & " segundos para recoger los items ganados.", FontTypeNames.FONTTYPE_RETOS)
+    Call WarpUserChar(P1, UserList(P1).RetoAntPos.map, UserList(P1).RetoAntPos.X, UserList(P1).RetoAntPos.Y, True)
+    UserList(G1).RetoIndex = 0
+    UserList(G1).SalaIndex = 0
+    UserList(G1).RetosGanados = UserList(G1).RetosGanados + 1
+    modMySQL.Execute ("UPDATE pjs SET RetosGanados=" & UserList(G1).RetosGanados & " WHERE Nombre=" & Comillas(UserList(G1).Name))
+    UserList(P1).RetoIndex = 0
+    UserList(P1).SalaIndex = 0
+    UserList(P1).RetosPerdidos = UserList(P1).RetosPerdidos + 1
+    modMySQL.Execute ("UPDATE pjs SET RetosPerdidos=" & UserList(P1).RetosPerdidos & " WHERE Nombre=" & Comillas(UserList(P1).Name))
+
     If Retos(RI).Vs = 2 Then
-        If UserList(G2).flags.Muerto = 1 Then
-            'Si lo habian matado antes
-            Call RevivirUsuarioReto(G2)
-            Call WarpUserChar(G2, 2, UserList(G2).Pos.X, UserList(G2).Pos.Y + 7, False)
-        End If
-    
-        Call TirarTodoReto(P2, G2)
-        Call WriteConsoleMsg(G2, "Tienes " & SEGUNDOS_RETO_ITEMS & " segundos para recoger los items ganados.", FontTypeNames.FONTTYPE_RETOS)
+        UserList(G2).Stats.GLD = UserList(G2).Stats.GLD + Retos(RI).Oro * 2
+        Call WriteUpdateGold(G2)
+        Call WarpUserChar(P2, UserList(P2).RetoAntPos.map, UserList(P2).RetoAntPos.X, UserList(P2).RetoAntPos.Y, True)
+
+        'Libero el buffer porque sino quedan mal los mensajes :S
+        Call FlushBuffer(G1)
+        Call FlushBuffer(G2)
+
+        Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(UserList(G1).Name & " y " & UserList(G2).Name & " le han ganado el reto a " & UserList(P1).Name & " y " & UserList(P2).Name & " por " & Retos(RI).Oro & " monedas de oro" & IIf(Retos(RI).PorItems, " y los items", ""), FontTypeNames.FONTTYPE_RETOS))
+        UserList(G2).RetoIndex = 0
+        UserList(G2).SalaIndex = 0
+        UserList(G2).RetosGanados = UserList(G2).RetosGanados + 1
+        modMySQL.Execute ("UPDATE pjs SET RetosGanados=" & UserList(G2).RetosGanados & " WHERE Nombre=" & Comillas(UserList(G2).Name))
+        UserList(P2).RetoIndex = 0
+        UserList(P2).SalaIndex = 0
+        UserList(P2).RetosPerdidos = UserList(P2).RetosPerdidos + 1
+        modMySQL.Execute ("UPDATE pjs SET RetosPerdidos=" & UserList(P2).RetosPerdidos & " WHERE Nombre=" & Comillas(UserList(P2).Name))
+
+    Else
+        'Libero el buffer porque sino quedan mal los mensajes :S
+        Call FlushBuffer(G1)
+        Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(UserList(G1).Name & " le ha ganado el reto a " & UserList(P1).Name & " por " & Retos(RI).Oro & " monedas de oro" & IIf(Retos(RI).PorItems, " y los items", ""), FontTypeNames.FONTTYPE_RETOS))
     End If
-    SalasRetos(SI).Segundos = SEGUNDOS_RETO_ITEMS
-Else
-    'Limpiamos la sala y transportamos a los ganadores
-    Call LimpiarSala(SI)
-End If
-Call ResetReto(RI)
+
+    If Retos(RI).PorItems Then
+        If UserList(G1).flags.Muerto = 1 Then
+            'Si lo habian matado antes
+            Call RevivirUsuarioReto(G1)
+            Call WarpUserChar(G1, 2, UserList(G1).Pos.X, UserList(G1).Pos.Y + 7, False)
+        End If
+
+        Call TirarTodoReto(P1, G1)
+
+        'Si es por los items les dejo 30 segundos para agarrar las cosas y depositar
+        Call WriteConsoleMsg(G1, "Tienes " & SEGUNDOS_RETO_ITEMS & " segundos para recoger los items ganados.", FontTypeNames.FONTTYPE_RETOS)
+        If Retos(RI).Vs = 2 Then
+            If UserList(G2).flags.Muerto = 1 Then
+                'Si lo habian matado antes
+                Call RevivirUsuarioReto(G2)
+                Call WarpUserChar(G2, 2, UserList(G2).Pos.X, UserList(G2).Pos.Y + 7, False)
+            End If
+
+            Call TirarTodoReto(P2, G2)
+            Call WriteConsoleMsg(G2, "Tienes " & SEGUNDOS_RETO_ITEMS & " segundos para recoger los items ganados.", FontTypeNames.FONTTYPE_RETOS)
+        End If
+        SalasRetos(SI).Segundos = SEGUNDOS_RETO_ITEMS
+    Else
+        'Limpiamos la sala y transportamos a los ganadores
+        Call LimpiarSala(SI)
+    End If
+    Call ResetReto(RI)
 End Sub
 Sub TirarTodoReto(ByVal UserIndex As Integer, ByVal GanadorIndex As Integer)
     Dim i As Byte
