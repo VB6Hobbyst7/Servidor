@@ -45,3 +45,17 @@
 7/18/2021 2:26:35 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
 7/18/2021 2:26:35 PM 60 iteraciones en CrearNpc Area:48 NroNpc:521
 7/18/2021 2:32:28 PM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+07/08/2021 10:53:51 Access denied for user 'root'@'localhost' (using password: YES) 111421149 - 
+07/08/2021 10:53:51 Database went down. Reconnecting. 111421149 - 
+07/08/2021 10:54:24 Error cargando mapa: 31 - Pos: 62,69.El subíndice está fuera del intervalo
+07/08/2021 10:54:32 60 iteraciones en CrearNpc Area:68 NroNpc:531
+07/08/2021 10:54:33 60 iteraciones en CrearNpc Area:68 NroNpc:510
+07/08/2021 10:54:33 60 iteraciones en CrearNpc Area:68 NroNpc:510
+07/08/2021 10:56:07 Error cargando mapa: 31 - Pos: 62,69.El subíndice está fuera del intervalo
+07/08/2021 10:56:16 60 iteraciones en CrearNpc Area:68 NroNpc:531
+07/08/2021 10:56:16 60 iteraciones en CrearNpc Area:68 NroNpc:510
+07/08/2021 10:56:17 60 iteraciones en CrearNpc Area:68 NroNpc:510
+07/08/2021 11:00:10 Error cargando mapa: 31 - Pos: 62,69.El subíndice está fuera del intervalo
+07/08/2021 11:00:18 60 iteraciones en CrearNpc Area:68 NroNpc:531
+07/08/2021 11:00:19 60 iteraciones en CrearNpc Area:68 NroNpc:510
+07/08/2021 11:00:19 60 iteraciones en CrearNpc Area:68 NroNpc:510
