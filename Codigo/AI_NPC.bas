@@ -816,8 +816,8 @@ End Function
 Function EsGuardiaCaos(NpcIndex) As Boolean
 EsGuardiaCaos = (Npclist(NpcIndex).NpcType = eNPCType.Guardia Or Npclist(NpcIndex).NpcType = eNPCType.Mercader) And Npclist(NpcIndex).Stats.Alineacion = 1
 End Function
-Function EsGuardiaNeutral(NpcIndex) As Boolean
-EsGuardiaNeutral = Npclist(NpcIndex).NpcType = eNPCType.Guardia And Npclist(NpcIndex).Stats.Alineacion = 2
+Function EsGuardiaNeutral(NpcIndex) As Boolean 'neo añadido alineacion 2 a los mercaderes para que cualquiera pueda atacar sin perder nada
+EsGuardiaNeutral = (Npclist(NpcIndex).NpcType = eNPCType.Guardia Or Npclist(NpcIndex).NpcType = eNPCType.Mercader) And Npclist(NpcIndex).Stats.Alineacion = 2
 End Function
 Function EsGuardiaClan(NpcIndex) As Boolean
 EsGuardiaClan = (Npclist(NpcIndex).NpcType = eNPCType.Guardia Or Npclist(NpcIndex).NpcType = eNPCType.Fortaleza) And Npclist(NpcIndex).Stats.Alineacion = 3
@@ -1177,7 +1177,7 @@ Public Sub DagaRusa_MoveNpc(ByVal NpcIndex As Integer, Optional ByVal Init As Bo
             
             If (Distancia(Npclist(NpcIndex).Pos, UserList(UserIndex).Pos) <= 1) Then
                 Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, SOUTH)
-                .Users(UserList(UserIndex).flags.SlotUserEvent).Value = 1
+                .Users(UserList(UserIndex).flags.SlotUserEvent).value = 1
                 Call DagaRusa_AttackUser(UserIndex, NpcIndex)
                 SendData SendTarget.ToAll, 0, PrepareMessageConsoleMsg(UserList(UserIndex).Name, FontTypeNames.FONTTYPE_INFO)
                 Npclist(NpcIndex).Target = UserIndex
@@ -1185,7 +1185,7 @@ Public Sub DagaRusa_MoveNpc(ByVal NpcIndex As Integer, Optional ByVal Init As Bo
             End If
             
                 If Npclist(NpcIndex).Target <> UserIndex Then
-                    .Users(UserList(UserIndex).flags.SlotUserEvent).Value = 1
+                    .Users(UserList(UserIndex).flags.SlotUserEvent).value = 1
                     Call DagaRusa_AttackUser(UserIndex, NpcIndex)
                     
                     
