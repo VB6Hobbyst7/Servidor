@@ -180,3 +180,98 @@
 8/7/2021 9:00:12 PM Se intento CrearNpc con Area 0 NroNpc:523
 8/8/2021 3:43:27 AM MySQL server has gone away 95560965 - UPDATE pjs SET TrainningTime=423 WHERE Nombre='Mila'
 8/8/2021 3:43:27 AM Database went down. Reconnecting. 95560965 - UPDATE pjs SET TrainningTime=423 WHERE Nombre='Mila'
+8/8/2021 4:10:03 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/8/2021 4:10:04 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/8/2021 4:10:04 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:10:05 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:24:30 AM MySQL server has gone away 95036677 - UPDATE pjs SET TrainningTime=1732 WHERE Nombre='PoWeR'
+8/8/2021 4:24:30 AM Database went down. Reconnecting. 95036677 - UPDATE pjs SET TrainningTime=1732 WHERE Nombre='PoWeR'
+8/8/2021 4:25:24 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/8/2021 4:25:25 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/8/2021 4:25:25 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:25:25 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:33:11 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/8/2021 4:33:12 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/8/2021 4:33:12 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:33:12 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:37:04 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/8/2021 4:37:06 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/8/2021 4:37:06 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:37:06 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:50:48 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 4:54:01 AM MySQL server has gone away 94250245 - UPDATE pjs SET TrainningTime=66789 WHERE Nombre='neosefirot'
+8/8/2021 4:54:01 AM Database went down. Reconnecting. 94250245 - UPDATE pjs SET TrainningTime=66789 WHERE Nombre='neosefirot'
+8/8/2021 4:54:13 AM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/8/2021 4:54:15 AM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/8/2021 4:54:15 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:54:15 AM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:56:09 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 4:56:11 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 5:32:21 AM Se intento CrearNpc con Area 0 NroNpc:616
+8/8/2021 5:39:22 AM Se intento CrearNpc con Area 0 NroNpc:646
+8/8/2021 6:23:04 AM Se intento CrearNpc con Area 0 NroNpc:538
+8/8/2021 6:56:15 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 6:56:27 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 7:04:32 AM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 7:04:34 AM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 7:04:37 AM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 9:11:34 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 9:11:39 AM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 11:49:32 AM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:16:26 PM Error en UsuarioAtacaNpc. Error 9 : Subscript out of range. User: 1-> Mora. NpcIndex: 1956.
+8/8/2021 12:16:28 PM Error en UsuarioAtacaNpc. Error 9 : Subscript out of range. User: 1-> Mora. NpcIndex: 1956.
+8/8/2021 12:29:25 PM Error en UsuarioAtacaNpc. Error 9 : Subscript out of range. User: 1-> Mora. NpcIndex: 833.
+8/8/2021 12:31:50 PM Error en UsuarioAtacaNpc. Error 9 : Subscript out of range. User: 1-> Mora. NpcIndex: 937.
+8/8/2021 12:34:44 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 12:41:14 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 12:42:31 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 12:45:37 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:45:52 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:46:10 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:47:15 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:47:44 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 12:47:59 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:48:29 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:49:43 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:50:06 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 12:50:29 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:50:57 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:54:21 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 12:58:41 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:58:57 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 12:59:26 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 12:59:40 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 1:00:15 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 1:00:39 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 1:00:52 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 1:01:52 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 1:02:16 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 1:02:59 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 1:03:13 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 1:03:54 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 1:04:02 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 1:26:22 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 1:26:58 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 1:28:34 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 1:28:39 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 1:28:46 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 1:54:44 PM Se intento CrearNpc con Area 0 NroNpc:990
+8/8/2021 1:56:56 PM Se intento CrearNpc con Area 0 NroNpc:992
+8/8/2021 3:41:33 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 3:44:54 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 3:48:23 PM Se intento CrearNpc con Area 0 NroNpc:523
+8/8/2021 3:49:35 PM Se intento CrearNpc con Area 0 NroNpc:510
+8/8/2021 4:26:44 PM Error cargando mapa: 31 - Pos: 62,69.Subscript out of range
+8/8/2021 4:26:45 PM 60 iteraciones en CrearNpc Area:68 NroNpc:531
+8/8/2021 4:26:45 PM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:26:45 PM 60 iteraciones en CrearNpc Area:68 NroNpc:510
+8/8/2021 4:42:35 PM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 4:43:43 PM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 5:48:45 PM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 5:50:12 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 5:50:23 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 5:50:29 PM Error en MuereNpc - Error: 9 - Desc: Subscript out of range
+8/8/2021 5:57:37 PM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/8/2021 5:58:48 PM Error en LanzarHechizo. Error 9 : Subscript out of range
+8/9/2021 3:52:21 AM MySQL server has gone away 92742901 - SELECT COUNT(Id) as 'Cantidad' FROM cuentas WHERE Nombre='neosefirot'
+8/9/2021 3:52:21 AM Database went down. Reconnecting. 92742901 - SELECT COUNT(Id) as 'Cantidad' FROM cuentas WHERE Nombre='neosefirot'
