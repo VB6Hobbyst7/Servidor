@@ -47,12 +47,12 @@ Private Const SONIDO_Dragon_VIVO As Integer = 30
 ''ESTÁN UBICADOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ''MUCHO MENOS LA COORDENADA Y DE LAS ALCOBAS YA QUE DEBE SER LA MISMA!!!
 ''(HAY FUNCIONES Q CUENTAN CON QUE ES LA MISMA!)
-Public Const ALCOBA1_X As Integer = 365
-Public Const ALCOBA1_Y As Integer = 44
-Public Const ALCOBA2_X As Integer = 399
-Public Const ALCOBA2_Y As Integer = 44
+Public Const ALCOBA1_X As Integer = 419
+Public Const ALCOBA1_Y As Integer = 100
+Public Const ALCOBA2_X As Integer = 452
+Public Const ALCOBA2_Y As Integer = 100
 
-Public Const ZONA_PRETORIANO As Integer = 49
+Public Const ZONA_PRETORIANO As Integer = 182
 
 'Added by Nacho
 'Cuantos pretorianos vivos quedan. Uno por cada alcoba
@@ -118,7 +118,7 @@ On Error GoTo errorh
     Dim wp2 As WorldPos
     Dim TeleFrag As Integer
     
-    wp.map = 6
+    wp.map = 1
     If X < Zonas(MAPA_PRETORIANO).X1 + 50 Then   ''forma burda de ver que alcoba es
         wp.X = ALCOBA2_X
         wp.Y = ALCOBA2_Y
@@ -127,7 +127,7 @@ On Error GoTo errorh
         wp.Y = ALCOBA1_Y
     End If
     pretorianosVivos = 7 'Hay 7 + el Rey.
-    TeleFrag = MapData(6).Tile(wp.X, wp.Y).NpcIndex
+    TeleFrag = MapData(1).Tile(wp.X, wp.Y).NpcIndex
     
     If TeleFrag > 0 Then
         ''El rey va a pisar a un npc de antiguo rey
@@ -1238,7 +1238,7 @@ errorh:
 
 End Sub
 
-Sub NpcLanzaSpellSobreUser2(ByVal NpcIndex As Integer, ByVal UserIndex As Integer, ByVal Spell As Integer)
+Sub NpcLanzaSpellSobreUser2(ByVal NpcIndex As Integer, ByVal UserIndex As Integer, ByVal spell As Integer)
 '***************************************************
 'Author: Unknown
 'Last Modification: 05/09/09
@@ -1255,11 +1255,11 @@ Npclist(NpcIndex).CanAttack = 0
 Npclist(NpcIndex).AttackTimer = TIMER_ATTACK
 Dim daño As Integer
 
-If Hechizos(Spell).SubeHp = 1 Then
+If Hechizos(spell).SubeHp = 1 Then
 
-    daño = RandomNumber(Hechizos(Spell).MinHP, Hechizos(Spell).MaxHP)
-    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(Spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
-    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(Spell).FXgrh, Hechizos(Spell).Loops))
+    daño = RandomNumber(Hechizos(spell).MinHP, Hechizos(spell).MaxHP)
+    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
+    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(spell).FXgrh, Hechizos(spell).Loops))
 
     UserList(UserIndex).Stats.MinHP = UserList(UserIndex).Stats.MinHP + daño
     If UserList(UserIndex).Stats.MinHP > UserList(UserIndex).Stats.MaxHP Then UserList(UserIndex).Stats.MinHP = UserList(UserIndex).Stats.MaxHP
@@ -1267,13 +1267,13 @@ If Hechizos(Spell).SubeHp = 1 Then
     Call WriteConsoleMsg(UserIndex, Npclist(NpcIndex).Name & " te ha quitado " & daño & " puntos de vida.", FontTypeNames.FONTTYPE_FIGHT)
 
     Call WriteUpdateHP(UserIndex)
-ElseIf Hechizos(Spell).SubeHp = 2 Then
+ElseIf Hechizos(spell).SubeHp = 2 Then
     
-    daño = RandomNumber(Hechizos(Spell).MinHP, Hechizos(Spell).MaxHP)
-    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(Spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
-    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(Spell).FXgrh, Hechizos(Spell).Loops))
+    daño = RandomNumber(Hechizos(spell).MinHP, Hechizos(spell).MaxHP)
+    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
+    Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(spell).FXgrh, Hechizos(spell).Loops))
 
-    If UserList(UserIndex).flags.Privilegios And PlayerType.user Then UserList(UserIndex).Stats.MinHP = UserList(UserIndex).Stats.MinHP - daño
+    If UserList(UserIndex).flags.Privilegios And PlayerType.User Then UserList(UserIndex).Stats.MinHP = UserList(UserIndex).Stats.MinHP - daño
     
     Call WriteConsoleMsg(UserIndex, Npclist(NpcIndex).Name & " te ha quitado " & daño & " puntos de vida.", FontTypeNames.FONTTYPE_FIGHT)
     
@@ -1286,12 +1286,12 @@ ElseIf Hechizos(Spell).SubeHp = 2 Then
     Call WriteUpdateHP(UserIndex)
 End If
 
-If Hechizos(Spell).Paraliza = 1 Then
+If Hechizos(spell).Paraliza = 1 Then
      If UserList(UserIndex).flags.Paralizado = 0 Then
           UserList(UserIndex).flags.Paralizado = 1
           UserList(UserIndex).Counters.Paralisis = IntervaloParalizado
-          Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(Spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
-          Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(Spell).FXgrh, Hechizos(Spell).Loops))
+          Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayWave(Hechizos(spell).Wav, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
+          Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.CharIndex, Hechizos(spell).FXgrh, Hechizos(spell).Loops))
 
           Call WriteParalizeOK(UserIndex)
 
@@ -1358,7 +1358,7 @@ On Error GoTo errorh
                         danio = 880 / (Dist ^ (3 / 7))
                         danioI = Abs(Int(danio))
                         ''efectiviza el danio
-                        If UserList(PJInd).flags.Privilegios And PlayerType.user Then UserList(PJInd).Stats.MinHP = UserList(PJInd).Stats.MinHP - danioI
+                        If UserList(PJInd).flags.Privilegios And PlayerType.User Then UserList(PJInd).Stats.MinHP = UserList(PJInd).Stats.MinHP - danioI
                         
                         Call WriteConsoleMsg(PJInd, Npclist(npcind).Name & " te ha quitado " & danioI & " puntos de vida al romper su vara.", FontTypeNames.FONTTYPE_FIGHT)
                         Call SendData(SendTarget.ToPCArea, PJInd, PrepareMessagePlayWave(Hechizos(indireccion).Wav, UserList(PJInd).Pos.X, UserList(PJInd).Pos.Y))
@@ -2057,23 +2057,23 @@ On Error GoTo errorh
 
     Select Case Npclist(npcind).Invent.ArmourEqpSlot
         Case 2
-            Call GreedyWalkTo(npcind, 2, 393, 467)
-            If Npclist(npcind).Pos.X = 393 And Npclist(npcind).Pos.Y = 467 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
+            Call GreedyWalkTo(npcind, 1, 415, 97)
+            If Npclist(npcind).Pos.X = 415 And Npclist(npcind).Pos.Y = 97 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
         Case 6
-            Call GreedyWalkTo(npcind, 2, 398, 468)
-            If Npclist(npcind).Pos.X = 398 And Npclist(npcind).Pos.Y = 468 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
+            Call GreedyWalkTo(npcind, 1, 419, 102)
+            If Npclist(npcind).Pos.X = 419 And Npclist(npcind).Pos.Y = 102 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
         Case 1
-            Call GreedyWalkTo(npcind, 2, 418, 453)
-            If Npclist(npcind).Pos.X = 418 And Npclist(npcind).Pos.Y = 453 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
+            Call GreedyWalkTo(npcind, 1, 424, 102)
+            If Npclist(npcind).Pos.X = 424 And Npclist(npcind).Pos.Y = 102 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
         Case 7
-            Call GreedyWalkTo(npcind, 2, 418, 445)
-            If Npclist(npcind).Pos.X = 418 And Npclist(npcind).Pos.Y = 445 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
+            Call GreedyWalkTo(npcind, 1, 424, 97)
+            If Npclist(npcind).Pos.X = 424 And Npclist(npcind).Pos.Y = 97 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
         Case 5
-            Call GreedyWalkTo(npcind, 2, 376, 453)
-            If Npclist(npcind).Pos.X = 376 And Npclist(npcind).Pos.Y = 453 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
+            Call GreedyWalkTo(npcind, 1, 415, 102)
+            If Npclist(npcind).Pos.X = 415 And Npclist(npcind).Pos.Y = 102 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
         Case 3
-            Call GreedyWalkTo(npcind, 2, 376, 445)
-            If Npclist(npcind).Pos.X = 376 And Npclist(npcind).Pos.Y = 445 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
+            Call GreedyWalkTo(npcind, 1, 419, 97)
+            If Npclist(npcind).Pos.X = 419 And Npclist(npcind).Pos.Y = 97 Then Npclist(npcind).Invent.ArmourEqpSlot = Npclist(npcind).Invent.ArmourEqpSlot + 1
         Case 4, 8
             Npclist(npcind).Invent.ArmourEqpSlot = 0
             Exit Sub

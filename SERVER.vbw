@@ -1,6 +1,6 @@
 Acciones = 200, 200, 1079, 707, 
 Admin = 25, 25, 904, 532, 
-AI = 150, 150, 1029, 657, Z
+AI = 150, 150, 1029, 657, 
 modSistemaComercio = 52, 52, 803, 494, 
 Declaraciones = 50, 50, 929, 557, 
 ES = 196, 117, 1075, 624, 
@@ -42,7 +42,7 @@ wskapiAO = 130, 130, 647, 572,
 modInvisibles = 0, 0, 0, 0, C
 modNuevoTimer = 25, 25, 867, 532, 
 frmUserList = 26, 26, 777, 468, , 150, 150, 1029, 657, C
-PraetoriansCoopNPC = 34, 33, 713, 511, 
+PraetoriansCoopNPC = 34, 33, 713, 511, Z
 mdParty = 0, 0, 0, 0, C
 ConsultasPopulares = 52, 52, 711, 368, 
 clsParty = 0, 0, 0, 0, C
