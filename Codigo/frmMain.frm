@@ -28,6 +28,12 @@ Begin VB.Form frmMain
    ScaleWidth      =   5385
    StartUpPosition =   2  'CenterScreen
    WindowState     =   1  'Minimized
+   Begin VB.Timer TimerPreto 
+      Enabled         =   0   'False
+      Interval        =   60000
+      Left            =   4320
+      Top             =   240
+   End
    Begin VB.Timer timerbots 
       Interval        =   40
       Left            =   0
@@ -872,6 +878,20 @@ Private Sub timerbots_Timer()
     
 End Sub
 'bots
+
+Private Sub TimerPreto_Timer()
+    TiempoPreto = TiempoPreto + 1
+    If TiempoPreto = 120 Then
+
+        PretorianosMuerte = 0
+
+
+        Call CrearClanPretoriano(Zonas(MAPA_PRETORIANO).X1)
+        TiempoPreto = 0
+        TimerPreto = False
+    End If
+
+End Sub
 
 Private Sub tLluviaEvent_Timer()
 

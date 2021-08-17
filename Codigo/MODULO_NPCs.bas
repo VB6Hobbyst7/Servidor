@@ -104,7 +104,10 @@ Sub MuereNpc(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
                     End If
                 Next j
             Next i
+           
+          
             Call CrearClanPretoriano(Npclist(NpcIndex).Pos.X)
+          
         End If
     ElseIf esPretoriano(NpcIndex) > 0 Then
         If Npclist(NpcIndex).zona = MAPA_PRETORIANO Then

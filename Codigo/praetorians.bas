@@ -27,6 +27,7 @@ Option Explicit
 '' los NPCs pretorianos en el NPC-HOSTILES.DAT
 '' Son FIJAS, pero se podria hacer una rutina que
 '' las lea desde el npcshostiles.dat
+
 Public Const PRCLER_NPC As Integer = 900   ''"Sacerdote Pretoriano"
 Public Const PRGUER_NPC As Integer = 901   ''"Guerrero  Pretoriano"
 Public Const PRMAGO_NPC As Integer = 902   ''"Mago Pretoriano"
@@ -57,6 +58,8 @@ Public Const ZONA_PRETORIANO As Integer = 182
 'Added by Nacho
 'Cuantos pretorianos vivos quedan. Uno por cada alcoba
 Public pretorianosVivos As Integer
+Public PretorianosMuerte As Integer
+Public TiempoPreto As Integer
 
 '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 '/\/\/\/\/\/\/\/\ MODULO DE COMBATE PRETORIANO /\/\/\/\/\/\/\/\/\
@@ -101,13 +104,13 @@ Sub CrearClanPretoriano(ByVal X As Integer)
 'Inicializa el clan Pretoriano.
 'Last Modify Date: 22/6/06: (Nacho) Seteamos cuantos NPCs creamos
 '********************************************************
-On Error GoTo errorh
+    On Error GoTo errorh
 
     ''------------------------------------------------------
     ''recibe el X,Y donde EL REY ANTERIOR ESTABA POSICIONADO.
     ''------------------------------------------------------
     ''35,25 y 67,25 son las posiciones del rey
-    
+
     ''Sub CrearNPC(NroNPC As Integer, mapa As Integer, OrigPos As WorldPos)
     ''Public Const PRCLER_NPC = 900
     ''Public Const PRGUER_NPC = 901
@@ -118,6 +121,11 @@ On Error GoTo errorh
     Dim wp2 As WorldPos
     Dim TeleFrag As Integer
     
+    PretorianosMuerte = PretorianosMuerte + 1
+    If PretorianosMuerte > 2 Then
+    frmMain.TimerPreto = True
+    Exit Sub
+    End If
     wp.map = 1
     If X < Zonas(MAPA_PRETORIANO).X1 + 50 Then   ''forma burda de ver que alcoba es
         wp.X = ALCOBA2_X
@@ -126,16 +134,16 @@ On Error GoTo errorh
         wp.X = ALCOBA1_X
         wp.Y = ALCOBA1_Y
     End If
-    pretorianosVivos = 7 'Hay 7 + el Rey.
+    pretorianosVivos = 7    'Hay 7 + el Rey.
     TeleFrag = MapData(1).Tile(wp.X, wp.Y).NpcIndex
-    
+
     If TeleFrag > 0 Then
         ''El rey va a pisar a un npc de antiguo rey
         ''Obtengo en WP2 la mejor posicion cercana
         Call ClosestLegalPos(wp, wp2)
         If (LegalPos(wp2.map, wp2.X, wp2.Y)) Then
             ''mover al actual
-            
+
             Call SendData(SendTarget.ToNPCArea, TeleFrag, PrepareMessageCharacterMove(Npclist(TeleFrag).Char.CharIndex, wp2.X, wp2.Y))
             'Update map and user pos
             MapData(wp.map).Tile(wp.X, wp.Y).NpcIndex = 0
@@ -152,37 +160,37 @@ On Error GoTo errorh
     'Busco la posicion legal mas cercana aca, aun que creo que tendría que ir en el crearnpc. (NicoNZ)
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRKING_NPC, 0, nPos)
-    
+
     wp.X = wp.X + 3
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRCLER_NPC, 0, nPos)
-    
+
     wp.X = wp.X - 6
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRCLER_NPC, 0, nPos)
-    
+
     wp.Y = wp.Y + 3
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRGUER_NPC, 0, nPos)
-    
+
     wp.X = wp.X + 3
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRGUER_NPC, 0, nPos)
-    
+
     wp.X = wp.X + 3
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRGUER_NPC, 0, nPos)
-    
+
     wp.Y = wp.Y - 6
     wp.X = wp.X - 1
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRCAZA_NPC, 0, nPos)
-    
+
     wp.X = wp.X - 4
     Call ClosestLegalPos(wp, nPos, False, True)
     Call CrearNPC(PRMAGO_NPC, 0, nPos)
-    
-Exit Sub
+
+    Exit Sub
 
 errorh:
     LogError ("Error en NPCAI.CrearClanPretoriano ")

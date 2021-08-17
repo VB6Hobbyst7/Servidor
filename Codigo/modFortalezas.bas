@@ -39,7 +39,7 @@ End If
 End Sub
 
 Public Sub AvisarAtaqueFortaleza(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
-If Npclist(NpcIndex).NPCtype = eNPCType.Fortaleza Then
+If Npclist(NpcIndex).NpcType = eNPCType.Fortaleza Then
     If Npclist(NpcIndex).Pos.X <= 550 Then
         Call Fortaleza1.AvisarAtaque(NpcIndex, UserIndex)
     Else
@@ -56,9 +56,9 @@ End If
 End Sub
 
 Public Sub HandleProteger(ByVal UserIndex As Integer, ByVal Opcion As Byte)
-If Opcion = 0 And UserList(UserIndex).Zona = 90 Then
+If Opcion = 0 And UserList(UserIndex).zona = 12 Then
     Call Fortaleza1.Proteger(UserIndex)
-ElseIf Opcion = 0 And UserList(UserIndex).Zona = 89 Then
+ElseIf Opcion = 0 And UserList(UserIndex).zona = 64 Then
     Call Fortaleza2.Proteger(UserIndex)
 ElseIf Opcion = 1 Then
     Call Fortaleza1.SumUser(UserIndex)

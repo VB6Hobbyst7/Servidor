@@ -414,6 +414,7 @@ Sub Main()
     Call CargarAreas
     frmCargando.Label1(2).Caption = "Finalizando..."
     'Comentado porque hay worldsave en ese mapa!
+  
     Call CrearClanPretoriano(Zonas(MAPA_PRETORIANO).X1)
     '¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿
 
