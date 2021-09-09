@@ -241,7 +241,7 @@ On Error GoTo hayerror
                     Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Name & " <" & klan & ">", bCr, UserList(UserIndex).flags.Privilegios, 0, UserList(UserIndex).Char.alaIndex)
                 Else
                     'Hide the name and clan - set privs as normal user
-                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.User, 0, UserList(UserIndex).Char.alaIndex)
+                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.user, 0, UserList(UserIndex).Char.alaIndex)
                 End If
             Else
                 Call AgregarUser(UserIndex, UserList(UserIndex).Pos.map)
@@ -251,7 +251,7 @@ On Error GoTo hayerror
                 If UserList(UserIndex).showName Then
                     Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, UserList(UserIndex).Name, bCr, UserList(UserIndex).flags.Privilegios, 0, UserList(UserIndex).Char.alaIndex)
                 Else
-                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.User, 0, UserList(UserIndex).Char.alaIndex)
+                    Call WriteCharacterCreate(sndIndex, UserList(UserIndex).Char.Body, UserList(UserIndex).Char.Head, UserList(UserIndex).Char.heading, UserList(UserIndex).Char.CharIndex, X, Y, UserList(UserIndex).Char.WeaponAnim, UserList(UserIndex).Char.ShieldAnim, UserList(UserIndex).Char.FX, 999, UserList(UserIndex).Char.CascoAnim, vbNullString, bCr, PlayerType.user, 0, UserList(UserIndex).Char.alaIndex)
                 End If
             Else
                 Call AgregarUser(UserIndex, UserList(UserIndex).Pos.map)
@@ -861,7 +861,7 @@ Sub SendUserMiniStatsTxtFromChar(ByVal sendIndex As Integer, ByVal charName As S
     Dim Ban As String
     Dim BanDetailPath As String
     
-    BanDetailPath = LogPath & "\" & "BanDetail.dat"
+    BanDetailPath = CarpetaLogs & "\" & "BanDetail.dat"
     
     Dim Datos As clsMySQLRecordSet
     Dim Cant As Long
@@ -1760,7 +1760,7 @@ Public Sub CancelExit(ByVal UserIndex As Integer)
             Call WriteQuit(UserIndex, 1)
         Else
             'Simply reset
-            UserList(UserIndex).Counters.Salir = IIf((UserList(UserIndex).flags.Privilegios And PlayerType.User) And Zonas(UserList(UserIndex).zona).Segura = 0, IntervaloCerrarConexion, 0)
+            UserList(UserIndex).Counters.Salir = IIf((UserList(UserIndex).flags.Privilegios And PlayerType.user) And Zonas(UserList(UserIndex).zona).Segura = 0, IntervaloCerrarConexion, 0)
         End If
     End If
 End Sub
@@ -1817,7 +1817,7 @@ Sub VolverCriminal(ByVal UserIndex As Integer)
     With UserList(UserIndex)
         If MapData(.Pos.map).Tile(.Pos.X, .Pos.Y).Trigger = eTrigger.ZONAPELEA Then Exit Sub
         
-        If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero) Then
+        If .flags.Privilegios And (PlayerType.user Or PlayerType.Consejero) Then
             .Reputacion.BurguesRep = 0
             .Reputacion.NobleRep = 0
             .Reputacion.PlebeRep = 0

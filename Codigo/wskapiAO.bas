@@ -358,7 +358,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\wsapi.log" For Append Shared As #nfile
+Open CarpetaLogs & "\wsapi.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & str
 Close #nfile
 
@@ -449,8 +449,8 @@ Public Sub EventoSockAccept(ByVal SockID As Long)
     If NewIndex <= MaxUsers Then
         
         'Make sure both outgoing and incoming data buffers are clean
-        Call UserList(NewIndex).incomingData.ReadASCIIStringFixed(UserList(NewIndex).incomingData.length)
-        Call UserList(NewIndex).outgoingData.ReadASCIIStringFixed(UserList(NewIndex).outgoingData.length)
+        Call UserList(NewIndex).incomingData.ReadASCIIStringFixed(UserList(NewIndex).incomingData.Length)
+        Call UserList(NewIndex).outgoingData.ReadASCIIStringFixed(UserList(NewIndex).outgoingData.Length)
 
 #If SeguridadAlkon Then
         Call Security.NewConnection(NewIndex)
@@ -507,7 +507,7 @@ With UserList(Slot)
     
     If .ConnID <> -1 Then
         Procesado = False
-        Do While .incomingData.length And Not Procesado
+        Do While .incomingData.Length And Not Procesado
             Procesado = HandleIncomingData(Slot)
         Loop
     End If

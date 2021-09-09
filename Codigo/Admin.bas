@@ -30,7 +30,7 @@ Attribute VB_Name = "Admin"
 Option Explicit
 
 Public Type tMotd
-    texto As String
+    Texto As String
     Formato As String
 End Type
 
@@ -158,12 +158,12 @@ Dim j As Integer, k As Integer
 
 FrmStat.ProgressBar1.min = 0
 FrmStat.ProgressBar1.max = k
-FrmStat.ProgressBar1.Value = 0
+FrmStat.ProgressBar1.value = 0
 
 For loopX = 1 To NumMaps
     'DoEvents
     Call GrabarMapa(loopX, WorldBkPath & "\Mapa" & loopX & ".bak")
-    FrmStat.ProgressBar1.Value = FrmStat.ProgressBar1.Value + 1
+    FrmStat.ProgressBar1.value = FrmStat.ProgressBar1.value + 1
 Next loopX
 
 FrmStat.Visible = False
@@ -291,8 +291,8 @@ Public Function UnBan(ByVal Name As String) As Boolean
 Call Execute("UPDATE pjs SET Ban=0 WHERE Nombre=" & Comillas(Name))
 
 'Remove it from the banned people database
-Call WriteVar(LogPath & "\" & "BanDetail.dat", Name, "BannedBy", "NOBODY")
-Call WriteVar(LogPath & "\" & "BanDetail.dat", Name, "Reason", "NO REASON")
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.dat", Name, "BannedBy", "NOBODY")
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.dat", Name, "Reason", "NO REASON")
 End Function
 
 Public Function MD5ok(ByVal md5formateado As String) As Boolean
@@ -391,7 +391,7 @@ Dim ArchN As Long
 Dim Tmp As String
 Dim ArchivoBanIp As String
 
-ArchivoBanIp = App.Path & "\Dat\BanIps.dat"
+ArchivoBanIp = DatPath & "\BanIps.dat"
 
 Do While BanIps.Count > 0
     BanIps.Remove 1
@@ -445,7 +445,7 @@ Public Function UserDarPrivilegioLevel(ByVal Name As String) As PlayerType
     ElseIf EsConsejero(Name) Then
         UserDarPrivilegioLevel = PlayerType.Consejero
     Else
-        UserDarPrivilegioLevel = PlayerType.User
+        UserDarPrivilegioLevel = PlayerType.user
     End If
 End Function
 

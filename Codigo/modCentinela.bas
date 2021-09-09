@@ -79,7 +79,7 @@ Private Sub GoToNextWorkingChar()
     Dim LoopC As Long
     
     For LoopC = 1 To LastUser
-        If UserList(LoopC).flags.UserLogged And UserList(LoopC).Counters.Trabajando > 0 And (UserList(LoopC).flags.Privilegios And PlayerType.User) Then
+        If UserList(LoopC).flags.UserLogged And UserList(LoopC).Counters.trabajando > 0 And (UserList(LoopC).flags.Privilegios And PlayerType.user) Then
             If Not UserList(LoopC).flags.CentinelaOK Then
                 'Inicializamos
                 Centinela.RevisandoUserIndex = LoopC
@@ -292,7 +292,7 @@ Private Sub WarpCentinela(ByVal UserIndex As Integer)
         CentinelaNPCIndex = 0
     End If
     
-    If HayAgua(UserList(UserIndex).Pos.Map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y) Then
+    If HayAgua(UserList(UserIndex).Pos.map, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y) Then
         CentinelaNPCIndex = SpawnNpc(NPC_CENTINELA_AGUA, UserList(UserIndex).Pos, True, False, UserList(UserIndex).zona)
     Else
         CentinelaNPCIndex = SpawnNpc(NPC_CENTINELA_TIERRA, UserList(UserIndex).Pos, True, False, UserList(UserIndex).zona)
@@ -323,7 +323,7 @@ Public Sub CentinelaUserLogout()
     End If
 End Sub
 
-Private Sub LogCentinela(ByVal texto As String)
+Private Sub LogCentinela(ByVal Texto As String)
 '*************************************************
 'Author: Juan Martín Sotuyo Dodero (Maraxus)
 'Last modified: 03/15/2006
@@ -334,8 +334,8 @@ On Error GoTo errhandler
     Dim nfile As Integer
     nfile = FreeFile ' obtenemos un canal
     
-    Open LogPath & "\Centinela.log" For Append Shared As #nfile
-    Print #nfile, Date & " " & time & " " & texto
+    Open CarpetaLogs & "\Centinela.log" For Append Shared As #nfile
+    Print #nfile, Date & " " & time & " " & Texto
     Close #nfile
 Exit Sub
 

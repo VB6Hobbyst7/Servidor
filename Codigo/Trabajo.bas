@@ -1718,7 +1718,7 @@ On Error GoTo errhandler
     
         If .Invent.AnilloEqpObjIndex = GUANTE_HURTO Then GuantesHurto = True
         
-        If UserList(VictimaIndex).flags.Privilegios And PlayerType.User Then
+        If UserList(VictimaIndex).flags.Privilegios And PlayerType.user Then
             
             Dim Suerte As Integer
             Dim res As Integer
@@ -1965,7 +1965,7 @@ Select Case UserList(UserIndex).clase
 End Select
 
 
-If RandomNumber(0, 100) < Suerte Then
+If RandomNumber(0, 10) < Suerte Then
     If VictimUserIndex <> 0 Then
         If UserList(UserIndex).clase = eClass.Assasin Then
             daño = Round(daño * 1.4, 0)
@@ -1975,13 +1975,13 @@ If RandomNumber(0, 100) < Suerte Then
         
         With UserList(VictimUserIndex)
             .Stats.MinHP = .Stats.MinHP - daño
-            'Call WriteConsoleMsg(UserIndex, "Has apuñalado a " & .Name & " por " & daño, FontTypeNames.FONTTYPE_FIGHT)
+            Call WriteConsoleMsg(UserIndex, "Has apuñalado a " & .Name & " por " & daño, FontTypeNames.FONTTYPE_FIGHT)
             Call WriteMultiMessage(UserIndex, eMessages.HasApunaladoA, daño, , , .Name)
             
-            'Call WriteConsoleMsg(VictimUserIndex, "Te ha apuñalado " & UserList(UserIndex).Name & " por " & daño, FontTypeNames.FONTTYPE_FIGHT)
+            Call WriteConsoleMsg(VictimUserIndex, "Te ha apuñalado " & UserList(UserIndex).Name & " por " & daño, FontTypeNames.FONTTYPE_FIGHT)
             Call WriteMultiMessage(VictimUserIndex, eMessages.TeHanApunalado, daño, , , UserList(UserIndex).Name)
             
-            Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(VictimUserIndex).Char.CharIndex, 53, 0))
+            Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(VictimUserIndex).Char.CharIndex, 53, 2))
              
             
         End With
@@ -1989,10 +1989,10 @@ If RandomNumber(0, 100) < Suerte Then
         Call FlushBuffer(VictimUserIndex)
     Else
         Npclist(VictimNpcIndex).Stats.MinHP = Npclist(VictimNpcIndex).Stats.MinHP - Int(daño * 2)
-        'Call WriteConsoleMsg(UserIndex, "Has apuñalado la criatura por " & Int(daño * 2), FontTypeNames.FONTTYPE_FIGHT)
+        Call WriteConsoleMsg(UserIndex, "Has apuñalado la criatura por " & Int(daño * 2), FontTypeNames.FONTTYPE_FIGHT)
         Call WriteMultiMessage(UserIndex, eMessages.HasApunaladoCriatura, Int(daño * 2))
         
-        Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(VictimNpcIndex).Char.CharIndex, 53, 0))
+        Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(Npclist(VictimNpcIndex).Char.CharIndex, 53, 2))
         
         '[Alejo]
         Call CalcularDarExp(UserIndex, VictimNpcIndex, daño * 2)
@@ -2000,13 +2000,12 @@ If RandomNumber(0, 100) < Suerte Then
     
     Call SubirSkill(UserIndex, eSkill.Apuñalar)
 Else
-    'Call WriteConsoleMsg(UserIndex, "¡No has logrado apuñalar a tu enemigo!", FontTypeNames.FONTTYPE_FIGHT)
+    Call WriteConsoleMsg(UserIndex, "¡No has logrado apuñalar a tu enemigo!", FontTypeNames.FONTTYPE_FIGHT)
     Call WriteMultiMessage(UserIndex, eMessages.NoHasApunalado)
     Call SubirSkill(UserIndex, eSkill.Apuñalar)
 End If
 
 End Sub
-
 Public Sub DoGolpeCritico(ByVal UserIndex As Integer, ByVal VictimNpcIndex As Integer, ByVal VictimUserIndex As Integer, ByVal daño As Integer)
 '***************************************************
 'Autor: Pablo (ToxicWaste)
@@ -2031,7 +2030,7 @@ Public Sub DoGolpeCritico(ByVal UserIndex As Integer, ByVal VictimNpcIndex As In
     
     Suerte = Int((((0.00000003 * Skill + 0.000006) * Skill + 0.000107) * Skill + 0.0893) * 100)
     
-    If RandomNumber(1, 100) <= Suerte Then
+    If RandomNumber(1, 10) <= Suerte Then
     
         daño = Int(daño * 0.75)
         
@@ -2039,10 +2038,10 @@ Public Sub DoGolpeCritico(ByVal UserIndex As Integer, ByVal VictimNpcIndex As In
             
             With UserList(VictimUserIndex)
                 .Stats.MinHP = .Stats.MinHP - daño
-                'Call WriteConsoleMsg(UserIndex, "Has golpeado críticamente a " & .Name & " por " & daño & ".", FontTypeNames.FONTTYPE_FIGHT)
+                Call WriteConsoleMsg(UserIndex, "Has golpeado críticamente a " & .Name & " por " & daño & ".", FontTypeNames.FONTTYPE_FIGHT)
                 Call WriteMultiMessage(UserIndex, eMessages.HasGolpeadoCriticamente, daño, , , .Name)
                 
-                'Call WriteConsoleMsg(VictimUserIndex, UserList(UserIndex).Name & " te ha golpeado críticamente por " & daño & ".", FontTypeNames.FONTTYPE_FIGHT)
+                Call WriteConsoleMsg(VictimUserIndex, UserList(UserIndex).Name & " te ha golpeado críticamente por " & daño & ".", FontTypeNames.FONTTYPE_FIGHT)
                 Call WriteMultiMessage(VictimUserIndex, eMessages.TeHanGolpeadoCriticamente, daño, , , UserList(UserIndex).Name)
                 
                 Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(VictimUserIndex).Char.CharIndex, 53, 0))

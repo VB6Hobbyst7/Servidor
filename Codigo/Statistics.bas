@@ -73,7 +73,7 @@ Public Sub UserLevelUp(ByVal UserIndex As Integer)
     
     With trainningInfo(UserIndex)
         'Log the data
-        Open LogPath & "\statistics.log" For Append Shared As handle
+        Open CarpetaLogs & "\statistics.log" For Append Shared As handle
         
         Print #handle, UCase$(UserList(UserIndex).Name) & " completó el nivel " & CStr(UserList(UserIndex).Stats.ELV) & " en " & CStr(.trainningTime + ((GetTickCount() And &H7FFFFFFF) - .startTick) / 1000) & " segundos."
         
@@ -159,11 +159,11 @@ Public Sub DumpStatistics()
     Dim handle As Integer
     handle = FreeFile()
     
-    Dim line As String
+    Dim Line As String
     Dim i As Long
     Dim j As Long
     
-    Open LogPath & "\frags.txt" For Output As handle
+    Open CarpetaLogs & "\frags.txt" For Output As handle
     
     'Save lvl vs lvl frag matrix for each class - we use GNU Octave's ASCII file format
     
@@ -174,11 +174,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(1).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(1).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlLvl_Bar"
@@ -188,11 +188,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(2).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(2).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlLvl_Mag"
@@ -202,11 +202,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(3).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(3).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlLvl_Pal"
@@ -216,11 +216,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(4).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(4).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlLvl_Gue"
@@ -230,11 +230,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(5).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(5).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlLvl_Cle"
@@ -244,11 +244,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(6).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(6).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlLvl_Caz"
@@ -258,11 +258,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 50
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlLvlData(7).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlLvlData(7).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     
@@ -278,11 +278,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(1).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(1).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlRace_Bar"
@@ -292,11 +292,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(2).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(2).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlRace_Mag"
@@ -306,11 +306,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(3).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(3).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlRace_Pal"
@@ -320,11 +320,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(4).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(4).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlRace_Gue"
@@ -334,11 +334,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(5).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(5).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlRace_Cle"
@@ -348,11 +348,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(6).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(6).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlRace_Caz"
@@ -362,11 +362,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 5
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(7).matrix(i, j))
+            Line = Line & " " & CStr(fragLvlRaceData(7).matrix(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     
@@ -383,11 +383,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 7
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(j).matrix(i, 1))
+            Line = Line & " " & CStr(fragLvlRaceData(j).matrix(i, 1))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlClass_Dar"
@@ -397,11 +397,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 7
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(j).matrix(i, 2))
+            Line = Line & " " & CStr(fragLvlRaceData(j).matrix(i, 2))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlClass_Dwa"
@@ -411,11 +411,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 7
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(j).matrix(i, 3))
+            Line = Line & " " & CStr(fragLvlRaceData(j).matrix(i, 3))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlClass_Gno"
@@ -425,11 +425,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 7
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(j).matrix(i, 4))
+            Line = Line & " " & CStr(fragLvlRaceData(j).matrix(i, 4))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Print #handle, "# name: fragLvlClass_Hum"
@@ -439,11 +439,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 7
         For i = 1 To 50
-            line = line & " " & CStr(fragLvlRaceData(j).matrix(i, 5))
+            Line = Line & " " & CStr(fragLvlRaceData(j).matrix(i, 5))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     
@@ -458,11 +458,11 @@ Public Sub DumpStatistics()
     
     For j = 1 To 4
         For i = 1 To 50
-            line = line & " " & CStr(fragAlignmentLvlData(i, j))
+            Line = Line & " " & CStr(fragAlignmentLvlData(i, j))
         Next i
         
-        Print #handle, line
-        line = vbNullString
+        Print #handle, Line
+        Line = vbNullString
     Next j
     
     Close handle
@@ -472,7 +472,7 @@ Public Sub DumpStatistics()
     'Dump Chat statistics
     handle = FreeFile()
     
-    Open LogPath & "\huffman.log" For Output As handle
+    Open CarpetaLogs & "\huffman.log" For Output As handle
     
     Dim Total As Currency
     

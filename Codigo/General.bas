@@ -204,8 +204,7 @@ Sub Main()
     'inicializa los spells de los bots
     Call ModBots.ia_Spells
     'bots
-    Call LoadMotd
-    Call BanIpCargar
+    
 
     Prision.map = 1
     Libertad.map = 1
@@ -334,7 +333,8 @@ Sub Main()
     DoEvents
 
     frmCargando.Label1(2).Caption = "Iniciando Arrays..."
-
+    'Fix Helios Estaba mal colocado y no leia las Rutas. 07/08/20212
+    Call LoadSini
 
 
     Call CargarSpawnList
@@ -343,7 +343,9 @@ Sub Main()
     frmCargando.Label1(2).Caption = "Cargando Server.ini"
 
     MaxUsers = 0
-    Call LoadSini
+
+    Call LoadMotd
+    Call BanIpCargar
     Call CargaApuestas
     frmCargando.Label1(2).Caption = "Cargando Sets.Dat"
     Call CargarSets
@@ -504,7 +506,7 @@ Sub Main()
     'Log
     Dim N As Integer
     N = FreeFile
-    Open LogPath & "\Main.log" For Append Shared As #N
+    Open CarpetaLogs & "\Main.log" For Append Shared As #N
     Print #N, Date & " " & time & " server iniciado " & App.Major & "."; App.Minor & "." & App.Revision
     Close #N
 
@@ -521,11 +523,11 @@ Sub Main()
     Call InitBarcos
 End Sub
 
-Function FileExist(ByVal file As String, Optional FileType As VbFileAttribute = vbNormal) As Boolean
+Function FileExist(ByVal File As String, Optional FileType As VbFileAttribute = vbNormal) As Boolean
 '*****************************************************************
 'Se fija si existe el archivo
 '*****************************************************************
-    FileExist = LenB(Dir$(file, FileType)) <> 0
+    FileExist = LenB(Dir$(File, FileType)) <> 0
 End Function
 
 Function ReadField(ByVal Pos As Integer, ByRef Text As String, ByVal SepASCII As Byte) As String
@@ -570,7 +572,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\Eventos.log" For Append Shared As #nfile
+Open CarpetaLogs & "\Eventos.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & desc
 Close #nfile
 
@@ -585,7 +587,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\EjercitoReal.log" For Append Shared As #nfile
+Open CarpetaLogs & "\EjercitoReal.log" For Append Shared As #nfile
 Print #nfile, desc
 Close #nfile
 
@@ -600,7 +602,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\EjercitoCaos.log" For Append Shared As #nfile
+Open CarpetaLogs & "\EjercitoCaos.log" For Append Shared As #nfile
 Print #nfile, desc
 Close #nfile
 
@@ -616,7 +618,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\" & index & ".log" For Append Shared As #nfile
+Open CarpetaLogs & "\" & index & ".log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & desc
 Close #nfile
 
@@ -632,7 +634,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\errores.log" For Append Shared As #nfile
+Open CarpetaLogs & "\errores.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & desc
 Close #nfile
 
@@ -647,7 +649,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\Stats.log" For Append Shared As #nfile
+Open CarpetaLogs & "\Stats.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & desc
 Close #nfile
 
@@ -662,7 +664,7 @@ On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile(1) ' obtenemos un canal
-Open LogPath & "\haciendo.log" For Append Shared As #nfile
+Open CarpetaLogs & "\haciendo.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & desc
 Close #nfile
 
@@ -678,7 +680,7 @@ Public Sub LogClanes(ByVal str As String)
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\clanes.log" For Append Shared As #nfile
+Open CarpetaLogs & "\clanes.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & str
 Close #nfile
 
@@ -688,7 +690,7 @@ Public Sub LogIP(ByVal str As String)
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\IP.log" For Append Shared As #nfile
+Open CarpetaLogs & "\IP.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & str
 Close #nfile
 
@@ -699,7 +701,7 @@ Public Sub LogDesarrollo(ByVal str As String)
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\desarrollo" & Month(Date) & Year(Date) & ".log" For Append Shared As #nfile
+Open CarpetaLogs & "\desarrollo" & Month(Date) & Year(Date) & ".log" For Append Shared As #nfile
 Print #nfile, Date & " " & time & " " & str
 Close #nfile
 
@@ -707,14 +709,14 @@ End Sub
 
 
 
-Public Sub LogGM(Nombre As String, texto As String)
+Public Sub LogGM(Nombre As String, Texto As String)
 On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
 'Guardamos todo en el mismo lugar. Pablo (ToxicWaste) 18/05/07
-Open LogPath & "\" & Nombre & ".log" For Append Shared As #nfile
-Print #nfile, Date & " " & time & " " & texto
+Open CarpetaLogs & "\" & Nombre & ".log" For Append Shared As #nfile
+Print #nfile, Date & " " & time & " " & Texto
 Close #nfile
 
 Exit Sub
@@ -723,14 +725,14 @@ errhandler:
 
 End Sub
 
-Public Sub LogAsesinato(texto As String)
+Public Sub LogAsesinato(Texto As String)
 On Error GoTo errhandler
 Dim nfile As Integer
 
 nfile = FreeFile ' obtenemos un canal
 
-Open LogPath & "\asesinatos.log" For Append Shared As #nfile
-Print #nfile, Date & " " & time & " " & texto
+Open CarpetaLogs & "\asesinatos.log" For Append Shared As #nfile
+Print #nfile, Date & " " & time & " " & Texto
 Close #nfile
 
 Exit Sub
@@ -738,15 +740,15 @@ Exit Sub
 errhandler:
 
 End Sub
-Public Sub logVentaCasa(ByVal texto As String)
+Public Sub logVentaCasa(ByVal Texto As String)
 On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
 
-Open LogPath & "\propiedades.log" For Append Shared As #nfile
+Open CarpetaLogs & "\propiedades.log" For Append Shared As #nfile
 Print #nfile, "----------------------------------------------------------"
-Print #nfile, Date & " " & time & " " & texto
+Print #nfile, Date & " " & time & " " & Texto
 Print #nfile, "----------------------------------------------------------"
 Close #nfile
 
@@ -756,47 +758,14 @@ errhandler:
 
 
 End Sub
-Public Sub LogHackAttemp(texto As String)
+Public Sub LogHackAttemp(Texto As String)
 On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\HackAttemps.log" For Append Shared As #nfile
+Open CarpetaLogs & "\HackAttemps.log" For Append Shared As #nfile
 Print #nfile, "----------------------------------------------------------"
-Print #nfile, Date & " " & time & " " & texto
-Print #nfile, "----------------------------------------------------------"
-Close #nfile
-
-Exit Sub
-
-errhandler:
-
-End Sub
-
-Public Sub LogCheating(texto As String)
-On Error GoTo errhandler
-
-Dim nfile As Integer
-nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\CH.log" For Append Shared As #nfile
-Print #nfile, Date & " " & time & " " & texto
-Close #nfile
-
-Exit Sub
-
-errhandler:
-
-End Sub
-
-
-Public Sub LogCriticalHackAttemp(texto As String)
-On Error GoTo errhandler
-
-Dim nfile As Integer
-nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\CriticalHackAttemps.log" For Append Shared As #nfile
-Print #nfile, "----------------------------------------------------------"
-Print #nfile, Date & " " & time & " " & texto
+Print #nfile, Date & " " & time & " " & Texto
 Print #nfile, "----------------------------------------------------------"
 Close #nfile
 
@@ -806,13 +775,46 @@ errhandler:
 
 End Sub
 
-Public Sub LogAntiCheat(texto As String)
+Public Sub LogCheating(Texto As String)
 On Error GoTo errhandler
 
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\AntiCheat.log" For Append Shared As #nfile
-Print #nfile, Date & " " & time & " " & texto
+Open CarpetaLogs & "\CH.log" For Append Shared As #nfile
+Print #nfile, Date & " " & time & " " & Texto
+Close #nfile
+
+Exit Sub
+
+errhandler:
+
+End Sub
+
+
+Public Sub LogCriticalHackAttemp(Texto As String)
+On Error GoTo errhandler
+
+Dim nfile As Integer
+nfile = FreeFile ' obtenemos un canal
+Open CarpetaLogs & "\CriticalHackAttemps.log" For Append Shared As #nfile
+Print #nfile, "----------------------------------------------------------"
+Print #nfile, Date & " " & time & " " & Texto
+Print #nfile, "----------------------------------------------------------"
+Close #nfile
+
+Exit Sub
+
+errhandler:
+
+End Sub
+
+Public Sub LogAntiCheat(Texto As String)
+On Error GoTo errhandler
+
+Dim nfile As Integer
+nfile = FreeFile ' obtenemos un canal
+Open CarpetaLogs & "\AntiCheat.log" For Append Shared As #nfile
+Print #nfile, Date & " " & time & " " & Texto
 Print #nfile, ""
 Close #nfile
 
@@ -882,7 +884,7 @@ For LoopC = 1 To UBound(UserList())
     Set UserList(LoopC).outgoingData = Nothing
 Next LoopC
 
-ReDim UserList(1 To MaxUsers) As User
+ReDim UserList(1 To MaxUsers) As user
 
 For LoopC = 1 To MaxUsers
     UserList(LoopC).ConnID = -1
@@ -935,7 +937,7 @@ If frmMain.Visible Then frmMain.txStatus.Caption = "Escuchando conexiones entran
 'Log it
 Dim N As Integer
 N = FreeFile
-Open LogPath & "\Main.log" For Append Shared As #N
+Open CarpetaLogs & "\Main.log" For Append Shared As #N
 Print #N, Date & " " & time & " servidor reiniciado."
 Close #N
 
@@ -1380,7 +1382,7 @@ End Sub
 
 Public Sub HambreYSed(ByVal UserIndex As Integer, ByRef fenviarAyS As Boolean)
 
-If Not UserList(UserIndex).flags.Privilegios And PlayerType.User Then Exit Sub
+If Not UserList(UserIndex).flags.Privilegios And PlayerType.user Then Exit Sub
 
 'Sed
 If UserList(UserIndex).Stats.MinAGU > 0 Then

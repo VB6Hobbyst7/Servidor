@@ -431,14 +431,18 @@ End If
 
 Call PurgarPenas
 Call CheckIdleUser
+    If FileExist(CarpetaLogs & "\CantidaddeUsuarios.log", vbNormal) Then Kill CarpetaLogs & "\CantidaddeUsuarios.log"
+    'Log helios desde Dll 18/08/2021
+    Call Escribe(CarpetaLogs & "\CantidaddeUsuarios.log", CStr(NumUsers))
 
-'<<<<<-------- Log the number of users online ------>>>
-Dim N As Integer
-N = FreeFile()
-Open LogPath & "\numusers.log" For Output Shared As N
-Print #N, NumUsers
-Close #N
-'<<<<<-------- Log the number of users online ------>>>
+
+''<<<<<-------- Log the number of users online ------>>>
+'Dim N As Integer
+'N = FreeFile()
+'Open CarpetaLogs & "\numusers.log" For Output Shared As N
+'Print #N, NumUsers
+'Close #N
+''<<<<<-------- Log the number of users online ------>>>
 
 Exit Sub
 errhandler:
@@ -526,7 +530,7 @@ Next
 'Log
 Dim N As Integer
 N = FreeFile
-Open LogPath & "\Main.log" For Append Shared As #N
+Open CarpetaLogs & "\Main.log" For Append Shared As #N
 Print #N, Date & " " & time & " server cerrado."
 Close #N
 
@@ -574,10 +578,10 @@ On Error GoTo hayerror
                     If .flags.Muerto = 0 Then
                         
                         '[Consejeros]
-                        If (.flags.Privilegios And PlayerType.User) Then Call EfectoLava(iUserIndex)
-                        If .flags.Desnudo <> 0 And (.flags.Privilegios And PlayerType.User) <> 0 Then Call EfectoFrio(iUserIndex)
+                        If (.flags.Privilegios And PlayerType.user) Then Call EfectoLava(iUserIndex)
+                        If .flags.Desnudo <> 0 And (.flags.Privilegios And PlayerType.user) <> 0 Then Call EfectoFrio(iUserIndex)
                         If .flags.Meditando Then Call DoMeditar(iUserIndex)
-                        If .flags.Envenenado <> 0 And (.flags.Privilegios And PlayerType.User) <> 0 Then Call EfectoVeneno(iUserIndex)
+                        If .flags.Envenenado <> 0 And (.flags.Privilegios And PlayerType.user) <> 0 Then Call EfectoVeneno(iUserIndex)
                         If .flags.AdminInvisible <> 1 Then
                             If .flags.invisible = 1 Then Call EfectoInvisibilidad(iUserIndex)
                             If .flags.Oculto = 1 Then Call DoPermanecerOculto(iUserIndex, False)
@@ -712,13 +716,13 @@ End Sub
 
 Private Sub KillLog_Timer()
 On Error Resume Next
-If FileExist(LogPath & "\connect.log", vbNormal) Then Kill LogPath & "\connect.log"
-If FileExist(LogPath & "\haciendo.log", vbNormal) Then Kill LogPath & "\haciendo.log"
-If FileExist(LogPath & "\stats.log", vbNormal) Then Kill LogPath & "\stats.log"
-If FileExist(LogPath & "\Asesinatos.log", vbNormal) Then Kill LogPath & "\Asesinatos.log"
-If FileExist(LogPath & "\HackAttemps.log", vbNormal) Then Kill LogPath & "\HackAttemps.log"
-If Not FileExist(LogPath & "\nokillwsapi.txt") Then
-    If FileExist(LogPath & "\wsapi.log", vbNormal) Then Kill LogPath & "\wsapi.log"
+'If FileExist(CarpetaLogs & "\connect.log", vbNormal) Then Kill CarpetaLogs & "\connect.log"
+If FileExist(CarpetaLogs & "\haciendo.log", vbNormal) Then Kill CarpetaLogs & "\haciendo.log"
+If FileExist(CarpetaLogs & "\stats.log", vbNormal) Then Kill CarpetaLogs & "\stats.log"
+If FileExist(CarpetaLogs & "\Asesinatos.log", vbNormal) Then Kill CarpetaLogs & "\Asesinatos.log"
+If FileExist(CarpetaLogs & "\HackAttemps.log", vbNormal) Then Kill CarpetaLogs & "\HackAttemps.log"
+If Not FileExist(CarpetaLogs & "\nokillwsapi.txt") Then
+    If FileExist(CarpetaLogs & "\wsapi.log", vbNormal) Then Kill CarpetaLogs & "\wsapi.log"
 End If
 
 End Sub
@@ -1104,13 +1108,13 @@ Private Sub TCPServ_Read(ByVal Id As Long, Datos As Variant, ByVal Cantidad As L
 On Error GoTo errorh
 
 With UserList(MiDato)
-    Dim data() As Byte
+    Dim Data() As Byte
     Dim Procesado As Boolean
     
-    data = StrConv(Datos, vbFromUnicode)
+    Data = StrConv(Datos, vbFromUnicode)
     'Debug.Print StrConv(.clave, vbUnicode)
-    Call DataCorrect(.clave, data, .iCliente)
-    Datos = StrConv(data, vbUnicode)
+    Call DataCorrect(.clave, Data, .iCliente)
+    Datos = StrConv(Data, vbUnicode)
     
     Call .incomingData.WriteASCIIStringFixed(Datos)
     

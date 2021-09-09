@@ -556,7 +556,7 @@ Dim sENtrada As String
 sENtrada = InputBox("Escribe ""estoy DE acuerdo"" entre comillas y con distición de mayusculas minusculas para desbanear a todos los personajes", "UnBan", "hola")
 If sENtrada = "estoy DE acuerdo" Then
 
-    Fn = LogPath & "\GenteBanned.log"
+    Fn = CarpetaLogs & "\GenteBanned.log"
     
     If FileExist(Fn, vbNormal) Then
         N = FreeFile
@@ -730,12 +730,12 @@ If frmMain.Visible Then frmMain.txStatus.Caption = "Reiniciando."
 
 FrmStat.Show
 
-If FileExist(LogPath & "\errores.log", vbNormal) Then Kill LogPath & "\errores.log"
-If FileExist(LogPath & "\connect.log", vbNormal) Then Kill LogPath & "\Connect.log"
-If FileExist(LogPath & "\HackAttemps.log", vbNormal) Then Kill LogPath & "\HackAttemps.log"
-If FileExist(LogPath & "\Asesinatos.log", vbNormal) Then Kill LogPath & "\Asesinatos.log"
-If FileExist(LogPath & "\Resurrecciones.log", vbNormal) Then Kill LogPath & "\Resurrecciones.log"
-If FileExist(LogPath & "\Teleports.Log", vbNormal) Then Kill LogPath & "\Teleports.Log"
+'If FileExist(CarpetaLogs & "\errores.log", vbNormal) Then Kill CarpetaLogs & "\errores.log"
+'If FileExist(CarpetaLogs & "\connect.log", vbNormal) Then Kill CarpetaLogs & "\Connect.log"
+If FileExist(CarpetaLogs & "\HackAttemps.log", vbNormal) Then Kill CarpetaLogs & "\HackAttemps.log"
+If FileExist(CarpetaLogs & "\Asesinatos.log", vbNormal) Then Kill CarpetaLogs & "\Asesinatos.log"
+If FileExist(CarpetaLogs & "\Resurrecciones.log", vbNormal) Then Kill CarpetaLogs & "\Resurrecciones.log"
+If FileExist(CarpetaLogs & "\Teleports.Log", vbNormal) Then Kill CarpetaLogs & "\Teleports.Log"
 
 
 #If UsarQueSocket = 1 Then

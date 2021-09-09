@@ -738,13 +738,13 @@ Public Function EnviarDatosASlot(ByVal UserIndex As Integer, ByRef Datos As Stri
 'Last Modified By: Lucas Tavolaro Ortiz (Tavo)
 'Now it uses the clsByteQueue class and don`t make a FIFO Queue of String
 '***************************************************
-    Dim Data() As Byte
+    Dim data() As Byte
     
-    Data = StrConv(Datos, vbFromUnicode)
+    data = StrConv(Datos, vbFromUnicode)
     
-    Call DataCorrect(UserList(UserIndex).clave, Data, UserList(UserIndex).iServer)
+    Call DataCorrect(UserList(UserIndex).clave, data, UserList(UserIndex).iServer)
     
-    Datos = StrConv(Data, vbUnicode)
+    Datos = StrConv(data, vbUnicode)
 
 
 #If UsarQueSocket = 1 Then '**********************************************
@@ -1392,21 +1392,20 @@ Sub ConnectUser(ByVal UserIndex As Integer, ByVal UserAccount As String, ByRef N
     #If SeguridadAlkon Then
         Call Security.UserConnected(UserIndex)
     #End If
+    
+    Call Helios(CarpetaLog & "\Connect.log", time & " " & Date & " " & UserList(UserIndex).Name & " ha entrado al juego. UserIndex: " & UserIndex & " IP: " & UserList(UserIndex).ip)
+    
+    Call Helios(CarpetaLog & "\numusers.log", CStr(NumUsers))
 
-
-    'Log helios desde Dll 18/08/2021
-     Call CrearLog(CarpetaLogs & "\UserConectados.log", time & " " & Date & " " & Name & " ha entrado al juego. UserIndex: " & UserIndex & " IP: " & UserList(UserIndex).ip)
-    'Log helios desde Dll 18/08/2021
-    Call Escribe(CarpetaLogs & "\CantidaddeUsuarios.log", CStr(NumUsers))
 
 '    N = FreeFile
-'    Open CarpetaLogs & "\numusers.log" For Output As N
+'    Open CarpetaLog & "\numusers.log" For Output As N
 '    Print #N, NumUsers
 '    Close #N
 '
 '    N = FreeFile
 '    'Log
-'    Open CarpetaLogs & "\Connect.log" For Append Shared As #N
+'    Open CarpetaLog & "\Connect.log" For Append Shared As #N
 '    Print #N, UserList(UserIndex).Name & " ha entrado al juego. UserIndex:" & UserIndex & " " & time & " " & Date
 '    Close #N
 
@@ -1757,12 +1756,12 @@ On Error GoTo errhandler
 Dim N As Integer
 Dim LoopC As Integer
 Dim map As Integer
-Dim IPS As String
 Dim Name As String
+Dim IPS As String
 Dim i As Integer
 
 Dim aN As Integer
-IPS = UserList(UserIndex).ip
+
 aN = UserList(UserIndex).flags.AtacadoPorNpc
 If aN > 0 Then
       Npclist(aN).Movement = Npclist(aN).flags.OldMovement
@@ -1782,6 +1781,7 @@ UserList(UserIndex).flags.NPCAtacado = 0
 
 map = UserList(UserIndex).Pos.map
 Name = UCase$(UserList(UserIndex).Name)
+IPS = UserList(UserIndex).ip
 
 UserList(UserIndex).Char.FX = 0
 UserList(UserIndex).Char.Loops = 0
@@ -1844,14 +1844,12 @@ Call ResetUserSlot(UserIndex)
 LimpiarAreasUser (UserIndex)
 
 Call MostrarNumUsers
-    'Log helios desde Dll 18/08/2021
- Call CrearLog(CarpetaLogs & "\UserConectados.log", time & " " & Date & " " & Name & " ha Salido del juego. UserIndex: " & UserIndex & " IP: " & IPS)
 
 
 
-
+Call Helios(CarpetaLog & "\Connect.log", time & " " & Date & " " & Name & " ha dejado al juego. UserIndex: " & UserIndex & " IP: " & IPS)
 'N = FreeFile(1)
-'Open CarpetaLogs & "\Connect.log" For Append Shared As #N
+'Open CarpetaLog & "\Connect.log" For Append Shared As #N
 'Print #N, Name & " ha dejado el juego. " & "User Index:" & UserIndex & " " & time & " " & Date
 'Close #N
 

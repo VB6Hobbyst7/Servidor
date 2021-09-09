@@ -215,7 +215,7 @@ Public Enum iMinerales
 End Enum
 
 Public Enum PlayerType
-    User = &H1
+    user = &H1
     Consejero = &H2
     SemiDios = &H4
     Dios = &H8
@@ -751,7 +751,7 @@ End Type
 
 'Neo Frases para trabajadores
 Public Type tFraseTrabajador
-    texto As String
+    Texto As String
 End Type
 
 'Neo Npc trabajadores
@@ -1053,7 +1053,7 @@ Public Type ObjData
     SkHerreria As Integer
     SkCarpinteria As Integer
 
-    texto As String
+    Texto As String
 
     'Clases que no tienen permitido usar este obj
     ClaseProhibida(1 To NUMCLASES) As eClass
@@ -1455,7 +1455,7 @@ Public Type tCrafting
 End Type
 
 'Tipo de los Usuarios
-Public Type User
+Public Type user
     'eventos
     PosAnt As WorldPos
     'eventos
@@ -1838,7 +1838,7 @@ Public CharPath As String
 'Ruta base para los archivos de mapas
 Public MapPath As String
 Public WorldBkPath As String
-Public LogPath As String
+Public CarpetaLogs As String
 Public DatPath As String
 
 ''
@@ -1910,7 +1910,7 @@ Public EnTesting As Boolean
 
 
 '*****************ARRAYS PUBLICOS*************************
-Public UserList() As User    'USUARIOS
+Public UserList() As user    'USUARIOS
 Public Npclist(1 To MAXNPCS) As NPC    'NPCS
 Public MapData(300) As mapa
 Public MapInfo(300) As MapInfo

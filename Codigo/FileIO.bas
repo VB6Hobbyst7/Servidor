@@ -185,7 +185,7 @@ If NumeroFraseTrabajador > 0 Then
     frmCargando.cargar.value = 0
     'Leo npc por npc y lo cargo en el array
         For NPCI = 1 To NumeroFraseTrabajador
-            FraseTrabajadores(NPCI).texto = Leer.GetValue("FRASE" & NPCI, "Texto")
+            FraseTrabajadores(NPCI).Texto = Leer.GetValue("FRASE" & NPCI, "Texto")
             'Avisa que un nuevo npc fue cargado
             frmCargando.cargar.value = frmCargando.cargar.value + 1
         Next NPCI
@@ -684,11 +684,11 @@ End Sub
 Sub LoadMotd()
 Dim i As Integer
 
-MaxLines = val(GetVar(App.Path & "\Dat\Motd.ini", "INIT", "NumLines"))
+MaxLines = val(GetVar(DatPath & "Motd.ini", "INIT", "NumLines"))
 
 ReDim MOTD(1 To MaxLines)
 For i = 1 To MaxLines
-    MOTD(i).texto = GetVar(App.Path & "\Dat\Motd.ini", "Motd", "Line" & i)
+    MOTD(i).Texto = GetVar(DatPath & "Motd.ini", "Motd", "Line" & i)
     MOTD(i).Formato = vbNullString
 Next i
 
@@ -733,7 +733,7 @@ haciendoBK = False
 On Error Resume Next
 Dim nfile As Integer
 nfile = FreeFile ' obtenemos un canal
-Open LogPath & "\BackUps.log" For Append Shared As #nfile
+Open CarpetaLogs & "\BackUps.log" For Append Shared As #nfile
 Print #nfile, Date & " " & time
 Close #nfile
 End Sub
@@ -889,7 +889,10 @@ Sub CargarZonas()
 
     ReDim Zonas(0 To NumZonas)
     For i = 1 To NumZonas
+        
         Zonas(i).Nombre = GetVar(archivoC, "Zona" & CStr(i), "Nombre")
+        'fix Helios Si no existe la Zona salta error 07/09/2021
+        If Zonas(i).Nombre = "" Then GoTo Sindatos
         Zonas(i).mapa = CByte(GetVar(archivoC, "Zona" & CStr(i), "Mapa"))
         Zonas(i).X1 = CInt(GetVar(archivoC, "Zona" & CStr(i), "X1"))
         Zonas(i).Y1 = CInt(GetVar(archivoC, "Zona" & CStr(i), "Y1"))
@@ -912,6 +915,7 @@ Sub CargarZonas()
         Zonas(i).Acoplar = val(GetVar(archivoC, "Zona" & CStr(i), "Acoplar"))
         Zonas(i).TieneNpcInvocacion = val(GetVar(archivoC, "Zona" & CStr(i), "TieneNpcInvocacion"))
         Zonas(i).NpcInvocadoIndex = 0
+Sindatos:
     Next i
 End Sub
 Sub LoadArmadurasHerreria()
@@ -1182,7 +1186,7 @@ For Object = 1 To NumObjDatas
     'Puertas y llaves
     ObjData(Object).clave = val(Leer.GetValue("OBJ" & Object, "Clave"))
     
-    ObjData(Object).texto = Leer.GetValue("OBJ" & Object, "Texto")
+    ObjData(Object).Texto = Leer.GetValue("OBJ" & Object, "Texto")
     ObjData(Object).GrhSecundario = val(Leer.GetValue("OBJ" & Object, "VGrande"))
     
     ObjData(Object).Agarrable = val(Leer.GetValue("OBJ" & Object, "Agarrable"))
@@ -1486,7 +1490,7 @@ UserList(UserIndex).GuildIndex = CInt(UserFile("GuildIndex"))
 
 End Sub
 
-Function GetVar(ByVal file As String, ByVal Main As String, ByVal Var As String, Optional EmptySpaces As Long = 1024) As String
+Function GetVar(ByVal File As String, ByVal Main As String, ByVal Var As String, Optional EmptySpaces As Long = 1024) As String
 
 Dim sSpaces As String ' This will hold the input that the program will retrieve
 Dim szReturn As String ' This will be the defaul value if the string is not found
@@ -1496,7 +1500,7 @@ szReturn = vbNullString
 sSpaces = Space$(EmptySpaces) ' This tells the computer how long the longest string can be
   
   
-GetPrivateProfileString Main, Var, szReturn, sSpaces, EmptySpaces, file
+GetPrivateProfileString Main, Var, szReturn, sSpaces, EmptySpaces, File
   
 GetVar = RTrim$(sSpaces)
 GetVar = left$(GetVar, Len(GetVar) - 1)
@@ -1548,17 +1552,17 @@ Dim npcfile As String
 On Error GoTo man
 
 
-Dim file As String
-file = Dir(MapPath & "\")
+Dim File As String
+File = Dir(MapPath & "\")
 Dim Num As Integer
 NumMaps = 0
 
 
     
-Do While file > ""
+Do While File > ""
     
-  If left(file, 5) = "SMapa" Then
-    Num = val(mid(file, 6, Len(file) - 9))
+  If left(File, 5) = "SMapa" Then
+    Num = val(mid(File, 6, Len(File) - 9))
     If Num > 0 And Num < 300 Then
         If Num > NumMaps Then NumMaps = Num
         
@@ -1571,7 +1575,7 @@ Do While file > ""
   End If
 
   
-  file = Dir()
+  File = Dir()
 
 Loop
 
@@ -1584,16 +1588,16 @@ man:
     Call LogError(Date & " " & Err.Description & " " & Err.HelpContext & " " & Err.HelpFile & " " & Err.Source)
 
 End Sub
-Sub ReadInt(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Integer)
+Sub ReadInt(ByRef Data() As Byte, ByRef Pos As Long, ByRef value As Integer)
 
 'value = (Data(Pos + 1) And &H7F) * &H100 Or Data(Pos) Or -(Data(Pos + 1) > &H7F) * &H8000
 
-CopyMemory value, data(Pos), 2
+CopyMemory value, Data(Pos), 2
 
 Pos = Pos + 2
 End Sub
-Sub ReadByte(ByRef data() As Byte, ByRef Pos As Long, ByRef value As Byte)
-value = data(Pos)
+Sub ReadByte(ByRef Data() As Byte, ByRef Pos As Long, ByRef value As Byte)
+value = Data(Pos)
 Pos = Pos + 1
 End Sub
 Public Sub CargarMapa(ByVal map As Long, ByVal MAPFl As String)
@@ -1610,27 +1614,27 @@ On Error GoTo errh
     Dim FirstRead As Boolean
     Dim MapVer As Integer
     Dim tmpStr As String * 10
-    Dim data() As Byte
+    Dim Data() As Byte
     Dim Pos As Long
     FreeFileMap = FreeFile
     
     Open MAPFl For Binary As #FreeFileMap
-        ReDim data(LOF(FreeFileMap))
-        Get #FreeFileMap, , data
+        ReDim Data(LOF(FreeFileMap))
+        Get #FreeFileMap, , Data
     Close #FreeFileMap
     
-    Call ReadInt(data, Pos, tmpInt)
+    Call ReadInt(Data, Pos, tmpInt)
     
     If tmpInt = 23678 Then
         FirstRead = True
-        Call ReadInt(data, Pos, MapVer)
-        Call ReadInt(data, Pos, MapInfo(map).Width)
-        Call ReadInt(data, Pos, MapInfo(map).Height)
-        Call ReadInt(data, Pos, MapInfo(map).MapVersion)
-        Call ReadInt(data, Pos, tmpInt)
+        Call ReadInt(Data, Pos, MapVer)
+        Call ReadInt(Data, Pos, MapInfo(map).Width)
+        Call ReadInt(Data, Pos, MapInfo(map).Height)
+        Call ReadInt(Data, Pos, MapInfo(map).MapVersion)
+        Call ReadInt(Data, Pos, tmpInt)
         MapInfo(map).Name = ""
         For X = 1 To tmpInt
-             MapInfo(map).Name = MapInfo(map).Name & Chr(data(X))
+             MapInfo(map).Name = MapInfo(map).Name & Chr(Data(X))
         Next X
         
         Pos = Pos + tmpInt
@@ -1649,34 +1653,34 @@ On Error GoTo errh
         For X = 1 To MapInfo(map).Width
             If FirstRead Then
                 '.dat file
-                Call ReadInt(data, Pos, ByFlags)
+                Call ReadInt(Data, Pos, ByFlags)
             End If
             
             If ByFlags And 1 Then
                 MapData(map).Tile(X, Y).Blocked = 1
             End If
             
-            Call ReadInt(data, Pos, MapData(map).Tile(X, Y).Graphic(1))
+            Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).Graphic(1))
             
             'Layer 2 used?
-            If ByFlags And 2 Then Call ReadInt(data, Pos, MapData(map).Tile(X, Y).Graphic(2))
+            If ByFlags And 2 Then Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).Graphic(2))
             
             'Layer 3 used?
-            If ByFlags And 4 Then Call ReadInt(data, Pos, MapData(map).Tile(X, Y).Graphic(3))
+            If ByFlags And 4 Then Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).Graphic(3))
             
             'Layer 4 used?
-            If ByFlags And 8 Then Call ReadInt(data, Pos, MapData(map).Tile(X, Y).Graphic(4))
+            If ByFlags And 8 Then Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).Graphic(4))
             
             'Trigger used?
             If ByFlags And 16 Then
                 'Enums are 4 byte long in VB, so we make sure we only read 2
-                Call ReadByte(data, Pos, TempByte)
+                Call ReadByte(Data, Pos, TempByte)
                 MapData(map).Tile(X, Y).Trigger = TempByte
             End If
             
             If ByFlags And 32 Then
                 'Get and make NPC
-                Call ReadInt(data, Pos, MapData(map).Tile(X, Y).NpcIndex)
+                Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).NpcIndex)
                 
                 If MapData(map).Tile(X, Y).NpcIndex > 0 Then
                     npcfile = DatPath & "NPCs.dat"
@@ -1708,18 +1712,18 @@ On Error GoTo errh
             
             If ByFlags And 64 Then
                 'Get and make Object
-                Call ReadInt(data, Pos, MapData(map).Tile(X, Y).ObjInfo.ObjIndex)
-                Call ReadInt(data, Pos, MapData(map).Tile(X, Y).ObjInfo.Amount)
+                Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).ObjInfo.ObjIndex)
+                Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).ObjInfo.Amount)
             End If
             If ByFlags And 128 Then
                 'Get and make Object
-                Call ReadInt(data, Pos, MapData(map).Tile(X, Y).TileExit.map)
-                Call ReadInt(data, Pos, MapData(map).Tile(X, Y).TileExit.X)
-                Call ReadInt(data, Pos, MapData(map).Tile(X, Y).TileExit.Y)
+                Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).TileExit.map)
+                Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).TileExit.X)
+                Call ReadInt(Data, Pos, MapData(map).Tile(X, Y).TileExit.Y)
             End If
             
             If MapData(map).Tile(X, Y).Graphic(3) < 0 Then
-                Call ReadByte(data, Pos, TempByte)
+                Call ReadByte(Data, Pos, TempByte)
             End If
         Next X
         frmCargando.cargar.value = Y
@@ -1741,7 +1745,7 @@ BootDelBackUp = val(GetVar(IniPath & "Server.ini", "INIT", "IniciarDesdeBackUp")
 
 DatPath = GetVar(IniPath & "Server.ini", "PATH", "DatPath") & "\"
 MapPath = GetVar(IniPath & "Server.ini", "PATH", "MapPath")
-LogPath = GetVar(IniPath & "Server.ini", "PATH", "LogPath")
+CarpetaLogs = GetVar(IniPath & "Server.ini", "PATH", "LogPath")
 WorldBkPath = GetVar(IniPath & "Server.ini", "PATH", "WorldBkPath")
 'Misc
 #If SeguridadAlkon Then
@@ -1897,7 +1901,7 @@ recordusuarios = val(GetVar(IniPath & "Server.ini", "INIT", "Record"))
 Temporal = val(GetVar(IniPath & "Server.ini", "INIT", "MaxUsers"))
 If MaxUsers = 0 Then
     MaxUsers = Temporal
-    ReDim UserList(1 To MaxUsers) As User
+    ReDim UserList(1 To MaxUsers) As user
 End If
 
 '&&&&&&&&&&&&&&&&&&&&& BALANCE &&&&&&&&&&&&&&&&&&&&&&&
@@ -1948,12 +1952,12 @@ Encriptacion.StringValidacion = Encriptacion.ArmarStringValidacion
 
 End Sub
 
-Sub WriteVar(ByVal file As String, ByVal Main As String, ByVal Var As String, ByVal value As String)
+Sub WriteVar(ByVal File As String, ByVal Main As String, ByVal Var As String, ByVal value As String)
 '*****************************************************************
 'Escribe VAR en un archivo
 '*****************************************************************
 
-writeprivateprofilestring Main, Var, value, file
+writeprivateprofilestring Main, Var, value, File
     
 End Sub
 
@@ -2482,13 +2486,13 @@ End Sub
 
 Sub LogBan(ByVal BannedIndex As Integer, ByVal UserIndex As Integer, ByVal motivo As String)
 
-Call WriteVar(LogPath & "\" & "BanDetail.log", UserList(BannedIndex).Name, "BannedBy", UserList(UserIndex).Name)
-Call WriteVar(LogPath & "\" & "BanDetail.log", UserList(BannedIndex).Name, "Reason", motivo)
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.log", UserList(BannedIndex).Name, "BannedBy", UserList(UserIndex).Name)
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.log", UserList(BannedIndex).Name, "Reason", motivo)
 
 'Log interno del servidor, lo usa para hacer un UNBAN general de toda la gente banned
 Dim mifile As Integer
 mifile = FreeFile
-Open LogPath & "\GenteBanned.log" For Append Shared As #mifile
+Open CarpetaLogs & "\GenteBanned.log" For Append Shared As #mifile
 Print #mifile, UserList(BannedIndex).Name
 Close #mifile
 
@@ -2497,13 +2501,13 @@ End Sub
 
 Sub LogBanFromName(ByVal BannedName As String, ByVal UserIndex As Integer, ByVal motivo As String)
 
-Call WriteVar(LogPath & "\" & "BanDetail.dat", BannedName, "BannedBy", UserList(UserIndex).Name)
-Call WriteVar(LogPath & "\" & "BanDetail.dat", BannedName, "Reason", motivo)
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.dat", BannedName, "BannedBy", UserList(UserIndex).Name)
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.dat", BannedName, "Reason", motivo)
 
 'Log interno del servidor, lo usa para hacer un UNBAN general de toda la gente banned
 Dim mifile As Integer
 mifile = FreeFile
-Open LogPath & "\GenteBanned.log" For Append Shared As #mifile
+Open CarpetaLogs & "\GenteBanned.log" For Append Shared As #mifile
 Print #mifile, BannedName
 Close #mifile
 
@@ -2512,14 +2516,14 @@ End Sub
 
 Sub Ban(ByVal BannedName As String, ByVal Baneador As String, ByVal motivo As String)
 
-Call WriteVar(LogPath & "\" & "BanDetail.dat", BannedName, "BannedBy", Baneador)
-Call WriteVar(LogPath & "\" & "BanDetail.dat", BannedName, "Reason", motivo)
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.dat", BannedName, "BannedBy", Baneador)
+Call WriteVar(CarpetaLogs & "\" & "BanDetail.dat", BannedName, "Reason", motivo)
 
 
 'Log interno del servidor, lo usa para hacer un UNBAN general de toda la gente banned
 Dim mifile As Integer
 mifile = FreeFile
-Open LogPath & "\GenteBanned.log" For Append Shared As #mifile
+Open CarpetaLogs & "\GenteBanned.log" For Append Shared As #mifile
 Print #mifile, BannedName
 Close #mifile
 
